@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -19,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,6 +59,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,24 +71,65 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\indexadmin.html" />
+    <Content Include="admin\auteurs.html" />
+    <Content Include="admin\css\admin.css" />
+    <Content Include="admin\js\controllers\auteurController.js" />
+    <Content Include="admin\livres.html" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload-all.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload-all.min.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload-shim.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload-shim.min.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\angular-file-upload.min.js" />
+    <Content Include="admin\js\angular-file-upload-master\dist\FileAPI.flash.swf" />
+    <Content Include="admin\js\angular-file-upload-master\dist\FileAPI.min.js" />
+    <Content Include="admin\js\appAdmin.js" />
+    <Content Include="admin\js\controllers\livreController.js" />
+    <Content Include="admin\js\controllers\mainControllerAdmin.js" />
+    <Content Include="admin\js\general.js" />
+    <Content Include="admin\js\directives\isotopeThis.js" />
+    <Content Include="admin\main.html" />
+    <Content Include="css\bootstrap-modal-bs3patch.css" />
+    <Content Include="css\bootstrap-modal.css" />
+    <Content Include="css\bootstrap-override.css" />
+    <Content Include="css\common.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="js\img\sprites-sfa68604977.png" />
+    <Content Include="js\img\sprites\A-checkbox.png" />
+    <Content Include="js\img\sprites\B-checkbox-focus.png" />
+    <Content Include="js\img\sprites\C-checkbox-checked.png" />
+    <Content Include="js\img\sprites\D-checkbox-checked-focus.png" />
+    <Content Include="js\img\sprites\E-checkbox-disabled.png" />
+    <Content Include="js\img\sprites\F-checkbox-checked-disabled.png" />
+    <Content Include="js\img\sprites\G-radio.png" />
+    <Content Include="js\img\sprites\H-radio-focus.png" />
+    <Content Include="js\img\sprites\I-radio-checked.png" />
+    <Content Include="js\img\sprites\J-radio-checked-focus.png" />
+    <Content Include="js\img\sprites\K-radio-disabled.png" />
+    <Content Include="js\img\sprites\L-radio-checked-disabled.png" />
     <Content Include="index.html" />
     <Content Include="js\jquery.isotope.js" />
+    <Content Include="js\packages\angular-pretty-checkable.js" />
+    <Content Include="js\packages\angular-ui-router.min.js" />
+    <Content Include="js\packages\bootstrap-modal.js" />
+    <Content Include="js\packages\bootstrap-modalmanager.js" />
+    <Content Include="js\packages\prettyCheckable.css" />
+    <Content Include="js\packages\prettyCheckable.min.js" />
+    <Content Include="js\packages\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="js\tools.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="admin\css\" />
-    <Folder Include="admin\js\" />
-    <Folder Include="css\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

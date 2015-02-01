@@ -1,0 +1,14 @@
+﻿.drop-box {
+     transition: all .3s ease-out;
+    -o-transition: all .3s ease-out;
+    -moz-transition: all .3s ease-out;
+    -webkit-transition: all .3s ease-out;  
+}
+.drop-box.dragover {
+    background: rgba(100, 255, 100, 0.50);
+}
+
+.auteur-placeholder-wrapper{
+    display:block;
+    height:100px;
+}

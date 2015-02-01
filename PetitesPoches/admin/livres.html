@@ -1,0 +1,148 @@
+﻿<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <!--<img ng-src="match.model.Nom" width="16">-->
+        <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+        <span bind-html-unsafe="match.model.Prenom | typeaheadHighlight:query"></span>
+    </a>
+</script>
+
+<div class="viewContainer" ng-controller="livreController" ng-file-drop ng-model="files" class="drop-box dragover"
+     drag-over-class="dragover" multiple="false"
+     allow-dir="false" accept="image/*,application/pdf"
+     ng-file-change="addLivre($files, $event)"
+     ng-init="init()">
+
+    <div id="booksContainer" class="tilesContainer">
+        <!--| orderBy:'Index':true-->
+        <div class="tile isotopey tile-admin {{item.Theme}} {{item.Tags}}" ng-repeat="item in items"
+             isotopethis=isotopethis>
+            <button class="close close-override" title="supprimer"
+                    ng-click="deleteLivre($index, item)">
+                <i class="fa fa-close"></i><p class=" index">{{item.Index}}</p>
+            </button>
+            <tags item="item"></tags>
+
+            <div class="inner-tile">
+                <i title="{{item.PrixLitteraire}}" class="fa fa-certificate fa-price" ng-show="item.PrixLitteraire"></i>
+                <img href="#responsive"
+                     data-toggle="modal"
+                     class="tile-image" ng-click="select(item)"
+                     src="{{apiRootUrl}}/{{item.Couverture}}" />
+
+
+                <div class="moreInfoButtonWrapper">
+                    <button class="transparentButton background-circle" title="E-book" ng-show="item.EBookUrl">
+                        <i class="fa fa-tablet"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div tabindex="-1" class="modal fade" id="responsive" data-width="760">
+        <div class="modal-header">
+            <button class="close" aria-hidden="true" type="button" data-dismiss="modal"><i class="fa fa-times"></i></button>
+            <input class="modal-title form-control" placeholder="Titre" ng-model="selectedItem.Titre" type="text" />
+        </div>
+        <div class="modal-body">
+            <!--<ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
+                <li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">-->
+            <div class="row">
+                <div class="col-md-6">
+
+
+                    <p><pretty-radio value="'premiersPas'" ng-model="selectedItem.NiveauLecture" label="'Permiers pas'"></pretty-radio></p>
+                    <p><pretty-radio value="'debutants'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs débutants'"></pretty-radio></p>
+                    <p><pretty-radio value="'confirmes'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs confirmés'"></pretty-radio></p>
+
+                    <p><input class="form-control" type="text" placeholder="Prix littéraire" ng-model="selectedItem.PrixLitteraire" /></p>
+                    <p><input class="form-control" type="text" placeholder="Lien E-book" ng-model="selectedItem.EBookUrl" /></p>
+                    <p><input class="form-control" type="text" placeholder="Lien Issuu" ng-model="selectedItem.Extrait" /></p>
+                    <p><input class="form-control" type="text" placeholder="Site marchand" ng-model="selectedItem.SiteMarchand" /></p>
+                    <p><input class="form-control" type="text" placeholder="Lien vidéo" ng-model="selectedItem.LienVideo" /></p>
+
+
+                </div>
+                <div class="col-md-6">
+
+                    <img class="tile-image" src="{{apiRootUrl}}/{{selectedItem.Couverture}}" />
+                    <h4>Infos techniques</h4>
+                    <p><input class="form-control" type="text" placeholder="prix" ng-model="selectedItem.Prix" /></p>
+                    <p><input class="form-control" type="text" placeholder="ISBN" ng-model="selectedItem.ISBN" /></p>
+
+
+                </div>
+
+            </div>
+            <h4>Auteur</h4>
+            <input type="text"
+                   ng-model="selectedItem.Auteur"
+                   placeholder="Auteur"
+                   typeahead="val as val.Nom for val in searchAuteurSuggestions($viewValue) | filter:$viewValue"
+                   typeahead-loading="loadingSearchSuggestions"
+                   typeahead-template-url="customTemplate.html"
+                   class="form-control">
+            </input>
+            <p>{{selectedItem.Auteur.Prenom}} {{selectedItem.Auteur.Nom}}</p>
+            <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{apiRootUrl}}/{{selectedItem.Auteur.Photo}}" />
+            
+            
+        </div>
+
+  
+       
+        <!--<div class="tab-pane" id="tab2"><p>This is some other tab content</p></div>
+            </div>
+
+
+        </div>-->
+        <div class="modal-footer">
+            <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="saveItem(selectedItem)" data-dismiss="modal">Save changes</button>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    var $container = $('.tilesContainer');
+
+
+    // change layout mode
+    //$container.isotope({ layoutMode: "masonryHorizontal" });
+    $container.isotope({
+        layoutMode: 'masonryHorizontal',
+        itemSelector: '.isotopey',
+        masonryHorizontal: { rowHeight: 20 },
+        getSortData: {
+            weight: function (itemElem) { // function
+                if (!$(itemElem).scope())
+                    return 0;
+                if ($(itemElem).scope().item) {
+                    //console.log($(itemElem).scope().item.Index);
+                    return parseFloat($(itemElem).scope().item.Index);
+                } else {
+                    var weight = $(itemElem).find('.index').text();
+                    //console.log(weight);
+                    return parseFloat(weight.replace(/[\(\)]/g, ''));
+                }
+
+
+            }
+        },
+        //sortBy: 'weight',
+        sortAscending: false,
+        transformsEnabled: false,
+        onLayout: function () {
+            $container.css('overflow', 'visible');
+        }
+    });
+   
+</script>

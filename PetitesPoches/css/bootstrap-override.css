@@ -1,0 +1,41 @@
+﻿.form-control{
+    font-size:1em;
+}
+
+
+.modal-backdrop{
+    position:fixed;
+    bottom:0px;
+}
+
+.modal.fade {
+     -webkit-transition: opacity .1s linear, none;
+    -moz-transition: opacity .1s linear, none;
+    -ms-transition: opacity .1s linear, none;
+    -o-transition: opacity .1s linear, none;
+    transition: opacity .1s linear, none;
+    top: 50%;
+}.modal.fade.in {
+      -webkit-transition: opacity .1s linear, none;
+    -moz-transition: opacity .1s linear, none;
+    -ms-transition: opacity .1s linear, none;
+    -o-transition: opacity .1s linear, none;
+    transition: opacity .1s linear, none;
+    top: 50%;
+}
+ .close-override{
+    float:none;
+}
+
+ 
+ label {
+  font-weight:normal;
+}
+
+ 
+ .tab-content{
+     height:100%
+ }
+ .tab-pane{
+     height:100%
+ }
