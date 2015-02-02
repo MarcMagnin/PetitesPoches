@@ -25,23 +25,23 @@ var Update = function () {
 
 
 app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', function ($scope, $rootScope, $http, $timeout, $upload, $state) {
-    $rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
+    
     $scope.items = [];
     $scope.tags = [];
     $scope.selectedItem = "";
     $scope.searchedAuteur = "";
-
+    $scope.entityName = "Livre";
 
     $scope.init = function () {
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index' }).
             success(function (data, status, headers, config) {
 
-                for (var i = 0; i < 100; i++) {
-                    var livre = new Livre();
-                    livre['@metadata'] ="";
-                    livre['@metadata']['@id'] = 0;
-                    data.Results.push(livre);
-                }
+                //for (var i = 0; i < 100; i++) {
+                //    var livre = new Livre();
+                //    livre['@metadata'] ="";
+                //    livre['@metadata']['@id'] = 0;
+                //    data.Results.push(livre);
+                //}
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
@@ -77,6 +77,49 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.select = function (item) {
         $scope.selectedItem = item;
     }
+    $scope.addFile = function ($files, $event, field) {
+        var file = $files[0];
+        var fileReader = new FileReader();
+        fileReader.onload = function (e) {
+            $scope.upload =
+                $upload.http({
+                    url: $rootScope.apiRootUrl + '/static/' + $scope.selectedItem.Id + '/' + file.name,
+                    method: "PUT",
+                    headers: { 'Content-Type': file.type },
+                    data: e.target.result
+                }).progress(function (evt) {
+                    // Math.min is to fix IE which reports 200% sometimes
+                    //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    // mise à jour de l'item
+                    var update = new Update();
+                    update.Type = 'Set';
+                    update.Name = field;
+                    update.Value = file.name;
+
+                    $http({
+                        method: 'PATCH',
+                        headers: { 'Raven-Entity-Name': $scope.entityName },
+                        url: $rootScope.apiRootUrl + '/docs/' + $scope.selectedItem.Id,
+                        data: angular.toJson(new Array(update))
+                    }).
+                        success(function (data, status, headers, config) {
+                            $scope.selectedItem[field] = file.name;
+                        }).
+                        error(function (data, status, headers, config) {
+
+                        });
+
+
+                }).error(function (err) {
+                    alert('Error occured during upload');
+                });
+        }
+        fileReader.readAsArrayBuffer(file);
+    };
+
+
 
     $scope.addLivre = function ($files, $event, $rejectedFiles) {
         var file = $files[0];

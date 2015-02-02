@@ -31,9 +31,19 @@
 
 
                 <div class="moreInfoButtonWrapper">
-                    <button class="transparentButton background-circle" title="E-book" ng-show="item.EBookUrl">
-                        <i class="fa fa-tablet"></i>
-                    </button>
+
+                    <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
+                       class="transparentButton background-circle">
+                        <i class="fa fa-certificate fa-07" />
+                    </a>
+
+                    <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.EBookUrl}}" target="_blank"
+                       title="E-book"
+                       ng-show="item.EBookUrl"
+                       class="transparentButton background-circle">
+                        <i class="fa fa-tablet" />
+                    </a>
+
                 </div>
             </div>
 
@@ -69,10 +79,21 @@
                     <p><input class="form-control" type="text" placeholder="Lien vidéo" ng-model="selectedItem.LienVideo" /></p>
 
 
+                    
+
                 </div>
                 <div class="col-md-6">
 
                     <img class="tile-image" src="{{apiRootUrl}}/{{selectedItem.Couverture}}" />
+
+                    <a href="{{apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}" target="_blank" ng-show="selectedItem.FichePedago">{{selectedItem.FichePedago}}</a>
+                    <div ng-file-drop ng-model="files" class="drop-box drop-zone"
+                         drag-over-class="dragover" multiple="false"
+                         allow-dir="false" accept="application/pdf"
+                         ng-file-change="addFile($files, $event, 'FichePedago')">
+                        <p>Déposer la fiche pédagogique ici</p>
+                    </div>
+
                     <h4>Infos techniques</h4>
                     <p><input class="form-control" type="text" placeholder="prix" ng-model="selectedItem.Prix" /></p>
                     <p><input class="form-control" type="text" placeholder="ISBN" ng-model="selectedItem.ISBN" /></p>

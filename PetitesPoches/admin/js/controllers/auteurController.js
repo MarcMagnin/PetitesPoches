@@ -16,7 +16,6 @@ var Update = function () {
 
 
 app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', '$state', function ($scope, $rootScope, $http, $upload, $state) {
-    $rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
     $scope.entityName = "Auteur"
     $scope.items = [];
     $scope.tags = [];
@@ -68,7 +67,11 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
         success(function (data, status, headers, config) {
             item.Id = data.Key;
             item.new = true;
+            $scope.selectedItem = item;
             $scope.items.unshift(item);
+            $("#responsive").modal('show');
+
+
         }).
         error(function (data, status, headers, config) {
             console.log(data);
@@ -169,33 +172,6 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     };
 
-
-    $scope.addImageToLivre = function (fileName, item) {
-        var couvertureUrl = 'static/' + item.Id + '/' + fileName;
-        var update = new Update();
-        update.Type = 'Set';
-        update.Name = 'Couverture';
-        update.Value = couvertureUrl;
-
-
-        $http({
-            method: 'PATCH',
-            headers: { 'Raven-Entity-Name': $scope.entityName },
-            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
-            data: angular.toJson(new Array(update))
-        }).
-            success(function (data, status, headers, config) {
-                item.Couverture = couvertureUrl;
-            }).
-            error(function (data, status, headers, config) {
-
-            });
-
-        //}).
-        //error(function (data, status, headers, config) {
-
-        //});
-    };
 
     $scope.delete = function ($index, item) {
         if (item.Photo) {

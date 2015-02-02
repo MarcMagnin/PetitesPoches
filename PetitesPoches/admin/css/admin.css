@@ -1,4 +1,18 @@
-﻿.drop-box {
+﻿.drop-zone {
+    position:relative;
+    border:dashed 3px;
+    border-color :rgba(76, 255, 0, 0.3);
+    background-color:rgba(0, 0, 0, 0.20);
+    min-height:50px;
+}
+.drop-zone > p{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+.drop-box {
      transition: all .3s ease-out;
     -o-transition: all .3s ease-out;
     -moz-transition: all .3s ease-out;
