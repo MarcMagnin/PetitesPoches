@@ -34,7 +34,7 @@
 
                     <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
                        class="transparentButton background-circle">
-                        <i class="fa fa-certificate fa-07" />
+                        <i class="fa fa-file-text" />
                     </a>
 
                     <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.EBookUrl}}" target="_blank"
@@ -89,7 +89,7 @@
                     <a href="{{apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}" target="_blank" ng-show="selectedItem.FichePedago">{{selectedItem.FichePedago}}</a>
                     <div ng-file-drop ng-model="files" class="drop-box drop-zone"
                          drag-over-class="dragover" multiple="false"
-                         allow-dir="false" accept="application/pdf"
+                         allow-dir="false" accept="*"
                          ng-file-change="addFile($files, $event, 'FichePedago')">
                         <p>Déposer la fiche pédagogique ici</p>
                     </div>

@@ -20,7 +20,7 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
     $scope.items = [];
     $scope.tags = [];
     $scope.selectedItem = "";
-
+   // $scope.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     $scope.init = function () {
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/' + $scope.entityName + '?start=0&pageSize=200&sort=-Nom' }).
@@ -52,10 +52,20 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     };
 
+    
+    $scope.filterByLetter = function (item) {
+        var $container = $('.tilesContainer');
+        var test = '[class*=\'filter-' + item.toLowerCase() + '\']';
+        $container.isotope({ filter: test });
+    }
+    $scope.unFilter = function (item) {
+        $container.isotope({ filter: '*' });
+    }
 
     $scope.select = function (item) {
         $scope.selectedItem = item;
     }
+
     $scope.add = function () {
         var item = new Auteur;
         return $http({
@@ -129,7 +139,6 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
         //});
     };
 
-
     $scope.addDragAndDrop = function ($files, $event, $rejectedFiles) {
         var file = $files[0];
         // add the new item with the last index :
@@ -171,7 +180,6 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
             });
 
     };
-
 
     $scope.delete = function ($index, item) {
         if (item.Photo) {
