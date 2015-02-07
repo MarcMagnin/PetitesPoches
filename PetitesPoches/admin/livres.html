@@ -20,24 +20,28 @@
      ng-file-change="addLivre($files, $event)"
      ng-init="init()">
 
+    <p><pretty-checkbox ng-model="checkboxPrixLitteraire" ng-change="searchPrixLitteraires(value)" label="'Prix littéraires'"></pretty-checkbox></p>
 
-    <select ng-model="selected" ng-options="item for item in items | orderByDisplayOrder:this"></select>
+
+    
 
     <input type="text"
+           id="searchLivre"
            ng-model="searchedText"
            placeholder="Recherche..."
            typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue) | filter:$viewValue"
            typeahead-loading="loadingSearchSuggestions"
            typeahead-template-url="livreSearchTemplate.html"
-           ng-keypress="validateSearch($event)"
+           typeahead-wait-ms="300"
+           ng-keyup="validateSearch($event)"
            typeahead-on-select="validateSearchFromLivre($item)"
-           class="form-control">
-    </input>
+           class="form-control" />
+    
 
 
     <div id="booksContainer" class="tilesContainer">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin fil-{{item.Titre}}" ng-repeat="item in items"
+        <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}}  {{item.PrixLitteraire && 'fil-prix' || ''}} " ng-repeat="item in items"
              isotopethis=isotopethis>
             <button class="close close-override" title="supprimer"
                     ng-click="deleteLivre($index, item)">
@@ -55,7 +59,7 @@
 
 
                 <div class="tile-text-wrapper">
-                    <p href="#responsive" data-toggle="modal" class="tile-text" ng-pattern ="/\s/" >{{item.Titre}}</p>
+                    <p href="#responsive" data-toggle="modal" class="tile-text">{{item.Titre}}</p>
                     <!--<p href="#responsive" data-toggle="modal" class="tile-text">{{item.Titre.replace($scope.whiteSpacePattern,'')}}</p>-->
                 </div>
 
@@ -109,8 +113,6 @@
                     <p><input class="form-control" type="text" placeholder="Lien vidéo" ng-model="selectedItem.LienVideo" /></p>
 
 
-                    
-
                 </div>
                 <div class="col-md-6">
 
@@ -162,6 +164,7 @@
     </div>
 </div>
 <script>
+
 
     var $container = $('.tilesContainer');
 

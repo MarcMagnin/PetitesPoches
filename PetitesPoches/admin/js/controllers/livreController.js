@@ -33,9 +33,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.entityName = "Livre";
     $scope.searchedText = "";
     $scope.whiteSpacePattern = '/ /g'
+    $scope.searchTimeout;
+    $scope.checkboxPrixLitteraire;
+    $scope.container = $('.tilesContainer');
 
     $scope.init = function () {
-        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index' }).
+        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
                 //for (var i = 0; i < 100; i++) {
@@ -276,18 +279,52 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             return res.data.Results;
         });
     }
-    $scope.validateSearch = function (keyEvent) {
-        if (keyEvent.which === 13){
-            var $container = $('.tilesContainer');
-            var searchPattern = '[class*=\'fil-' + $scope.searchedText.toLowerCase().replace(/ /g, '') + '\']';
-            $container.isotope({ filter: searchPattern });
+
+    $scope.searchPatternPrixLitteraires;
+    $scope.searchPatternRecherche;
+
+    $scope.validateFilter = function () {
+        var searchPattern = $scope.searchPatternPrixLitteraires + ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '');
+        $scope.container.isotope({ filter: searchPattern });
+    }
+
+    $scope.searchPrixLitteraires = function () {
+        if ($scope.checkboxPrixLitteraire) {
+            $scope.searchPatternPrixLitteraires = '.fil-prix';
+        } else {
+            $scope.searchPatternPrixLitteraires = '';
         }
+        $scope.validateFilter();
     }
-    $scope.validateSearchFromLivre = function (item) {
-        var $container = $('.tilesContainer');
-        var searchPattern = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g,'') + '\']';
-        $container.isotope({ filter: searchPattern });
+
+    $scope.validateSearch = function (keyEvent) {
+        if ($scope.searchTimeout) {
+            clearTimeout($scope.searchTimeout);
+        }
+
+        $scope.searchTimeout = setTimeout(function () {
+            var searchPattern;
+            if ($scope.searchedText.Titre) {
+                $scope.searchPatternRecherche = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g, '') + '\']';
+            } else {
+                $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.toLowerCase().replace(/ /g, '') + '\']';
+            }
+
+            $scope.validateFilter();
+        }, 300);
     }
+
+    //$scope.validateSearchFromLivre = function (item) {
+    //    if ($scope.searchTimeout) {
+    //        clearTimeout($scope.searchTimeout);
+    //    }
+
+    //    $scope.searchTimeout = setTimeout(function () {
+    //        var $container = $('.tilesContainer');
+    //        var searchPattern = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g, '') + '\']';
+    //        $container.isotope({ filter: searchPattern });
+    //    }, 300);
+    //}
     
     $scope.searchAuteurSuggestions = function (value) {
         $scope.loadingSearchSuggestions = true;
