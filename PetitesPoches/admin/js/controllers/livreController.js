@@ -31,6 +31,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.selectedItem = "";
     $scope.searchedAuteur = "";
     $scope.entityName = "Livre";
+    $scope.searchedText = "";
+    $scope.whiteSpacePattern = '/ /g'
 
     $scope.init = function () {
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index' }).
@@ -256,7 +258,37 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
           });
     }
 
-
+    $scope.searchLivreSuggestions = function (value) {
+        $scope.loadingSearchSuggestions = true;
+        return $http({
+            method: 'GET',
+            url: $rootScope.apiRootUrl + '/indexes/LivreSearchSuggestions',
+            params: {
+                query: "Titre:" + value + "*",
+                //resultsTransformer: "AuteurSearchTransform",
+                pageSize: 10
+            }
+        }).then(function (res) {
+            $scope.loadingSearchSuggestions = false;
+            res.data.Results.forEach(function (item) {
+                item.imageUrl = $scope.apiRootUrl + "/" + item.Couverture;
+            });
+            return res.data.Results;
+        });
+    }
+    $scope.validateSearch = function (keyEvent) {
+        if (keyEvent.which === 13){
+            var $container = $('.tilesContainer');
+            var searchPattern = '[class*=\'fil-' + $scope.searchedText.toLowerCase().replace(/ /g, '') + '\']';
+            $container.isotope({ filter: searchPattern });
+        }
+    }
+    $scope.validateSearchFromLivre = function (item) {
+        var $container = $('.tilesContainer');
+        var searchPattern = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g,'') + '\']';
+        $container.isotope({ filter: searchPattern });
+    }
+    
     $scope.searchAuteurSuggestions = function (value) {
         $scope.loadingSearchSuggestions = true;
         return   $http({

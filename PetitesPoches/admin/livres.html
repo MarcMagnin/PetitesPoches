@@ -6,15 +6,38 @@
     </a>
 </script>
 
+<script type="text/ng-template" id="livreSearchTemplate.html">
+    <a>
+        <img src="{{match.model.imageUrl}}" width="40" />
+        <span bind-html-unsafe="match.model.Titre | typeaheadHighlight:query"></span>
+    </a>
+</script>
+
+
 <div class="viewContainer" ng-controller="livreController" ng-file-drop ng-model="files" class="drop-box dragover"
      drag-over-class="dragover" multiple="false"
      allow-dir="false" accept="image/*,application/pdf"
      ng-file-change="addLivre($files, $event)"
      ng-init="init()">
 
+
+    <select ng-model="selected" ng-options="item for item in items | orderByDisplayOrder:this"></select>
+
+    <input type="text"
+           ng-model="searchedText"
+           placeholder="Recherche..."
+           typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue) | filter:$viewValue"
+           typeahead-loading="loadingSearchSuggestions"
+           typeahead-template-url="livreSearchTemplate.html"
+           ng-keypress="validateSearch($event)"
+           typeahead-on-select="validateSearchFromLivre($item)"
+           class="form-control">
+    </input>
+
+
     <div id="booksContainer" class="tilesContainer">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin {{item.Theme}} {{item.Tags}}" ng-repeat="item in items"
+        <div class="tile isotopey tile-admin fil-{{item.Titre}}" ng-repeat="item in items"
              isotopethis=isotopethis>
             <button class="close close-override" title="supprimer"
                     ng-click="deleteLivre($index, item)">
@@ -28,6 +51,13 @@
                      data-toggle="modal"
                      class="tile-image" ng-click="select(item)"
                      src="{{apiRootUrl}}/{{item.Couverture}}" />
+
+
+
+                <div class="tile-text-wrapper">
+                    <p href="#responsive" data-toggle="modal" class="tile-text" ng-pattern ="/\s/" >{{item.Titre}}</p>
+                    <!--<p href="#responsive" data-toggle="modal" class="tile-text">{{item.Titre.replace($scope.whiteSpacePattern,'')}}</p>-->
+                </div>
 
 
                 <div class="moreInfoButtonWrapper">
