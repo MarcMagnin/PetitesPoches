@@ -8,8 +8,11 @@
 
 <script type="text/ng-template" id="livreSearchTemplate.html">
     <a>
+
         <img src="{{match.model.imageUrl}}" width="40" />
         <span bind-html-unsafe="match.model.Titre | typeaheadHighlight:query"></span>
+        <span bind-html-unsafe="match.model.Auteur.Prenom | typeaheadHighlight:query"></span>
+        <span bind-html-unsafe="match.model.Auteur.Nom | typeaheadHighlight:query"></span>
     </a>
 </script>
 
@@ -20,46 +23,82 @@
      ng-file-change="addLivre($files, $event)"
      ng-init="init()">
 
-    <p><pretty-checkbox ng-model="checkboxPrixLitteraire" ng-change="searchPrixLitteraires(value)" label="'Prix littéraires'"></pretty-checkbox></p>
+
+    <button class="btn btn-lg btn-success" ng-click="add()">
+        <i class="fa fa-user-plus"></i>
+    </button>
+   
+    <label class="btn btn-lg btn-primary" ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()"><i title="testes" class="fa fa-certificate"></i> Prix littéraires</label>
+    <label class="btn btn-lg btn-primary" ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()"><i class="fa fa-tablet" /> E-Book</label>
+    <!--http://isteven.github.io/angular-multi-select/-->
+    <div multi-select
+         class="inline-block"
+         input-model="tags"
+         button-label="Name"
+         item-label="Name"
+         tick-property="ticked"
+         helper-elements="reset"
+         output-model="themeMultiselectmodel"
+         default-label="Themes"
+         on-item-click="filtreThemes()">
+    </div>
+  
+    <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
+    <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
+    <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
+    <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
+
+    <div class="btn-group">
+        <label class="btn btn-lg btn-primary active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">Tous niveaux</label>
+        <label class="btn btn-lg btn-primary" ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">Permiers pas</label>
+        <label class="btn btn-lg btn-primary" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">Débutants</label>
+        <label class="btn btn-lg btn-primary" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">Confirmés</label>
+    </div>
+
+    <!--<select id="themes" ng-model="selected" ng-options="item.Name for item in tags"></select>-->
+    <!--<div ng-dropdown-multiselect="" options="tags" selected-model="themeMultiselectmodel" extra-settings="themeMultiselectSettings"></div>-->
+
 
 
     
+
 
     <input type="text"
            id="searchLivre"
            ng-model="searchedText"
            placeholder="Recherche..."
-           typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue) | filter:$viewValue"
+           typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
            typeahead-loading="loadingSearchSuggestions"
            typeahead-template-url="livreSearchTemplate.html"
            typeahead-wait-ms="300"
            ng-keyup="validateSearch($event)"
-           typeahead-on-select="validateSearchFromLivre($item)"
-           class="form-control" />
-    
+           typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+           class="form-control form-control-inline" />
+
 
 
     <div id="booksContainer" class="tilesContainer">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}}  {{item.PrixLitteraire && 'fil-prix' || ''}} " ng-repeat="item in items"
-             isotopethis=isotopethis>
+        <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+             {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}
+             {{item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+             {{item.Tags && item.Tags || '' | filterString}}"
+             ng-repeat="item in items"
+             isotopethis=isotopethis ng-click="select(item)" href="#responsive" data-toggle="modal">
             <button class="close close-override" title="supprimer"
                     ng-click="deleteLivre($index, item)">
                 <i class="fa fa-close"></i><p class=" index">{{item.Index}}</p>
             </button>
-            <tags item="item"></tags>
 
             <div class="inner-tile">
                 <i title="{{item.PrixLitteraire}}" class="fa fa-certificate fa-price" ng-show="item.PrixLitteraire"></i>
-                <img href="#responsive"
-                     data-toggle="modal"
-                     class="tile-image" ng-click="select(item)"
+                <img class="tile-image"
                      src="{{apiRootUrl}}/{{item.Couverture}}" />
 
 
 
                 <div class="tile-text-wrapper">
-                    <p href="#responsive" data-toggle="modal" class="tile-text">{{item.Titre}}</p>
+                    <p class="tile-text">{{item.Titre}}</p>
                     <!--<p href="#responsive" data-toggle="modal" class="tile-text">{{item.Titre.replace($scope.whiteSpacePattern,'')}}</p>-->
                 </div>
 
@@ -106,6 +145,7 @@
                     <p><pretty-radio value="'debutants'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs débutants'"></pretty-radio></p>
                     <p><pretty-radio value="'confirmes'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs confirmés'"></pretty-radio></p>
 
+                    <tags item="selectedItem" entityname="Livre"></tags>
                     <p><input class="form-control" type="text" placeholder="Prix littéraire" ng-model="selectedItem.PrixLitteraire" /></p>
                     <p><input class="form-control" type="text" placeholder="Lien E-book" ng-model="selectedItem.EBookUrl" /></p>
                     <p><input class="form-control" type="text" placeholder="Lien Issuu" ng-model="selectedItem.Extrait" /></p>
@@ -145,12 +185,12 @@
             </input>
             <p>{{selectedItem.Auteur.Prenom}} {{selectedItem.Auteur.Nom}}</p>
             <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{apiRootUrl}}/{{selectedItem.Auteur.Photo}}" />
-            
-            
+
+
         </div>
 
-  
-       
+
+
         <!--<div class="tab-pane" id="tab2"><p>This is some other tab content</p></div>
             </div>
 
@@ -167,8 +207,7 @@
 
 
     var $container = $('.tilesContainer');
-
-
+  
     // change layout mode
     //$container.isotope({ layoutMode: "masonryHorizontal" });
     $container.isotope({
@@ -198,5 +237,5 @@
             $container.css('overflow', 'visible');
         }
     });
-   
+
 </script>

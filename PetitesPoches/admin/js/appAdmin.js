@@ -1,4 +1,4 @@
-﻿var app = angular.module('PetitesPoches', ['angularFileUpload', 'pretty-checkable', "ui.router", "ui.bootstrap"]);
+﻿var app = angular.module('PetitesPoches', ['angularFileUpload', 'multi-select', 'pretty-checkable', "ui.router", "ui.bootstrap"]);
 
 
 app.config(function ($stateProvider, $urlRouterProvider) {

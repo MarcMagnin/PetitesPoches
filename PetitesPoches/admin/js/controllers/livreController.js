@@ -36,6 +36,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.searchTimeout;
     $scope.checkboxPrixLitteraire;
     $scope.container = $('.tilesContainer');
+    $scope.niveauLecture = '';
+    $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
+    $scope.themeMultiselectmodel = [];
 
     $scope.init = function () {
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
@@ -66,11 +69,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             });
 
         // Load tags
-        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Tags?pageSize=30&sort=Name&noCache=1015157938' }).
+        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Tags?pageSize=30&sort=Name&noCache=1015157938&_=' + Date.now() }).
             success(function (data, status, headers, config) {
-
-
-
+                $scope.tags = data.Results;
             }).
             error(function (data, status, headers, config) {
                 console.log(data);
@@ -210,7 +211,27 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
         //});
     };
+    $scope.add = function () {
+        var item = new Livre;
+        return $http({
+            method: 'PUT',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
+            data: angular.toJson(item)
+        }).
+        success(function (data, status, headers, config) {
+            item.Id = data.Key;
+            item.new = true;
+            $scope.selectedItem = item;
+            $scope.items.unshift(item);
+            $("#responsive").modal('show');
 
+
+        }).
+        error(function (data, status, headers, config) {
+            console.log(data);
+        });
+    }
     $scope.deleteLivre = function ($index, item) {
 
         if (item.Couverture) {
@@ -261,13 +282,15 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
           });
     }
 
+    $scope.searchSuggestionsValue;
     $scope.searchLivreSuggestions = function (value) {
+        $scope.searchSuggestionsValue = value;
         $scope.loadingSearchSuggestions = true;
         return $http({
             method: 'GET',
             url: $rootScope.apiRootUrl + '/indexes/LivreSearchSuggestions',
             params: {
-                query: "Titre:" + value + "*",
+                query: "Titre:" + value + "* OR Nom:" + value + "* OR Prenom:" + value + "*",
                 //resultsTransformer: "AuteurSearchTransform",
                 pageSize: 10
             }
@@ -279,23 +302,45 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             return res.data.Results;
         });
     }
+    $scope.validateSearchFromLivre = function ($item, $model, $label) {
+        if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
+            $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
+        }
+    }
 
-    $scope.searchPatternPrixLitteraires;
-    $scope.searchPatternRecherche;
 
     $scope.validateFilter = function () {
-        var searchPattern = $scope.searchPatternPrixLitteraires + ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '');
+        var searchPattern = ($scope.searchPatternEBook ? $scope.searchPatternEBook : '')
+        + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
+        + ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
+        + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
+        + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '');
         $scope.container.isotope({ filter: searchPattern });
     }
 
-    $scope.searchPrixLitteraires = function () {
-        if ($scope.checkboxPrixLitteraire) {
-            $scope.searchPatternPrixLitteraires = '.fil-prix';
-        } else {
-            $scope.searchPatternPrixLitteraires = '';
-        }
+    $scope.filtreNiveauLecture = function () {
+        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
         $scope.validateFilter();
     }
+
+
+    $scope.searchEBook = function () {
+        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
+        $scope.validateFilter();
+    }
+
+    $scope.searchPrixLitteraires = function () {
+        $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';
+        $scope.validateFilter();
+    }
+    $scope.filtreThemes = function () {
+        $scope.searchPatternTheme =   $scope.themeMultiselectmodel.map(function (val) {
+            return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
+        }).join('');
+        $scope.validateFilter();
+    }
+
+    
 
     $scope.validateSearch = function (keyEvent) {
         if ($scope.searchTimeout) {
@@ -305,27 +350,20 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
             if ($scope.searchedText.Titre) {
-                $scope.searchPatternRecherche = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g, '') + '\']';
+                $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
             } else {
-                $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.toLowerCase().replace(/ /g, '') + '\']';
+                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
+                    return '[class*=\'fil-' + val.toLowerCase() + '\']';
+                }).join(',');
             }
 
             $scope.validateFilter();
         }, 300);
     }
 
-    //$scope.validateSearchFromLivre = function (item) {
-    //    if ($scope.searchTimeout) {
-    //        clearTimeout($scope.searchTimeout);
-    //    }
-
-    //    $scope.searchTimeout = setTimeout(function () {
-    //        var $container = $('.tilesContainer');
-    //        var searchPattern = '[class*=\'fil-' + item.Titre.toLowerCase().replace(/ /g, '') + '\']';
-    //        $container.isotope({ filter: searchPattern });
-    //    }, 300);
-    //}
+   
     
+  
     $scope.searchAuteurSuggestions = function (value) {
         $scope.loadingSearchSuggestions = true;
         return   $http({

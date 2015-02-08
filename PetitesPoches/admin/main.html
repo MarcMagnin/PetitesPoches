@@ -3,9 +3,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Les Petites Poches - administration</title>
-    <!--<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css" rel="stylesheet">-->
-    <link href="../js/packages/bootstrap.min.css" rel="stylesheet" />
-    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />-->
+    <!--<link href="../js/packages/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>-->
+    <link href="../bower_components/angular-multi-select/angular-multi-select.css" rel="stylesheet" />
     <link href="../css/bootstrap-modal-bs3patch.css" rel="stylesheet" />
     <link href="../css/bootstrap-modal.css" rel="stylesheet" />
     <link href="../js/packages/prettyCheckable.css" rel="stylesheet" />
@@ -47,14 +49,24 @@
     <script src="js/angular-file-upload-master/dist/angular-file-upload-shim.js"></script>
     <script src="js/angular-file-upload-master/dist/angular-file-upload.js"></script>
     
+
+    <!--used for angular multiselect-->
+    <!--<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>-->
+
+
     <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
     <script src="../js/packages/bootstrap.min.js"></script>
     <script src="../js/packages/bootstrap-modalmanager.js"></script>
     <script src="../js/packages/bootstrap-modal.js"></script>
+    <script src="../bower_components/angular-multi-select/angular-multi-select.js"></script>
+
+    <!--<script src="../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>-->
 
     <script src="js/appAdmin.js"></script>
     <script src="js/filter/filters.js"></script>
-    <script src="../js/filters/noSpace.js"></script>
+    <script src="../js/filters/filters.js"></script>
+    <script src="js/directives/tags.js"></script>
+    <script src="../js/filters/getRelevantSearchedSuggestion.js"></script>
     <script src="js/controllers/livreController.js"></script>
     <script src="js/controllers/auteurController.js"></script>
     <script src="js/controllers/mainControllerAdmin.js"></script>

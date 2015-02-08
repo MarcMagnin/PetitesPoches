@@ -59,13 +59,37 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\js\directives\tags.js" />
     <Content Include="admin\js\filter\filters.js" />
+    <Content Include="bower_components\angular-multi-select\angular-multi-select.css" />
+    <Content Include="bower_components\angular-multi-select\angular-multi-select.js" />
+    <Content Include="bower_components\angular-multi-select\LICENSE.txt" />
+    <Content Include="bower_components\angular\angular-csp.css" />
+    <Content Include="bower_components\angular\angular.js" />
+    <Content Include="bower_components\angular\angular.min.js" />
+    <Content Include="bower_components\lodash\dist\lodash.compat.js" />
+    <Content Include="bower_components\lodash\dist\lodash.compat.min.js" />
+    <Content Include="bower_components\lodash\dist\lodash.js" />
+    <Content Include="bower_components\lodash\dist\lodash.min.js" />
+    <Content Include="bower_components\lodash\dist\lodash.underscore.js" />
+    <Content Include="bower_components\lodash\dist\lodash.underscore.min.js" />
+    <Content Include="bower_components\lodash\LICENSE.txt" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
-    <Content Include="js\filters\noSpace.js" />
+    <Content Include="js\filters\filters.js" />
     <Content Include="js\packages\angular.min.js.map" />
+    <Content Include="bower_components\angular\.bower.json" />
+    <Content Include="bower_components\angular\angular.min.js.gzip" />
+    <Content Include="bower_components\angular\angular.min.js.map" />
+    <Content Include="bower_components\angular\bower.json" />
+    <Content Include="bower_components\angular\package.json" />
+    <Content Include="bower_components\angular\README.md" />
+    <Content Include="bower_components\lodash\.bower.json" />
+    <Content Include="bower_components\lodash\bower.json" />
+    <Content Include="bower_components\angular-multi-select\.bower.json" />
+    <Content Include="bower_components\angular-multi-select\.npmignore" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -130,7 +154,6 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

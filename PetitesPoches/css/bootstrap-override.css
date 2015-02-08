@@ -1,6 +1,10 @@
 ﻿.form-control{
     font-size:1em;
 }
+.form-control-inline{
+    display:inline-block;
+    width:auto;
+}
 
 
 .modal-backdrop{
@@ -39,3 +43,4 @@
  .tab-pane{
      height:100%
  }
+
