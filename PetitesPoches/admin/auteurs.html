@@ -16,41 +16,43 @@
     </a>
   
 
-        <div id="booksContainer" class="tilesContainer" ng-file-drop ng-model="files" class="drop-box dragover"
-             drag-over-class="dragover" multiple="false"
-             allow-dir="false" accept="image/*"
-             ng-file-change="add($files, $event)">
-            <!--| orderBy:'Index':true-->
-            <div class="tile isotopey tile-admin filter-{{item.Nom|lowercase}}" ng-repeat="item in items"
-                 isotopethis=isotopethis>
-                <button class="close close-override" title="supprimer"
-                        ng-click="delete($index, item)">
-                    <i class="fa fa-close"></i>
-                </button>
+    <div id="booksContainer" class="tilesContainer" ng-file-drop ng-model="files" class="drop-box dragover"
+         drag-over-class="dragover" multiple="false"
+         allow-dir="false" accept="image/*"
+         ng-file-change="add($files, $event)"
+       >
+        <!--| orderBy:'Index':true-->
+        <div class="tile isotopey tile-admin filter-{{item.Nom|lowercase}}" ng-repeat="item in items"
+             isotopethis=isotopethis
+             ng-click="select(item, $event)">
+            <button class="close close-override" title="supprimer"
+                    ng-click="delete($index, item, $event)">
+                <i class="fa fa-close"></i>
+            </button>
 
-                <div class="inner-tile" ng-click="select(item)">
+            <div class="inner-tile">
 
-                    <img href="#responsive" data-toggle="modal" class="tile-image"
-                         src="{{apiRootUrl}}/{{item.Photo}}" ng-show="item.Photo" />
-                    <i href="#responsive" data-toggle="modal" class="fa fa-user fa-placeholder placeholder" ng-show="!item.Photo"></i>
-
-
-                    <div class="tile-text-wrapper">
-                        <p href="#responsive" data-toggle="modal" class="tile-text">{{item.Prenom}} {{item.Nom}}</p>
-                    </div>
+                <img class="tile-image"
+                     src="{{apiRootUrl}}/{{item.Photo}}" ng-show="item.Photo" />
+                <i class="fa fa-user fa-placeholder placeholder" ng-show="!item.Photo"></i>
 
 
-
-                    <div class="moreInfoButtonWrapper topRight">
-                        <a href="{{item.LienBiblio}}" target="_blank" title="Bibliographie" ng-show="item.LienBiblio" class="transparentButton background-circle">
-                            <i class="fa fa-leanpub fa-07" />
-                        </a>
-
-                    </div>
+                <div class="tile-text-wrapper">
+                    <p class="tile-text">{{item.Prenom}} {{item.Nom}}</p>
                 </div>
 
+
+
+                <div class="moreInfoButtonWrapper topRight">
+                    <a href="{{item.LienBiblio}}" data-dismiss="modal" target="_blank" title="Bibliographie" ng-show="item.LienBiblio" class="transparentButton background-circle">
+                        <i class="fa fa-leanpub fa-07" />
+                    </a>
+
+                </div>
             </div>
+
         </div>
+    </div>
 
 
         <div tabindex="-1" class="modal fade" id="responsive" data-width="760" data-height="300">

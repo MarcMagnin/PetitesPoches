@@ -2,7 +2,13 @@
 app.directive('isotopethis', function () {
     return {
         link: function (scope, elm) {
-           
+            //elm.find("a").click(function (event) {
+            //    event.preventDefault();
+            //    event.stopPropagation();
+            //    event.stopImmediatePropagation();
+            //    window.open($(this).attr("href"), $(this).attr("target"));
+            //});
+
             var tileImage = elm.find(".tileHeroImage");
             // $container.isotope('insert', elm);
             // advantage : don't filter

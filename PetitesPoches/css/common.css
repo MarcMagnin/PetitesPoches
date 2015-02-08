@@ -1,4 +1,5 @@
-﻿@import url('bootstrap-override.css');
+﻿
+@import url('bootstrap-override.css');
 @font-face {
     font-family: 'fontawesome-webfont';
     src: url('fontawesome-webfont.eot') format('embedded-opentype');
@@ -62,9 +63,9 @@ margin-top: 5px;
   transition: background-color .1s ease-out;
 }
 .inner-tile{
-  position:relative;
+    position:relative;
     width:140px;
-    height:200px;background:red;
+    height:200px;
 }
 
 

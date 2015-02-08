@@ -80,8 +80,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     };
 
 
-    $scope.select = function (item) {
+    $scope.select = function (item, $event) {
         $scope.selectedItem = item;
+        // prevent the modal to show if we click on a nested link
+        if (!$($event.target).closest('a').length) {
+            $('#responsive').modal('show');
+        }
     }
     $scope.addFile = function ($files, $event, field) {
         var file = $files[0];
@@ -232,7 +236,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             console.log(data);
         });
     }
-    $scope.deleteLivre = function ($index, item) {
+    $scope.deleteLivre = function ($index, item, $event) {
+        $event.stopPropagation();
+        $event.stopImmediatePropagation();
 
         if (item.Couverture) {
             $http({

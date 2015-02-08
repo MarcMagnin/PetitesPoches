@@ -62,8 +62,12 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
         $container.isotope({ filter: '*' });
     }
 
-    $scope.select = function (item) {
+    $scope.select = function (item, $event) {
         $scope.selectedItem = item;
+        // prevent the modal to show if we click on a nested link
+        if (!$($event.target).closest('a').length) {
+            $('#responsive').modal('show');
+        }
     }
 
     $scope.add = function () {
@@ -181,7 +185,10 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     };
 
-    $scope.delete = function ($index, item) {
+    $scope.delete = function ($index, item, $event) {
+        $event.stopPropagation();
+        $event.stopImmediatePropagation();
+
         if (item.Photo) {
             $http({
                 method: 'DELETE',
