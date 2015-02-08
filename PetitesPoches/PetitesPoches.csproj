@@ -90,6 +90,7 @@
     <Content Include="bower_components\lodash\bower.json" />
     <Content Include="bower_components\angular-multi-select\.bower.json" />
     <Content Include="bower_components\angular-multi-select\.npmignore" />
+    <Content Include="Dump of PetitesPoches, 2015-02-08 20-38.ravendump" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
