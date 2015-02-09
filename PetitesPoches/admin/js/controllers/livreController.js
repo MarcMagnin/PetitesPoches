@@ -140,6 +140,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }).success(function (data, status, headers, config) {
             // add the new item with the last index :
             var livre = new Livre;
+            livre.datePublication = moment().format();
             if (data.Results[0])
                 livre.Index = ++data.Results[0].Count;
             else
@@ -217,6 +218,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     };
     $scope.add = function () {
         var item = new Livre;
+        item.datePublication = moment().format();
         return $http({
             method: 'PUT',
             headers: { 'Raven-Entity-Name': $scope.entityName },
@@ -405,5 +407,34 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         });
     }
 
+    $scope.clear = function () {
+        $scope.selectedItem.datePublication = null;
+    };
 
+    $scope.toggleMin = function () {
+        $scope.minDate = $scope.minDate ? null : new Date();
+    };
+    $scope.toggleMin();
+
+    $scope.open = function ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        startingDay: 1
+    };
+
+    $scope.formats = ['dd-MMMM-yyyy', 'dd/MM/yyyy', 'dd.MM.yyyy', 'shortDate'];
+    $scope.format = $scope.formats[1];
+
+    $scope.sort = function () {
+        $scope.container.isotope({ 
+            sortBy: 'date',
+            sortAscending : false
+        });
+    }
 }]);

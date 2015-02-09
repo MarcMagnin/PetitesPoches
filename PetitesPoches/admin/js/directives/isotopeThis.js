@@ -12,10 +12,10 @@ app.directive('isotopethis', function () {
             var tileImage = elm.find(".tileHeroImage");
             // $container.isotope('insert', elm);
             // advantage : don't filter
-            $container.isotope('appended', elm);
-
+            //$container.isotope('appended', elm);
+            $container.isotope('insert', elm);
             if (scope.item.new) {
-                $container.isotope({ sortBy: 'weight' });
+                $container.isotope({ sortBy: 'date' });
             }
             tileImage.load(function () {
                 $container.isotope('reLayout');

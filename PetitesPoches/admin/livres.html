@@ -74,7 +74,7 @@
            ng-keyup="validateSearch($event)"
            typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
            class="form-control form-control-inline" />
-
+      <a href="#sortBy=date" ng-click="sort()">by date</a>
 
 
     <div id="booksContainer" class="tilesContainer">
@@ -87,7 +87,7 @@
              isotopethis=isotopethis ng-click="select(item, $event)">
             <button class="close close-override" title="supprimer"
                     ng-click="deleteLivre($index, item, $event)">
-                <i class="fa fa-close"></i><p class=" index">{{item.Index}}</p>
+                <i class="fa fa-close"></i>
             </button>
             <!--href="#responsive" data-toggle="modal"-->
             <div class="inner-tile">
@@ -159,9 +159,24 @@
                     </div>
 
                     <h4>Infos techniques</h4>
+
+                    <p class="input-group">
+                        <input type="text" class="form-control"
+                               datepicker-popup="dd/MM/yyyy"
+                               ng-model="selectedItem.datePublication"
+                               is-open="opened"
+                               min-date="'1800-01-01'"
+                               max-date="'2015-06-22'"
+                               datepicker-options="dateOptions"
+                               ng-required="true"
+                               close-text=" close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+
                     <p><input class="form-control" type="text" placeholder="prix" ng-model="selectedItem.Prix" /></p>
                     <p><input class="form-control" type="text" placeholder="ISBN" ng-model="selectedItem.ISBN" /></p>
-
 
                 </div>
 
@@ -175,6 +190,9 @@
                    typeahead-template-url="customTemplate.html"
                    class="form-control">
             </input>
+
+
+
             <p>{{selectedItem.Auteur.Prenom}} {{selectedItem.Auteur.Nom}}</p>
             <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{apiRootUrl}}/{{selectedItem.Auteur.Photo}}" />
 
@@ -194,6 +212,7 @@
 
         </div>
     </div>
+  
 </div>
 <script>
 
@@ -208,22 +227,37 @@
         itemSelector: '.isotopey',
         masonryHorizontal: { rowHeight: 20 },
         getSortData: {
-            weight: function (itemElem) { // function
-                if (!$(itemElem).scope())
+            //weight: function (itemElem) { // function
+            //    if (!$(itemElem).scope())
+            //        return 0;
+            //    if ($(itemElem).scope().item) {
+            //        //console.log($(itemElem).scope().item.Index);
+            //        return parseFloat($(itemElem).scope().item.Index);
+            //    } else {
+            //        var weight = $(itemElem).find('.index').text();
+            //        //console.log(weight);
+            //        return parseFloat(weight.replace(/[\(\)]/g, ''));
+            //    }
+
+
+            //}
+            date: function (elem) {
+                if (!$(elem).scope())
                     return 0;
-                if ($(itemElem).scope().item) {
-                    //console.log($(itemElem).scope().item.Index);
-                    return parseFloat($(itemElem).scope().item.Index);
-                } else {
-                    var weight = $(itemElem).find('.index').text();
-                    //console.log(weight);
-                    return parseFloat(weight.replace(/[\(\)]/g, ''));
+                if ($(elem).scope().item && $(elem).scope().item.datePublication) {
+                    console.log("test " +$(elem).scope().item.datePublication);
+                    var value = Date.parse($(elem).scope().item.datePublication);
+                    console.log("test val " + value);
+                    return value;
                 }
-
-
+                return 0;
             }
         },
-        //sortBy: 'weight',
+
+        
+
+
+        sortBy: 'date',
         sortAscending: false,
         transformsEnabled: false,
         onLayout: function () {
