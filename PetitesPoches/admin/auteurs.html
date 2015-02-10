@@ -118,25 +118,8 @@
         layoutMode: 'masonryHorizontal',
         itemSelector: '.isotopey',
         masonryHorizontal: { rowHeight: 20 },
-        getSortData: {
-            weight: function (itemElem) { // function
-                if (!$(itemElem).scope())
-                    return 0;
-                if ($(itemElem).scope().item) {
-                    //console.log($(itemElem).scope().item.Index);
-                    return parseFloat($(itemElem).scope().item.Index);
-                } else {
-                    var weight = $(itemElem).find('.index').text();
-                    //console.log(weight);
-                    return parseFloat(weight.replace(/[\(\)]/g, ''));
-                }
-
-
-            }
-        },
-        //sortBy: 'weight',
         sortAscending: true,
-        transformsEnabled: false,
+        transformsEnabled: true,
         onLayout: function () {
             $container.css('overflow', 'visible');
         }

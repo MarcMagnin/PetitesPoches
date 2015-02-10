@@ -59,7 +59,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\js\directives\tags.js" />
+    <Content Include="admin\js\directives\adminDirectives.js" />
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
@@ -171,6 +171,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="js\directives\commonDirectives.js" />
     <Content Include="js\filters\filters.js" />
     <Content Include="js\packages\angular.min.js.map" />
     <Content Include="bower_components\angular\.bower.json" />
@@ -218,7 +219,6 @@
     <Content Include="admin\js\controllers\livreController.js" />
     <Content Include="admin\js\controllers\mainControllerAdmin.js" />
     <Content Include="admin\js\general.js" />
-    <Content Include="admin\js\directives\isotopeThis.js" />
     <Content Include="admin\main.html" />
     <Content Include="css\bootstrap-modal-bs3patch.css" />
     <Content Include="css\bootstrap-modal.css" />

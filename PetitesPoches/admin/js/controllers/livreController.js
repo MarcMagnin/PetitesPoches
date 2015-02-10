@@ -3,11 +3,14 @@ var Livre = function () {
     this.Index = 0;
     this.Titre = "";
     this.Couverture = "";
-    this.Auteur = "";
+    this.Auteur = {
+        Nom: "",
+        Prenom:""
+    };
     this.Prix = "";
     this.ISBN = "";
     this.EBookUrl = "";
-    this.NiveauLecture = "premiersPas";
+    this.NiveauLecture = "";
     this.PrixLitteraire = "";
     this.FichePedago = "";
     this.Extrait = "";
@@ -21,10 +24,22 @@ var Update = function () {
     this.Name = "";
 };
 
+app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedItem, parentScope) {
+    $scope.$parent = parentScope;
+    $scope.selectedItem = selectedItem;
+
+    $scope.ok = function () {
+        $modalInstance.close($scope.selectedItem);
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+});
 
 
 
-app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', function ($scope, $rootScope, $http, $timeout, $upload, $state) {
+app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal) {
     
     $scope.items = [];
     $scope.tags = [];
@@ -41,15 +56,16 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.themeMultiselectmodel = [];
 
     $scope.init = function () {
+        itemAdded = 0;
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
-                //for (var i = 0; i < 100; i++) {
-                //    var livre = new Livre();
-                //    livre['@metadata'] ="";
-                //    livre['@metadata']['@id'] = 0;
-                //    data.Results.push(livre);
-                //}
+                for (var i = 0; i < 100; i++) {
+                    var livre = new Livre();
+                    livre['@metadata'] ="";
+                    livre['@metadata']['@id'] = 0;
+                    data.Results.push(livre);
+                }
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
@@ -63,6 +79,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);
                 });
+             
             }).
             error(function (data, status, headers, config) {
                 console.log(data);
@@ -80,11 +97,42 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     };
 
 
-    $scope.select = function (item, $event) {
+    $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;
+      //  $($event.target).parent().css({ width: '200px' });
+       // $scope.container.isotope('reLayout');
         // prevent the modal to show if we click on a nested link
         if (!$($event.target).closest('a').length) {
-            $('#responsive').modal('show');
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    selectedItem: function () {
+                        return $scope.selectedItem;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    },
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $http({
+                    method: 'PUT',
+                    headers: { 'Raven-Entity-Name': 'Livre' },
+                    url: $rootScope.apiRootUrl + '/docs/' + item.Id,
+                    data: angular.toJson(item)
+                }).
+                success(function (data, status, headers, config) {
+                }).
+                error(function (data, status, headers, config) {
+                    console.log(data);
+                });
+
+            }, function () {
+                //   $log.info('Modal dismissed at: ' + new Date());
+            });
         }
     }
     $scope.addFile = function ($files, $event, field) {
@@ -216,27 +264,63 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
         //});
     };
-    $scope.add = function () {
+
+
+    $scope.cancel = function () {
+        $scope.modalInstance.dismiss('cancel');
+    }
+
+
+    $scope.add = function (size) {
         var item = new Livre;
         item.datePublication = moment().format();
-        return $http({
-            method: 'PUT',
-            headers: { 'Raven-Entity-Name': $scope.entityName },
-            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
-            data: angular.toJson(item)
-        }).
-        success(function (data, status, headers, config) {
-            item.Id = data.Key;
-            item.new = true;
-            $scope.selectedItem = item;
-            $scope.items.unshift(item);
-            $("#responsive").modal('show');
-
-
-        }).
-        error(function (data, status, headers, config) {
-            console.log(data);
+        $scope.selectedItem = item;
+        var modalInstance = $modal.open({
+            templateUrl: 'myModalContent.html',
+            controller: 'ModalInstanceCtrl',
+            size: size,
+            resolve: {
+                selectedItem: function () {
+                    return $scope.selectedItem;
+                },
+                parentScope: function () {
+                    return $scope;
+                },
+            }
         });
+
+        modalInstance.result.then(function (selectedItem) {
+            return $http({
+                method: 'PUT',
+                headers: { 'Raven-Entity-Name': $scope.entityName },
+                url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
+                data: angular.toJson($scope.selectedItem)
+            }).
+               success(function (data, status, headers, config) {
+                   item.Id = data.Key;
+                   item.new = true;
+                   $scope.items.unshift(item);
+
+               }).
+               error(function (data, status, headers, config) {
+                   console.log(data);
+               });
+
+
+        }, function () {
+         //   $log.info('Modal dismissed at: ' + new Date());
+        });
+
+        //var test = $("#responsive").modal('show');
+        //$('#responsive').on('show.bs.modal', function (e) {
+        //    alert('modal show');
+        //});
+        //$("#responsive").modal('show').result.then(function () {
+        //    alert("test");
+       
+        //});
+
+    
     }
     $scope.deleteLivre = function ($index, item, $event) {
         $event.stopPropagation();
@@ -392,20 +476,6 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         });
     };
 
-    $scope.saveItem = function (item) {
-        $http({
-            method: 'PUT',
-            headers: { 'Raven-Entity-Name': 'Livre' },
-            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
-            data: angular.toJson(item)
-        }).
-        success(function (data, status, headers, config) {
-
-        }).
-        error(function (data, status, headers, config) {
-            console.log(data);
-        });
-    }
 
     $scope.clear = function () {
         $scope.selectedItem.datePublication = null;
@@ -419,7 +489,6 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.open = function ($event) {
         $event.preventDefault();
         $event.stopPropagation();
-
         $scope.opened = true;
     };
 

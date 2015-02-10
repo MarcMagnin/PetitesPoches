@@ -335,8 +335,8 @@
     containerClass : 'isotope',
     itemClass : 'isotope-item',
     hiddenClass : 'isotope-hidden',
-    hiddenStyle: { opacity: 0, scale: 0.001 },
-    visibleStyle: { opacity: 1, scale: 1 },
+    hiddenStyle: { opacity: 0, scale:0},
+    visibleStyle: { opacity: 1, scale:1},
     containerStyle: {
       position: 'relative',
       overflow: 'hidden'
@@ -556,7 +556,6 @@
           if (!filter) {
               this.styleQueue.push({ $el: $atomsToShow, style: this.options.visibleStyle });
               $atomsToShow.removeClass(hiddenClass);
-
               return $atoms;
           }
 
@@ -565,10 +564,8 @@
               var $atomsToHide = $atoms.not(hiddenSelector).not(filter).addClass(hiddenClass);
               this.styleQueue.push({ $el: $atomsToHide, style: this.options.hiddenStyle });
           }
-
           this.styleQueue.push({ $el: $atomsToShow, style: this.options.visibleStyle });
           $atomsToShow.removeClass(hiddenClass);
-
           return $atoms.filter(filter);
       }
     },
@@ -683,12 +680,12 @@
     layout : function( $elems, callback ) {
 
       var layoutMode = this.options.layoutMode;
-
+ 
       // layout logic
       this[ '_' +  layoutMode + 'Layout' ]( $elems );
 
       // set the size of the container
-      if ( this.options.resizesContainer ) {
+      if (this.options.resizesContainer) {
         var containerStyle = this[ '_' +  layoutMode + 'GetContainerSize' ]();
         this.styleQueue.push({ $el: this.element, style: containerStyle });
       }
@@ -768,7 +765,8 @@
           // yeah, this is inexact
           var duration = parseFloat( getComputedStyle( testElem[0] )[ transitionDurProp ] );
           if ( duration > 0 ) {
-            processor = function( i, obj ) {
+              processor = function (i, obj) {
+                
               obj.$el[ styleFn ]( obj.style, animOpts )
                 // trigger callback at transition end
                 .one( transitionEndEvent, callbackFn );
@@ -782,7 +780,7 @@
       $.each( this.styleQueue, processor );
 
       if ( triggerCallbackNow ) {
-        callbackFn();
+          callbackFn(); 
       }
 
       // clear out queue for next time
@@ -834,6 +832,9 @@
         instance._revealAppended( $newFilteredAtoms, callback );
       });
 
+    },
+    appended2 : function( $content ) {
+        this.addItems( $content);
     },
 
     // convienence method for working with Infinite Scroll

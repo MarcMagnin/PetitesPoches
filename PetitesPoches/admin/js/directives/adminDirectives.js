@@ -1,4 +1,19 @@
-﻿app.directive('tags', function ($http, $rootScope) {
+﻿
+app.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if (event.which === 13) {
+                scope.$apply(function () {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
+app.directive('tags', function ($http, $rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -6,21 +21,22 @@
             entityName: '='
         },
         template:
+             ' <label class="control-label" for="Tags">Thèmes</label>' +
             '<div class="tags">' +
-                '<button class="btn btn-lg btn-info tag" ng-repeat="(idx, tag) in item.Tags" ng-click="remove(idx)">{{tag}}</button>' +
+                '<button class="btn btn-info tag" ng-repeat="(idx, tag) in item.Tags" ng-click="remove(idx)">{{tag}}</button>' +
             '</div>' +
-             '<input type="text" ' +
+             '<p><input id="Tags" type="text" ' +
                 'ng-model="new_value"  ' +
-                'placeholder="themes..." ' +
                 'typeahead="tags.Name for tags in getTags($viewValue) | filter:$viewValue" ' +
                 'typeahead-loading="loading" ' +
-                'class="form-control"></input>',
-                //'<i ng-show="loading" class="glyphicon glyphicon-refresh"></i> ' +
-            //'<a class="btn" ng-click="add()">Ajouter</a>'
-            
+                'class="form-control"></input></p>',
+        //'<i ng-show="loading" class="glyphicon glyphicon-refresh"></i> ' +
+        //'<a class="btn" ng-click="add()">Ajouter</a>'
+
         link: function ($scope, $element) {
             // FIXME: this is lazy and error-prone
-            var input = angular.element($element.children()[1]);
+            //var input = angular.element($element.children()[1]);
+            var input =$($element).first("input");
             // This adds the new tag to the tags array
             $scope.add = function () {
                 if (!$scope.new_value)
@@ -40,7 +56,7 @@
                     params: {
                         query: "Name:" + value + "*",
                         pageSize: 10,
-                        _ :  Date.now(),
+                        _: Date.now(),
                     }
                 }).then(function (res) {
                     $scope.loading = false;
@@ -63,7 +79,7 @@
                 // put tags before to get id back  
                 $http({
                     method: 'PUT',
-                    headers: { 'Raven-Entity-Name': entityName },
+                    headers: { 'Raven-Entity-Name': $scope.entityName },
                     url: $rootScope.apiRootUrl + '/docs/' + $scope.item['@metadata']['@id'],
                     data: angular.toJson($scope.item)
                 }).

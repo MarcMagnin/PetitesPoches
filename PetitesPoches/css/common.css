@@ -22,10 +22,10 @@ html, body {
     /*http://www.colorzilla.com/gradient-editor/*/
     background:lightseagreen;
     padding-left:150px;
-    height: -moz-calc(100% - 50px) !important; 
-    height: -webkit-calc(100% - 50px)!important; 
-    height: -o-calc(100% - 50px)!important; 
-    height: calc(100% - 50px)!important; 
+    height: -moz-calc(100% - 100px) !important; 
+    height: -webkit-calc(100% - 100px)!important; 
+    height: -o-calc(100% - 100px)!important; 
+    height: calc(100% - 100px)!important; 
     
 
     width: -moz-calc(100% - 150px) !important; 
@@ -50,6 +50,7 @@ html, body {
   cursor:pointer;
 margin-right: 10px;
 margin-top: 5px;
+position:absolute;
   background-color:rgba(113, 109, 109, 0.50);
 -o-transition: all .3s ease-out; -moz-transition: all .3s ease-out; -webkit-transition: all 0.3s ease-out; transition: all .3s ease-out;
 -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;
@@ -106,7 +107,7 @@ text-align: center;
 
 .fa-price {
     position:absolute;
-    right:5px;
+    left:5px;
     top:5px;
     color:orange;
 }

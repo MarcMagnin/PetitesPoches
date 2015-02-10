@@ -10,42 +10,32 @@
 .modal-backdrop{
     position:fixed;
     bottom:0px;
+    z-index:5;
 }
-/*.modal-backdrop.fade{
-    -webkit-transition: opacity .1s linear, none;
-    -moz-transition: opacity .1s linear, none;
-    -o-transition: opacity .1s linear, none;
-    transition: opacity .1s linear, none;
-}
-
-.modal.fade {
-  top: 1%;top: 20%;
-  -webkit-transition: opacity 0.1s linear;
+.modal-backdrop.fade ,.modal.fade, .modal.fade.in, .modal-overflow.modal.fade.in{
+      -webkit-transition: opacity 0.1s linear;
      -moz-transition: opacity 0.1s linear;
        -o-transition: opacity 0.1s linear;
           transition: opacity 0.1s linear;
 }
 
-.modal.fade.in {
-  top: 1%;
+.modal-header{
+    text-align: right;
 }
-
-.modal-scrollable{
-      -webkit-transition: opacity .1s linear, none;
-    -moz-transition: opacity .1s linear, none;
-    -o-transition: opacity .1s linear, none;
-    transition: opacity .1s linear, none;
-    top: 1%;
- }*/
+.modal-dialog{
+    width:650px;
+}
  .close-override{
     float:none;
 }
 
- 
  label {
   font-weight:normal;
 }
-
+ .small{
+     font-size:70% !important;
+     padding-right:3px;
+ }
  
  .tab-content{
      height:100%

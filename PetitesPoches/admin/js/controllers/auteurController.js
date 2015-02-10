@@ -23,6 +23,7 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
    // $scope.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     $scope.init = function () {
+        itemAdded = 0;
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/' + $scope.entityName + '?start=0&pageSize=200&sort=-Nom&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
