@@ -1,17 +1,17 @@
 ﻿
-app.directive('ngEnter', function () {
-    return function (scope, element, attrs) {
-        element.bind("keydown keypress", function (event) {
-            if (event.which === 13) {
-                scope.$apply(function () {
-                    scope.$eval(attrs.ngEnter);
-                });
+//app.directive('ngEnter', function () {
+//    return function (scope, element, attrs) {
+//        element.bind("keydown keypress", function (event) {
+//            if (event.which === 13) {
+//                scope.$apply(function () {
+//                    scope.$eval(attrs.ngEnter);
+//                });
 
-                event.preventDefault();
-            }
-        });
-    };
-});
+//                event.preventDefault();
+//            }
+//        });
+//    };
+//});
 
 app.directive('tags', function ($http, $rootScope) {
     return {
@@ -23,12 +23,13 @@ app.directive('tags', function ($http, $rootScope) {
         template:
              ' <label class="control-label" for="Tags">Thèmes</label>' +
             '<div class="tags">' +
-                '<button class="btn btn-info tag" ng-repeat="(idx, tag) in item.Tags" ng-click="remove(idx)">{{tag}}</button>' +
+                '<button class="btn btn-info tag" ng-repeat="(idx, tag) in item.Tags track by $index" ng-click="remove(idx)">{{tag}}</button>' +
             '</div>' +
              '<p><input id="Tags" type="text" ' +
-                'ng-model="new_value"  ' +
+                'ng-model="new_value"' +
                 'typeahead="tags.Name for tags in getTags($viewValue) | filter:$viewValue" ' +
                 'typeahead-loading="loading" ' +
+                'typeahead-on-select="onSelect($item, $model, $label)"'+
                 'class="form-control"></input></p>',
         //'<i ng-show="loading" class="glyphicon glyphicon-refresh"></i> ' +
         //'<a class="btn" ng-click="add()">Ajouter</a>'
@@ -43,11 +44,15 @@ app.directive('tags', function ($http, $rootScope) {
                     return;
                 if (!$scope.item.Tags)
                     $scope.item.Tags = new Array();
-                $scope.item.Tags.push($scope.new_value);
+                if ($scope.item.Tags.indexOf($scope.new_value) == -1) {
+                    $scope.item.Tags.push($scope.new_value);
+                    $scope.update();
+                }
                 $scope.new_value = "";
-                $scope.update();
             };
-
+            $scope.onSelect = function ($item, $model, $label) {
+                $scope.add();
+            };
             $scope.tags = [];
             $scope.loading = false;
             $scope.getTags = function (value) {
@@ -80,7 +85,7 @@ app.directive('tags', function ($http, $rootScope) {
                 $http({
                     method: 'PUT',
                     headers: { 'Raven-Entity-Name': $scope.entityName },
-                    url: $rootScope.apiRootUrl + '/docs/' + $scope.item['@metadata']['@id'],
+                    url: $rootScope.apiRootUrl + '/docs/' + $scope.item.Id,
                     data: angular.toJson($scope.item)
                 }).
                     success(function (data, status, headers, config) {
@@ -95,7 +100,7 @@ app.directive('tags', function ($http, $rootScope) {
                 // But we only care when Enter was pressed
                 if (event.keyCode == 13) {
                     // There's probably a better way to handle this...
-                    $scope.$apply($scope.add);
+                   $scope.add();
                 }
             });
         }

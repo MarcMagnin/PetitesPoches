@@ -60,12 +60,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
-                for (var i = 0; i < 100; i++) {
-                    var livre = new Livre();
-                    livre['@metadata'] ="";
-                    livre['@metadata']['@id'] = 0;
-                    data.Results.push(livre);
-                }
+                //for (var i = 0; i < 100; i++) {
+                //    var livre = new Livre();
+                //    livre['@metadata'] ="";
+                //    livre['@metadata']['@id'] = 0;
+                //    data.Results.push(livre);
+                //}
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
@@ -117,31 +117,50 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                 }
             });
 
-            modalInstance.result.then(function (selectedItem) {
-                $http({
-                    method: 'PUT',
-                    headers: { 'Raven-Entity-Name': 'Livre' },
-                    url: $rootScope.apiRootUrl + '/docs/' + item.Id,
-                    data: angular.toJson(item)
-                }).
-                success(function (data, status, headers, config) {
-                }).
-                error(function (data, status, headers, config) {
-                    console.log(data);
-                });
-
+            modalInstance.result.then(function () {
+                $scope.saveItem($scope.selectedItem);
             }, function () {
                 //   $log.info('Modal dismissed at: ' + new Date());
             });
         }
     }
+
+    $scope.saveItem = function (item) {
+        $http({
+            method: 'PUT',
+            headers: { 'Raven-Entity-Name': 'Livre' },
+            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
+            data: angular.toJson(item)
+        }).
+        success(function (data, status, headers, config) {
+        }).
+        error(function (data, status, headers, config) {
+            console.log(data);
+        });
+    }
+
+    $scope.getPrixSuggestions = function (value) {
+        $scope.loading = true;
+        return $http.get($rootScope.apiRootUrl + '/indexes/PrixLitteraireSuggestions', {
+            params: {
+                query: "Value:" + value + "*",
+                pageSize: 10,
+                _: Date.now(),
+            }
+        }).then(function (res) {
+            $scope.loading = false;
+            return res.data.Results;
+        });
+    };
+
     $scope.addFile = function ($files, $event, field) {
         var file = $files[0];
         var fileReader = new FileReader();
+        var item = $scope.selectedItem;
         fileReader.onload = function (e) {
             $scope.upload =
                 $upload.http({
-                    url: $rootScope.apiRootUrl + '/static/' + $scope.selectedItem.Id + '/' + file.name,
+                    url: $rootScope.apiRootUrl + '/static/' + item.Id + '/' + file.name,
                     method: "PUT",
                     headers: { 'Content-Type': file.type },
                     data: e.target.result
@@ -155,21 +174,18 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                     update.Type = 'Set';
                     update.Name = field;
                     update.Value = file.name;
-
                     $http({
                         method: 'PATCH',
                         headers: { 'Raven-Entity-Name': $scope.entityName },
-                        url: $rootScope.apiRootUrl + '/docs/' + $scope.selectedItem.Id,
+                        url: $rootScope.apiRootUrl + '/docs/' + item.Id,
                         data: angular.toJson(new Array(update))
                     }).
-                        success(function (data, status, headers, config) {
-                            $scope.selectedItem[field] = file.name;
-                        }).
-                        error(function (data, status, headers, config) {
-
-                        });
-
-
+                    success(function (data, status, headers, config) {
+                        item[field] = file.name;
+                    }).
+                    error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
                 }).error(function (err) {
                     alert('Error occured during upload');
                 });
@@ -179,61 +195,95 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
 
 
+    $scope.updateAttachment = function ($files, $event, fieldName) {
+        var file = $files[0];
+        var fileReader = new FileReader();
+        var item = $scope.selectedItem;
+        fileReader.onload = function (e) {
+            $scope.upload =
+                $upload.http({
+                    url: $rootScope.apiRootUrl + '/static/' + item.Id + '/' + file.name,
+                    method: "PUT",
+                    headers: { 'Content-Type': file.type },
+                    data: e.target.result
+                }).progress(function (evt) {
+                    // Math.min is to fix IE which reports 200% sometimes
+                    //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                }).success(function (data, status, headers, config) {
+                    // mise à jour du livre avec l'URI de l'image
+                    $scope.addAttachment(file.name, item, fieldName);
+
+                }).error(function (err) {
+                    alert('Error occured during upload');
+                });
+        }
+        fileReader.readAsArrayBuffer(file);
+
+    };
+    $scope.addAttachment = function (fileName, item, fieldName) {
+        var attachmentUrl = 'static/' + item.Id + '/' + fileName;
+        var update = new Update();
+        update.Type = 'Set';
+        update.Name = fieldName;
+        update.Value = attachmentUrl;
+        $http({
+            method: 'PATCH',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
+            data: angular.toJson(new Array(update))
+        }).
+            success(function (data, status, headers, config) {
+                item[fieldName] = attachmentUrl;
+            }).
+            error(function (data, status, headers, config) {
+                console.log(data);
+            });
+    };
+
+
+
+
     $scope.addLivre = function ($files, $event, $rejectedFiles) {
         var file = $files[0];
         // get the last index of items 
+        var livre = new Livre;
+        livre.datePublication = moment().format();
         $http({
-            method: 'GET',
-            url: $rootScope.apiRootUrl + '/indexes/CountLivres?start=0&_=' + Date.now(),
-        }).success(function (data, status, headers, config) {
-            // add the new item with the last index :
-            var livre = new Livre;
-            livre.datePublication = moment().format();
-            if (data.Results[0])
-                livre.Index = ++data.Results[0].Count;
-            else
-                livre.Index = 1;
-            $http({
-                method: 'PUT',
-                headers: { 'Raven-Entity-Name': 'Livre' },
-                url: $rootScope.apiRootUrl + '/docs/Livre%2F',
-                data: angular.toJson(livre)
-            }).
-                success(function (data, status, headers, config) {
-                    livre.Id = data.Key;
-                    livre.new = true;
-                    $scope.items.push(livre);
-                    var fileReader = new FileReader();
-                    fileReader.onload = function (e) {
-                        $scope.upload =
-                            $upload.http({
-                                url: $rootScope.apiRootUrl + '/static/' + livre.Id + '/' + file.name,
-                                method: "PUT",
-                                headers: { 'Content-Type': file.type },
-                                data: e.target.result
-                            }).progress(function (evt) {
-                                // Math.min is to fix IE which reports 200% sometimes
-                                //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                                console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                            }).success(function (data, status, headers, config) {
-                                // mise à jour du livre avec l'URI de l'image
-                                $scope.addImageToLivre(file.name, livre);
-
-                            }).error(function (err) {
-                                alert('Error occured during upload');
-                            });
-                    }
-                    fileReader.readAsArrayBuffer(file);
-                }).
-                error(function (data, status, headers, config) {
-                    console.log(data);
-                });
-
+            method: 'PUT',
+            headers: { 'Raven-Entity-Name': 'Livre' },
+            url: $rootScope.apiRootUrl + '/docs/Livre%2F',
+            data: angular.toJson(livre)
         }).
-        error(function (data, status, headers, config) {
-            console.log(data);
-        });
+            success(function (data, status, headers, config) {
+                livre.Id = data.Key;
+                livre.new = true;
+                $scope.items.push(livre);
+                var fileReader = new FileReader();
+                fileReader.onload = function (e) {
+                    $scope.upload =
+                        $upload.http({
+                            url: $rootScope.apiRootUrl + '/static/' + livre.Id + '/' + file.name,
+                            method: "PUT",
+                            headers: { 'Content-Type': file.type },
+                            data: e.target.result
+                        }).progress(function (evt) {
+                            // Math.min is to fix IE which reports 200% sometimes
+                            //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                            console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                        }).success(function (data, status, headers, config) {
+                            // mise à jour du livre avec l'URI de l'image
+                            $scope.addImageToLivre(file.name, livre);
 
+                        }).error(function (err) {
+                            alert('Error occured during upload');
+                        });
+                }
+                fileReader.readAsArrayBuffer(file);
+            }).
+            error(function (data, status, headers, config) {
+                console.log(data);
+            });
 
     };
 
@@ -275,61 +325,67 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         var item = new Livre;
         item.datePublication = moment().format();
         $scope.selectedItem = item;
-        var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            size: size,
-            resolve: {
-                selectedItem: function () {
-                    return $scope.selectedItem;
-                },
-                parentScope: function () {
-                    return $scope;
-                },
-            }
+        $http({
+            method: 'PUT',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
+            data: angular.toJson(item)
+        }).success(function (data, status, headers, config) {
+            item.Id = data.Key;
+            item.new = true;
+            $scope.items.unshift(item);
+            //setTimeout(function () {
+            //    $container.isotope('reLayout');
+            //}, 100);
+
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: size,
+                resolve: {
+                    selectedItem: function () {
+                        return $scope.selectedItem;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    },
+                }
+            });
+
+            modalInstance.result.then(function () {
+                $scope.saveItem($scope.selectedItem);
+            }, function () {
+                // delete on dismiss
+                $scope.deleteLivre($scope.selectedItem);
+            });
+        }).
+        error(function (data, status, headers, config) {
+            console.log(data);
         });
-
-        modalInstance.result.then(function (selectedItem) {
-            return $http({
-                method: 'PUT',
-                headers: { 'Raven-Entity-Name': $scope.entityName },
-                url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
-                data: angular.toJson($scope.selectedItem)
-            }).
-               success(function (data, status, headers, config) {
-                   item.Id = data.Key;
-                   item.new = true;
-                   $scope.items.unshift(item);
-
-               }).
-               error(function (data, status, headers, config) {
-                   console.log(data);
-               });
-
-
-        }, function () {
-         //   $log.info('Modal dismissed at: ' + new Date());
-        });
-
-        //var test = $("#responsive").modal('show');
-        //$('#responsive').on('show.bs.modal', function (e) {
-        //    alert('modal show');
-        //});
-        //$("#responsive").modal('show').result.then(function () {
-        //    alert("test");
-       
-        //});
-
-    
     }
-    $scope.deleteLivre = function ($index, item, $event) {
-        $event.stopPropagation();
-        $event.stopImmediatePropagation();
 
+
+    $scope.deleteLivre = function (item, $event) {
+        if ($event) {
+            $event.stopPropagation();
+            $event.stopImmediatePropagation();
+        }
+        
         if (item.Couverture) {
             $http({
                 method: 'DELETE',
                 url: $rootScope.apiRootUrl + '/' + item.Couverture
+            }).
+              success(function (data, status, headers, config) {
+              }).
+              error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+        }
+        if (item.FichePedago) {
+            $http({
+                method: 'DELETE',
+                url: $rootScope.apiRootUrl + '/static/' + item.Id + '/' + item.FichePedago
             }).
               success(function (data, status, headers, config) {
               }).
@@ -343,7 +399,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             url: $rootScope.apiRootUrl + '/docs/' + item.Id,
         }).
           success(function (data, status, headers, config) {
-              $scope.items.splice($index, 1);
+              $scope.items.splice($scope.items.indexOf(item), 1);
               setTimeout(function () {
                   $container.isotope('reLayout');
               }, 100);

@@ -23,8 +23,8 @@
     <div class="tab-view" ng-controller="mainControllerAdmin">
 
         <tabset>
-            <tab ng-repeat="t in tabs"
-                 heading="{{t.heading}}"
+            <tab ng-repeat="t in ::tabs"
+                 heading="{{::t.heading}}"
                  select="go(t.route)"
                  active="t.active">
             </tab>

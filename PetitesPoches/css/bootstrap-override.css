@@ -12,12 +12,20 @@
     bottom:0px;
     z-index:5;
 }
-.modal-backdrop.fade ,.modal.fade, .modal.fade.in, .modal-overflow.modal.fade.in{
+
+.modal.fade {
       -webkit-transition: opacity 0.1s linear;
      -moz-transition: opacity 0.1s linear;
        -o-transition: opacity 0.1s linear;
           transition: opacity 0.1s linear;
 }
+
+.modal.fade .modal-dialog, .modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+
 
 .modal-header{
     text-align: right;

@@ -23,10 +23,8 @@ app.directive('isotopethis', function () {
                 $container.isotope({ sortBy: 'date' });
             }
           
-            
-            
             if (scope.item.new) {
-           //     $container.isotope({ sortBy: 'date' });
+                $container.isotope({ sortBy: 'date' });
             }
             tileImage.load(function () {
                 

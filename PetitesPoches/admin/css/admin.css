@@ -2,6 +2,10 @@
     position:relative;
     border:dashed 2px;
     min-height:50px;
+    height:auto;
+}
+.clickable{
+    cursor:pointer;
 }
 .drop-zone > p{
     position: absolute;

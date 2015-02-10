@@ -16,6 +16,13 @@
     </a>
 </script>
 
+<script type="text/ng-template" id="simpleSuggestionTemplate.html">
+    <a>
+        <span bind-html-unsafe="match.model.Value | typeaheadHighlight:query"></span>
+    </a>
+</script>
+
+
 <script type="text/ng-template" id="myModalContent.html">
 
     <div class="modal-header">
@@ -27,7 +34,7 @@
         <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
         <button class="btn btn-primary" type="button" ng-click="ok()" data-dismiss="modal">Save changes</button>
 
-      
+
     </div>
     <div class="modal-body">
         <!--<ul class="nav nav-tabs">
@@ -37,75 +44,80 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="tab1">-->
-     
+
         <div class="row">
             <div class="col-md-6">
-                 <div class="row">
-                     <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
 
-                         <!--<p><pretty-radio value="'premiersPas'" ng-model="selectedItem.NiveauLecture" label="'Permiers pas'"></pretty-radio></p>
-        <p><pretty-radio value="'debutants'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs débutants'"></pretty-radio></p>
-        <p><pretty-radio value="'confirmes'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs confirmés'"></pretty-radio></p>-->
+                        <!--<p><pretty-radio value="'premiersPas'" ng-model="selectedItem.NiveauLecture" label="'Permiers pas'"></pretty-radio></p>
+                        <p><pretty-radio value="'debutants'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs débutants'"></pretty-radio></p>
+                        <p><pretty-radio value="'confirmes'" ng-model="selectedItem.NiveauLecture" label="'Lecteurs confirmés'"></pretty-radio></p>-->
 
-                         <label class="control-label" for="Couverture">Couverture</label>
-                         <img class="tile-image" ng-show="selectedItem.Couverture" src="{{apiRootUrl}}/{{selectedItem.Couverture}}" />
-                         <div ng-file-drop ng-model="files" class="drop-box drop-zone form-control" drag-over-class="dragover" multiple="false"
-                              allow-dir="false" accept="*" ng-file-change="$parent.addFile($files, $event, 'FichePedago')" ng-hide="selectedItem.Couverture">
-                             <p>Glisser ici</p>
-                         </div>
+                        <label class="control-label" for="Couverture">Couverture</label>
+
+                        <div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control" drag-over-class="dragover" multiple="false"
+                             allow-dir="false" accept="*" ng-file-select="" ng-file-change="$parent.updateAttachment($files, $event, 'Couverture')">
+                            <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
+                            <p ng-hide="selectedItem.Couverture">Glisser ici</p>
+                        </div>
 
 
-                     </div>
-                 <div class="col-md-6">
+                    </div>
+                    <div class="col-md-6">
 
-                     <label class="control-label" for="DatePub">Publication</label>
-                     <p class="input-group">
-                         <input type="text" id="DatePub" class="form-control small"
-                                datepicker-popup="dd/MM/yyyy"
-                                ng-model="selectedItem.datePublication"
-                                min-date="'1800-01-01'"
-                                max-date="'2015-06-22'"
-                                datepicker-options="dateOptions"
-                                ng-required="true"
-                                is-open="$parent.opened"
-                                close-text="close" />
-                         <span class="input-group-btn">
-                             <button type="button" class="btn btn-default" ng-click="$parent.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                         </span>
-                     </p>
+                        <label class="control-label" for="DatePub">Publication</label>
+                        <p class="input-group">
+                            <input type="text" id="DatePub" class="form-control small"
+                                   datepicker-popup="dd/MM/yyyy"
+                                   ng-model="selectedItem.datePublication"
+                                   min-date="'1800-01-01'"
+                                   max-date="'2015-06-22'"
+                                   datepicker-options="dateOptions"
+                                   ng-required="true"
+                                   is-open="$parent.opened"
+                                   close-text="close" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="$parent.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
 
-                     <label class="control-label" for="Prix">Prix</label>
-                     <p><input class="form-control" id="Prix" type="text" ng-model="selectedItem.Prix" /></p>
-                     <label class="control-label" for="ISBN">ISBN</label>
-                     <p><input class="form-control" id="ISBN" type="text" ng-model="selectedItem.ISBN" /></p>
+                        <label class="control-label" for="Prix">Prix</label>
+                        <p><input class="form-control" id="Prix" type="text" ng-model="::selectedItem.Prix" /></p>
+                        <label class="control-label" for="ISBN">ISBN</label>
+                        <p><input class="form-control" id="ISBN" type="text" ng-model="::selectedItem.ISBN" /></p>
 
-              </div>
+                    </div>
                 </div>
-          
-            <p>
-                <div class="btn-group btn-group-justified">
-                    <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'premierspas'">Permiers pas</label>
-                    <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'debutants'">Débutants</label>
-                    <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'confirmes'">Confirmés</label>
-                </div>
-            </p>
+
+                <p>
+                    <div class="btn-group btn-group-justified">
+                        <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'premierspas'">Permiers pas</label>
+                        <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'debutants'">Débutants</label>
+                        <label class="btn btn-primary" ng-model="selectedItem.NiveauLecture" btn-radio="'confirmes'">Confirmés</label>
+                    </div>
+                </p>
 
 
-            <tags item="selectedItem" entityname="Livre"></tags>
-            <label class="control-label" for="PrixLitteraire">Prix littéraire</label>
-            <p><input id="PrixLitteraire" class="form-control" type="text"  ng-model="selectedItem.PrixLitteraire" /></p>
-            <label class="control-label" for="LienEbook">Lien E-book</label>
-            <p><input id="LienEbook" class="form-control" type="text" ng-model="selectedItem.EBookUrl" /></p>
-            <label class="control-label" for="Extrait">Lien Issuu</label>
-            <p><input class="form-control" id="Extrait" type="text" ng-model="selectedItem.Extrait" /></p>
-           
+                <tags item="selectedItem" entityname="Livre"></tags>
+                <label class="control-label" for="PrixLitteraire">Prix littéraire</label>
+                <p>
+                    <input type="text"
+                           id="PrixLitteraire"
+                           ng-model="selectedItem.PrixLitteraire"
+                           typeahead="val.Value for val in $parent.getPrixSuggestions($viewValue)"
+                           typeahead-loading="loadingSearchSuggestions"
+                           typeahead-template-url="simpleSuggestionTemplate.html"
+                           class="form-control">
+                    </input>
+                </p>
+                <label class="control-label" for="LienEbook">Lien E-book</label>
+                <p><input id="LienEbook" class="form-control" type="text" ng-model="selectedItem.EBookUrl" /></p>
+                <label class="control-label" for="Extrait">Lien Issuu</label>
+                <p><input class="form-control" id="Extrait" type="text" ng-model="selectedItem.Extrait" /></p>
 
-
-
-         </div>
+            </div>
             <div class="col-md-6">
-
-
 
                 <label class="control-label" for="Auteur">Auteur</label>
                 <input type="text"
@@ -118,32 +130,29 @@
                 </input>
 
                 <p>{{selectedItem.Auteur.Prenom}} {{selectedItem.Auteur.Nom}}</p>
-                <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{apiRootUrl}}/{{selectedItem.Auteur.Photo}}" />
-
-
-            
-             
+                <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{::apiRootUrl}}/{{selectedItem.Auteur.Photo}}" />
 
                 <label class="control-label" for="FichePedago">Fiche Pédagogique</label>
                 <p>
-                    <a href="{{apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}" target="_blank" ng-show="selectedItem.FichePedago">{{selectedItem.FichePedago}}</a>
+
                     <div ng-file-drop ng-model="files" class="drop-box drop-zone form-control"
-                            drag-over-class="dragover" multiple="false"
-                            allow-dir="false" accept="*"
-                            ng-file-change="$parent.addFile($files, $event, 'FichePedago')">
-                        <p>Glisser ici</p>
-                    </div>
-                </p>
-
-                <label class="control-label" for="SiteMarchand">Site marchand</label>
-                <p><input class="form-control" id="SiteMarchand" type="text" ng-model="selectedItem.SiteMarchand" /></p>
-                <label class="control-label" for="LienVideo">Lien Vidéo</label>
-                <p><input class="form-control" id="LienVideo" type="text" ng-model="selectedItem.LienVideo" /></p>
-
+                         drag-over-class="dragover" multiple="false"
+                         allow-dir="false" accept="*"
+                         ng-file-change="$parent.addFile($files, $event, 'FichePedago')">
+                        <a href="{{::apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}" target="_blank" ng-show="selectedItem.FichePedago">{{selectedItem.FichePedago}}</a>
+                <p ng-hide="selectedItem.FichePedago">Glisser ici</p>
             </div>
+            </p>
+
+            <label class="control-label" for="SiteMarchand">Site marchand</label>
+            <p><input class="form-control" id="SiteMarchand" type="text" ng-model="selectedItem.SiteMarchand" /></p>
+            <label class="control-label" for="LienVideo">Lien Vidéo</label>
+            <p><input class="form-control" id="LienVideo" type="text" ng-model="selectedItem.LienVideo" /></p>
 
         </div>
-        
+
+    </div>
+
     </div>
 
     <div class="modal-footer">
@@ -164,11 +173,10 @@
     <button class="btn btn-lg btn-success" ng-click="add()">
         <i class="fa fa-user-plus"></i>
     </button>
-   
+
     <label class="btn btn-lg btn-primary" ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()"><i title="testes" class="fa fa-certificate"></i> Prix littéraires</label>
     <label class="btn btn-lg btn-primary" ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()"><i class="fa fa-tablet" /> E-Book</label>
- 
-  
+
     <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
     <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
     <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
@@ -196,11 +204,6 @@
     <!--<select id="themes" ng-model="selected" ng-options="item.Name for item in tags"></select>-->
     <!--<div ng-dropdown-multiselect="" options="tags" selected-model="themeMultiselectmodel" extra-settings="themeMultiselectSettings"></div>-->
 
-
-
-    
-
-
     <input type="text"
            id="searchLivre"
            ng-model="searchedText"
@@ -212,7 +215,7 @@
            ng-keyup="validateSearch($event)"
            typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
            class="form-control form-control-inline" />
-      <a href="#sortBy=date" ng-click="sort()">by date</a>
+    <a href="#sortBy=date" ng-click="sort()">by date</a>
 
 
     <div id="booksContainer" class="tilesContainer">
@@ -221,16 +224,16 @@
              {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}
              {{item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
              {{item.Tags && item.Tags || '' | filterString}}"
-             ng-repeat="item in items" 
+             ng-repeat="item in items"
              isotopethis=isotopethis ng-click="select(item, lg, $event)">
             <button class="close close-override" title="supprimer"
-                    ng-click="deleteLivre($index, item, $event)">
+                    ng-click="deleteLivre(item, $event)">
                 <i class="fa fa-close"></i>
             </button>
             <!--href="#responsive" data-toggle="modal"-->
             <div class="inner-tile">
                 <i title="{{item.PrixLitteraire}}" class="fa fa-certificate fa-price" ng-show="item.PrixLitteraire"></i>
-                <img class="tile-image" src="{{apiRootUrl}}/{{item.Couverture}}" />
+                <img class="tile-image" src="{{::apiRootUrl}}/{{item.Couverture}}" />
 
                 <div class="tile-text-wrapper">
                     <p class="tile-text">{{item.Titre}}</p>
@@ -238,11 +241,11 @@
                 </div>
 
                 <div class="moreInfoButtonWrapper topRight">
-                    <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
+                    <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
                        class="transparentButton background-circle">
                         <i class="fa fa-file-text" />
                     </a>
-                    <a href="{{apiRootUrl}}/static/{{item.Id}}/{{item.EBookUrl}}" target="_blank"
+                    <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{item.EBookUrl}}" target="_blank"
                        title="E-book"
                        ng-show="item.EBookUrl"
                        class="transparentButton background-circle">
@@ -257,10 +260,10 @@
 </div>
 <script>
 
-    
+
 
     var $container = $('.tilesContainer');
-  
+
     // change layout mode
     //$container.isotope({ layoutMode: "masonryHorizontal" });
     $container.isotope({
@@ -295,7 +298,7 @@
             }
         },
 
-        
+
 
 
         //sortBy: 'date',
