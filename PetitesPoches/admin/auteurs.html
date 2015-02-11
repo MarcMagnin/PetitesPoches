@@ -1,4 +1,63 @@
-﻿<div class="viewContainer" ng-controller="auteurController"
+﻿
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <!--<button class="close" aria-hidden="true" type="button" ng-click="cancel()"><i class="fa fa-times"></i></button>-->
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ok()" data-dismiss="modal">Save changes</button>
+
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                <label class="control-label" for="Prenom">Prénom</label>
+                <p><input class="modal-title form-control" id="Prenom" ng-model="selectedItem.Prenom" type="text" /></p>
+
+                <label class="control-label" for="Nom">Nom</label>
+                <p><input class="modal-title form-control" id="Nom" ng-model="selectedItem.Nom" type="text" /></p>
+
+                <label class="control-label" for="LienBibliographie">Lien Bibliographie</label>
+                <p><input class="form-control" id="LienBibliographie" type="text" ng-model="selectedItem.LienBiblio" /></p>
+
+            </div>
+            <div class="col-md-6">
+                <!--<div class="auteur-placeholder-wrapper" ng-file-drop ng-model="files" class="drop-box dragover"
+                     drag-over-class="dragover" multiple="false"
+                     allow-dir="false" accept="image/*"
+                     ng-file-change="updatePhoto($files, $event)">
+                    <img class="tile-image" src="{{::apiRootUrl}}/{{selectedItem.Photo}}" ng-show="selectedItem.Photo" />
+                    <i class="fa fa-user fa-placeholder placeholder" ng-show="!selectedItem.Photo"></i>
+                </div>-->
+                <label class="control-label" for="LienPhoto">Lien Photo</label>
+                <p><input class="form-control" id="LienPhoto" type="text" ng-model="selectedItem.Photo" /></p>
+
+                <div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control" drag-over-class="dragover" multiple="false"
+                     allow-dir="false" accept="*" ng-file-select="" ng-file-change="$parent.updatePhoto($files, $event)">
+                    <img style="width:100%" ng-show="selectedItem.Photo" src="{{selectedItem.Photo}}" />
+                    <div class="placeholder" ng-hide="selectedItem.Photo">
+                        <p class="inner-placeholder">
+                            <i class="fa fa-user fa-3 inner-placeholder " />
+                        </p>
+                    </div>
+                    <p></p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-primary" type="button" ng-click="ok()" data-dismiss="modal">Save changes</button>
+
+    </div>
+</script>
+
+
+
+<div class="viewContainer" ng-controller="auteurController"
      ng-init="init()">
 
 
@@ -8,34 +67,38 @@
 
 
 
-    <a ng-click="unFilter()">
+    <a class="clickable" ng-click="unFilter()">
         All
     </a>
-    <a ng-repeat="item in items | orderByDisplayOrder" ng-click="filterByLetter(item)">
-        {{item}}
+    <a class="clickable" ng-repeat="item in items | orderByDisplayOrder" ng-click="filterByLetter(item)">
+        {{::item}}
     </a>
-  
 
     <div id="booksContainer" class="tilesContainer" ng-file-drop ng-model="files" class="drop-box dragover"
          drag-over-class="dragover" multiple="false"
          allow-dir="false" accept="image/*"
-         ng-file-change="add($files, $event)"
-       >
+         ng-file-change="add($files, $event)">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin filter-{{item.Nom|lowercase}}" ng-repeat="item in items"
-             isotopethis=isotopethis
+        <div class="tile isotopey tile-admin filter-{{item.Nom|lowercase}}"
+             ng-repeat="item in items"
+             isotopethis
+             sort="nom"
              ng-click="select(item, $event)">
+            <isotopthis></isotopthis>
             <button class="close close-override" title="supprimer"
-                    ng-click="delete($index, item, $event)">
+                    ng-click="delete(item, $event)">
                 <i class="fa fa-close"></i>
             </button>
 
             <div class="inner-tile">
 
-                <img class="tile-image"
-                     src="{{apiRootUrl}}/{{item.Photo}}" ng-show="item.Photo" />
-                <i class="fa fa-user fa-placeholder placeholder" ng-show="!item.Photo"></i>
+                <img class="tile-image" src="{{item.Photo}}" ng-show="item.Photo" />
 
+                <div class="placeholder" ng-hide="item.Photo">
+                    <p class="inner-placeholder">
+                        <i class="fa fa-user fa-3 inner-placeholder " />
+                    </p>
+                </div>
 
                 <div class="tile-text-wrapper">
                     <p class="tile-text">{{item.Prenom}} {{item.Nom}}</p>
@@ -55,58 +118,30 @@
     </div>
 
 
-        <div tabindex="-1" class="modal fade" id="responsive" data-width="760" data-height="300">
-            <button class="close" aria-hidden="true" type="button" data-dismiss="modal"><i class="fa fa-times"></i></button>
 
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <input class="modal-title form-control" placeholder="Prenom" ng-model="selectedItem.Prenom" type="text" />
-                        <input class="modal-title form-control" placeholder="Nom" ng-model="selectedItem.Nom" type="text" />
-                        <p><input class="form-control" type="text" placeholder="Lien Bibliographie" ng-model="selectedItem.LienBiblio" /></p>
-
-                    </div>
-                    <div class="col-md-6">
-                        <div class="auteur-placeholder-wrapper" ng-file-drop ng-model="files" class="drop-box dragover"
-                             drag-over-class="dragover" multiple="false"
-                             allow-dir="false" accept="image/*"
-                             ng-file-change="updatePhoto($files, $event)">
-                            <img class="tile-image" src="{{apiRootUrl}}/{{selectedItem.Photo}}" ng-show="selectedItem.Photo" />
-                            <i class="fa fa-user fa-placeholder placeholder" ng-show="!selectedItem.Photo"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" type="button" ng-click="save(selectedItem)" data-dismiss="modal">Save changes</button>
-
-            </div>
-        </div>
 </div>
 <script>
 
-    // hash of functions that match data-filter values
-    var filterFns = {
-        // show if number is greater than 50
-        numberGreaterThan50: function () {
-            var number = $(this).find('.number').text();
-            return parseInt(number, 10) > 50;
-        },
-        // show if name ends with -ium
-        ium: function () {
-            var name = $(this).find('.name').text();
-            return name.match(/^/);
-        }
-    };
-    // filter items on button click
-    $('#filters').on('click', 'button', function () {
-        var filterValue = $(this).attr('data-filter');
-        // use filter function if value matches
-        filterValue = filterFns[filterValue] || filterValue;
-        $container.isotope({ filter: filterValue });
-    });
+    //// hash of functions that match data-filter values
+    //var filterFns = {
+    //    // show if number is greater than 50
+    //    numberGreaterThan50: function () {
+    //        var number = $(this).find('.number').text();
+    //        return parseInt(number, 10) > 50;
+    //    },
+    //    // show if name ends with -ium
+    //    ium: function () {
+    //        var name = $(this).find('.name').text();
+    //        return name.match(/^/);
+    //    }
+    //};
+    //// filter items on button click
+    //$('#filters').on('click', 'button', function () {
+    //    var filterValue = $(this).attr('data-filter');
+    //    // use filter function if value matches
+    //    filterValue = filterFns[filterValue] || filterValue;
+    //    $container.isotope({ filter: filterValue });
+    //});
 
 
     var $container = $('.tilesContainer');
@@ -118,11 +153,21 @@
         layoutMode: 'masonryHorizontal',
         itemSelector: '.isotopey',
         masonryHorizontal: { rowHeight: 20 },
+        getSortData: {
+            nom: function (elem) {
+                var scope = $(elem).scope();
+                if (scope && scope.item && scope.item.Nom) {
+                    console.log(scope.item.Nom.toLowerCase())
+                    return scope.item.Nom.toLowerCase();
+                }
+                // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste
+                return "aaaaaa";
+            }
+        },
+
         sortAscending: true,
         transformsEnabled: true,
-        onLayout: function () {
-            $container.css('overflow', 'visible');
-        }
+
     });
 
 </script>

@@ -1,11 +1,9 @@
-﻿
-var Auteur = function () {
+﻿var Auteur = function () {
     this.Nom = "";
     this.Prenom = "";
     this.Photo = "";
     this.LienBiblio = "";
 };
-
 
 var Update = function () {
     this.Type = "";
@@ -13,13 +11,12 @@ var Update = function () {
 };
 
 
-
-
-app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', '$state', function ($scope, $rootScope, $http, $upload, $state) {
+app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', '$state', '$modal', function ($scope, $rootScope, $http, $upload, $state, $modal) {
     $scope.entityName = "Auteur"
     $scope.items = [];
     $scope.tags = [];
     $scope.selectedItem = "";
+    $scope.container = $('.tilesContainer');
    // $scope.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
     $scope.init = function () {
@@ -65,33 +62,68 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     $scope.select = function (item, $event) {
         $scope.selectedItem = item;
+        //  $($event.target).parent().css({ width: '200px' });
+        // $scope.container.isotope('reLayout');
         // prevent the modal to show if we click on a nested link
         if (!$($event.target).closest('a').length) {
-            $('#responsive').modal('show');
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                //size: 'lg',
+                resolve: {
+                    selectedItem: function () {
+                        return $scope.selectedItem;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    },
+                }
+            });
+
+            modalInstance.result.then(function () {
+                $scope.save($scope.selectedItem);
+            }, function () {
+                //   $log.info('Modal dismissed at: ' + new Date());
+            });
         }
     }
 
+
     $scope.add = function () {
         var item = new Auteur;
-        return $http({
-            method: 'PUT',
-            headers: { 'Raven-Entity-Name': $scope.entityName },
-            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
-            data: angular.toJson(item)
-        }).
-        success(function (data, status, headers, config) {
+        $scope.selectedItem = item;
+        $scope.$parent.add(item, $scope).success(function (data, status, headers, config) {
             item.Id = data.Key;
             item.new = true;
-            $scope.selectedItem = item;
             $scope.items.unshift(item);
-            $("#responsive").modal('show');
 
+            var modalInstance = $modal.open({
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                //size: size,
+                resolve: {
+                    selectedItem: function () {
+                        return $scope.selectedItem;
+                    },
+                    parentScope: function () {
+                        return $scope;
+                    },
+                }
+            });
 
+            modalInstance.result.then(function () {
+                $scope.save($scope.selectedItem);
+            }, function () {
+                // delete on dismiss
+                $scope.delete($scope.selectedItem);
+            });
         }).
         error(function (data, status, headers, config) {
             console.log(data);
         });
     }
+
+
     $scope.updatePhoto = function ($files, $event) {
         var file = $files[0];
         var fileReader = new FileReader();
@@ -118,7 +150,7 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     };
     $scope.addPhotoToAuteur = function (fileName, item) {
-        var imageUrl = 'static/' + item.Id + '/' + fileName;
+        var imageUrl = $rootScope.apiRootUrl +'/static/' + item.Id + '/' + fileName;
         var update = new Update();
         update.Type = 'Set';
         update.Name = 'Photo';
@@ -186,9 +218,11 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
 
     };
 
-    $scope.delete = function ($index, item, $event) {
-        $event.stopPropagation();
-        $event.stopImmediatePropagation();
+    $scope.delete = function (item, $event) {
+        if ($event) {
+            $event.stopPropagation();
+            $event.stopImmediatePropagation();
+        }
 
         if (item.Photo) {
             $http({
@@ -207,9 +241,9 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
             url: $rootScope.apiRootUrl + '/docs/' + item.Id,
         }).
           success(function (data, status, headers, config) {
-              $scope.items.splice($index, 1);
+              $scope.items.splice($scope.items.indexOf(item), 1);
               setTimeout(function () {
-                  $container.isotope('reLayout');
+                  $scope.container.isotope('reLayout');
               }, 100);
           }).
           error(function (data, status, headers, config) {
@@ -225,12 +259,20 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
             data: angular.toJson(item)
         }).
         success(function (data, status, headers, config) {
-
+            $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
+            $scope.container.isotope({sortBy: 'nom'});
+            
         }).
         error(function (data, status, headers, config) {
             console.log(data);
         });
     }
 
-
+    $scope.sort = function () {
+        console.log("sort");
+        $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
+        $scope.container.isotope({
+            sortBy: 'nom',
+        });
+    }
 }]);

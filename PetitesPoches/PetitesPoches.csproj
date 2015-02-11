@@ -71,13 +71,15 @@
     <Content Include="bower_components\angular\angular-csp.css" />
     <Content Include="bower_components\angular\angular.js" />
     <Content Include="bower_components\angular\angular.min.js" />
-    <Content Include="bower_components\lodash\dist\lodash.compat.js" />
-    <Content Include="bower_components\lodash\dist\lodash.compat.min.js" />
-    <Content Include="bower_components\lodash\dist\lodash.js" />
-    <Content Include="bower_components\lodash\dist\lodash.min.js" />
-    <Content Include="bower_components\lodash\dist\lodash.underscore.js" />
-    <Content Include="bower_components\lodash\dist\lodash.underscore.min.js" />
-    <Content Include="bower_components\lodash\LICENSE.txt" />
+    <Content Include="bower_components\isotope-masonry-horizontal\masonry-horizontal.js" />
+    <Content Include="bower_components\isotope\dist\isotope.pkgd.js" />
+    <Content Include="bower_components\isotope\dist\isotope.pkgd.min.js" />
+    <Content Include="bower_components\isotope\js\isotope.js" />
+    <Content Include="bower_components\isotope\js\item.js" />
+    <Content Include="bower_components\isotope\js\layout-mode.js" />
+    <Content Include="bower_components\isotope\js\layout-modes\fit-rows.js" />
+    <Content Include="bower_components\isotope\js\layout-modes\masonry.js" />
+    <Content Include="bower_components\isotope\js\layout-modes\vertical.js" />
     <Content Include="bower_components\moment\benchmarks\clone.js" />
     <Content Include="bower_components\moment\locale\af.js" />
     <Content Include="bower_components\moment\locale\ar-ma.js" />
@@ -180,8 +182,6 @@
     <Content Include="bower_components\angular\bower.json" />
     <Content Include="bower_components\angular\package.json" />
     <Content Include="bower_components\angular\README.md" />
-    <Content Include="bower_components\lodash\.bower.json" />
-    <Content Include="bower_components\lodash\bower.json" />
     <Content Include="bower_components\angular-multi-select\.bower.json" />
     <Content Include="bower_components\angular-multi-select\.npmignore" />
     <Content Include="Dump of PetitesPoches, 2015-02-08 20-38.ravendump" />
@@ -195,6 +195,13 @@
     <Content Include="bower_components\moment\Moment.js.nuspec" />
     <Content Include="bower_components\moment\README.md" />
     <Content Include="bower_components\moment\scripts\npm_prepublish.sh" />
+    <Content Include="bower_components\isotope\.bower.json" />
+    <Content Include="bower_components\isotope\bower.json" />
+    <Content Include="bower_components\isotope\README.mdown" />
+    <Content Include="bower_components\isotope-masonry-horizontal\.bower.json" />
+    <Content Include="bower_components\isotope-masonry-horizontal\bower.json" />
+    <Content Include="bower_components\isotope-masonry-horizontal\package.json" />
+    <Content Include="bower_components\isotope-masonry-horizontal\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

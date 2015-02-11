@@ -24,18 +24,6 @@ var Update = function () {
     this.Name = "";
 };
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedItem, parentScope) {
-    $scope.$parent = parentScope;
-    $scope.selectedItem = selectedItem;
-
-    $scope.ok = function () {
-        $modalInstance.close($scope.selectedItem);
-    };
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-});
 
 
 
@@ -60,12 +48,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
-                //for (var i = 0; i < 100; i++) {
-                //    var livre = new Livre();
-                //    livre['@metadata'] ="";
-                //    livre['@metadata']['@id'] = 0;
-                //    data.Results.push(livre);
-                //}
+                for (var i = 0; i < 100; i++) {
+                    var livre = new Livre();
+                    livre['@metadata'] ="";
+                    livre['@metadata']['@id'] = 0;
+                    data.Results.push(livre);
+                }
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
@@ -133,6 +121,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             data: angular.toJson(item)
         }).
         success(function (data, status, headers, config) {
+            $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
+            $scope.container.isotope({ sortBy: 'date' });
         }).
         error(function (data, status, headers, config) {
             console.log(data);
@@ -321,7 +311,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     }
 
 
-    $scope.add = function (size) {
+    $scope.add = function () {
         var item = new Livre;
         item.datePublication = moment().format();
         $scope.selectedItem = item;
@@ -334,14 +324,10 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             item.Id = data.Key;
             item.new = true;
             $scope.items.unshift(item);
-            //setTimeout(function () {
-            //    $container.isotope('reLayout');
-            //}, 100);
 
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',
                 controller: 'ModalInstanceCtrl',
-                size: size,
                 resolve: {
                     selectedItem: function () {
                         return $scope.selectedItem;
@@ -401,29 +387,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
           success(function (data, status, headers, config) {
               $scope.items.splice($scope.items.indexOf(item), 1);
               setTimeout(function () {
-                  $container.isotope('reLayout');
+                  $scope.container.isotope('reLayout');
               }, 100);
-
-              // decrement index of items with higher index
-              angular.forEach($scope.items, function (itemWithHigherIndex, index) {
-
-                  if (itemWithHigherIndex.Index > item.Index) {
-                      itemWithHigherIndex.Index = --itemWithHigherIndex.Index;
-                  }
-
-                  $http({
-                      method: 'PUT',
-                      headers: { 'Raven-Entity-Name': 'Livre' },
-                      url: $rootScope.apiRootUrl + '/docs/' + itemWithHigherIndex.Id,
-                      data: angular.toJson(itemWithHigherIndex)
-                  }).
-                   success(function (data, status, headers, config) {
-
-                   }).
-                   error(function (data, status, headers, config) {
-                       console.log(data);
-                   });
-              });
           }).
           error(function (data, status, headers, config) {
               console.log(data);
