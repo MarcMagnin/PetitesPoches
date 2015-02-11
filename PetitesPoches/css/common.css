@@ -20,7 +20,6 @@ html, body {
 
 .tilesContainer {
     /*http://www.colorzilla.com/gradient-editor/*/
-    background:lightseagreen;
     padding-left:150px;
     height: -moz-calc(100% - 100px) !important; 
     height: -webkit-calc(100% - 100px)!important; 
@@ -199,16 +198,24 @@ height: 30px;
    min-width:100px;
 }
 
-.inner-placeholder{
+.inner-placeholder {
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    opacity:0.5;
-    font-size: 64px; font-size: 5rem;
+    opacity: 0.5;
+    font-size: 64px;
+    font-size: 5rem;
 }
-
+.fa-2 {
+    font-size: 24px;
+    font-size: 3rem;
+}
 
 .inline-block{
     display:inline-block;

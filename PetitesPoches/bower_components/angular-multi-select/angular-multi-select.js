@@ -70,7 +70,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
         template: 
             '<span class="multiSelect inlineBlock">' +        
-                '<button type="button" dropdown-toggle class="btn btn-primary btn-lg dropdown-toggle" ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton();" ng-bind-html="varButtonLabel">' +
+                '<button type="button" dropdown-toggle class="btn btn-primary dropdown-toggle" ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton();" ng-bind-html="varButtonLabel">' +
                 '</button>' +                              
                 '<div class="checkboxLayer">' +                        
                     '<form>' + 

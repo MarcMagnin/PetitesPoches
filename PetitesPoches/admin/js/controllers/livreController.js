@@ -48,12 +48,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
             success(function (data, status, headers, config) {
 
-                for (var i = 0; i < 100; i++) {
-                    var livre = new Livre();
-                    livre['@metadata'] ="";
-                    livre['@metadata']['@id'] = 0;
-                    data.Results.push(livre);
-                }
+                //for (var i = 0; i < 100; i++) {
+                //    var livre = new Livre();
+                //    livre['@metadata'] ="";
+                //    livre['@metadata']['@id'] = 0;
+                //    data.Results.push(livre);
+                //}
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];

@@ -59,6 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\css\bootstrap-override.css">
+      <DependentUpon>bootstrap-override.less</DependentUpon>
+    </Content>
     <Content Include="admin\js\directives\adminDirectives.js" />
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
@@ -202,6 +205,14 @@
     <Content Include="bower_components\isotope-masonry-horizontal\bower.json" />
     <Content Include="bower_components\isotope-masonry-horizontal\package.json" />
     <Content Include="bower_components\isotope-masonry-horizontal\README.md" />
+    <Content Include="admin\css\admin.less" />
+    <Content Include="admin\css\admin.css.map">
+      <DependentUpon>admin.css</DependentUpon>
+    </Content>
+    <Content Include="admin\css\bootstrap-override.less" />
+    <Content Include="admin\css\bootstrap-override.css.map">
+      <DependentUpon>bootstrap-override.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

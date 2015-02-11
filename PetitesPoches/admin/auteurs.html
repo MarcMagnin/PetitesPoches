@@ -60,19 +60,19 @@
 <div class="viewContainer" ng-controller="auteurController"
      ng-init="init()">
 
-
-    <button class="btn btn-lg btn-success" ng-click="add()">
-        <i class="fa fa-user-plus"></i>
-    </button>
-
-
-
-    <a class="clickable" ng-click="unFilter()">
-        All
-    </a>
-    <a class="clickable" ng-repeat="item in items | orderByDisplayOrder" ng-click="filterByLetter(item)">
-        {{::item}}
-    </a>
+    <div class="toolbar">
+        <button class="btn btn-lg btn-success" ng-click="add()">
+            <i class="fa fa-user-plus"></i>
+        </button>
+        <div class="inline-block" style="margin-left:63px;">
+            <a class="clickable" ng-click="unFilter()">
+                All
+            </a>
+            <a class="clickable" ng-repeat="item in items | orderByDisplayOrder" ng-click="filterByLetter(item)">
+                {{::item}}
+            </a>
+        </div>
+    </div>
 
     <div id="booksContainer" class="tilesContainer" ng-file-drop ng-model="files" class="drop-box dragover"
          drag-over-class="dragover" multiple="false"
