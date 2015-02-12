@@ -72,13 +72,13 @@ html, body {
 }
 .inner-tile{
     position:relative;
-        width: 140px;
+        width: 160px;
     height: 200px;
 }
 
 
 .tile-image {
-    width:140px;
+    width:160px;
 }
 .tile-text-wrapper{
     position:absolute;
