@@ -114,6 +114,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     }
 
     $scope.saveItem = function (item) {
+        delete item.new;
         $http({
             method: 'PUT',
             headers: { 'Raven-Entity-Name': 'Livre' },

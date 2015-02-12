@@ -26,10 +26,10 @@ app.directive('isotopethis', function () {
             // get a reference for 
             //scope.item.DOMelement = elm;
 
-            if (scope.item.new) {
-                console.log("SORT : " + attrs.sort)
-                $container.isotope({ sortBy: attrs.sort });
-            }
+            //if (scope.item.new) {
+            //    console.log("SORT : " + attrs.sort)
+            //    $container.isotope({ sortBy: attrs.sort });
+            //}
             tileImage.load(function () {
                 
                // $container.isotope('reLayout');

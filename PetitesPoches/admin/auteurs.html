@@ -61,7 +61,7 @@
      ng-init="init()">
 
     <div class="toolbar">
-        <button class="btn btn-lg btn-success" ng-click="add()">
+        <button class="btn btn-success" ng-click="add()">
             <i class="fa fa-user-plus"></i>
         </button>
         <div class="inline-block" style="margin-left:63px;">
@@ -157,7 +157,6 @@
             nom: function (elem) {
                 var scope = $(elem).scope();
                 if (scope && scope.item && scope.item.Nom) {
-                    console.log(scope.item.Nom.toLowerCase())
                     return scope.item.Nom.toLowerCase();
                 }
                 // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste

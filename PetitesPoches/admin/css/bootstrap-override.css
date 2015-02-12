@@ -63,6 +63,12 @@ body {
 .toolbar .btn-group .btn {
   margin: 0px;
 }
+.search {
+  padding: 10px 16px;
+  vertical-align: middle;
+  height: auto;
+  margin-left: 8px;
+}
 /*
     BUTTON OVERRIDES
 */

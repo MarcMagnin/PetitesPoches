@@ -43,15 +43,18 @@ body{
         &>a{
              color:lighten(@pageBackground,15%);
             &:hover{
-          background-color:darken( @pageBackground,2%);
-          border:1px solid darken(@pageBackground,2%);
-          color:white;
-        }
+                background-color:darken( @pageBackground,2%);
+                border:1px solid darken(@pageBackground,2%);
+                color:white;
+            }
 
         }
     }
-
 }
+
+
+@inputPadding : 10px 16px;
+@inputMarginLeft : 8px;
 .toolbar {
     width:100%;
     display:inline-block;
@@ -62,9 +65,9 @@ body{
     .btn {
         background-color: @buttonColor;
         border-color: transparent;
-        margin-left: 8px;
+        margin-left: @inputMarginLeft;
         font-size: 0.9em;
-        padding: 10px 16px;
+        padding: @inputPadding;
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
         border-radius: 6px;
@@ -82,14 +85,19 @@ body{
     }
 
     .btn-group {
-        margin-left: 8px;
+        margin-left: @inputMarginLeft;
         .btn {
             margin: 0px;
         }
     }
 }
 
-
+.search{
+    padding: @inputPadding;
+    vertical-align:middle;
+    height:auto;
+    margin-left: @inputMarginLeft;
+}
 /*
     BUTTON OVERRIDES
 */

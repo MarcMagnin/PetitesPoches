@@ -11,13 +11,16 @@ var Update = function () {
 };
 
 
-app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', '$state', '$modal', function ($scope, $rootScope, $http, $upload, $state, $modal) {
+app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', '$upload', '$state', '$modal', function ($scope, $rootScope, $http,$filter, $upload, $state, $modal) {
     $scope.entityName = "Auteur"
     $scope.items = [];
     $scope.tags = [];
     $scope.selectedItem = "";
     $scope.container = $('.tilesContainer');
    // $scope.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+  
+
 
     $scope.init = function () {
         itemAdded = 0;
@@ -37,12 +40,13 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
                 //    $scope.$apply();
                 //});
 
-
-
                 angular.forEach(data.Results, function (item, index) {
                     item.Id = item['@metadata']['@id'];
                     $scope.items.unshift(item);
                 });
+               // $scope.AZArray = $filter('orderByDisplayOrder')($scope.items);
+
+
             }).
             error(function (data, status, headers, config) {
                 console.log(data);
@@ -252,6 +256,7 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$upload', 
     }
 
     $scope.save = function (item) {
+        delete item.new;
         $http({
             method: 'PUT',
             headers: { 'Raven-Entity-Name': $scope.entityName },
