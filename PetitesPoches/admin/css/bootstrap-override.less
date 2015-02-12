@@ -53,8 +53,9 @@ body{
 }
 
 
-@inputPadding : 10px 16px;
-@inputMarginLeft : 8px;
+@inputPadding : 8px 12px;
+@inputMarginLeft : 6px;
+@inputFontSize : 0.8em;
 .toolbar {
     width:100%;
     display:inline-block;
@@ -66,7 +67,7 @@ body{
         background-color: @buttonColor;
         border-color: transparent;
         margin-left: @inputMarginLeft;
-        font-size: 0.9em;
+        font-size: @inputFontSize;
         padding: @inputPadding;
         -moz-border-radius: 6px;
         -webkit-border-radius: 6px;
@@ -93,10 +94,14 @@ body{
 }
 
 .search{
-    padding: @inputPadding;
+    padding: 7px 12px;
     vertical-align:middle;
     height:auto;
+    font-size: @inputFontSize;
     margin-left: @inputMarginLeft;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 /*
     BUTTON OVERRIDES
