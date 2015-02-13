@@ -174,10 +174,7 @@
 </script>
 
 
-<div class="viewContainer" ng-controller="livreController" ng-file-drop ng-model="files" class="drop-box dragover"
-     drag-over-class="dragover" multiple="false"
-     allow-dir="false" accept="image/*,application/pdf"
-     ng-file-change="addLivre($files, $event)"
+<div class="viewContainer " ng-controller="livreController"
      ng-init="init()">
 
     <div class="toolbar">
@@ -188,9 +185,9 @@
         <label class="btn btn-primary" ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()"><i title="testes" class="fa fa-certificate"></i> Prix littéraires</label>
         <label class="btn btn-primary" ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()"><i class="fa fa-tablet" /> E-Book</label>
         <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
-    <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
-    <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
-    <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
+        <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
+        <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
+        <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
 
         <div class="btn-group">
             <label class="btn btn-primary active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">Tous niveaux</label>
@@ -228,11 +225,11 @@
 
         <!--<a href="#sortBy=date" ng-click="sort()">by date</a>-->
     </div>
-    
-    
 
-
-    <div id="booksContainer" class="tilesContainer">
+    <div id="booksContainer" class="tilesContainer drop-box" ng-file-drop ng-model="files"
+         drag-over-class="dragover" multiple="true"
+         allow-dir="false" accept="image/*"
+         ng-file-change="addLivreByDragAndDrop($files, $event)">
         <!--| orderBy:'Index':true-->
         <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
              {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}

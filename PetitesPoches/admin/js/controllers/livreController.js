@@ -27,7 +27,7 @@ var Update = function () {
 
 
 
-app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal) {
+app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', '$q', 'livreService', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal, $q, livreService) {
     
     $scope.items = [];
     $scope.tags = [];
@@ -45,8 +45,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
     $scope.init = function () {
         itemAdded = 0;
-        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Livres?start=0&pageSize=200&sort=-Index&_=' + Date.now() }).
-            success(function (data, status, headers, config) {
+        livreService.getLivres()
+            .then(function (livres) {
 
                 //for (var i = 0; i < 100; i++) {
                 //    var livre = new Livre();
@@ -62,16 +62,13 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                 //});
 
 
-
-                angular.forEach(data.Results, function (item, index) {
+                angular.forEach(livres, function (item, index) {
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);
                 });
              
-            }).
-            error(function (data, status, headers, config) {
-                console.log(data);
-            });
+            })
+
 
         // Load tags
         $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Tags?pageSize=30&sort=Name&noCache=1015157938&_=' + Date.now() }).
@@ -130,24 +127,27 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         });
     }
 
-    $scope.getPrixSuggestions = function (value) {
-        $scope.loading = true;
-        return $http.get($rootScope.apiRootUrl + '/indexes/PrixLitteraireSuggestions', {
-            params: {
-                query: "Value:" + value + "*",
-                pageSize: 10,
-                _: Date.now(),
-            }
-        }).then(function (res) {
-            $scope.loading = false;
-            return res.data.Results;
-        });
-    };
-
+    $scope.tryRemoveAttachment = function (item, field) {
+        if (item[field]) {
+            $http({
+                method: 'DELETE',
+                url: $rootScope.apiRootUrl + '/' + item[field]
+            }).
+              success(function (data, status, headers, config) {
+              }).
+              error(function (data, status, headers, config) {
+                  console.log(data);
+              });
+        }
+    }
     $scope.addFile = function ($files, $event, field) {
+        var item = $scope.selectedItem;
+        // clear up the previous attachment if it exist
+        $scope.tryRemoveAttachment(item, field);
+
         var file = $files[0];
         var fileReader = new FileReader();
-        var item = $scope.selectedItem;
+       
         fileReader.onload = function (e) {
             $scope.upload =
                 $upload.http({
@@ -187,9 +187,11 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
 
     $scope.updateAttachment = function ($files, $event, fieldName) {
+        var item = $scope.selectedItem;
+        $scope.tryRemoveAttachment(item, fieldName);
+
         var file = $files[0];
         var fileReader = new FileReader();
-        var item = $scope.selectedItem;
         fileReader.onload = function (e) {
             $scope.upload =
                 $upload.http({
@@ -203,7 +205,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
                 }).success(function (data, status, headers, config) {
                     // mise à jour du livre avec l'URI de l'image
-                    $scope.addAttachment(file.name, item, fieldName);
+                    $scope.setAttachment(file.name, item, fieldName);
 
                 }).error(function (err) {
                     alert('Error occured during upload');
@@ -212,7 +214,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         fileReader.readAsArrayBuffer(file);
 
     };
-    $scope.addAttachment = function (fileName, item, fieldName) {
+
+    $scope.setAttachment = function (fileName, item, fieldName) {
+
         var attachmentUrl = 'static/' + item.Id + '/' + fileName;
         var update = new Update();
         update.Type = 'Set';
@@ -233,80 +237,72 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     };
 
 
-
-
-    $scope.addLivre = function ($files, $event, $rejectedFiles) {
-        var file = $files[0];
-        // get the last index of items 
-        var livre = new Livre;
-        livre.datePublication = moment().format();
-        $http({
+    $scope.addLivre = function (livre) {
+        return $http({
             method: 'PUT',
-            headers: { 'Raven-Entity-Name': 'Livre' },
-            url: $rootScope.apiRootUrl + '/docs/Livre%2F',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
             data: angular.toJson(livre)
-        }).
-            success(function (data, status, headers, config) {
+        });
+    }
+
+    $scope.addLivreByDragAndDrop = function ($files, $event, $rejectedFiles) {
+        var prom = [];
+        angular.forEach($files, function (file, key) {
+            var livre = new Livre;
+            livre.datePublication = moment().format();
+            var defer = $q.defer();
+            prom.push(defer.promise);
+            $scope.addLivre(livre).success(function (data, status, headers, config) {
                 livre.Id = data.Key;
-                livre.new = true;
                 $scope.items.push(livre);
+                defer.resolve();
                 var fileReader = new FileReader();
                 fileReader.onload = function (e) {
-                    $scope.upload =
-                        $upload.http({
-                            url: $rootScope.apiRootUrl + '/static/' + livre.Id + '/' + file.name,
-                            method: "PUT",
-                            headers: { 'Content-Type': file.type },
-                            data: e.target.result
-                        }).progress(function (evt) {
-                            // Math.min is to fix IE which reports 200% sometimes
-                            //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                            console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
-                        }).success(function (data, status, headers, config) {
-                            // mise à jour du livre avec l'URI de l'image
-                            $scope.addImageToLivre(file.name, livre);
+                    $upload.http({
+                        url: $rootScope.apiRootUrl + '/static/' + livre.Id + '/' + file.name,
+                        method: "PUT",
+                        headers: { 'Content-Type': file.type },
+                        data: e.target.result
+                    }).progress(function (evt) {
+                        // Math.min is to fix IE which reports 200% sometimes
+                        //   $scope.progress[index] = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                    }).success(function (data, status, headers, config) {
+                        // mise à jour du livre avec l'URI de l'image
+                        $scope.setAttachment(file.name, livre, 'Couverture');
 
-                        }).error(function (err) {
-                            alert('Error occured during upload');
-                        });
+                    }).error(function (err) {
+                        alert('Error occured during upload');
+                    });
                 }
                 fileReader.readAsArrayBuffer(file);
             }).
             error(function (data, status, headers, config) {
                 console.log(data);
             });
-
+        });
+        $q.all(prom).finally(function () {
+            $scope.sort();
+        });
+       
     };
 
+    
 
-    $scope.addImageToLivre = function (fileName, item) {
-        var couvertureUrl = 'static/' + item.Id + '/' + fileName;
-        var update = new Update();
-        update.Type = 'Set';
-        update.Name = 'Couverture';
-        update.Value = couvertureUrl;
-
-
-        $http({
-            method: 'PATCH',
-            headers: { 'Raven-Entity-Name': 'Livre' },
-            url: $rootScope.apiRootUrl + '/docs/' + item.Id,
-            data: angular.toJson(new Array(update))
-        }).
-            success(function (data, status, headers, config) {
-                item.Couverture = couvertureUrl;
-            }).
-            error(function (data, status, headers, config) {
-
-            });
-
-        //}).
-        //error(function (data, status, headers, config) {
-
-        //});
+    $scope.getPrixSuggestions = function (value) {
+        $scope.loading = true;
+        return $http.get($rootScope.apiRootUrl + '/indexes/PrixLitteraireSuggestions', {
+            params: {
+                query: "Value:" + value + "*",
+                pageSize: 10,
+                _: Date.now(),
+            }
+        }).then(function (res) {
+            $scope.loading = false;
+            return res.data.Results;
+        });
     };
-
-
     $scope.cancel = function () {
         $scope.modalInstance.dismiss('cancel');
     }
@@ -523,9 +519,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.format = $scope.formats[1];
 
     $scope.sort = function () {
-        $scope.container.isotope({ 
-            sortBy: 'date',
-            sortAscending : false
-        });
+        setTimeout(function () {
+            $scope.container.isotope({sortBy: 'date'});
+        }, 100)
+        
     }
 }]);
