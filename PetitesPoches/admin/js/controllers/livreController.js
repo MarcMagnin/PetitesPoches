@@ -16,6 +16,7 @@ var Livre = function () {
     this.Extrait = "";
     this.SiteMarchand = "";
     this.LienVideo = "";
+    this.LienIssu =""
 };
 
 
@@ -101,7 +102,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                     },
                 }
             });
-
+         
+        
             modalInstance.result.then(function () {
                 $scope.saveItem($scope.selectedItem);
             }, function () {

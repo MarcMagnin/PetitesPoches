@@ -39,3 +39,18 @@ app.directive('isotopethis', function () {
         }
     }
 });
+
+//app.directive('autogrow', function () {
+//    return {
+//        link: function (scope, elm, attrs) {
+//            scope.$watch('selectedItem.Extrait', function (newval, oldval) {
+//                if (newval) {
+//                    $(elm).autogrow();
+//                }
+
+//            }, true);
+
+            
+//        }
+//    }
+//});

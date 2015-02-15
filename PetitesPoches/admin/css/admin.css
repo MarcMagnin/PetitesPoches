@@ -30,3 +30,11 @@
     display:block;
     height:100px;
 }*/
+
+
+.hiddendiv {
+    display: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* future version of deprecated 'word-wrap' */
+}

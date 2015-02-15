@@ -117,8 +117,10 @@
                 </p>
                 <label class="control-label" for="LienEbook">Lien E-book</label>
                 <p><input id="LienEbook" class="form-control" type="text" ng-model="selectedItem.EBookUrl" /></p>
-                <label class="control-label" for="Extrait">Lien Issuu</label>
-                <p><input class="form-control" id="Extrait" type="text" ng-model="selectedItem.Extrait" /></p>
+                <label class="control-label" for="LienIssu">Lien Issuu</label>
+                <p><input class="form-control" id="LienIssu" type="text" ng-model="selectedItem.LienIssu" /></p>
+                <label class="control-label" for="Extrait">Extrait</label>
+                <p><textarea class="form-control" id="Extrait" rows="5" type="text" ng-model="selectedItem.Extrait" /></p>
 
             </div>
             <div class="col-md-6">
@@ -271,7 +273,11 @@
 </div>
 <script>
 
-
+   
+    $(document)
+    		.one('focus.textarea', '.autoExpand', function () {
+    		  
+    		})
 
     var $container = $('.tilesContainer');
 

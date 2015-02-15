@@ -36,6 +36,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedIt
     $scope.$parent = parentScope;
     $scope.selectedItem = selectedItem;
 
+
     $scope.ok = function () {
         $modalInstance.close($scope.selectedItem);
     };
