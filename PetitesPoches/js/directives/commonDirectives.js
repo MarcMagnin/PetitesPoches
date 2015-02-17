@@ -1,5 +1,5 @@
 ﻿var itemAdded = 0;
-app.directive('isotopethis', function () {
+app.directive("isotopethis", function () {
     return {
         link: function (scope, elm, attrs) {
             //elm.find("a").click(function (event) {
@@ -40,17 +40,32 @@ app.directive('isotopethis', function () {
     }
 });
 
-//app.directive('autogrow', function () {
-//    return {
-//        link: function (scope, elm, attrs) {
-//            scope.$watch('selectedItem.Extrait', function (newval, oldval) {
-//                if (newval) {
-//                    $(elm).autogrow();
-//                }
+app.directive("bg", function ($window) {
+    return {
+        link: function (scope, elm, attrs) {
+            var counter = 0;
+            var previousLayer;
+   
+            scope.updateColor = function (i) {
+                if (previousLayer)
+                    previousLayer.removeClass("on");
+                previousLayer = $(".bg-layer.color-" + i);
+                previousLayer.addClass("on");
+                console.log(previousLayer);
+            };
 
-//            }, true);
+            scope.onScroll = function() {
+                counter++;
+                if (counter % 15 === 0) {
+                    scope.updateColor(Math.floor(Math.random() * 4) + 1);
+                    counter = 0;
+                }
+            };
+
+            angular.element($window).on("scroll", scope.$apply.bind(scope, scope.onScroll));
 
             
-//        }
-//    }
-//});
+          
+        }
+    }
+});
