@@ -1,4 +1,173 @@
-﻿
+﻿/*  Menu animations
+~-----------------------------------------*/
+
+        .containContent3{
+            width:100%;
+            max-width: 500px;
+        }
+            .slider3 .contenTitle h3, .slider3 .content1, .slider3 .content2 {
+                color: #fff;
+                font-weight: 200;
+                font-size: 40px;
+                text-align: right;
+                line-height: 130%;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+
+            }
+            .slider3 .contenTitle h3 {
+                margin: 70px 0 0 0px;
+                color:#56AB99;
+                font-weight:800;
+                font-weight: 400;
+                font-size: 50px;
+
+            }
+
+            .slider3 .content1 {
+                font-size: 30px;
+            }
+
+            .slider3 .content2 {
+                font-size: 36px;
+            }
+            
+            .ButtonMore{
+                background-color: #33ACFF;
+                display: inline-block;
+                color: #FFF;
+                font-size: 26px;
+                line-height: 45px;
+                font-weight: 200;
+                padding: 0 25px;
+                text-shadow: 5px 0px 8px rgba(0, 0, 0, 0.4);
+                width: auto;
+                float: right;
+                margin-right: 10%;
+                -webkit-transition: all 0.2s ease;
+                -moz-transition: all 0.2s ease;
+                -ms-transition: all 0.2s ease;
+                -o-transition: all 0.2s ease;
+                transition: all 0.2s ease;
+            }
+            .slider3 .ButtonMore {
+                -webkit-border-radius:2px;
+                -moz-border-radius:2px;
+                -o-border-radius:2px;
+                border-radius:2px;
+                margin:20px 0px 0px 0px;
+                box-shadow: #fff 0px 0px 0px 1px;
+                background: rgba(86, 171, 153,0.5);
+            }
+
+            .slider3:hover .contenTitle h3{ 
+            }
+
+            .slider3 .ButtonMore:hover  {
+                background: rgba(86, 171, 153,0.85);
+            
+            }
+
+
+
+.slider3 a{
+    -webkit-transition: all 2s ease;
+    -moz-transition: all 2s ease;
+    -ms-transition: all 2s ease;
+    -o-transition: all 2s ease;
+    transition: all 2s ease;
+
+}
+
+.slider3:hover a{
+    -moz-transform: translateX(20px);
+    -webkit-transform: translateX(20px);
+    -o-transform: translateX(20px) ;
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+   .slider3.shwn{
+                display:block;
+                background: #23423B url('http://www.ovh.com/fr/images/index2015/slider/webhosting.png') center top no-repeat;
+                background-size:cover;
+                background-size:1180px;
+                -webkit-transition: all 1s ease;
+                -moz-transition: all 1s ease;
+                -ms-transition: all 1s ease;
+                -o-transition: all 1s ease;
+                transition: all 1s ease;
+
+            }
+            .slider3.shwn:hover{
+                background-size:1000px;
+
+            }
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+            transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+
+.fadeInLeft {
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+  -webkit-animation-name: fadeInLeft;
+          animation-name: fadeInLeft;
+}
+@-webkit-keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+
+           @media screen and (max-width: 1500px) and (min-width: 700px){
+                .slider3.shwn{
+                    background-position: 34% 0%;
+                }
+            }
 .container {
     z-index: 1;
 }
