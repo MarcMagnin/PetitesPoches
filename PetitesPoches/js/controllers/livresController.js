@@ -1,4 +1,23 @@
-﻿
+﻿var Livre = function () {
+    this.Index = 0;
+    this.Titre = "";
+    this.Couverture = "";
+    this.Auteur = {
+        Nom: "",
+        Prenom: ""
+    };
+    this.Prix = "";
+    this.ISBN = "";
+    this.EBookUrl = "";
+    this.NiveauLecture = "";
+    this.PrixLitteraire = "";
+    this.FichePedago = "";
+    this.Extrait = "";
+    this.SiteMarchand = "";
+    this.LienVideo = "";
+    this.LienIssu = ""
+};
+
 app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$state', '$modal', '$q', 'livreService', function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, livreService) {
     $scope.entityName = "Livre";
     $scope.items = [];
@@ -19,12 +38,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         livreService.getLivres()
             .then(function (livres) {
 
-                //for (var i = 0; i < 100; i++) {
-                //    var livre = new Livre();
-                //    livre['@metadata'] ="";
-                //    livre['@metadata']['@id'] = 0;
-                //    data.Results.push(livre);
-                //}
+                for (var i = 0; i < 200; i++) {
+                    var livre = new Livre();
+                    livre['@metadata'] ="";
+                    livre['@metadata']['@id'] = 0;
+                    $scope.items.push(livre);
+                }
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];

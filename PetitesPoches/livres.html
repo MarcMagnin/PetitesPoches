@@ -32,7 +32,9 @@
             </h2>
         </div>
         <button class="close" aria-hidden="true" type="button" ng-click="cancel()"><i class="fa fa-times"></i></button>
+        <br />
     </div>
+
     <div class="modal-body">
         <!--<ul class="nav nav-tabs">
             <li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
@@ -46,8 +48,6 @@
             <div class="col-md-4">
 
                 <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
-
-                
 
                         <p>Publié le {{::selectedItem.datePublication}}</p>
                         <p>ISBN {{::selectedItem.ISBN}}</p>
@@ -72,26 +72,29 @@
                 <a class="btn btn-info tag" href="{{::selectedItem.LienIssu}}">Extrait Issu</a>
                 <a class="btn btn-info tag" href="{{::selectedItem.LienVideo}}">Vidéo</a>
                 <a class="btn btn-info tag" href="{{::apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}">Fiche pédagogique</a>
+                <a href="{{::selectedItem.SiteMarchand}}">Commander</a>
 
             </div>
             <div class="col-md-8">
                 <label class="control-label" for="Extrait">Extrait</label>
                 <p>{{::selectedItem.Extrait}}</p>
-
+                <br />
                 <label class="control-label">Thèmes</label>
                 <div class="tags">
                     <button class="btn btn-info tag" ng-repeat="(idx, tag) in selectedItem.Tags track by $index">{{tag}}</button>
                 </div>
-
+                <br />
                 <label class="control-label" for="Auteur">Auteur</label>
-                <a class="btn btn-info tag" href="{{::selectedItem.Auteur.Bibliographie}}">
-                    {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
-                </a>
+                 <p>
+                     <a href="{{::selectedItem.Auteur.Bibliographie}}">
+                         {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
+                     </a>
+                 </p>
                 <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{selectedItem.Auteur.Photo}}" />
 
                 
 
-                <a href="{{::selectedItem.SiteMarchand}}">Commander</a>
+             
                 
 
         </div>

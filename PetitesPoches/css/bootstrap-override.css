@@ -64,43 +64,15 @@ body {
   margin: 0px;
 }
 .search {
-    display:inline-block;
+  display: inline-block;
   padding: 7px 12px;
   vertical-align: middle;
   height: auto;
-  width:auto;
+  width: auto;
   font-size: 0.8em;
   margin-left: 6px;
   -moz-border-radius: 6px;
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-label {
-    color:#333b40;
-    font-size:0.8em;
-}
-
-*{
-    -webkit-box-sizing:initial;
-    -moz-box-sizing:initial;
-    box-sizing:initial;
-}
-.row {
-    margin:15px;
-}
-.col-md-4 {
-    padding:0;
-}
-
-
-.col-md-8 {
-    padding:0;
-}
-/*
-    BUTTON OVERRIDES
-*/
-/*.btn, .btn-primary{
-    background-color: @buttonColor;
-    border-color: darken(@buttonColor, 10%);
-}*/
 /*# sourceMappingURL=bootstrap-override.css.map */
