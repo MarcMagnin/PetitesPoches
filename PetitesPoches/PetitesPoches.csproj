@@ -68,6 +68,8 @@
     <Content Include="css\bootstrap-override.min.css">
       <DependentUpon>bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\simple-sidebar.css" />
+    <Content Include="css\userSite.css" />
     <Content Include="js\controllers\mainController.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />

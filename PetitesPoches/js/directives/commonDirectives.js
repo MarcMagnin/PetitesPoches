@@ -51,21 +51,18 @@ app.directive("bg", function ($window) {
                     previousLayer.removeClass("on");
                 previousLayer = $(".bg-layer.color-" + i);
                 previousLayer.addClass("on");
-                console.log(previousLayer);
             };
 
             scope.onScroll = function() {
                 counter++;
-                if (counter % 15 === 0) {
+                if (counter % 50 === 0) {
                     scope.updateColor(Math.floor(Math.random() * 4) + 1);
                     counter = 0;
                 }
             };
+            elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
 
-            angular.element($window).on("scroll", scope.$apply.bind(scope, scope.onScroll));
-
-            
-          
+            scope.updateColor(1);
         }
     }
 });

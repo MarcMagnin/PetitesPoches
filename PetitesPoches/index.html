@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Les Petites Poches</title>
+    <title>Collection Les Petites Poches</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' />
     <link href="js/packages/bootstrap.min.css" rel="stylesheet" />
     <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />-->
     <!--<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>-->
@@ -10,23 +12,47 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap-override.css" rel="stylesheet" />
     <link href="css/common.css" rel="stylesheet" />
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Slab' rel='stylesheet' />
+    <link href="css/test.css" rel="stylesheet" />
+    <link href="css/simple-sidebar.css" rel="stylesheet" />
+    <link href="css/userSite.css" rel="stylesheet" />
+    
 
 </head>
-<body ng-app="PetitesPoches">
-
-    <div class="tab-view" ng-controller="mainController">
-
-        <tabset>
-            <tab ng-repeat="t in ::tabs"
-                 heading="{{::t.heading}}"
-                 select="go(t.route)"
-                 active="t.active">
-            </tab>
-        </tabset>
-        <div ui-view class="tab-view"></div>
-
+<body ng-app="PetitesPoches" ng-controller="mainController">
+    <div class="bg-grad">
+        <div class="clouds">
+            <div class="cloud x1"></div>
+        </div>
+        <div class="bg-layer color-1"></div>
+        <div class="bg-layer color-2"></div>
+        <div class="bg-layer color-3"></div>
+        <div class="bg-layer color-4"></div>
     </div>
+
+
+    <nav class="navbar navbar-default">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="sr-only">Toggle nav</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-brand">Les petites poches</p>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="nav navbar-nav">
+                <li ng-repeat="t in ::tabs"
+                    ng-click="go(t.route)">
+                    <a>{{::t.heading}}</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div ui-view class="tab-view"></div>
+
 
 
     <script src="js/packages/jquery-2.1.3.min.js"></script>
