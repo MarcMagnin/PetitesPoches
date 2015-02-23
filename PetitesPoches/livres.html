@@ -52,7 +52,6 @@
                         <p>ISBN {{::selectedItem.ISBN}}</p>
                         <p>{{::selectedItem.Prix}} euros</p>
 
-
                 <p>
                     <div ng-switch="selectedItem.NiveauLecture">
                         <label ng-switch-when="premierspas">Permiers pas</label>
@@ -60,8 +59,6 @@
                         <label ng-switch-when="confirmes">Confirmés</label>
                     </div>
                 </p>
-                
-              
 
 
                 <label class="control-label" for="PrixLitteraire">Prix littéraire</label>
@@ -91,21 +88,13 @@
                  </p>
                 <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{selectedItem.Auteur.Photo}}" />
 
-                
-
-             
-                
-
         </div>
 
-      
-
         </div>
-
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-default" type="button" ng-click="cancel()">Fermer</button>
+        <button class="btn btn-transparent" type="button" ng-click="cancel()">Fermer</button>
     </div>
 </script>
 
@@ -121,39 +110,44 @@
                     </a>
                 </li>-->
                 <li>
-                    <input type="text"
-                           id="searchLivre"
-                           ng-model="searchedText"
-                           placeholder="Recherche"
-                           typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
-                           typeahead-loading="loadingSearchSuggestions"
-                           typeahead-template-url="livreSearchTemplate.html"
-                           typeahead-wait-ms="300"
-                           ng-keyup="validateSearch($event)"
-                           typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
-                           class="form-control form-control-inline search" />
+                    <div class="searchSideBar">
+                        <input type="text"
+                               id="searchLivre"
+                               ng-model="searchedText"
+                               typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                               typeahead-loading="loadingSearchSuggestions"
+                               typeahead-template-url="livreSearchTemplate.html"
+                               typeahead-wait-ms="300"
+                               ng-keyup="validateSearch($event)"
+                               typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                               class="form-control form-control-inline transparentInput"/>
+
+                        <span class="header-search-icon"><i class="fa fa-search"></i></span>
+                    </div>
                 </li>
 
-                <li><a ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()"><i title="testes" class="fa fa-certificate"></i> Prix littéraires</a></li>
-                <li>
-                    <a ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()"><i class="fa fa-tablet" /> E-Book</a>
-                </li>
+                <li><a ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">Prix littéraires</a></li>
+                <li><a ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()">E-Book</a></li>
                 <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
                 <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
                 <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
                 <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
                 <li>
-                    <div class="btn-group">
-                        <a class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">Tous niveaux</a>
-                        <label class="btn btn-primary" ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">Permiers pas</label>
-                        <label class="btn btn-primary" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">Débutants</label>
-                        <label class="btn btn-primary" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">Confirmés</label>
-                    </div>
+                    <a class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">Tous niveaux</a>
+                </li>
+                <li>
+                    <a ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">Permiers pas</a>
+                </li>
+                <li>
+                    <a ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">Débutants</a>
+                </li>
+                <li>
+                    <a ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">Confirmés</a>
                 </li>
                 <!--http://isteven.github.io/angular-multi-select/-->
                 <li>
                     <div multi-select
-                         class="inline-block"
+                         class="transparent-multi-select-input"
                          input-model="tags"
                          button-label="Name"
                          item-label="Name"
@@ -173,15 +167,11 @@
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper" style="height:100%">
-            <a class="btn btn-default" id="menu-toggle" href="#menu-toggle">
-                <i class="fa fa-search"></i>
-
-            </a>
             <div class="container-fluid" style="height:100%">
-                <div class="row" style="height:100%">
-                    <div class="col-lg-12" style="height:100%">
+                <div class="row" style="height:100%; padding-bottom: 105px;">
+                    <div class="col-lg-12" style="height:100%; padding:0">
                         
-                        <div id="booksContainer" class="tilesContainer" bg>
+                        <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
                             <!--| orderBy:'Index':true-->
                             <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
              {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}
@@ -191,10 +181,10 @@
                                  isotopethis sort="date" ng-click="select(item, 'lg', $event)">
                                 <!--href="#responsive" data-toggle="modal"-->
                                 <div class="inner-tile">
-                                    <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price" ng-show="item.PrixLitteraire"></i>
+                                    <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
                                     <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                    <div class="moreInfoButtonWrapper topRight">
+                                    <div class="moreInfoButtonWrapper bottomRight">
                                         <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
                                            class="transparentButton background-circle">
                                             <i class="fa fa-file-text" />
@@ -221,9 +211,15 @@
 </div>
 <script>
 
+
+
     $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+    });
+    $("#page-content-wrapper").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").removeClass("toggled");
     });
 
 

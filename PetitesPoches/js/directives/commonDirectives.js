@@ -44,9 +44,11 @@ app.directive("bg", function ($window) {
     return {
         link: function (scope, elm, attrs) {
             var counter = 0;
+            var previousRandom = 1;
             var previousLayer;
    
             scope.updateColor = function (i) {
+                previousRandom = i;
                 if (previousLayer)
                     previousLayer.removeClass("on");
                 previousLayer = $(".bg-layer.color-" + i);
@@ -55,12 +57,24 @@ app.directive("bg", function ($window) {
 
             scope.onScroll = function() {
                 counter++;
+                console.log(counter);
                 if (counter % 50 === 0) {
-                    scope.updateColor(Math.floor(Math.random() * 4) + 1);
+                    var random = Math.floor(Math.random() * 4) + 1;
+                    if (random == previousRandom) {
+                        if (random == 4){
+                            random = 1;
+                        }
+                        else {
+                            random = random++;
+                        }
+                    }
+                    scope.updateColor(random);
                     counter = 0;
                 }
             };
             elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
+
+
 
             scope.updateColor(1);
         }

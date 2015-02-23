@@ -1,8 +1,8 @@
 ﻿app.controller("mainController", ['$scope', '$rootScope', '$http', '$timeout', '$state', function ($scope, $rootScope, $http, $timeout, $state) {
-    $rootScope.apiRootUrl = "http://localhost:8088/databases/PetitesPoches";
+    $rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
 
     $scope.tabs = [
-        { heading: "Livres", route: "livres", active: true },
+        { heading: "Collection", route: "collection", active: true },
         { heading: "Auteurs", route: "auteurs", active: false },
     ];
 
@@ -17,6 +17,11 @@
     $scope.$on("$stateChangeSuccess", function () {
         $scope.tabs.forEach(function (tab) {
             tab.active = $scope.active(tab.route);
+            if (tab.active) {
+                $('.' + tab.heading).addClass('active');
+            } else {
+                $('.' + tab.heading).removeClass('active');
+            }
         });
     });
 }]);

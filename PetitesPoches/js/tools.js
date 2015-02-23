@@ -16,3 +16,18 @@ function delayLoop(collection, index, action) {           //  create a loop func
         }                        //  ..  setTimeout()
     }, 3)
 }
+
+
+$(document).ready(function () {
+    $('body, html').mousewheel(function (event) {
+
+        if (event.deltaY != 0)
+
+            if ($('.modal-backdrop').length == 0) {
+                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
+            }
+            
+        //console.log(event.deltaX, event.deltaY, event.deltaFactor);
+
+    });
+});

@@ -68,9 +68,21 @@
     <Content Include="css\bootstrap-override.min.css">
       <DependentUpon>bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\client-bootstrap-override.css">
+      <DependentUpon>client-bootstrap-override.less</DependentUpon>
+    </Content>
+    <Content Include="css\ressources.css">
+      <DependentUpon>ressources.less</DependentUpon>
+    </Content>
+    <Content Include="css\tile.css">
+      <DependentUpon>tile.less</DependentUpon>
+    </Content>
     <Content Include="css\simple-sidebar.css" />
     <Content Include="css\userSite.css" />
+    <Content Include="images\background.jpg" />
+    <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="js\controllers\mainController.js" />
+    <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />
@@ -223,6 +235,16 @@
     <Content Include="css\bootstrap-override.css.map">
       <DependentUpon>bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\userSite.less" />
+    <Content Include="css\tile.less" />
+    <Content Include="css\tile.css.map">
+      <DependentUpon>tile.css</DependentUpon>
+    </Content>
+    <Content Include="css\client-bootstrap-override.less" />
+    <Content Include="css\client-bootstrap-override.css.map">
+      <DependentUpon>client-bootstrap-override.css</DependentUpon>
+    </Content>
+    <Content Include="css\ressources.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

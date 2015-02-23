@@ -11,83 +11,10 @@ html, body {
     width:100%;
     /*'Josefin Slab', 'Architects Daughter',*/
     font-family: "Helvetica Neue", "Helvetica", serif;
-    font-size:1.1em;
     color: rgb(35, 35, 35);
     overflow-x:hidden;
     overflow-y:hidden;
-    
-}
-
-.tilesContainer {
-    /*http://www.colorzilla.com/gradient-editor/*/
-    padding-left:150px;
-    height: -moz-calc(100% - 100px) !important; 
-    height: -webkit-calc(100% - 100px)!important; 
-    height: -o-calc(100% - 100px)!important; 
-    height: calc(100% - 100px)!important; 
-    
-
-    width: -moz-calc(100% - 150px) !important; 
-    width: -webkit-calc(100% - 150px)!important; 
-    width: -o-calc(100% - 150px)!important; 
-    width: calc(100% - 150px)!important; 
-	overflow-y: hidden !important;
-	overflow-x: scroll !important;
-	-webkit-overflow-scrolling: touch;
-
-    -webkit-box-sizing:content-box !important;
-    -moz-box-sizing:content-box !important;
-    box-sizing:content-box !important;
-        
-    scrollbar-base-color : transparent;  
-    scrollbar-track-color : transparent;
-    scrollbar-highlight-color : transparent;
-    scrollbar-arrow-color : transparent;
-    scrollbar-face-color : rgba(3, 255, 8, 0.17);  
-}
-.tile {
-    cursor: pointer;
-    margin-right: 10px;
-    margin-top: 5px;
-    position: absolute;
-    background-color: rgba(113, 109, 109, 0.50);
-
-    -o-transition: all .3s; 
--moz-transition: all .3s;
--webkit-transition: all 0.3s; 
- transition: all .3s ;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-.tile:hover {
-  background-color:rgba(113, 109, 109, 0.70);
-  -o-transition: background-color .1s ease-out; 
-  -moz-transition: background-color .1s ease-out; 
-  -webkit-transition: background-color 0.1s ease-out; 
-  transition: background-color .1s ease-out;
-}
-.inner-tile{
-    position:relative;
-        width: 160px;
-    height: 200px;
-}
-
-
-.tile-image {
-    width:160px;
-}
-.tile-text-wrapper{
-    position:absolute;
-    width:100%;
-    bottom:0px;
-}
-.tile-text{
-text-align: center;
-    color:whitesmoke;
+    -webkit-font-smoothing: antialiased;
 }
 
 
@@ -125,13 +52,18 @@ text-align: center;
     right:0px;
 }
 
-
+.bottomLeft{
+    top:auto;
+    right:auto;
+    left : 5px;
+    bottom:5px;
+    
+}
 .moreInfoButtonWrapper{
     position:absolute;
     display:inline-flex;
     bottom:0px;
     right:0px;
-    margin:5px;
 }
 
 .transparentButton{
@@ -165,21 +97,19 @@ height: 30px;
 .background-circle {
     position:relative;
     display:block;
-	width: 30px;
-	height: 30px;
-	background-color: black;
+	width: 22px;
+	height: 22px;
+    background-color: whitesmoke;
 	-moz-border-radius: 50%;
 	-webkit-border-radius: 50%;
 	border-radius: 50%;
 }
 .background-circle:hover
  {
-	background-color: whitesmoke;
-
-
+	background-color: black;
 }
 .background-circle > i{
-    color:white;
+   color:black;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -187,7 +117,7 @@ height: 30px;
     transform: translate(-50%, -50%);
 }
 .background-circle:hover > i{
-      color:black;
+     color:white;
 }
 
 .placeholder{

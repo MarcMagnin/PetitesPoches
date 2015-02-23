@@ -60,8 +60,59 @@
 }
 
 .sidebar-nav li {
+    width:100%;
     text-indent: 20px;
     line-height: 40px;
+ 
+}
+.transparentInput {
+        width:100%;
+background-color: rgba(255,255,255,.3);
+border-radius: 3px;
+border: none;
+min-height: 30px;
+
+line-height: 19px;
+z-index: 1;
+padding: 0 8px;
+}
+.transparent-multi-select-input > button {
+      width:210px;
+      margin-left:20px;
+background-color: rgba(255,255,255,.3);
+border-radius: 3px;
+border: none;
+float: left;
+min-height: 30px;
+line-height: 19px;
+}
+.multiSelect {
+    width:100%;
+}
+.multiSelect .checkboxLayer{
+    min-width:150px;
+    width:210px;
+    margin-top:31px;
+    margin-left:20px;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+ background:white;
+  outline: 0 none;
 }
 
 .sidebar-nav li a {
@@ -96,7 +147,9 @@
     background: none;
 }
 
-@media(min-width:768px) {
+
+
+/*@media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
     }
@@ -122,4 +175,4 @@
         position: relative;
         margin-right: 0;
     }
-}
+}*/

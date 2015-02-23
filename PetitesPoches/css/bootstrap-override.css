@@ -1,7 +1,4 @@
-﻿body {
-  background-color: #374046;
-}
-.box {
+﻿.box {
   color: #7c4dff;
   border-color: #ede6ff;
 }
@@ -9,7 +6,9 @@
   -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
-
+body {
+  background-color: #374046;
+}
 .nav {
   background-color: #272e32;
 }
@@ -76,4 +75,11 @@
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
+/*
+    BUTTON OVERRIDES
+*/
+/*.btn, .btn-primary{
+    background-color: @buttonColor;
+    border-color: darken(@buttonColor, 10%);
+}*/
 /*# sourceMappingURL=bootstrap-override.css.map */

@@ -38,3 +38,7 @@
     word-wrap: break-word;
     overflow-wrap: break-word; /* future version of deprecated 'word-wrap' */
 }
+
+.close-override{
+    float:none;
+}
