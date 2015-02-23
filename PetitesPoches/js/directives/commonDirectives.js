@@ -55,25 +55,36 @@ app.directive("bg", function ($window) {
                 previousLayer.addClass("on");
             };
 
-            scope.onScroll = function() {
-                counter++;
-                console.log(counter);
-                if (counter % 50 === 0) {
-                    var random = Math.floor(Math.random() * 4) + 1;
-                    if (random == previousRandom) {
-                        if (random == 4){
-                            random = 1;
-                        }
-                        else {
-                            random = random++;
-                        }
+            //scope.onScroll = function() {
+            //    counter++;
+            //    console.log(counter);
+            //    if (counter % 50 === 0) {
+            //        var random = Math.floor(Math.random() * 4) + 1;
+            //        if (random == previousRandom) {
+            //            if (random == 4){
+            //                random = 1;
+            //            }
+            //            else {
+            //                random = random++;
+            //            }
+            //        }
+            //        scope.updateColor(random);
+            //        counter = 0;
+            //    }
+            //};
+            //elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
+            setInterval(function () {
+                var random = Math.floor(Math.random() * 4) + 1;
+                if (random == previousRandom) {
+                    if (random == 4) {
+                        random = 1;
                     }
-                    scope.updateColor(random);
-                    counter = 0;
+                    else {
+                        random = random++;
+                    }
                 }
-            };
-            elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
-
+                scope.updateColor(random);
+            }, 10000);
 
 
             scope.updateColor(1);
