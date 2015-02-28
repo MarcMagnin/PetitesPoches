@@ -71,13 +71,15 @@
     <Content Include="css\client-bootstrap-override.css">
       <DependentUpon>client-bootstrap-override.less</DependentUpon>
     </Content>
+    <Content Include="css\multi-select.css">
+      <DependentUpon>multi-select.less</DependentUpon>
+    </Content>
     <Content Include="css\ressources.css">
       <DependentUpon>ressources.less</DependentUpon>
     </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
     </Content>
-    <Content Include="css\simple-sidebar.css" />
     <Content Include="css\userSite.css" />
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
@@ -245,6 +247,11 @@
       <DependentUpon>client-bootstrap-override.css</DependentUpon>
     </Content>
     <Content Include="css\ressources.less" />
+    <Content Include="css\multi-select.less" />
+    <Content Include="css\multi-select.css.map">
+      <DependentUpon>multi-select.css</DependentUpon>
+    </Content>
+    <Content Include="css\simple-sidebar.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

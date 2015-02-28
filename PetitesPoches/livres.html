@@ -99,50 +99,59 @@
 </script>
 
 <div class="viewContainer" ng-controller="livreController" ng-init="init()">
-    
+    <div class="searchSideBar">
+        <div class="inner-search-bar">
+            <input type="text"
+                   id="search"
+                   ng-model="searchedText"
+                   typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                   typeahead-loading="loadingSearchSuggestions"
+                   typeahead-template-url="livreSearchTemplate.html"
+                   typeahead-wait-ms="300"
+                   ng-keyup="validateSearch($event)"
+                   typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                   class="form-control form-control-inline transparentInput" />
+            <div class="search-icon"><i class="fa fa-search"></i></div>
+        </div>
+    </div>
     <div id="wrapper" style="height:100%">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <!--<li class="sidebar-brand">
-                    <a href="#">
-                        Recherche
-                    </a>
-                </li>-->
-                <li>
-                    <div class="searchSideBar">
-                        <input type="text"
-                               id="searchLivre"
-                               ng-model="searchedText"
-                               typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
-                               typeahead-loading="loadingSearchSuggestions"
-                               typeahead-template-url="livreSearchTemplate.html"
-                               typeahead-wait-ms="300"
-                               ng-keyup="validateSearch($event)"
-                               typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
-                               class="form-control form-control-inline transparentInput"/>
+            <a href="#">
+                Recherche
+            </a>
+        </li>-->
 
-                        <span class="header-search-icon"><i class="fa fa-search"></i></span>
-                    </div>
-                </li>
 
-                <li><a ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">Prix littéraires</a></li>
-                <li><a ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()">E-Book</a></li>
-                <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
-                <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
-                <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
-                <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
-                <li>
-                    <a class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">Tous niveaux</a>
+                <li ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">
+                    <a>Prix littéraires</a>
+                    <span ng-show="checkboxPrixLitteraire" class="tickMark">✔</span>
                 </li>
-                <li>
-                    <a ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">Permiers pas</a>
+                <li ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()">
+                    <a>E-Book</a>
+                    <span ng-show="checkboxSearchEBook" class="tickMark">✔</span>
                 </li>
-                <li>
-                    <a ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">Débutants</a>
+                    <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
+            <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
+            <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
+            <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
+                <li class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">
+                    <a>Tous niveaux</a>
+                    <span ng-show="niveauLecture == ''" class="tickMark">✔</span>
                 </li>
-                <li>
-                    <a ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">Confirmés</a>
+                <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">
+                    <a>Permiers pas</a>
+                    <span ng-show="niveauLecture == 'premierspas'" class="tickMark">✔</span>
+                </li>
+                <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
+                    <a>Débutants</a>
+                    <span ng-show="niveauLecture == 'debutants'" class="tickMark">✔</span>
+                </li>
+                <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">
+                    <a>Confirmés</a>
+                    <span ng-show="niveauLecture == 'confirmes'" class="tickMark">✔</span>
                 </li>
                 <!--http://isteven.github.io/angular-multi-select/-->
                 <li>
@@ -173,10 +182,10 @@
                         
                         <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
                             <!--| orderBy:'Index':true-->
-                            <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
-             {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}
-             {{item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-             {{item.Tags && item.Tags || '' | filterString}}"
+                            <div class="tile isotopey tile-admin {{::item.Titre &&  'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+             {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{::item.EBookUrl && 'fil-ebook' || ''}}
+             {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+             {{::item.Tags && item.Tags || '' | filterString}}"
                                  ng-repeat="item in items"
                                  isotopethis sort="date" ng-click="select(item, 'lg', $event)">
                                 <!--href="#responsive" data-toggle="modal"-->
@@ -213,15 +222,24 @@
 
 
 
-    $("#menu-toggle").click(function (e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+    //$("#menu-toggle").click(function (e) {
+    //    e.preventDefault();
+    //    $("#wrapper").toggleClass("toggled");
+    //});
     $("#page-content-wrapper").click(function (e) {
         e.preventDefault();
         $("#wrapper").removeClass("toggled");
+        $("#search").removeClass("toggled");
+        $(".searchSideBar").removeClass("toggled");
     });
 
+
+    $(".searchSideBar").focusin(function (e) {
+        e.preventDefault();
+        $("#wrapper").addClass("toggled");
+        $("#search").addClass("toggled");
+        $(".searchSideBar").addClass("toggled");
+    });
 
     var $container = $('.tilesContainer');
 

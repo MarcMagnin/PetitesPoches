@@ -27,7 +27,6 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.searchedText = "";
     $scope.whiteSpacePattern = '/ /g'
     $scope.searchTimeout;
-    $scope.checkboxPrixLitteraire;
     $scope.container = $('.tilesContainer');
     $scope.niveauLecture = '';
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
@@ -188,11 +187,14 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             if ($scope.searchedText.Titre) {
                 $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
             } else {
-                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                }).join(',');
+                if ($scope.searchedText.length == 0) {
+                    $scope.searchPatternRecherche = '*';
+                } else {
+                    $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
+                        return '[class*=\'fil-' + val.toLowerCase() + '\']';
+                    }).join(',');
+                }
             }
-
             $scope.validateFilter();
         }, 300);
     }

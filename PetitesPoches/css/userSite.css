@@ -5,17 +5,6 @@
   padding: 0;
   padding-bottom: 0;
 }
-#sidebar-wrapper {
-  background-color: rgba(255, 255, 255, 0.02);
-}
-.sidebar-nav li a {
-  cursor: pointer;
-}
-.sidebar-nav li a:hover {
-  text-decoration: none;
-  color: #000;
-  background: rgba(255, 255, 255, 0.2);
-}
 /* ************************************
 
     Nav bar
@@ -32,7 +21,8 @@
   margin: 0;
 }
 .navbar-default {
-  background-color: rgba(255, 255, 255, 0.02);
+  /*background-color: @backgroundColor;*/
+  background-color: transparent;
   border-color: transparent;
 }
 .navbar-default .navbar-brand:hover,
@@ -60,7 +50,7 @@
   }
 }
 .navbar-brand {
-  top: 80px;
+  top: 20px;
   padding: 0;
 }
 .navbar-header {
@@ -123,33 +113,6 @@
   min-width: 30px;
   cursor: pointer;
 }
-.header-search-icon {
-  cursor: pointer;
-  position: absolute;
-  font-size: 16px;
-  right: 30px;
-  top: -1px;
-  -webkit-transition: background 85ms,color 85ms;
-  transition: background 85ms,color 85ms;
-  z-index: 2;
-  color: #f3f3f3;
-}
-.searchSideBar {
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 0.8em;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
-  width: 210px;
-  margin-bottom: 8px;
-}
-.searchSideBar input {
-  color: #f3f3f3;
-}
-.searchSideBar input:focus {
-  color: black;
-}
 .navbar-header a {
   text-decoration: none;
 }
@@ -164,9 +127,6 @@
 }
 .header-btn-text {
   padding: 0 8px;
-}
-.active {
-  color: #009688 !important;
 }
 /* ************************************
     Scrollbar

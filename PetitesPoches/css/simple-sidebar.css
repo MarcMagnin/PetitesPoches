@@ -1,99 +1,153 @@
-/*!
+﻿/*!
  * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+/*
+    Search
 
+*/
+.searchSideBar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding-left: 5px;
+  padding-top: 5px;
+  vertical-align: middle;
+  font-size: 0.8em;
+  -moz-transition: all  0.5s ease;
+  -o-transition: all  0.5s ease;
+  -webkit-transition: all  0.5s ease;
+  transition: all  0.5s ease;
+  height: 52px;
+  width: 250px;
+}
+.searchSideBar.toggled {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.searchSideBar input {
+  display: inline-block !important;
+  width: auto;
+  color: #f3f3f3;
+}
+.searchSideBar input:focus {
+  color: black;
+}
+.searchSideBar input:focus ~ .search-icon {
+  display: none;
+}
+.inner-search-bar {
+  position: relative;
+  display: inline-block;
+  -moz-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  -webkit-transition: width 0.5s ease;
+  transition: width 0.5s ease;
+}
+.search-icon {
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: -24px;
+  margin-top: 5px;
+  z-index: 2;
+  color: #f3f3f3;
+  display: inline-block;
+}
+#search {
+  width: 120px;
+  -moz-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  -webkit-transition: width 0.5s ease;
+  transition: width 0.5s ease;
+}
+#search.toggled {
+  width: 240px;
+}
 /* Toggle Styles */
-
 #wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
+  padding-left: 0;
+  /*-webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    transition: all 0.5s ease;*/
 }
-
 #wrapper.toggled {
-    padding-left: 250px;
+  padding-left: 250px;
 }
-
 #sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+  z-index: 500;
+  position: fixed;
+  left: 250px;
+  width: 0;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.02);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
-
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+  width: 250px;
 }
-
 #page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
+  width: 100%;
+  position: absolute;
+  padding: 15px;
 }
-
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
+  position: absolute;
+  margin-right: -250px;
 }
-
 /* Sidebar Styles */
-
 .sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
-
 .sidebar-nav li {
-    width:100%;
-    text-indent: 20px;
-    line-height: 40px;
- 
+  position: relative;
+  width: 100%;
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li.active > a {
+  color: #00e3cd;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #30ffec;
+  background-color: transparent;
+}
+.sidebar-nav .tickMark {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 1px;
+  font-size: 10px;
+  color: #30ffec;
 }
 .transparentInput {
-        width:100%;
-background-color: rgba(255,255,255,.3);
-border-radius: 3px;
-border: none;
-min-height: 30px;
-
-line-height: 19px;
-z-index: 1;
-padding: 0 8px;
-}
-.transparent-multi-select-input > button {
-      width:210px;
-      margin-left:20px;
-background-color: rgba(255,255,255,.3);
-border-radius: 3px;
-border: none;
-float: left;
-min-height: 30px;
-line-height: 19px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  border: none;
+  min-height: 30px;
+  line-height: 19px;
+  z-index: 1;
+  padding: 0 8px;
 }
 .multiSelect {
-    width:100%;
+  width: 100%;
 }
-.multiSelect .checkboxLayer{
-    min-width:150px;
-    width:210px;
-    margin-top:31px;
-    margin-left:20px;
+.multiSelect .checkboxLayer {
+  min-width: 150px;
+  width: 210px;
+  margin-top: 31px;
+  margin-left: 20px;
 }
 textarea:focus,
 input[type="text"]:focus,
@@ -110,45 +164,45 @@ input[type="url"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="color"]:focus,
-.uneditable-input:focus {   
- background:white;
+.uneditable-input:focus {
+  background: white;
   outline: 0 none;
 }
-
 .sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
+.sidebar-nav li:hover {
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
 }
-
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
-    text-decoration: none;
+  text-decoration: none;
 }
-
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
 }
-
 .sidebar-nav > .sidebar-brand a {
-    color: #999999;
+  color: #999999;
 }
-
 .sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
+  color: #fff;
+  background: none;
 }
-
-
-
+/*
+   
 /*@media(min-width:768px) {
     #wrapper {
         padding-left: 250px;
@@ -176,3 +230,4 @@ input[type="color"]:focus,
         margin-right: 0;
     }
 }*/
+/*# sourceMappingURL=simple-sidebar.css.map */
