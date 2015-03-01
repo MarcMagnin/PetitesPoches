@@ -177,6 +177,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
     var previousTag;
     $scope.filtreTheme = function (tag) {
+        tag = tag.toLowerCase();
         if (previousTag && previousTag == tag) {
             $rootScope.$broadcast('updateThemesFilter', null);
             previousTag = null;
