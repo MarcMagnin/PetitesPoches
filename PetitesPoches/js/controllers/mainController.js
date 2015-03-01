@@ -40,3 +40,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedIt
         $modalInstance.dismiss('cancel');
     };
 });
+
+angular.$externalBroadcast = function (selector, event, message) {
+    $rootscope.$broadcast(event, message);
+};

@@ -23,79 +23,147 @@
 </script>
 
 <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-wrapper">
+        <img class="prix" src="images/prix.png" />
+        <div class="modal-header">
+          
+            <div class="row">
+                <div class="col-md-10">
+                    <h2 class="modal-title">
+                        {{::selectedItem.Titre}}
+                    </h2>
+                </div>
+                <div class="col-md-2" style="padding:0">
+                    <a class="header-btn commander" href="{{::selectedItem.SiteMarchand}}"
+                       target="_blank"
+                       ng-show="::selectedItem.SiteMarchand">
+                        Commander
+                    </a>
+                  
+                </div>
+            </div>
 
-    <div class="modal-header">
-        <div class="col-md-7">
-            <h2 class="modal-title">
-                {{::selectedItem.Titre}}
-            </h2>
+
         </div>
-        <button class="close" aria-hidden="true" type="button" ng-click="cancel()"><i class="fa fa-times"></i></button>
-        <br />
-    </div>
 
-    <div class="modal-body">
-        <!--<ul class="nav nav-tabs">
-            <li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
-            <li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
-        </ul>
 
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab1">-->
+        <div class="modal-body">
+            <!--<ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Tab 1</a></li>
+                <li><a href="#tab2" data-toggle="tab">Tab 2</a></li>
+            </ul>
 
-        <div class="row">
-            <div class="col-md-4">
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">-->
 
-                <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
+            <div class="row">
+                <div class="col-md-4">
+                  
+                    <img  style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
 
-                        <p>Publié le {{::selectedItem.datePublication}}</p>
-                        <p>ISBN {{::selectedItem.ISBN}}</p>
-                        <p>{{::selectedItem.Prix}} euros</p>
+                    <p>Publication : {{::selectedItem.datePublication}}</p>
+                    <p ng-show="::selectedItem.ISBN">ISBN : {{::selectedItem.ISBN}}</p>
+                    <!--<p>{{::selectedItem.Prix}} euros</p>-->
 
-                <p>
-                    <div ng-switch="selectedItem.NiveauLecture">
-                        <label ng-switch-when="premierspas">Permiers pas</label>
-                        <label ng-switch-when="debutans">Débutants</label>
-                        <label ng-switch-when="confirmes">Confirmés</label>
+                    <p>
+                        <div ng-switch="selectedItem.NiveauLecture">
+                            <label ng-switch-when="premierspas">Permiers pas</label>
+                            <label ng-switch-when="debutans">Débutants</label>
+                            <label ng-switch-when="confirmes">Confirmés</label>
+                        </div>
+                    </p>
+
+
+                    <label class="control-label" for="PrixLitteraire" ng-show="::selectedItem.PrixLitteraire">Prix littéraire</label>
+                    <p>{{::selectedItem.PrixLitteraire}}</p>
+                    <label class="control-label" ng-show="::selectedItem.Tags.length > 0">Thèmes</label>
+                    <div class="tags">
+                        <button ng-click="$parent.$parent.filtreTheme(tag)"
+                                class="btn btn-info"
+                                ng-repeat="(idx, tag) in selectedItem.Tags track by $index">
+                            {{::tag}}
+                        </button>
                     </div>
-                </p>
+                
+                </div>
+                <div class="col-md-8">
+                    <label class="control-label" for="Extrait" ng-show="::selectedItem.Extrait">Extrait</label>
+                    <p>{{::selectedItem.Extrait}}</p>
+                    <br />
+                 
+                    <p>
+                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
+                           target="_blank" title="Fiche pédagogique"
+                           ng-show="::selectedItem.FichePedago">
+                            <i class="fa fa-file-text" />
+                            Fiche pédagogique
+                        </a>
+                    </p>
 
+                    <p>
+                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.EBookUrl}}"
+                           target="_blank" title="E-book"
+                           ng-show="::selectedItem.EBookUrl">
+                            <i class="fa fa-tablet" />
+                            Version E-book
+                        </a>
+                    </p>
 
-                <label class="control-label" for="PrixLitteraire">Prix littéraire</label>
-                <p>{{::selectedItem.PrixLitteraire}}</p>
+                    <p>
+                        <a class="transparentButton" href="{{::selectedItem.LienIssu}}"
+                           target="_blank" title="Fiche pédagogique"
+                           ng-show="::selectedItem.LienIssu">
+                            Extrait Issu
+                        </a>
+                    </p>
 
-                <a class="btn btn-info tag" href="{{::selectedItem.EBookUrl}}">Version E-book</a>
-                <a class="btn btn-info tag" href="{{::selectedItem.LienIssu}}">Extrait Issu</a>
-                <a class="btn btn-info tag" href="{{::selectedItem.LienVideo}}">Vidéo</a>
-                <a class="btn btn-info tag" href="{{::apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}">Fiche pédagogique</a>
-                <a href="{{::selectedItem.SiteMarchand}}">Commander</a>
+                    <p>
+                        <a class="transparentButton" href="{{::selectedItem.LienVideo}}"
+                           target="_blank"
+                           ng-show="::selectedItem.LienVideo">
+                            Vidéo
+                        </a>
+                    </p>
+
+                </div>
 
             </div>
-            <div class="col-md-8">
-                <label class="control-label" for="Extrait">Extrait</label>
-                <p>{{::selectedItem.Extrait}}</p>
-                <br />
-                <label class="control-label">Thèmes</label>
-                <div class="tags">
-                    <button class="btn btn-info tag" ng-repeat="(idx, tag) in selectedItem.Tags track by $index">{{tag}}</button>
-                </div>
-                <br />
-                <label class="control-label" for="Auteur">Auteur</label>
-                 <p>
-                     <a href="{{::selectedItem.Auteur.Bibliographie}}">
-                         {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
-                     </a>
-                 </p>
-                <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{selectedItem.Auteur.Photo}}" />
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-close" type="button" ng-click="cancel()">Fermer</button>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="modal-wrapper">
+        <div class="modal-header">
+            <button class="close" aria-hidden="true" type="button" ng-click="cancel()"><i class="fa fa-times"></i></button>
+
+            <h2 class="modal-title">
+                {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
+            </h2>
+
 
         </div>
 
+        <div class="modal-body">
+            <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{selectedItem.Auteur.Photo}}" />
+            <p>
+                <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
+                   target="_blank" title="Fiche pédagogique"
+                   ng-show="::selectedItem.Auteur.LienBiblio">
+                    Bibliographie
+                </a>
+            </p>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-close" type="button" ng-click="cancel()">Fermer</button>
         </div>
     </div>
 
-    <div class="modal-footer">
-        <button class="btn btn-transparent" type="button" ng-click="cancel()">Fermer</button>
-    </div>
+
 </script>
 
 <div class="viewContainer" ng-controller="livreController" ng-init="init()">

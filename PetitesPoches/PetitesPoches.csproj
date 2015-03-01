@@ -71,11 +71,17 @@
     <Content Include="css\client-bootstrap-override.css">
       <DependentUpon>client-bootstrap-override.less</DependentUpon>
     </Content>
+    <Content Include="css\Modal.css">
+      <DependentUpon>modal.less</DependentUpon>
+    </Content>
     <Content Include="css\multi-select.css">
       <DependentUpon>multi-select.less</DependentUpon>
     </Content>
     <Content Include="css\ressources.css">
       <DependentUpon>ressources.less</DependentUpon>
+    </Content>
+    <Content Include="css\simple-sidebar.css">
+      <DependentUpon>simple-sidebar.less</DependentUpon>
     </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
@@ -83,6 +89,7 @@
     <Content Include="css\userSite.css" />
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
+    <Content Include="images\prix.png" />
     <Content Include="js\controllers\mainController.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
@@ -252,6 +259,16 @@
       <DependentUpon>multi-select.css</DependentUpon>
     </Content>
     <Content Include="css\simple-sidebar.less" />
+    <Content Include="css\modal.less" />
+    <Content Include="css\Modal.css.map">
+      <DependentUpon>Modal.css</DependentUpon>
+    </Content>
+    <Content Include="css\simple-sidebar.css.map">
+      <DependentUpon>simple-sidebar.css</DependentUpon>
+    </Content>
+    <Content Include="css\userSite.css.map">
+      <DependentUpon>userSite.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

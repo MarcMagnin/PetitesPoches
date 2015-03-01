@@ -26,6 +26,7 @@
 /* the multiselect button */
 .transparent-multi-select-input > button {
   width: 100%;
+  white-space: normal;
   margin-left: 0px;
   padding-left: 20px;
   background-color: transparent;
@@ -68,6 +69,10 @@
 .multiSelect .buttonLabel {
   display: inline-block;
 }
+.multiSelect .active {
+  color: #30ffec;
+  background-color: transparent;
+}
 /* downward pointing arrow */
 .multiSelect .caret {
   display: inline-block;
@@ -83,6 +88,9 @@
 .transparent-multi-select-input > button:hover > .caret {
   border-top: 4px solid #30ffec;
 }
+.multiSelect {
+  width: 100%;
+}
 /* the main checkboxes and helper layer */
 .multiSelect .checkboxLayer {
   background-color: rgba(255, 255, 255, 0.32);
@@ -95,6 +103,10 @@
   min-width: 278px;
   display: none !important;
   margin-right: 30px;
+  margin-top: 41px;
+  margin-left: 20px;
+  min-width: 150px;
+  width: 210px;
 }
 /* container of helper elements */
 .multiSelect .helperContainer {

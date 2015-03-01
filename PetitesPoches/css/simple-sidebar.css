@@ -140,15 +140,6 @@
   z-index: 1;
   padding: 0 8px;
 }
-.multiSelect {
-  width: 100%;
-}
-.multiSelect .checkboxLayer {
-  min-width: 150px;
-  width: 210px;
-  margin-top: 31px;
-  margin-left: 20px;
-}
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,

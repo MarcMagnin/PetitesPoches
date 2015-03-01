@@ -1,0 +1,76 @@
+﻿@import "ressources";
+
+/*
+    MODAL
+*/
+
+.modal-backdrop{
+    height:100%;
+    background-color:@darkColor;
+}
+
+.modal-backdrop.in {
+filter: alpha(opacity=70);
+opacity: .7;
+}
+
+.modal-content{
+    color : black;
+     background-color:transparent;
+background-clip: padding-box;
+/* border-radius: 6px; */
+border:none;
+outline: 0;
+-webkit-box-shadow: none;
+box-shadow:none;
+}
+
+.modal-wrapper {
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-header{
+    background-color:rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 180px lighten(@primaryColor,10%);    
+    color:@textColor;
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+}
+
+.modal-footer{
+     background-color: @textColor;
+    box-shadow: inset 0 0 180px lighten(@textColor,10%);    
+    color:@textColor;
+    -webkit-border-radius: 0 0 2px 2px;
+    -moz-border-radius: 0 0 2px 2px;
+    border-radius: 0 0 2px 2px;
+}
+
+.modal-body{
+  box-shadow: inset 0 0 20px white;    
+  background-color: @textColor;
+}
+
+@media (min-width: 992px){
+    .modal-lg {
+    width: 750px;
+    }
+}
+
+.commander{
+    margin-right:35px;
+}
+
+
+.btn-close{
+    color:black;
+}
+
+.prix{
+    top:-15px;
+    right:-15px;
+    position:absolute;
+    width:50px;
+}

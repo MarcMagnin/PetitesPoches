@@ -107,11 +107,12 @@
   font-weight: 700;
   height: 40px;
   line-height: 40px;
-  padding: 0;
+  padding: 0 8px;
   position: relative;
   margin-right: 8px;
   min-width: 30px;
   cursor: pointer;
+  text-decoration: none;
 }
 .navbar-header a {
   text-decoration: none;

@@ -31,7 +31,7 @@
  * --------------------------------------------------------------------------------
  */
 
-angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$timeout', function ( $sce, $timeout ) {
+angular.module('multi-select', ['ng']).directive('multiSelect', ['$sce', '$timeout', '$rootScope', function ($sce, $timeout, $rootScope) {
     return {
         restrict: 
             'AE',
@@ -69,8 +69,8 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
         },
 
         template: 
-            '<span class="multiSelect inlineBlock">' +        
-                '<button type="button" dropdown-toggle class="btn btn-primary dropdown-toggle" ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton();" ng-bind-html="varButtonLabel">' +
+            '<span id="themesMultiSelect" class="multiSelect inlineBlock">' +
+                '<button id="themesMultiSelectButton" type="button" dropdown-toggle class="btn btn-primary dropdown-toggle" ng-click="toggleCheckboxes( $event ); refreshSelectedItems(); refreshButton();" ng-bind-html="varButtonLabel">' +
                 '</button>' +                              
                 '<div class="checkboxLayer">' +                        
                     '<form>' + 
@@ -113,6 +113,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             $scope.spacingProperty  = '';
             $scope.indexProperty    = '';            
             $scope.checkBoxLayer    = '';
+            $scope.button           = '';
             $scope.orientationH     = false;
             $scope.orientationV     = true;
             $scope.filteredModel    = [];
@@ -131,12 +132,24 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                     return 'max-height: ' + $scope.maxHeight + '; overflow-y:scroll';
                 }
             }
-
+           
             // A little hack so that AngularJS ng-repeat can loop using start and end index like a normal loop
             // http://stackoverflow.com/questions/16824853/way-to-ng-repeat-defined-number-of-times-instead-of-repeating-over-array
             $scope.numberToArray = function( num ) {
                 return new Array( num );   
             }
+
+            $rootScope.$on('updateThemesFilter', function (event, args) {
+                $scope.select('RESET');
+                if (args) {
+                    angular.forEach($scope.filteredModel, function (value, key) {
+                        if (value.Name == args) {
+                            $scope.syncItems(value, null, value.idx_ODixu);
+                            $scope.refreshSelectedItems();
+                        }
+                    });
+                }
+            });
 
             $scope.updateFilter = function()
             {
@@ -259,10 +272,10 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
             // call this function when an item is clicked
             $scope.syncItems = function( item, e, ng_repeat_index ) {                                                                
-
-                e.preventDefault();
-                e.stopPropagation();
-
+                if(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
                 // if it's globaly disabled, then don't do anything
                 if ( typeof attrs.disableProperty !== 'undefined' && item[ $scope.disableProperty ] === true ) {                                        
                     return false;
@@ -415,13 +428,25 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                 prevTabIndex = $scope.tabIndex;
                 $scope.tabIndex = ng_repeat_index + helperItemsLength;
                                 
-                // Set focus on the hidden checkbox 
-                e.target.focus();
+                if (e) {
+                    // Set focus on the hidden checkbox 
+                    e.target.focus();
+                }
 
+               
                 // set & remove CSS style
                 $scope.removeFocusStyle( prevTabIndex );
                 $scope.setFocusStyle( $scope.tabIndex );
             }     
+
+            $scope.checkActive = function () {
+                console.log($scope.selectedItems.length)
+                if ($scope.selectedItems.length > 0) {
+                    $('#themesMultiSelectButton').addClass('active');
+                } else {
+                    $('#themesMultiSelectButton').removeClass('active');
+                }
+            }
 
             // update $scope.selectedItems
             // this variable is used in $scope.outputModel and to refresh the button label
@@ -435,7 +460,8 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                             }
                         }
                     }
-                });                                
+                });
+                $scope.checkActive();
             }
 
             // refresh output model as well
@@ -474,16 +500,16 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                     else {
                         $scope.more = false;
                     }                
-                
+                    
                     angular.forEach( $scope.selectedItems, function( value, key ) {
                         if ( typeof value !== 'undefined' ) {                        
-                            if ( ctr < tempMaxLabels ) {                            
+                            if (ctr < tempMaxLabels) {
                                 $scope.varButtonLabel += ( $scope.varButtonLabel.length > 0 ? '</div>, <div class="buttonLabel">' : '<div class="buttonLabel">') + $scope.writeLabel( value, 'buttonLabel' );
                             }
                             ctr++;
                         }
                     });                
-
+                    $scope.varButtonLabel = $scope.defaultLabel + ' : ' + $scope.varButtonLabel;
                     if ( $scope.more === true ) {
                         // https://github.com/isteven/angular-multi-select/pull/16
                         if (tempMaxLabels > 0) {
@@ -540,6 +566,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
                 // We grab the button
                 clickedEl = element.children()[0];
+                $scope.button = clickedEl;
 
                 // Just to make sure.. had a bug where key events were recorded twice
                 angular.element( document ).unbind( 'click', $scope.externalClickListener );
@@ -657,8 +684,11 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
             // select All / select None / reset buttons
             $scope.select = function( type, e ) {
 
-                helperIndex = helperItems.indexOf( e.target );
-                $scope.tabIndex = helperIndex;
+                if (e) {
+                    helperIndex = helperItems.indexOf(e.target);
+                    $scope.tabIndex = helperIndex;
+                }
+                
 
                 switch( type.toUpperCase() ) {
                     case 'ALL':
@@ -699,7 +729,7 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
                         $scope.tabIndex = helperItems.length - 1;
                         break;
                     default:                        
-                }                                                                                 
+                }
             }            
 
             // just to create a random variable name                
@@ -807,12 +837,12 @@ angular.module( 'multi-select', ['ng'] ).directive( 'multiSelect' , [ '$sce', '$
 
             // set (add) CSS style on selected row
             $scope.setFocusStyle = function( tabIndex ) {                
-                angular.element( $scope.formElements[ tabIndex ] ).parent().parent().parent().addClass( 'multiSelectFocus' );                        
+                angular.element($scope.formElements[tabIndex]).parent().parent().parent().addClass('multiSelectFocus');          
             }
 
             // remove CSS style on selected row
             $scope.removeFocusStyle = function( tabIndex ) {
-                angular.element( $scope.formElements[ tabIndex ] ).parent().parent().parent().removeClass( 'multiSelectFocus' );
+                angular.element($scope.formElements[tabIndex]).parent().parent().parent().removeClass('multiSelectFocus');
             }
 
             ///////////////////////////////////////////////////////

@@ -175,7 +175,19 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.validateFilter();
     }
 
-
+    var previousTag;
+    $scope.filtreTheme = function (tag) {
+        if (previousTag && previousTag == tag) {
+            $rootScope.$broadcast('updateThemesFilter', null);
+            previousTag = null;
+            return;
+        }
+        previousTag = tag;
+        $("#wrapper").addClass("toggled");
+        $("#search").addClass("toggled");
+        $(".searchSideBar").addClass("toggled");
+        $rootScope.$broadcast('updateThemesFilter', tag);
+    }
 
     $scope.validateSearch = function (keyEvent) {
         if ($scope.searchTimeout) {
