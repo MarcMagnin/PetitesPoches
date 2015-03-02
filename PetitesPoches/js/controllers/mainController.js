@@ -1,5 +1,5 @@
 ﻿app.controller("mainController", ['$scope', '$rootScope', '$http', '$timeout', '$state', function ($scope, $rootScope, $http, $timeout, $state) {
-    $rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
+    $rootScope.apiRootUrl = "http://localhost:8088/databases/PetitesPoches";
 
     $scope.tabs = [
         { heading: "Collection", route: "collection", active: true },

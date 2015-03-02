@@ -19,6 +19,10 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.modal-title{
+    color:white;
+}
+
 .modal-wrapper {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   margin-left: auto;
@@ -31,6 +35,24 @@
   -webkit-border-radius: 2px 2px 0 0;
   -moz-border-radius: 2px 2px 0 0;
   border-radius: 2px 2px 0 0;
+  position:relative;
+}
+.modal-header-title {
+    position: absolute;
+    left: calc(100% + 85px);
+    top: 0px;
+    z-index: -500;
+    font-family: 'Arial Black';
+    font-size: 65px;
+    opacity: .2;
+    -ms-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -ms-transform-origin: top left 0;
+    -moz-transform-origin: top left 0;
+    -webkit-transform-origin: top left 0;
+    transform-origin: top left 0;
 }
 .modal-footer {
   background-color: #f3f3f3;
@@ -60,5 +82,6 @@
   right: -15px;
   position: absolute;
   width: 50px;
+  z-index:100;
 }
 /*# sourceMappingURL=Modal.css.map */

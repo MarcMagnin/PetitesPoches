@@ -151,7 +151,16 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
         + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '');
         $scope.container.isotope({ filter: searchPattern });
+
+        var filterActive = searchPattern.length > 1;
+        if (filterActive) {
+            $("#clearFilter").addClass("toggled");
+        }
+        else {
+            $("#clearFilter").removeClass("toggled");
+        }
     }
+
 
     $scope.filtreNiveauLecture = function () {
         $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
@@ -174,6 +183,14 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }).join('');
         $scope.validateFilter();
     }
+    $scope.filtreAuteur = function (auteur) {
+        $("#wrapper").addClass("toggled");
+        $("#search").addClass("toggled");
+        $(".searchSideBar").addClass("toggled");
+        $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
+        $scope.validateSearch();
+    }
+
 
     var previousTag;
     $scope.filtreTheme = function (tag) {
@@ -189,7 +206,23 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $(".searchSideBar").addClass("toggled");
         $rootScope.$broadcast('updateThemesFilter', tag);
     }
+    $scope.clearFilters = function () {
+        $scope.searchPatternEBook = "";
+        $scope.searchPatternPrixLitteraires = "";
+        $scope.searchPatternRecherche = "";
+        $scope.filterPatternNiveauLecture = "";
+        $scope.searchPatternTheme = "";
+        $scope.searchedText = "";
+        $scope.checkboxPrixLitteraire = false;
+        $scope.checkboxSearchEBook = false;
+        $scope.niveauLecture = '';
+        $scope.filtreTheme('');
 
+        $scope.validateFilter();
+        $("#wrapper").removeClass("toggled");
+        $("#search").removeClass("toggled");
+        $(".searchSideBar").removeClass("toggled");
+    }
     $scope.validateSearch = function (keyEvent) {
         if ($scope.searchTimeout) {
             clearTimeout($scope.searchTimeout);
@@ -209,7 +242,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                 }
             }
             $scope.validateFilter();
-        }, 300);
+        }, 100);
     }
 
 

@@ -293,3 +293,11 @@
     margin-left: -1400px;
   }
 }
+@keyframes moveclouds {
+  0% {
+    margin-left: 100%;
+  }
+  100% {
+    margin-left: -1400px;
+  }
+}

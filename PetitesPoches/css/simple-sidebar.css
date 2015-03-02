@@ -19,7 +19,7 @@
   -o-transition: all  0.5s ease;
   -webkit-transition: all  0.5s ease;
   transition: all  0.5s ease;
-  height: 52px;
+  height: 53px;
   width: 250px;
 }
 .searchSideBar.toggled {
@@ -55,6 +55,7 @@
 }
 #search {
   width: 120px;
+  padding-right: 28px;
   -moz-transition: width 0.5s ease;
   -o-transition: width 0.5s ease;
   -webkit-transition: width 0.5s ease;
@@ -62,6 +63,29 @@
 }
 #search.toggled {
   width: 240px;
+}
+
+.clear-icon {
+    position:absolute;
+    right:-40px;
+    top:0px;
+    color:white;
+    height: 34px;
+    width:34px;
+    font-size:1.4em;
+}
+.clear-icon > i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+#clearFilter {
+    display:none;
+}
+#clearFilter.toggled {
+    display:block;
 }
 /* Toggle Styles */
 #wrapper {
@@ -133,12 +157,22 @@
 }
 .transparentInput {
   background-color: rgba(255, 255, 255, 0.3);
+  color:white;
   border-radius: 3px;
   border: none;
   min-height: 30px;
   line-height: 19px;
   z-index: 1;
   padding: 0 8px;
+  cursor:pointer;
+    -moz-transition: all  0.2s ease !important;
+  -o-transition: all  0.2s ease !important;
+  -webkit-transition: all  0.2s ease !important;
+  transition: all  0.2s ease !important;
+}
+.transparentInput:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+
 }
 textarea:focus,
 input[type="text"]:focus,
@@ -192,6 +226,50 @@ input[type="color"]:focus,
   color: #fff;
   background: none;
 }
+
+.p {
+    -moz-animation: moveclouds 50s linear infinite;
+    -webkit-animation: moveclouds 50s linear infinite;
+    -ms-animation: moveclouds 50s linear infinite;
+    -o-animation: moveclouds 50s linear infinite;
+    animation: moveclouds 50s linear infinite;
+    width: 2036px;
+    height: 1608px;
+}
+
+@-webkit-keyframes moveclouds {
+  0% {
+    margin-left: 100%;
+  }
+  100% {
+    margin-left: -1400px;
+  }
+}
+@-moz-keyframes moveclouds {
+  0% {
+    margin-left: 100%;
+  }
+  100% {
+    margin-left: -1400px;
+  }
+}
+@-o-keyframes moveclouds {
+  0% {
+    margin-left: 100%;
+  }
+  100% {
+    margin-left: -1400px;
+  }
+}
+@keyframes moveclouds {
+  0% {
+    margin-left: 100%;
+  }
+  100% {
+    margin-left: -1400px;
+  }
+
+
 /*
    
 /*@media(min-width:768px) {
@@ -222,3 +300,5 @@ input[type="color"]:focus,
     }
 }*/
 /*# sourceMappingURL=simple-sidebar.css.map */
+
+
