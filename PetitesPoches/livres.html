@@ -26,7 +26,7 @@
     <div class="modal-wrapper">
         <img class="prix" src="images/prix.png" />
         <div class="modal-header">
-          
+
             <div class="row">
                 <div class="col-md-10">
                     <h2 class="modal-title">
@@ -39,7 +39,7 @@
                        ng-show="::selectedItem.SiteMarchand">
                         Commander
                     </a>
-                  
+
                 </div>
             </div>
 
@@ -58,8 +58,8 @@
 
             <div class="row">
                 <div class="col-md-4">
-                  
-                    <img  style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
+
+                    <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
 
                     <p>Publication : {{::selectedItem.datePublication}}</p>
                     <p ng-show="::selectedItem.ISBN">ISBN : {{::selectedItem.ISBN}}</p>
@@ -84,13 +84,13 @@
                             {{::tag}}
                         </button>
                     </div>
-                
+
                 </div>
                 <div class="col-md-8">
                     <label class="control-label" for="Extrait" ng-show="::selectedItem.Extrait">Extrait</label>
                     <p>{{::selectedItem.Extrait}}</p>
                     <br />
-                 
+
                     <p>
                         <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
                            target="_blank" title="Fiche pédagogique"
@@ -178,35 +178,40 @@
 
 </script>
 
-<div class="viewContainer" ng-controller="livreController" ng-init="init()">
-    <div class="searchSideBar">
-        <div class="inner-search-bar">
-            <input type="text"
-                   id="search"
-                   ng-model="searchedText"
-                   typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
-                   typeahead-loading="loadingSearchSuggestions"
-                   typeahead-template-url="livreSearchTemplate.html"
-                   typeahead-wait-ms="300"
-                   ng-keyup="validateSearch($event)"
-                   typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
-                   class="form-control form-control-inline transparentInput" />
-            <div class="search-icon"><i class="fa fa-search"></i></div>
+<div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
+    <section layout="row" flex>
+        <div class="searchSideBar">
+          
+        </div>
+
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-closed" md-component-id="left">
+            <div class="clear-icon-wrapper">
+                <md-button ng-click="toggleLeft()" class="clear-icon">
+                    <ng-md-icon icon="{{sideNavIcon}}" size="34" alt="search "></ng-md-icon>
+                </md-button>
+            </div>
+
+
+            <!--<div class="clear-icon-wrapper">
             <div id="clearFilter" class="clear-icon transparentInput" ng-click="clearFilters()">
                 <i class="fa fa-close"></i>
             </div>
-        </div>
-    </div>
-    <div id="wrapper" style="height:100%">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
+        </div>-->
             <ul class="sidebar-nav">
-                <!--<li class="sidebar-brand">
-            <a href="#">
-                Recherche
-            </a>
-        </li>-->
+                <div class="inner-search-bar">
+                    <input type="text"
+                           id="search"
+                           ng-model="searchedText"
+                           typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                           typeahead-loading="loadingSearchSuggestions"
+                           typeahead-template-url="livreSearchTemplate.html"
+                           typeahead-wait-ms="300"
+                           ng-keyup="validateSearch($event)"
+                           typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                           class="form-control form-control-inline transparentInput" />
+                    <!--<div class="search-icon"><i class="fa fa-search"></i></div>-->
 
+                </div>
 
                 <li ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">
                     <a>Prix littéraires</a>
@@ -216,7 +221,7 @@
                     <a>E-Book</a>
                     <span ng-show="checkboxSearchEBook" class="tickMark">✔</span>
                 </li>
-                    <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
+                <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
             <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
             <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
             <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
@@ -255,51 +260,61 @@
                 <!--<a href="#sortBy=date" ng-click="sort()">by date</a>-->
 
             </ul>
-        </div>
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        <div id="page-content-wrapper" style="height:100%">
-            <div class="container-fluid" style="height:100%">
-                <div class="row" style="height:100%; padding-bottom: 105px;">
-                    <div class="col-lg-12" style="height:100%; padding:0">
-                        
-                        <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
-                            <!--| orderBy:'Index':true-->
-                            <div class="tile isotopey tile-admin {{::item.Titre &&  'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
-             {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{::item.EBookUrl && 'fil-ebook' || ''}}
-             {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-             {{::item.Tags && item.Tags || '' | filterString}}"
-                                 ng-repeat="item in items"
-                                 isotopethis sort="date" ng-click="select(item, 'lg', $event)">
-                                <!--href="#responsive" data-toggle="modal"-->
-                                <div class="inner-tile">
-                                    <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
-                                    <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
+        </md-sidenav>
+        <div>
 
-                                    <div class="moreInfoButtonWrapper bottomRight">
-                                        <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
-                                           class="transparentButton background-circle">
-                                            <i class="fa fa-file-text" />
-                                        </a>
-                                        <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}" target="_blank"
-                                           title="E-book"
-                                           ng-show="item.EBookUrl"
-                                           class="transparentButton background-circle">
-                                            <i class="fa fa-tablet" />
-                                        </a>
+        </div>
+
+        <div id="wrapper" style="height:100%">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper">
+
+            </div>
+            <!-- /#sidebar-wrapper -->
+            <!-- Page Content -->
+            <div id="page-content-wrapper" style="height:100%">
+                <div class="container-fluid" style="height:100%">
+                    <div class="row" style="height:100%; padding-bottom: 105px;">
+                        <div class="col-lg-12" style="height:100%; padding:0">
+                            <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
+                                <!--| orderBy:'Index':true-->
+                                <div class="tile isotopey tile-admin {{::item.Titre &&  'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+                                     {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{::item.EBookUrl && 'fil-ebook' || ''}}
+                                     {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+                                     {{::item.Tags && item.Tags || '' | filterString}} "
+                                 ng-repeat=" item in items"
+                                     isotopethis sort="date" ng-click="select(item, 'lg', $event)">
+                                    <!--href="#responsive" data-toggle="modal"-->
+                                    <div class="inner-tile">
+                                        <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
+                                        <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
+
+                                        <div class="moreInfoButtonWrapper bottomRight">
+                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
+                                               class="transparentButton background-circle">
+                                                <i class="fa fa-file-text" />
+                                            </a>
+                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}" target="_blank"
+                                               title="E-book"
+                                               ng-show="item.EBookUrl"
+                                               class="transparentButton background-circle">
+                                                <i class="fa fa-tablet" />
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- /#page-content-wrapper -->
         </div>
-        <!-- /#page-content-wrapper -->
-    </div>
 
 
+
+        <section>
 </div>
 <script>
 
@@ -323,7 +338,7 @@
         $("#search").addClass("toggled");
         $(".searchSideBar").addClass("toggled");
     });
-
+    
     var $container = $('.tilesContainer');
 
     // change layout mode
@@ -364,11 +379,39 @@
 
         //sortBy: 'date',
         sortAscending: false,
-       // transitionDuration: 0
-       // transformsEnabled: true,
+        // transitionDuration: 0
+        // transformsEnabled: true,
         //onLayout: function () {
         //    $container.css('overflow', 'visible');
         //}
     });
 
+
+    // Ripple click effect
+    var parent, ink, d, x, y;
+    $("ul li a").click(function (e) {
+
+        parent = $(this).parent();
+        //create .ink element if it doesn't exist
+        if (parent.find(".ink").length == 0)
+            parent.prepend("<span class='ink'></span>");
+
+        ink = parent.find(".ink");
+        //incase of quick double clicks stop the previous animation
+        ink.removeClass("animate");
+
+        //set size of .ink
+        if (!ink.height() && !ink.width()) {
+            //use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+            d = Math.max(parent.outerWidth(), parent.outerHeight());
+            ink.css({ height: d, width: d });
+        }
+
+        //get click coordinates
+        //logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
+        x = e.pageX - parent.offset().left - ink.width() / 2;
+        y = e.pageY - parent.offset().top - ink.height() / 2;
+        //set the position and add class .animate
+        ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
+    })
 </script>

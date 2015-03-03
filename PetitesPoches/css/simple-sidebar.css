@@ -19,10 +19,13 @@
   -o-transition: all  0.5s ease;
   -webkit-transition: all  0.5s ease;
   transition: all  0.5s ease;
-  height: 53px;
+  height: 52px;
   width: 250px;
 }
 .searchSideBar.toggled {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+.md-whiteframe-z2 {
   background-color: rgba(255, 255, 255, 0.02);
 }
 .searchSideBar input {
@@ -54,38 +57,44 @@
   display: inline-block;
 }
 #search {
-  width: 120px;
-  padding-right: 28px;
+  width: 210px;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 15px;
   -moz-transition: width 0.5s ease;
   -o-transition: width 0.5s ease;
   -webkit-transition: width 0.5s ease;
   transition: width 0.5s ease;
 }
-#search.toggled {
-  width: 240px;
+md-sidenav.md-closed {
+  display: block;
 }
-
+md-sidenav {
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  overflow: visible;
+}
 .clear-icon {
-    position:absolute;
-    right:-40px;
-    top:0px;
-    color:white;
-    height: 34px;
-    width:34px;
-    font-size:1.4em;
+  position: absolute;
+  right: -55px;
+  top: 13px;
+  fill: #f3f3f3;
+  height: 44px;
+  width: 44px;
 }
 .clear-icon > i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 #clearFilter {
-    display:none;
+  /*display:none;*/
 }
 #clearFilter.toggled {
-    display:block;
+  display: block;
 }
 /* Toggle Styles */
 #wrapper {
@@ -138,6 +147,9 @@
   width: 100%;
   text-indent: 20px;
   line-height: 40px;
+  list-style-type: none;
+  /*relative positioning for list items along with overflow hidden to contain the overflowing ripple*/
+  overflow: hidden;
 }
 .sidebar-nav li.active > a {
   color: #00e3cd;
@@ -155,24 +167,87 @@
   font-size: 10px;
   color: #30ffec;
 }
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: white;
+  text-shadow: 1px 1px 1px #000000;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font: normal 14px/38px Montserrat;
+  /*static positioned elements appear behind absolutely positioned siblings(.ink in this case) hence we will make the links relatively positioned to bring them above .ink*/
+  position: relative;
+}
+.sidebar-nav li:hover {
+  text-decoration: none;
+  color: #fff;
+  background: transparent;
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+  display: block;
+  position: absolute;
+  background: rgba(0, 150, 136, 0.3);
+  border-radius: 100%;
+  transform: scale(0);
+}
+/*animation effect*/
+.ink.animate {
+  -moz-animation: ripple 0.65s linear;
+  -o-animation: ripple 0.65s linear;
+  -webkit-animation: ripple 0.65s linear;
+  animation: ripple 0.65s linear;
+}
+@-moz-keyframes ripple {
+  /*scale the element to 250% to safely cover the entire link and fade it out*/
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+@-webkit-keyframes ripple {
+  /*scale the element to 250% to safely cover the entire link and fade it out*/
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+@keyframes ripple {
+  /*scale the element to 250% to safely cover the entire link and fade it out*/
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+}
+.dropdown-menu li a {
+  color: black;
+}
 .transparentInput {
   background-color: rgba(255, 255, 255, 0.3);
-  color:white;
+  color: white;
   border-radius: 3px;
   border: none;
   min-height: 30px;
   line-height: 19px;
   z-index: 1;
   padding: 0 8px;
-  cursor:pointer;
-    -moz-transition: all  0.2s ease !important;
+  cursor: pointer;
+  -moz-transition: all  0.2s ease !important;
   -o-transition: all  0.2s ease !important;
   -webkit-transition: all  0.2s ease !important;
   transition: all  0.2s ease !important;
 }
 .transparentInput:hover {
   background-color: rgba(255, 255, 255, 0.5);
-
 }
 textarea:focus,
 input[type="text"]:focus,
@@ -192,27 +267,7 @@ input[type="color"]:focus,
 .uneditable-input:focus {
   background: white;
   outline: 0 none;
-}
-.sidebar-nav li a {
-  display: block;
-  text-decoration: none;
-  cursor: pointer;
-  color: white;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.sidebar-nav li:hover {
-  text-decoration: none;
-  color: #fff;
-  background: transparent;
-}
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-  text-decoration: none;
+  color: black;
 }
 .sidebar-nav > .sidebar-brand {
   height: 65px;
@@ -226,79 +281,4 @@ input[type="color"]:focus,
   color: #fff;
   background: none;
 }
-
-.p {
-    -moz-animation: moveclouds 50s linear infinite;
-    -webkit-animation: moveclouds 50s linear infinite;
-    -ms-animation: moveclouds 50s linear infinite;
-    -o-animation: moveclouds 50s linear infinite;
-    animation: moveclouds 50s linear infinite;
-    width: 2036px;
-    height: 1608px;
-}
-
-@-webkit-keyframes moveclouds {
-  0% {
-    margin-left: 100%;
-  }
-  100% {
-    margin-left: -1400px;
-  }
-}
-@-moz-keyframes moveclouds {
-  0% {
-    margin-left: 100%;
-  }
-  100% {
-    margin-left: -1400px;
-  }
-}
-@-o-keyframes moveclouds {
-  0% {
-    margin-left: 100%;
-  }
-  100% {
-    margin-left: -1400px;
-  }
-}
-@keyframes moveclouds {
-  0% {
-    margin-left: 100%;
-  }
-  100% {
-    margin-left: -1400px;
-  }
-
-
-/*
-   
-/*@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-}*/
 /*# sourceMappingURL=simple-sidebar.css.map */
-
-

@@ -83,10 +83,22 @@
     <Content Include="css\simple-sidebar.css">
       <DependentUpon>simple-sidebar.less</DependentUpon>
     </Content>
+    <Content Include="css\simple-sidebar.min.css">
+      <DependentUpon>simple-sidebar.css</DependentUpon>
+    </Content>
+    <Content Include="css\tabs.css">
+      <DependentUpon>tabs.less</DependentUpon>
+    </Content>
+    <Content Include="css\tabs.min.css">
+      <DependentUpon>tabs.css</DependentUpon>
+    </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
     </Content>
     <Content Include="css\userSite.css" />
+    <Content Include="css\userSite.min.css">
+      <DependentUpon>userSite.css</DependentUpon>
+    </Content>
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="images\prix.png" />
@@ -268,6 +280,10 @@
     </Content>
     <Content Include="css\userSite.css.map">
       <DependentUpon>userSite.css</DependentUpon>
+    </Content>
+    <Content Include="css\tabs.less" />
+    <Content Include="css\tabs.css.map">
+      <DependentUpon>tabs.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

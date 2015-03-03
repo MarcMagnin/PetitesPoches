@@ -33,7 +33,9 @@
 .searchSideBar.toggled{
     background-color:@backgroundColor;
 }
-
+.md-whiteframe-z2{
+     background-color:@backgroundColor;
+}
 
 .searchSideBar input {
     display:inline-block !important;
@@ -58,32 +60,39 @@ cursor: pointer;
 font-size: 16px;
 margin-left:-24px;
 margin-top:5px;
-
 z-index: 2;
 color: @textColor;
 display:inline-block;
 }
+
 #search {
-    width:120px;
-    padding-right: 28px;
+    width:210px;
+    margin-left:20px;
+    margin-top:20px;
+    margin-bottom:15px;
     -moz-transition: width 0.5s ease;
     -o-transition: width 0.5s ease;
     -webkit-transition: width 0.5s ease;
     transition: width 0.5s ease;    
 }
-#search.toggled {
-    width: 240px;
 
+md-sidenav.md-closed {
+display: block;
 }
 
+md-sidenav {
+    width: 250px;
+    min-width:250px;
+    max-width:250px;
+    overflow:visible;
+}
 .clear-icon {
     position:absolute;
-    right:-40px;
-    top:0px;
-    color:white;
-    height: 34px;
-    width:34px;
-    font-size:1.4em;
+    right:-55px;
+    top:13px;
+    fill:@textColor;
+    height: 44px;
+    width:44px;
 }
 .clear-icon > i {
     position: absolute;
@@ -93,11 +102,13 @@ display:inline-block;
     transform: translate(-50%, -50%);
 }
 #clearFilter {
-    display:none;
+    /*display:none;*/
 }
 #clearFilter.toggled {
     display:block;
 }
+
+
 /* Toggle Styles */
 
 #wrapper {
@@ -158,7 +169,9 @@ display:inline-block;
     width:100%;
     text-indent: 20px;
     line-height: 40px;
- 
+    list-style-type: none;
+	/*relative positioning for list items along with overflow hidden to contain the overflowing ripple*/
+	overflow: hidden;
 }
 .sidebar-nav li.active >a{
  color:lighten(@primaryColor,15%);
@@ -177,6 +190,68 @@ background-color:transparent;
     color:lighten(@primaryColor,30%);
 }
 
+
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    cursor:pointer;
+    color:white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font: normal 14px/38px Montserrat; 
+	/*static positioned elements appear behind absolutely positioned siblings(.ink in this case) hence we will make the links relatively positioned to bring them above .ink*/
+	position: relative;
+}
+
+.sidebar-nav li:hover {
+    text-decoration: none;
+    color: #fff;
+    background:transparent;
+}
+
+
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+}
+
+
+/*.ink styles - the elements which will create the ripple effect. The size and position of these elements will be set by the JS code. Initially these elements will be scaled down to 0% and later animated to large fading circles on user click.*/
+.ink {
+	display: block; position: absolute;
+	background: fadeout(lighten(@primaryColor,0%), 70%);
+	border-radius: 100%;
+	transform: scale(0);
+}
+/*animation effect*/
+.ink.animate { -moz-animation: ripple 0.65s linear; 
+               -o-animation: ripple 0.65s linear; 
+               -webkit-animation: ripple 0.65s linear; 
+               animation: ripple 0.65s linear;}
+@-moz-keyframes ripple {
+	/*scale the element to 250% to safely cover the entire link and fade it out*/
+	100% {opacity: 0; transform: scale(2.5);}
+}
+
+@-webkit-keyframes ripple {
+	/*scale the element to 250% to safely cover the entire link and fade it out*/
+	100% {opacity: 0; transform: scale(2.5);}
+}
+
+@keyframes ripple {
+	/*scale the element to 250% to safely cover the entire link and fade it out*/
+	100% {opacity: 0; transform: scale(2.5);}
+}
+
+.dropdown-menu li a{
+    color:black;
+}
 .transparentInput {
   background-color: rgba(255, 255, 255, 0.3);
   color:white;
@@ -194,7 +269,6 @@ background-color:transparent;
 }
 .transparentInput:hover {
   background-color: rgba(255, 255, 255, 0.5);
-
 }
 
 
@@ -218,32 +292,7 @@ input[type="color"]:focus,
 .uneditable-input:focus {   
  background:white;
   outline: 0 none;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    cursor:pointer;
-    color:white;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.sidebar-nav li:hover {
-    text-decoration: none;
-    color: #fff;
-    background:transparent;
-}
-
-
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
+  color:black;
 }
 
 

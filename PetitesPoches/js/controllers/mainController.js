@@ -1,4 +1,4 @@
-﻿app.controller("mainController", ['$scope', '$rootScope', '$http', '$timeout', '$state', function ($scope, $rootScope, $http, $timeout, $state) {
+﻿app.controller("mainController", function ($scope, $rootScope, $http, $timeout, $state) {
     $rootScope.apiRootUrl = "http://localhost:8088/databases/PetitesPoches";
 
     $scope.tabs = [
@@ -24,7 +24,7 @@
             }
         });
     });
-}]);
+});
 
 
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedItem, parentScope) {

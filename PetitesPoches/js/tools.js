@@ -30,4 +30,7 @@ $(document).ready(function () {
         //console.log(event.deltaX, event.deltaY, event.deltaFactor);
 
     });
+
+   
+    
 });

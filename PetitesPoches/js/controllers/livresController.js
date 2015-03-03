@@ -18,7 +18,7 @@
     this.LienIssu = ""
 };
 
-app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$state', '$modal', '$q', 'livreService', function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, livreService) {
+app.controller("livreController", function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.tags = [];
@@ -67,8 +67,38 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             error(function (data, status, headers, config) {
                 console.log(data);
             });
+      
+        
 
     };
+   
+    $scope.sideNavIcon = "search";
+    $scope.toggleLeft = function () {
+        var leftSideNave = $mdSidenav('left');
+        leftSideNave.toggle().then(function () {
+            if (leftSideNave.isOpen()) {
+                $('#search').focus();
+            }
+        }); 
+    }
+    $scope.closeLeft = function () {
+        var leftSideNave = $mdSidenav('left');
+        leftSideNave.close();
+    }
+    $scope.openLeft = function () {
+        var leftSideNave = $mdSidenav('left');
+        leftSideNave.open();
+    }
+
+    $scope.$watch(function () { return $('.md-sidenav-left').attr('class'); }, function (newValue) {
+        var leftSideNave = $mdSidenav('left');
+        console.log(leftSideNave);
+        if (leftSideNave.isOpen() && !$('.md-sidenav-left').hasClass('md-closed')) {
+            $scope.sideNavIcon = "chevron_left";
+        } else {
+            $scope.sideNavIcon = "search";
+        }
+    });
 
 
     $scope.select = function (item, size, $event) {
@@ -184,9 +214,11 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.validateFilter();
     }
     $scope.filtreAuteur = function (auteur) {
-        $("#wrapper").addClass("toggled");
-        $("#search").addClass("toggled");
-        $(".searchSideBar").addClass("toggled");
+        //$("#wrapper").addClass("toggled");
+        //$("#search").addClass("toggled");
+        //$(".searchSideBar").addClass("toggled");
+        $scope.openLeft();
+
         $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
         $scope.validateSearch();
     }
@@ -201,9 +233,11 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             return;
         }
         previousTag = tag;
-        $("#wrapper").addClass("toggled");
-        $("#search").addClass("toggled");
-        $(".searchSideBar").addClass("toggled");
+
+        $scope.openLeft();
+        //$("#wrapper").addClass("toggled");
+        //$("#search").addClass("toggled");
+        //$(".searchSideBar").addClass("toggled");
         $rootScope.$broadcast('updateThemesFilter', tag);
     }
     $scope.clearFilters = function () {
@@ -219,9 +253,10 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.filtreTheme('');
 
         $scope.validateFilter();
-        $("#wrapper").removeClass("toggled");
-        $("#search").removeClass("toggled");
-        $(".searchSideBar").removeClass("toggled");
+        $scope.closeLeft();
+        //$("#wrapper").removeClass("toggled");
+        //$("#search").removeClass("toggled");
+        //$(".searchSideBar").removeClass("toggled");
     }
     $scope.validateSearch = function (keyEvent) {
         if ($scope.searchTimeout) {
@@ -298,4 +333,4 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }, 100)
 
     }
-}]);
+});
