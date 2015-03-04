@@ -74,6 +74,9 @@
     <Content Include="css\Modal.css">
       <DependentUpon>modal.less</DependentUpon>
     </Content>
+    <Content Include="css\modal.min.css">
+      <DependentUpon>Modal.css</DependentUpon>
+    </Content>
     <Content Include="css\multi-select.css">
       <DependentUpon>multi-select.less</DependentUpon>
     </Content>
@@ -342,6 +345,7 @@
     <Content Include="js\packages\prettyCheckable.min.js" />
     <Content Include="js\tools.js" />
     <Content Include="livres.html" />
+    <Content Include="templates\livreDialog.tmpl.html" />
     <Content Include="test.html" />
     <Content Include="Web.config" />
   </ItemGroup>

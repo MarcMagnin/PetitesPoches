@@ -26,20 +26,35 @@
     });
 });
 
-
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedItem, parentScope) {
-    $scope.$parent = parentScope;
+app.controller('ModalInstanceCtrl', function ($scope, $mdDialog, selectedItem, parentScope) {
+    // Assigned from construction <code>locals</code> options...
+    $scope.parentScope = parentScope;
     $scope.selectedItem = selectedItem;
 
-
-    $scope.ok = function () {
-        $modalInstance.close($scope.selectedItem);
+    $scope.closeDialog = function () {
+        // Easily hides most recent dialog shown...
+        // no specific instance reference is needed.
+        $mdDialog.hide();
     };
 
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
+    $scope.modalMouseWheel = function (event) {
+        event.stopPropagation();
+    }
+
 });
+//app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, selectedItem, parentScope) {
+//    $scope.$parent = parentScope;
+//    $scope.selectedItem = selectedItem;
+
+
+//    $scope.ok = function () {
+//        $modalInstance.close($scope.selectedItem);
+//    };
+
+//    $scope.cancel = function () {
+//        $modalInstance.dismiss('cancel');
+//    };
+//});
 
 angular.$externalBroadcast = function (selector, event, message) {
     $rootscope.$broadcast(event, message);

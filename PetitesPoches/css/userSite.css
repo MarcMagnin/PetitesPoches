@@ -131,4 +131,48 @@ body {
   display: block;
   height: 50px;
 }
+/**
+     Animations tests
+ */
+.zoom.ng-enter {
+  transition: 0.5s linear all;
+  position: relative;
+  left: -200px;
+  opacity: 0;
+}
+.zoom.ng-enter-active {
+  left: 0;
+  opacity: 1;
+}
+.custom-enter,
+.custom-leave,
+.custom-move {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  position: relative;
+}
+.custom-enter {
+  left: -10px;
+  opacity: 0;
+}
+.custom-enter.custom-enter-active {
+  left: 0;
+  opacity: 1;
+}
+.custom-leave {
+  left: 0;
+  opacity: 1;
+}
+.custom-leave.custom-leave-active {
+  left: -10px;
+  opacity: 0;
+}
+.custom-move {
+  opacity: 0.5;
+}
+.custom-move.custom-move-active {
+  opacity: 1;
+}
 /*# sourceMappingURL=userSite.css.map */

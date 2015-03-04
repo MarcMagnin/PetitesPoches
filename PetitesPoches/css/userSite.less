@@ -129,3 +129,61 @@ border-radius:05px5px0
 }.u-fancy-scrollbar::-webkit-scrollbar-thumb:vertical,.u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal{
 background:rgba(196, 201, 204,0.5);border-radius:5px;display:block;height:50px
 }
+
+
+ /**
+     Animations tests
+ */
+
+ // This is where we start from: we go from not being 'visible' (eg: ng-if
+ // evaluates to false) to 'visible' (eg: ng-if evaluates to true)
+ //
+ .zoom.ng-enter {
+   transition: 0.5s linear all;
+   position: relative;
+   left: -200px;
+   opacity: 0;
+ }
+ 
+ // This is the state that it will be in when it is 'visible' - (eg: ng-if
+ // evaluates to true)
+ //
+ .zoom.ng-enter-active {
+   left: 0;
+   opacity: 1;
+ }
+
+ .custom-enter,
+.custom-leave,
+.custom-move {
+  -webkit-transition: 1s linear all;
+  -moz-transition: 1s linear all;
+  -o-transition: 1s linear all;
+  transition: 1s linear all;
+  position:relative;
+}
+
+.custom-enter {
+  left:-10px;
+  opacity:0;
+}
+.custom-enter.custom-enter-active {
+  left:0;
+  opacity:1;
+}
+
+.custom-leave {
+  left:0;
+  opacity:1;
+}
+.custom-leave.custom-leave-active {
+  left:-10px;
+  opacity:0;
+}
+
+.custom-move {
+  opacity:0.5;
+}
+.custom-move.custom-move-active {
+  opacity:1;
+}

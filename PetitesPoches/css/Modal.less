@@ -1,5 +1,37 @@
 ﻿@import "ressources";
 
+/**
+    Material Modal
+
+*/
+.md-subheader.md-default-theme {
+  background-color: transparent;
+  margin: 0px; 
+}
+
+md-dialog.md-default-theme {
+border-radius: 4px;
+background-color: transparent;
+max-width:500px;
+}
+md-content.md-default-theme {
+ background-color: transparent;
+}
+md-dialog md-content {
+    padding:0;
+    overflow-x: hidden;
+}
+md-dialog  {
+  overflow:initial;
+}
+.md-subheader{
+    padding:0;
+    background:transparent;
+}
+
+md-dialog .md-default-theme {
+  color:black;
+}
 /*
     MODAL
 */
@@ -24,6 +56,8 @@ outline: 0;
 -webkit-box-shadow: none;
 box-shadow:none;
 }
+
+
 .modal-title{
     color:@textColor;
 }
@@ -33,13 +67,20 @@ box-shadow:none;
     margin-right: auto;
 }
 .modal-header{
-    background-color:rgba(0, 0, 0, 0.5);
+    background-color:rgba(0, 0, 0, 0.4);
+    
+    min-height:55px;
     box-shadow: inset 0 0 180px lighten(@primaryColor,10%);    
     color:@textColor;
     -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
-  position:relative;
+    position:relative;
+    padding-top: 7px;
+}
+.modal-inner-header{
+     box-shadow: inset 0 0 180px lighten(@darkColor,30%);  
+     background:white;  
 }
 .modal-header-title {
     position: absolute;
@@ -89,9 +130,10 @@ box-shadow:none;
 }
 
 .prix {
-  top: -15px;
-  right: -15px;
-  position: absolute;
+    top: -25px;
+    right: -30px;
+
+  /*position: absolute;*/
   width: 50px;
   z-index:100;
 }

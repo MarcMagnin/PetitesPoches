@@ -1,4 +1,34 @@
-﻿/*
+﻿/**
+    Material Modal
+
+*/
+.md-subheader.md-default-theme {
+  background-color: transparent;
+  margin: 0px;
+}
+md-dialog.md-default-theme {
+  border-radius: 4px;
+  background-color: transparent;
+  max-width: 500px;
+}
+md-content.md-default-theme {
+  background-color: transparent;
+}
+md-dialog md-content {
+  padding: 0;
+  overflow-x: hidden;
+}
+md-dialog {
+  overflow: initial;
+}
+.md-subheader {
+  padding: 0;
+  background: transparent;
+}
+md-dialog .md-default-theme {
+  color: black;
+}
+/*
     MODAL
 */
 .modal-backdrop {
@@ -19,40 +49,45 @@
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.modal-title{
-    color:white;
+.modal-title {
+  color: #f3f3f3;
 }
-
 .modal-wrapper {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   margin-left: auto;
   margin-right: auto;
 }
 .modal-header {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.4);
+  min-height: 55px;
   box-shadow: inset 0 0 180px #00c9b6;
   color: #f3f3f3;
   -webkit-border-radius: 2px 2px 0 0;
   -moz-border-radius: 2px 2px 0 0;
   border-radius: 2px 2px 0 0;
-  position:relative;
+  position: relative;
+  padding-top: 7px;
+}
+.modal-inner-header {
+  box-shadow: inset 0 0 180px #797979;
+  background: white;
 }
 .modal-header-title {
-    position: absolute;
-    left: calc(100% + 85px);
-    top: 0px;
-    z-index: -500;
-    font-family: 'Arial Black';
-    font-size: 65px;
-    opacity: .2;
-    -ms-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    transform: rotate(90deg);
-    -ms-transform-origin: top left 0;
-    -moz-transform-origin: top left 0;
-    -webkit-transform-origin: top left 0;
-    transform-origin: top left 0;
+  position: absolute;
+  left: calc(100% + 85px);
+  top: 0px;
+  z-index: -500;
+  font-family: 'Arial Black';
+  font-size: 65px;
+  opacity: .2;
+  -ms-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -ms-transform-origin: top left 0;
+  -moz-transform-origin: top left 0;
+  -webkit-transform-origin: top left 0;
+  transform-origin: top left 0;
 }
 .modal-footer {
   background-color: #f3f3f3;
@@ -78,10 +113,10 @@
   color: black;
 }
 .prix {
-  top: -15px;
-  right: -15px;
-  position: absolute;
+  top: -25px;
+  right: -30px;
+  /*position: absolute;*/
   width: 50px;
-  z-index:100;
+  z-index: 100;
 }
-/*# sourceMappingURL=Modal.css.map */
+/*# sourceMappingURL=modal.css.map */

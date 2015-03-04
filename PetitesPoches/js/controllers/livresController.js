@@ -18,7 +18,7 @@
     this.LienIssu = ""
 };
 
-app.controller("livreController", function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService) {
+app.controller("livreController", function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.tags = [];
@@ -103,30 +103,44 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
 
     $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;
-        //  $($event.target).parent().css({ width: '200px' });
-        // $scope.container.isotope('reLayout');
-        // prevent the modal to show if we click on a nested link
-        if (!$($event.target).closest('a').length) {
-            var modalInstance = $modal.open({
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
-                resolve: {
-                    selectedItem: function () {
-                        return $scope.selectedItem;
-                    },
-                    parentScope: function () {
-                        return $scope;
-                    },
-                }
-            });
+
+        $mdDialog.show({
+            targetEvent: $event,
+            templateUrl: 'templates/livreDialog.tmpl.html',
+            controller: 'ModalInstanceCtrl',
+            onComplete: afterShowLivreDialog,
+            locals: {
+                selectedItem: $scope.selectedItem,
+                parentScope: $scope
+            }
+        });
+
+        //// prevent the modal to show if we click on a nested link
+        //if (!$($event.target).closest('a').length) {
+        //    var modalInstance = $modal.open({
+        //        templateUrl: 'myModalContent.html',
+        //        controller: 'ModalInstanceCtrl',
+        //        size: size,
+        //        resolve: {
+        //            selectedItem: function () {
+        //                return $scope.selectedItem;
+        //            },
+        //            parentScope: function () {
+        //                return $scope;
+        //            },
+        //        }
+        //    });
 
 
-            modalInstance.result.then(function () {
-            }, function () {
-                //   $log.info('Modal dismissed at: ' + new Date());
-            });
-        }
+        //    modalInstance.result.then(function () {
+        //    }, function () {
+        //        //   $log.info('Modal dismissed at: ' + new Date());
+        //    });
+        //}
+    }
+
+    function afterShowLivreDialog(scope, element, options) {
+        // post-show code here: DOM element focus, etc.
     }
 
     $scope.getPrixSuggestions = function (value) {
