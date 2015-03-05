@@ -140,7 +140,7 @@ angular.module('multi-select', ['ng']).directive('multiSelect', ['$sce', '$timeo
             }
 
             $rootScope.$on('updateThemesFilter', function (event, args) {
-                $scope.select('RESET');
+             //   $scope.select('RESET');
                 if (args) {
                     angular.forEach($scope.filteredModel, function (value, key) {
                         if (value.Name == args) {

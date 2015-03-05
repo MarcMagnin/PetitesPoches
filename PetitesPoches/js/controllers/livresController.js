@@ -213,6 +213,7 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
                 $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
                     return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
                 }).join('');
+                $rootScope.$broadcast('updateThemesFilter', searchItem.value);
                 break;
         } 
 
@@ -326,14 +327,14 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
     var previousTag;
     $scope.filtreTheme = function (tag) {
         tag = tag.toLowerCase();
-        if (previousTag && previousTag == tag) {
-            $rootScope.$broadcast('updateThemesFilter', null);
-            previousTag = null;
-            return;
-        }
-        previousTag = tag;
+        //if (previousTag && previousTag == tag) {
+        //  //  $rootScope.$broadcast('updateThemesFilter', null);
+        //  //  previousTag = null;
+        //    return;
+        //}
+        //previousTag = tag;
 
-        $scope.openLeft();
+       // $scope.openLeft();
         //$("#wrapper").addClass("toggled");
         //$("#search").addClass("toggled");
         //$(".searchSideBar").addClass("toggled");
