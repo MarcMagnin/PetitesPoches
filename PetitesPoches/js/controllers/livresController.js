@@ -31,6 +31,7 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
     $scope.niveauLecture = '';
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
     $scope.themeMultiselectmodel = [];
+    $scope.searchItems = [];
 
     $scope.init = function () {
         itemAdded = 0;
@@ -185,15 +186,102 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
+        $scope.validateFilter();
     }
 
+    
+    $scope.removeFilter = function (searchItem) {
+        switch (searchItem.key) {
+            case "text":
+                $scope.searchedText = "";
+                $scope.searchPatternRecherche = null;
+                break;
+            case "ebook":
+                $scope.searchPatternEBook = null;
+                $scope.checkboxSearchEBook = false;
+                break;
+            case "prix":
+                $scope.searchPatternPrixLitteraires = null;
+                $scope.checkboxPrixLitteraire = false;
+                break;
+            case "niveau":
+                $scope.niveauLecture = "";
+                $scope.filterPatternNiveauLecture = "";
+                break;
+            case "theme":
+                $scope.themeMultiselectmodel.splice($scope.themeMultiselectmodel.indexOf(searchItem.item), 1);
+                $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
+                    return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
+                }).join('');
+                break;
+        } 
 
+        $scope.validateFilter();
+    }
     $scope.validateFilter = function () {
-        var searchPattern = ($scope.searchPatternEBook ? $scope.searchPatternEBook : '')
-        + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
-        + ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
-        + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
-        + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '');
+        var searchPattern =
+            ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
+            + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '')
+            + ($scope.searchPatternEBook ?  $scope.searchPatternEBook : '')
+            + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
+            + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
+        
+        
+        $scope.searchItems.length = 0;
+        if ($scope.searchedText || $scope.searchedText.Titre) {
+            $scope.searchItems.push(
+            {
+                key : "text",
+                value: $scope.searchedText.Titre ? $scope.searchedText.Titre : $scope.searchedText
+            });
+        }
+        if ($scope.searchPatternEBook) {
+            $scope.searchItems.push(
+            {
+                key: "ebook",
+                value: "E-books"
+            });
+        }
+        if ($scope.searchPatternPrixLitteraires) {
+            $scope.searchItems.push(
+               {
+                   key: "prix",
+                   value: "Prix Littéraires"
+               });
+        }
+        if ($scope.filterPatternNiveauLecture) {
+            var label;
+            switch ($scope.niveauLecture) {
+                case "premierspas":
+                    label = "Premiers Pas";
+                    break;
+                case "debutants":
+                    label = "Débutants";
+                    break;
+                case "confirmes":
+                    label = "Confirmés";
+                    break;
+            }
+            $scope.searchItems.push(
+            {
+                key: "niveau",
+                value: label
+            });
+        }
+        if ($scope.searchPatternTheme) {
+            angular.forEach($scope.themeMultiselectmodel, function (theme) {
+                $scope.searchItems.push(
+                 {
+                     key: "theme",
+                     value: theme.Name,
+                     item: theme
+                 });
+            });
+         
+        }
+
+
+
         $scope.container.isotope({ filter: searchPattern });
 
         var filterActive = searchPattern.length > 1;
@@ -228,10 +316,7 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
         $scope.validateFilter();
     }
     $scope.filtreAuteur = function (auteur) {
-        //$("#wrapper").addClass("toggled");
-        //$("#search").addClass("toggled");
-        //$(".searchSideBar").addClass("toggled");
-        $scope.openLeft();
+        //$scope.openLeft();
 
         $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
         $scope.validateSearch();
@@ -287,7 +372,7 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
                 } else {
                     $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
                         return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                    }).join(',');
+                    }).join('');
                 }
             }
             $scope.validateFilter();

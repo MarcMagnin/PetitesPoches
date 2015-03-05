@@ -51,6 +51,7 @@ md-dialog .md-default-theme {
 }
 .modal-title {
   color: #f3f3f3;
+  float: left;
 }
 .modal-wrapper {
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
@@ -58,15 +59,15 @@ md-dialog .md-default-theme {
   margin-right: auto;
 }
 .modal-header {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.9);
   min-height: 55px;
-  box-shadow: inset 0 0 180px #00c9b6;
+  box-shadow: inset 0 0 180px rgba(0, 150, 136, 0.8);
   color: #f3f3f3;
   -webkit-border-radius: 2px 2px 0 0;
   -moz-border-radius: 2px 2px 0 0;
   border-radius: 2px 2px 0 0;
   position: relative;
-  padding-top: 7px;
+  border-bottom: 0;
 }
 .modal-inner-header {
   box-shadow: inset 0 0 180px #797979;
@@ -106,16 +107,13 @@ md-dialog .md-default-theme {
     width: 750px;
   }
 }
-.commander {
-  margin-right: 35px;
-}
 .btn-close {
   color: black;
 }
 .prix {
   top: -25px;
-  right: -30px;
-  /*position: absolute;*/
+  right: -10px;
+  position: absolute;
   width: 50px;
   z-index: 100;
 }

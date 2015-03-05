@@ -58,8 +58,10 @@ box-shadow:none;
 }
 
 
+
 .modal-title{
     color:@textColor;
+    float:left;
 }
 .modal-wrapper {
     box-shadow: 0 3px 9px rgba(0,0,0,.5);
@@ -67,16 +69,15 @@ box-shadow:none;
     margin-right: auto;
 }
 .modal-header{
-    background-color:rgba(0, 0, 0, 0.4);
-    
+    background-color:hsla(0, 0%, 0%, 0.9);
     min-height:55px;
-    box-shadow: inset 0 0 180px lighten(@primaryColor,10%);    
+    box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);    
     color:@textColor;
-    -webkit-border-radius: 2px 2px 0 0;
+       -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
     position:relative;
-    padding-top: 7px;
+    border-bottom:0;
 }
 .modal-inner-header{
      box-shadow: inset 0 0 180px lighten(@darkColor,30%);  
@@ -101,7 +102,7 @@ box-shadow:none;
 }
 
 .modal-footer{
-     background-color: @textColor;
+    background-color: @textColor;
     box-shadow: inset 0 0 180px lighten(@textColor,10%);    
     color:@textColor;
     -webkit-border-radius: 0 0 2px 2px;
@@ -120,20 +121,16 @@ box-shadow:none;
     }
 }
 
-.commander{
-    margin-right:35px;
-}
 
 
 .btn-close{
     color:black;
-}
+ }
 
 .prix {
     top: -25px;
-    right: -30px;
-
-  /*position: absolute;*/
+    right: -10px;
+  position: absolute;
   width: 50px;
   z-index:100;
 }

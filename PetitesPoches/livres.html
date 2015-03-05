@@ -179,10 +179,18 @@
 </script>
 
 <div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
-    <section layout="row" flex>
-        <div class="searchSideBar">
-          
+
+    <div class="filter-terms" layout="row" layout-align="start center">
+        <div class="tags" ng-repeat="searchItem in searchItems">
+            <button ng-click="removeFilter(searchItem)" class="btn btn-info">
+                {{::searchItem.value}}
+            </button>
         </div>
+    </div>
+
+    <section layout="row" flex>
+     
+  
 
         <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-closed" md-component-id="left">
             <div class="clear-icon-wrapper">
@@ -193,20 +201,21 @@
 
 
             <!--<div class="clear-icon-wrapper">
-            <div id="clearFilter" class="clear-icon transparentInput" ng-click="clearFilters()">
-                <i class="fa fa-close"></i>
-            </div>
-        </div>-->
+                <div id="clearFilter" class="clear-icon transparentInput" ng-click="clearFilters()">
+                    <i class="fa fa-close"></i>
+                </div>
+            </div>-->
             <ul class="sidebar-nav">
                 <div class="inner-search-bar">
                     <input type="text"
                            id="search"
                            ng-model="searchedText"
+                           ng-change='validateSearch()'
                            typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
                            typeahead-loading="loadingSearchSuggestions"
                            typeahead-template-url="livreSearchTemplate.html"
                            typeahead-wait-ms="300"
-                           ng-keyup="validateSearch($event)"
+                           
                            typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
                            class="form-control form-control-inline transparentInput" />
                     <!--<div class="search-icon"><i class="fa fa-search"></i></div>-->
@@ -215,31 +224,26 @@
 
                 <li ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">
                     <a>Prix littéraires</a>
-                    <span ng-show="checkboxPrixLitteraire" class="tickMark">✔</span>
+                    <!--<span ng-show="checkboxPrixLitteraire" class="tickMark">✔</span>-->
                 </li>
                 <li ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()">
                     <a>E-Book</a>
-                    <span ng-show="checkboxSearchEBook" class="tickMark">✔</span>
                 </li>
                 <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
-            <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
-            <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
-            <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
+                <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
+                <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
+                <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
                 <li class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">
                     <a>Tous niveaux</a>
-                    <span ng-show="niveauLecture == ''" class="tickMark">✔</span>
                 </li>
                 <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'premierspas'" ng-change="filtreNiveauLecture()">
                     <a>Permiers pas</a>
-                    <span ng-show="niveauLecture == 'premierspas'" class="tickMark">✔</span>
                 </li>
                 <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
                     <a>Débutants</a>
-                    <span ng-show="niveauLecture == 'debutants'" class="tickMark">✔</span>
                 </li>
                 <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">
                     <a>Confirmés</a>
-                    <span ng-show="niveauLecture == 'confirmes'" class="tickMark">✔</span>
                 </li>
                 <!--http://isteven.github.io/angular-multi-select/-->
                 <li>
@@ -261,62 +265,50 @@
 
             </ul>
         </md-sidenav>
-        <div>
+      
 
-        </div>
-
-        <div id="wrapper" style="height:100%">
-            <!-- Sidebar -->
-            <div id="sidebar-wrapper">
-
-            </div>
-            <!-- /#sidebar-wrapper -->
             <!-- Page Content -->
             <div id="page-content-wrapper" style="height:100%">
-                <div class="container-fluid" style="height:100%">
-                    <div class="row" style="height:100%; padding-bottom: 105px;">
+                    <div style="height:100%; padding-bottom: 105px;">
                         <div class="col-lg-12" style="height:100%; padding:0">
-
-
                             <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
                                 <!--| orderBy:'Index':true-->
-                                <div class="tile isotopey tile-admin {{::item.Titre &&  'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
-                                     {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{::item.EBookUrl && 'fil-ebook' || ''}}
-                                     {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-                                     {{::item.Tags && item.Tags || '' | filterString}} "
-                                 ng-repeat=" item in items"
-                                     isotopethis sort="date" ng-click="select(item, 'lg', $event)">
-                                    <!--href="#responsive" data-toggle="modal"-->
-                                    <div class="inner-tile">
-                                        <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
-                                        <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
+                                <div class="tile isotopey tile-admin {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+                                {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
+                                {{::item.PrixLitteraire && 'fil-prix' || ''}}
+                                {{::item.EBookUrl && 'fil-ebook' || ''}}
+                                {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+                                {{::item.Tags && item.Tags || '' | filterString}} "
+                                ng-repeat=" item in items"
+                                isotopethis sort="date" ng-click="select(item, 'lg', $event)">
+                                <!--href="#responsive" data-toggle="modal"-->
+                                <div class="inner-tile">
+                                <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
+                                <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                        <div class="moreInfoButtonWrapper bottomRight">
-                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
-                                               class="transparentButton background-circle">
-                                                <i class="fa fa-file-text" />
-                                            </a>
-                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}" target="_blank"
-                                               title="E-book"
-                                               ng-show="item.EBookUrl"
-                                               class="transparentButton background-circle">
-                                                <i class="fa fa-tablet" />
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div class="moreInfoButtonWrapper bottomRight">
+                                <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
+                                class="transparentButton background-circle">
+                                <i class="fa fa-file-text" />
+                                </a>
+                                <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}" target="_blank"
+                                title="E-book"
+                                ng-show="item.EBookUrl"
+                                class="transparentButton background-circle">
+                                <i class="fa fa-tablet" />
+                                </a>
+                                </div>
+                                </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-                </div>
             </div>
-            <!-- /#page-content-wrapper -->
-        </div>
 
 
 
-        <section>
+    <section>
 </div>
 <script>
 
