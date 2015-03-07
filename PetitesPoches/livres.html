@@ -24,6 +24,10 @@
 
 <div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
 
+    <md-button class="md-primary" ng-click="showListBottomSheet($event)">
+        Show bottom
+    </md-button>
+
     <div class="filter-terms" layout="row" layout-align="start center">
         <div class="tags" ng-repeat="searchItem in searchItems">
             <button ng-click="removeFilter(searchItem)" class="btn btn-info">
@@ -31,6 +35,8 @@
             </button>
         </div>
     </div>
+
+
 
     <section layout="row" flex>
      
@@ -103,6 +109,16 @@
                          on-item-click="filtreThemes()">
                     </div>
                 </li>
+
+                <li><div>
+                        <md-select ng-model="themeMultiselectmodel" 
+                                   multiple="true"
+                                   style="min-width: 200px;">
+                            <md-select-label>{{ themeMultiselectmodel.length > 0 ? theme.Name : 'Themes' }}</md-select-label>
+                            <md-option ng-value="theme" ng-repeat="theme in tags">{{theme.Name}}</md-option>
+                        </md-select>
+
+                    </div></li>
                 <!--<select id="themes" ng-model="selected" ng-options="item.Name for item in tags"></select>-->
                 <!--<div ng-dropdown-multiselect="" options="tags" selected-model="themeMultiselectmodel" extra-settings="themeMultiselectSettings"></div>-->
                 <!--<a href="#sortBy=date" ng-click="sort()">by date</a>-->

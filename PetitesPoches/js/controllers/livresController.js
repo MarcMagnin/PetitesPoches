@@ -17,8 +17,22 @@
     this.LienVideo = "";
     this.LienIssu = ""
 };
+app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet, parentScope) {
+    //$scope.items = [
+    //  { name: 'Share', icon: 'share' },
+    //  { name: 'Upload', icon: 'upload' },
+    //  { name: 'Copy', icon: 'copy' },
+    //  { name: 'Print this page', icon: 'print' },
+    //];
+    $scope.parentScope = parentScope;
+    $scope.listItemClick = function($index) {
+        var clickedItem = $scope.items[$index];
+        $mdBottomSheet.hide(clickedItem);
+    };
+})
 
-app.controller("livreController", function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
+
+app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet,$http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.tags = [];
@@ -73,6 +87,19 @@ app.controller("livreController", function ($scope, $rootScope, $http, $timeout,
 
     };
    
+    $scope.showListBottomSheet = function ($event) {
+        $mdBottomSheet.show({
+            templateUrl: 'templates/bottomSheet.tmpl.html',
+            controller: 'ListBottomSheetCtrl',
+            targetEvent: $event,
+            locals: {
+                parentScope: $scope
+            }
+        }).then(function (clickedItem) {
+            //$scope.alert = clickedItem.name + ' clicked!';
+        });
+    };
+
     $scope.sideNavIcon = "search";
     $scope.toggleLeft = function () {
         var leftSideNave = $mdSidenav('left');

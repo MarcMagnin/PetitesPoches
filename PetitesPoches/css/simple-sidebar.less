@@ -8,6 +8,31 @@
  */
 
 
+/* 
+    multi-select
+
+*/
+md-select, md-option {
+ color:white;
+}
+
+md-select-menu.md-default-theme md-option[selected]:focus,
+md-select-menu.md-default-theme md-option[selected] {
+background-color: transparent;
+color:cyan;
+}
+
+md-select-menu.md-default-theme md-option:focus:not([selected]) {
+background-color: transparent;
+}
+
+md-select-menu {
+    background-color:hsla(0, 0%, 0%, 0.9);
+    min-height:55px;
+    box-shadow: inset 0 0 180px rgba(0, 142, 129, 0.30);   
+}
+
+
 /*
     Search
 
@@ -341,3 +366,5 @@ input[type="color"]:focus,
         margin-right: 0;
     }
 }*/
+
+
