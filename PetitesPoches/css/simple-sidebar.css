@@ -3,32 +3,27 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
 /* 
     multi-select
 
 */
-md-select, md-option {
- color:white;
+md-select,
+md-option {
+  color: white;
 }
-
 md-select-menu.md-default-theme md-option[selected]:focus,
 md-select-menu.md-default-theme md-option[selected] {
-background-color: transparent;
-color:cyan;
+  background-color: transparent;
+  color: cyan;
 }
-
 md-select-menu.md-default-theme md-option:focus:not([selected]) {
-background-color: transparent;
+  background-color: transparent;
 }
-
 md-select-menu {
-    background-color:hsla(0, 0%, 0%, 0.9);
-    min-height:55px;
-    box-shadow: inset 0 0 180px rgba(0, 142, 129, 0.30);   
+  background-color: rgba(0, 0, 0, 0.9);
+  min-height: 55px;
+  box-shadow: inset 0 0 180px rgba(0, 142, 129, 0.3);
 }
-
-
 /*
     Search
 
@@ -307,4 +302,33 @@ input[type="color"]:focus,
   color: #fff;
   background: none;
 }
+/*
+   
+/*@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}*/
 /*# sourceMappingURL=simple-sidebar.css.map */

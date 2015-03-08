@@ -1,5 +1,15 @@
 ﻿var app = angular.module('PetitesPoches', ['multi-select', "ui.router", "ui.bootstrap", "ngMaterial", 'ngMdIcons', 'ngAnimate', 'monospaced.mousewheel']);
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
+    // for any unmatched url
+    //$urlRouterProvider.otherwise("/collection");
+
+    //$locationProvider.html5Mode({
+    //    enabled: true,
+    //    requireBase: false
+    //});
+
+
     $stateProvider.state('tabs', {
         abstract: true,
         url: '/tabs',
@@ -23,6 +33,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         },
         templateUrl: "/auteurs.html",
     })
+
 
 }).config(function ($mdThemingProvider) {
     $mdThemingProvider.definePalette('amazingPaletteName', {
@@ -48,5 +59,6 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     });
     $mdThemingProvider.theme('default')
       .primaryPalette('amazingPaletteName')
-     .accentPalette('amazingPaletteName');
+     .accentPalette('amazingPaletteName')
+    .backgroundPalette('amazingPaletteName')
 });;

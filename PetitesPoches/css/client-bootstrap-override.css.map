@@ -1,1 +1,1 @@
-﻿{"version":3,"file":"client-bootstrap-override.css","sources":["client-bootstrap-override.less"],"names":[],"mappings":"AAEA;EACI,SAAA;EACA,YAAY,uFAAZ;EACA,YAAY,qFAAZ;EACA,cAAA"}
+﻿{"version":3,"sources":["client-bootstrap-override.less"],"names":[],"mappings":"AAEA;EACI,SAAA;EACA,YAAY,uFAAZ;EACA,YAAY,qFAAZ;EACA,cAAA","file":"client-bootstrap-override.css"}

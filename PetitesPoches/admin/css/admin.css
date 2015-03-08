@@ -1,44 +1,9 @@
-﻿.drop-zone {
-    position:relative;
-    border:dashed 2px;
-    min-height:50px;
-    height:auto;
+﻿.box {
+  color: #fe33ac;
+  border-color: #fdcdea;
 }
-.clickable{
-    cursor:pointer;
+.box div {
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
-.drop-zone > p{
-    /*position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);*/
-    text-align:center;
-    vertical-align:middle;
-}
-.drop-box {
-     transition: all .3s ease-out;
-    -o-transition: all .3s ease-out;
-    -moz-transition: all .3s ease-out;
-    -webkit-transition: all .3s ease-out;  
-}
-.drop-box.dragover {
-    background: rgba(100, 255, 100, 0.50);
-}
-
-/*.auteur-placeholder-wrapper{
-    display:block;
-    height:100px;
-}*/
-
-
-.hiddendiv {
-    display: none;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word; /* future version of deprecated 'word-wrap' */
-}
-
-.close-override{
-    float:none;
-}
+/*# sourceMappingURL=admin.css.map */

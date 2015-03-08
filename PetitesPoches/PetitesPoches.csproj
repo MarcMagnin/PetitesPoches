@@ -59,6 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\css\admin.min.css">
+      <DependentUpon>admin.css</DependentUpon>
+    </Content>
     <Content Include="admin\js\directives\adminDirectives.js" />
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="appTest.js" />
@@ -68,8 +71,17 @@
     <Content Include="css\bootstrap-override.min.css">
       <DependentUpon>bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\bottom-sheet.css">
+      <DependentUpon>bottom-sheet.less</DependentUpon>
+    </Content>
+    <Content Include="css\bottom-sheet.min.css">
+      <DependentUpon>bottom-sheet.css</DependentUpon>
+    </Content>
     <Content Include="css\client-bootstrap-override.css">
       <DependentUpon>client-bootstrap-override.less</DependentUpon>
+    </Content>
+    <Content Include="css\client-bootstrap-override.min.css">
+      <DependentUpon>client-bootstrap-override.css</DependentUpon>
     </Content>
     <Content Include="css\Modal.css">
       <DependentUpon>modal.less</DependentUpon>
@@ -80,8 +92,14 @@
     <Content Include="css\multi-select.css">
       <DependentUpon>multi-select.less</DependentUpon>
     </Content>
+    <Content Include="css\multi-select.min.css">
+      <DependentUpon>multi-select.css</DependentUpon>
+    </Content>
     <Content Include="css\ressources.css">
       <DependentUpon>ressources.less</DependentUpon>
+    </Content>
+    <Content Include="css\ressources.min.css">
+      <DependentUpon>ressources.css</DependentUpon>
     </Content>
     <Content Include="css\simple-sidebar.css">
       <DependentUpon>simple-sidebar.less</DependentUpon>
@@ -98,7 +116,12 @@
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
     </Content>
-    <Content Include="css\userSite.css" />
+    <Content Include="css\tile.min.css">
+      <DependentUpon>tile.css</DependentUpon>
+    </Content>
+    <Content Include="css\userSite.css">
+      <DependentUpon>userSite.less</DependentUpon>
+    </Content>
     <Content Include="css\userSite.min.css">
       <DependentUpon>userSite.css</DependentUpon>
     </Content>
@@ -281,12 +304,19 @@
     <Content Include="css\simple-sidebar.css.map">
       <DependentUpon>simple-sidebar.css</DependentUpon>
     </Content>
-    <Content Include="css\userSite.css.map">
-      <DependentUpon>userSite.css</DependentUpon>
-    </Content>
     <Content Include="css\tabs.less" />
     <Content Include="css\tabs.css.map">
       <DependentUpon>tabs.css</DependentUpon>
+    </Content>
+    <Content Include="css\bottom-sheet.less" />
+    <Content Include="css\bottom-sheet.css.map">
+      <DependentUpon>bottom-sheet.css</DependentUpon>
+    </Content>
+    <Content Include="css\ressources.css.map">
+      <DependentUpon>ressources.css</DependentUpon>
+    </Content>
+    <Content Include="css\userSite.css.map">
+      <DependentUpon>userSite.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

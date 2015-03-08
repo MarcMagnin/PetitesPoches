@@ -1,42 +1,38 @@
-﻿<style>
- 
-    md-bottom-sheet.md-grid md-item .md-item-rowLayout {
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-      
-    }
-</style>
-<md-bottom-sheet class="md-grid">
-    <div class="bg-grad-bottom">
+﻿<md-bottom-sheet class="md-grid">
+    <!--<div class="bg-grad-bottom">
         <div class="bg-layer color-1"></div>
         <div class="bg-layer color-2"></div>
         <div class="bg-layer color-3"></div>
         <div class="bg-layer color-4"></div>
-    </div>
+    </div>-->
+
+    <!--<md-icon md-font-icon="fa-chevron-left" class="fa s64" style="color:#090;"></md-icon>-->  
 
     <md-list>
         <md-item>
-            <md-button btn-checkbox="" class="md-fab md-primary" 
+            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
                        aria-label="E-books"
                        ng-change="parentScope.searchEBook()"
                        ng-model="parentScope.checkboxSearchEBook">
-                <ng-md-icon icon="search" size="34" alt="search" >
+                <div class="md-icon-container">
+                    <md-icon md-svg-src="../images/ebook.svg"></md-icon>
+                </div>
+
             </md-button>
             <p class="md-grid-text"> E-books </p>
         </md-item>
 
         <md-item>
-            <md-button btn-checkbox="" class="md-fab md-primary"
+            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
                        aria-label="Prix littéraires"
                        ng-change="parentScope.searchPrixLitteraires()"
                        ng-model="parentScope.checkboxPrixLitteraire">
-                <ng-md-icon icon="search" size="34" alt="search">
+                <ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">
             </md-button>
             <p class="md-grid-text"> Prix littéraires </p>
         </md-item>
 
-        <md-item class="md-item-rowLayout">
+        <!--<md-item class="md-item-rowLayout">
             <md-button btn-radio="''" class="md-fab md-primary"
                        ng-change="parentScope.filtreNiveauLecture()"
                        ng-model="parentScope.niveauLecture">
@@ -55,18 +51,15 @@
                 <ng-md-icon icon="search" size="34" alt="search">
             </md-button>
             <p class="md-grid-text"> Premiers pas</p>
-        </md-item>
-
-        <md-item>
-            
-        </md-item>
+        </md-item>-->
 
 
-            <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
+
+            <!--<li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
                 <a>Débutants</a>
             </li>
             <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">
                 <a>Confirmés</a>
-            </li>
+            </li>-->
 </md-list>
 </md-bottom-sheet>
