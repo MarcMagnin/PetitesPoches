@@ -1,6 +1,7 @@
 ﻿@import "ressources";
 
 md-bottom-sheet{
+    overflow-y:hidden;
     background-color: fadein(@backgroundColor,40%);
     -moz-box-shadow: 0 -8px 17px rgba(0, 0, 0, 0.2);
     -webkit-box-shadow: 0 -8px 17px rgba(0, 0, 0, 0.2);
@@ -8,10 +9,26 @@ md-bottom-sheet{
   & *>{
       color:@textColor;
   }
-   & button.active *>{
+  & button.active *>{
       color:lighten(@primaryColor,20%);
   }
+  & .fa >{
+    font-size: 2.6em;
+    line-height: 45px;
+  }
+  & p.md-grid-text{
+    line-height: 16px;
+    font-size: 18px !important; 
+    width: auto !important;
+    text-align: center !important;
+    padding-top: 8px;
+  }
 }
+
+
+
+
+
 
 .md-button{
      background-color: transparent !important;

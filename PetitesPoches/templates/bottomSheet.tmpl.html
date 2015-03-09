@@ -5,8 +5,7 @@
         <div class="bg-layer color-3"></div>
         <div class="bg-layer color-4"></div>
     </div>-->
-
-    <!--<md-icon md-font-icon="fa-chevron-left" class="fa s64" style="color:#090;"></md-icon>-->  
+    <!--<md-icon md-font-icon="fa-chevron-left" class="fa s64" style="color:#090;"></md-icon>-->
 
     <md-list>
         <md-item>
@@ -27,35 +26,81 @@
                        aria-label="Prix littéraires"
                        ng-change="parentScope.searchPrixLitteraires()"
                        ng-model="parentScope.checkboxPrixLitteraire">
-                <ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">
+                <div class="md-icon-container">
+                    <md-icon md-font-icon="fa-certificate" class="fa"></md-icon>
+                </div>
+                <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
             </md-button>
             <p class="md-grid-text"> Prix littéraires </p>
         </md-item>
 
-        <!--<md-item class="md-item-rowLayout">
-            <md-button btn-radio="''" class="md-fab md-primary"
-                       ng-change="parentScope.filtreNiveauLecture()"
-                       ng-model="parentScope.niveauLecture">
-                <ng-md-icon icon="search" size="34" alt="search">
-            </md-button>
-            <p class="md-grid-text"> Tous niveaux </p>
 
-            <md-button btn-radio="'premierspas'" class="md-fab md-primary"
-                       ng-change="parentScope.filtreNiveauLecture()"
-                       ng-model="parentScope.niveauLecture">
-                <ng-md-icon icon="search" size="34" alt="search">
-            </md-button>
-            <p class="md-grid-text"> Premiers pas</p><md-button btn-radio="'premierspas'" class="md-fab md-primary"
-                                                                ng-change="parentScope.filtreNiveauLecture()"
-                                                                ng-model="parentScope.niveauLecture">
-                <ng-md-icon icon="search" size="34" alt="search">
-            </md-button>
-            <p class="md-grid-text"> Premiers pas</p>
-        </md-item>-->
+        <!--<div multi-select
+             style="position:relative"
+             class="transparent-multi-select-input"
+             input-model="parentScope.tags"
+             button-label="Name"
+             item-label="Name"
+             tick-property="ticked"
+             helper-elements="reset"
+             output-model="parentScope.themeMultiselectmodel"
+             default-label="Themes"
+             on-item-click="parentScope.filtreThemes()">
+        </div>
 
+            <div layout="column" layout-align="center center" style="height: 100px;">
+                <md-select ng-model="parentScope.themeMultiselectmodel"
+                           multiple="true"
+                           style="min-width: 200px;">
+                    <md-select-label>{{ parentScope.themeMultiselectmodel.length > 0 ? theme.Name : 'Themes' }}</md-select-label>
+                    <md-option ng-value="parentScope.theme" ng-repeat="theme in parentScope.tags">{{theme.Name}}</md-option>
+                </md-select>
+            </div>-->
 
+        <md-item>
+            <div style="height: 90px; position:absolute">
+                <md-select ng-model="parentScope.themeMultiselectmodel" multiple="true" placeholder="Thèmes ">
+                    <md-option ng-value="theme.Name" ng-repeat="theme in parentScope.tags">{{theme.Name}}</md-option>
+                </md-select>
+            </div>
+        </md-item>
 
-            <!--<li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
+        <md-item>
+        <div flex-item>
+            <lx-select ng-model="parentScope.themeMultiselectmodel"
+                       placeholder="Lorem Ipsum"
+                       choices="parentScope.tags" multiple floating-label>
+                <lx-select-selected>
+                    {{ $selected.Name }}
+                </lx-select-selected>
+
+                <lx-select-choices>
+                    {{ $choice.Name }}
+                </lx-select-choices>
+            </lx-select>
+            </div>
+        </md-item>
+                <!--<md-item class="md-item-rowLayout">
+                <md-button btn-radio="''" class="md-fab md-primary"
+                           ng-change="parentScope.filtreNiveauLecture()"
+                           ng-model="parentScope.niveauLecture">
+                    <ng-md-icon icon="search" size="34" alt="search">
+                </md-button>
+                <p class="md-grid-text"> Tous niveaux </p>
+
+                <md-button btn-radio="'premierspas'" class="md-fab md-primary"
+                           ng-change="parentScope.filtreNiveauLecture()"
+                           ng-model="parentScope.niveauLecture">
+                    <ng-md-icon icon="search" size="34" alt="search">
+                </md-button>
+                <p class="md-grid-text"> Premiers pas</p><md-button btn-radio="'premierspas'" class="md-fab md-primary"
+                                                                    ng-change="parentScope.filtreNiveauLecture()"
+                                                                    ng-model="parentScope.niveauLecture">
+                    <ng-md-icon icon="search" size="34" alt="search">
+                </md-button>
+                <p class="md-grid-text"> Premiers pas</p>
+            </md-item>-->
+                <!--<li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'debutants'" ng-change="filtreNiveauLecture()">
                 <a>Débutants</a>
             </li>
             <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">

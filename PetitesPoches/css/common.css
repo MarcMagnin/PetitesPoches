@@ -7,13 +7,13 @@
 
 
 html, body { 
-    height: 100%; 
-    width:100%;
+    height: 100% !important; 
+    width:100% !important;
     /*'Josefin Slab', 'Architects Daughter',*/
     font-family: "Helvetica Neue", "Helvetica", serif;
     color: rgb(35, 35, 35);
-    overflow-x:hidden;
-    overflow-y:hidden;
+    overflow-x:hidden !important;
+    overflow-y:hidden !important;
     -webkit-font-smoothing: antialiased;
 }
 a:hover, a:visited, a:link, a:active

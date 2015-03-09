@@ -1,4 +1,26 @@
-﻿/* 
+﻿/*md-select, md-option {
+ color:white;
+}
+
+md-select-menu.md-default-theme md-option[selected]:focus,
+md-select-menu.md-default-theme md-option[selected] {
+
+color:cyan;
+}
+
+md-select-menu.md-default-theme md-option:focus:not([selected]) {
+background-color: transparent;
+}
+
+md-select-menu {
+    background-color: @modalBackground;
+}
+md-select-menu md-content {
+min-width: 136px;
+max-height: 256px;
+overflow-y: auto;
+}*/
+/* 
  * Don't modify things marked with ! - unless you know what you're doing
  */
 /* ! vertical layout */
