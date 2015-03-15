@@ -57,29 +57,34 @@
                 </md-select>
             </div>-->
 
-        <md-item>
-            <div style="height: 90px; position:absolute">
-                <md-select ng-model="parentScope.themeMultiselectmodel" multiple="true" placeholder="Thèmes ">
-                    <md-option ng-value="theme.Name" ng-repeat="theme in parentScope.tags">{{theme.Name}}</md-option>
-                </md-select>
-            </div>
-        </md-item>
+     
 
-        <md-item>
-        <div flex-item>
-            <lx-select ng-model="parentScope.themeMultiselectmodel"
-                       placeholder="Lorem Ipsum"
-                       choices="parentScope.tags" multiple floating-label>
-                <lx-select-selected>
-                    {{ $selected.Name }}
-                </lx-select-selected>
+            <md-item>
+                <md-button class="md-primary md-grid-item-content"
+                           aria-label="Thèmes">
+                           
+                    <div class="md-icon-container">
+                        <md-icon md-font-icon="fa-certificate" class="fa"></md-icon>
+                    </div>
+                </md-button>
+                <div flex-item>
+                   
+                    <lx-select id="themeSelect" ng-model="parentScope.themeMultiselectmodel"
+                               placeholder="Thèmes"
+                               change="cbSelect.exec(newValue, oldValue)"
+                               choices="parentScope.tags" multiple floating-label>
+                        <lx-select-selected>
+                            {{ $selected.Name }}
+                        </lx-select-selected>
 
-                <lx-select-choices>
-                    {{ $choice.Name }}
-                </lx-select-choices>
-            </lx-select>
-            </div>
-        </md-item>
+                        <lx-select-choices>
+                            {{ $choice.Name }}
+                        </lx-select-choices>
+                    </lx-select>
+                  
+                </div>
+            </md-item>
+      
                 <!--<md-item class="md-item-rowLayout">
                 <md-button btn-radio="''" class="md-fab md-primary"
                            ng-change="parentScope.filtreNiveauLecture()"

@@ -2,38 +2,57 @@
 
 
 
-/*md-select, md-option {
+md-select, md-option {
+ margin-top:0;
  color:white;
 }
 
 md-select-menu.md-default-theme md-option[selected]:focus,
 md-select-menu.md-default-theme md-option[selected] {
-
-color:cyan;
-}
-
+background-color: transparent;
+color:cyan
+    }
 md-select-menu.md-default-theme md-option:focus:not([selected]) {
 background-color: transparent;
 }
 
 md-select-menu {
-    background-color: @modalBackground;
+   background-color: white;
+
 }
 md-select-menu md-content {
 min-width: 136px;
 max-height: 256px;
 overflow-y: auto;
-}*/
+}
 
+md-select-menu.md-default-theme md-option{
+     color:black;
+}
+.md-select-menu-container {
+    -moz-transform: translateY(35px);
+    -ms-transform: translateY(35px);
+    -o-transform: translateY(35px);
+    -webkit-transform: translateY(35px);
+    transform: translateY(35px);
+      
+}
 
+.md-select-label .md-select-icon:after {
+position: relative;
+padding-left:12px;
+}
+.md-select-label:hover,
+.md-select-label .md-select-icon:hover {
+color:lighten(@primaryColor,20%);
+}
 
-
-
-
-
-
-
-
+.md-select-label{
+    font: normal 14px/38px Montserrat;
+    padding:0;
+    border-bottom: none;
+    text-indent:0;
+}
 
 
 
@@ -139,6 +158,7 @@ overflow-y: auto;
 
 .multiSelect {
     width:100%;
+
 }
 
 

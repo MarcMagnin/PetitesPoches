@@ -3,32 +3,26 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-/* 
-    multi-select
-
-*/
-md-select,
-md-option {
-  color: white;
+md-backdrop.md-opaque.md-default-theme {
+  background-color: rgba(0, 0, 0, 0.52);
 }
-md-select-menu.md-default-theme md-option[selected]:focus,
-md-select-menu.md-default-theme md-option[selected] {
-  background-color: transparent;
-  color: cyan;
+.clear-icon {
+  position: absolute;
+  left: 5px;
+  top: 13px;
+  fill: #f3f3f3;
+  height: 44px;
+  width: 44px;
 }
-md-select-menu.md-default-theme md-option:focus:not([selected]) {
-  background-color: transparent;
+.clear-icon > i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
-md-select-menu {
-  background-color: rgba(0, 0, 0, 0.9);
-  /*min-height:55px;*/
-  height: 150px;
-  box-shadow: inset 0 0 180px rgba(0, 142, 129, 0.3);
-}
-md-select-menu md-content {
-  min-width: 136px;
-  max-height: 256px;
-  overflow-y: auto;
+.clear-icon.toggled {
+  opacity: 0;
 }
 /*
     Search
@@ -100,22 +94,8 @@ md-sidenav {
   width: 250px;
   min-width: 250px;
   max-width: 250px;
-  overflow: visible;
-}
-.clear-icon {
-  position: absolute;
-  right: -55px;
-  top: 13px;
-  fill: #f3f3f3;
-  height: 44px;
-  width: 44px;
-}
-.clear-icon > i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 #clearFilter {
   /*display:none;*/
@@ -208,7 +188,7 @@ md-sidenav {
   user-select: none;
   font: normal 14px/38px Montserrat;
   /*static positioned elements appear behind absolutely positioned siblings(.ink in this case) hence we will make the links relatively positioned to bring them above .ink*/
-  position: relative;
+  position: relative /*overflow: hidden;*/;
 }
 .sidebar-nav li:hover {
   text-decoration: none;
@@ -308,4 +288,33 @@ input[type="color"]:focus,
   color: #fff;
   background: none;
 }
+/*
+   
+/*@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
+}*/
 /*# sourceMappingURL=simple-sidebar.css.map */

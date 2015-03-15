@@ -22,6 +22,21 @@ md-bottom-sheet p.md-grid-text {
   text-align: center !important;
   padding-top: 8px;
 }
+md-bottom-sheet .lx-select {
+  font-size: 18px !important;
+  line-height: 45px;
+  max-height: 500px;
+}
+.disabled {
+  opacity: 0.4;
+}
+.lx-select:before {
+  border-bottom: none;
+}
+.lx-select__filter,
+.lx-select__chosen {
+  display: none;
+}
 .md-button {
   background-color: transparent !important;
   transition: background-color 0s;
@@ -38,10 +53,6 @@ md-inline-list-icon {
   display: inline-block;
   height: 24px;
   width: 24px;
-}
-md-icon {
-  height: 48px;
-  width: 48px;
 }
 .md-ripple-container {
   background-color: transparent !important;

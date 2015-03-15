@@ -1,0 +1,140 @@
+﻿@import "ressources";
+
+
+
+
+
+/*.md-fab {
+    padding: 1px;
+    background-color: transparent;
+    opacity: 0.5;
+    width: 50px !important;
+    height: 50px !important;
+    &.active {
+        opacity: 0.8;
+
+        & > md-icon {
+            color: lighten(@primaryColor, 10%);
+        }
+
+ 
+    }
+
+    & > md-icon {
+        width: 100%;
+        height: 100%;
+    }
+}*/
+
+
+.menuBar {
+    margin-top: 20px;
+
+    & md-item {
+        position: relative;
+        color: @textColor;
+        height: 150px;
+        width: 150px;
+    }
+
+    & .md-button {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        opacity: 0.6;
+        border-radius: 50%;
+        color: @textColor !important;
+
+        &.active {
+            opacity: 0.8;
+            color: lighten(@primaryColor, 20%) !important;
+        }
+    }
+
+    & .md-icon-container md-icon {
+        height: 45px;
+        width: 45px;
+        margin-bottom: 10px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    }
+
+    &.md-font::before {
+        font-size: 2.6em;
+        vertical-align: middle;
+    }
+}
+
+.dropdown-menu {
+    z-index: 3000;
+    position: absolute !important;
+}
+
+
+.searchButton {
+    height: 150px;
+    width: 150px;
+    overflow: visible;
+}
+
+.searchButton.toggled {
+    opacity: 1;
+}
+
+.searchButton .md-ripple-container {
+    overflow: hidden;
+    border-radius: 50%;
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    transform: scale(0.95);
+}
+
+
+
+#search2 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    margin-right: -50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    opacity: 0;
+    min-width: 0;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#search2.toggled {
+    width: 180px;
+    height: auto;
+    opacity: 1;
+}
+
+#searchIcon.toggled {
+    width: 0;
+    opacity: 0;
+}
+
+#searchitem.toggled{
+    opacity:1;
+}
+
+
+md-autocomplete ul li {
+     background-color:white;
+    width:600px;
+    height:65px;
+}
+md-autocomplete ul{
+    background-color:white;
+    overflow: visible;
+}

@@ -24,9 +24,116 @@
 
 <div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
 
-    <md-button class="md-primary" ng-click="showListBottomSheet($event)">
-        Show bottom
-    </md-button>
+    <md-list class="menuBar" layout="row" layout-align="center center">
+        <md-item>
+            <md-autocomplete md-selected-item="searchSelectedItem"
+                             md-search-text="searchedText"
+                             md-items="item in searchLivreSuggestions(searchedText)"
+                             md-item-text="searchSelectedItemText">
+                <img src="{{::item.imageUrl}}" width="45" />
+                <span md-highlight-text="searchedText">{{::item.Titre}}</span>
+                <span md-highlight-text="searchedText">de {{item.Auteur.Prenom}}</span>
+                <span md-highlight-text="searchedText">{{item.Auteur.Nom}}</span>
+            </md-autocomplete>
+        </md-item>
+        <md-item id="searchitem" ng-click="toggleSearch()">
+            <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
+                       aria-label="Recherche">
+                <!--<div id="searchIcon" class="md-icon-container toggled">
+                <md-icon md-font-icon="fa-search" class="fa"></md-icon>
+            </div>-->
+                <div id="searchIcon" class="md-icon-container ">
+                    <md-icon md-svg-src="../images/search.svg"></md-icon>
+                </div>
+                <p class="md-grid-text"> Recherche </p>
+                <input type="text"
+                       id="search2"
+                       ng-model="searchedText"
+                       ng-change='validateSearch($viewValue)'
+                       typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                       typeahead-loading="loadingSearchSuggestions"
+                       typeahead-template-url="livreSearchTemplate.html"
+                       typeahead-wait-ms="300"
+                       typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                       class="form-control form-control-inline transparentInput" />
+            </md-button>
+        </md-item>
+
+
+        <md-item>
+            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
+                       aria-label="E-books"
+                       ng-change="searchEBook()"
+                       ng-model="checkboxSearchEBook">
+                <div class="md-icon-container">
+                    <md-icon md-svg-src="../images/ebook2.svg"></md-icon>
+                </div>
+
+                <p class="md-grid-text"> E-books </p>
+            </md-button>
+
+        </md-item>
+
+
+        <md-item>
+            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
+                       aria-label="Prix littéraires"
+                       ng-change="searchPrixLitteraires()"
+                       ng-model="checkboxPrixLitteraire">
+                <div class="md-icon-container">
+                    <md-icon md-svg-src="../images/prix.svg"></md-icon>
+                </div>
+                <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
+                <p class="md-grid-text"> Prix littéraires </p>
+            </md-button>
+
+        </md-item>
+
+
+        <!--<div multi-select
+             style="position:relative"
+             class="transparent-multi-select-input"
+             input-model="parentScope.tags"
+             button-label="Name"
+             item-label="Name"
+             tick-property="ticked"
+             helper-elements="reset"
+             output-model="parentScope.themeMultiselectmodel"
+             default-label="Themes"
+             on-item-click="parentScope.filtreThemes()">
+        </div>
+
+            <div layout="column" layout-align="center center" style="height: 100px;">
+                <md-select ng-model="parentScope.themeMultiselectmodel"
+                           multiple="true"
+                           style="min-width: 200px;">
+                    <md-select-label>{{ parentScope.themeMultiselectmodel.length > 0 ? theme.Name : 'Themes' }}</md-select-label>
+                    <md-option ng-value="parentScope.theme" ng-repeat="theme in parentScope.tags">{{theme.Name}}</md-option>
+                </md-select>
+            </div>-->
+
+        <md-item>
+            <md-select ng-model="themeMultiselectmodel"
+                        multiple="true"
+                        style="width: 80%;">
+                <md-select-label>
+                    <md-button class="md-primary md-grid-item-content"
+                                aria-label="Thèmes">
+                        <div class="md-icon-container">
+                            <md-icon md-font-icon="fa-certificate" class="fa"></md-icon>
+                        </div>
+                        <p class="md-grid-text"> Thèmes</p>
+                    </md-button>
+                </md-select-label>
+                <md-option ng-value="theme" ng-repeat="theme in tags">{{theme.Name}}</md-option>
+            </md-select>
+
+
+        </md-item>
+    </md-list>
+
+
+
 
     <div class="filter-terms" layout="row" layout-align="start center">
         <div class="tags" ng-repeat="searchItem in searchItems">
@@ -35,35 +142,28 @@
             </button>
         </div>
     </div>
-    <div flex-item>
-        <lx-select ng-model="selects.selectedPersons" placeholder="Lorem Ipsum" choices="people" multiple floating-label>
-            <lx-select-selected>
-                {{ $selected.name }} - {{ $selected.age }}
-            </lx-select-selected>
-
-            <lx-select-choices>
-                {{ $choice.email }}
-            </lx-select-choices>
-        </lx-select>
-    </div>
+    
 
     <section layout="row" flex>
      
-  
+
+
+
+
+
+
+
+
+
+        <!--<div class="clear-icon-wrapper">
+            <md-button ng-click="openLeft()" class="clear-icon">
+                <ng-md-icon icon="{{sideNavIcon}}" size="34" alt="search "></ng-md-icon>
+            </md-button>
+        </div>
 
         <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-closed" md-component-id="left">
-            <div class="clear-icon-wrapper">
-                <md-button ng-click="toggleLeft()" class="clear-icon">
-                    <ng-md-icon icon="{{sideNavIcon}}" size="34" alt="search "></ng-md-icon>
-                </md-button>
-            </div>
-
-
-            <!--<div class="clear-icon-wrapper">
-                <div id="clearFilter" class="clear-icon transparentInput" ng-click="clearFilters()">
-                    <i class="fa fa-close"></i>
-                </div>
-            </div>-->
+         
+       
             <ul class="sidebar-nav">
                 <div class="inner-search-bar">
                     <input type="text"
@@ -77,21 +177,15 @@
                            
                            typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
                            class="form-control form-control-inline transparentInput" />
-                    <!--<div class="search-icon"><i class="fa fa-search"></i></div>-->
 
                 </div>
 
                 <li ng-model="checkboxPrixLitteraire" btn-checkbox ng-change="searchPrixLitteraires()">
                     <a>Prix littéraires</a>
-                    <!--<span ng-show="checkboxPrixLitteraire" class="tickMark">✔</span>-->
                 </li>
                 <li ng-model="checkboxSearchEBook" btn-checkbox ng-change="searchEBook()">
                     <a>E-Book</a>
                 </li>
-                <!--<pretty-radio value="''" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Tous niveaux'"></pretty-radio>
-                <pretty-radio value="'premierspas'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Permiers pas'"></pretty-radio>
-                <pretty-radio value="'debutants'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs débutants'"></pretty-radio>
-                <pretty-radio value="'confirmes'" ng-model="niveauLecture" ng-change="filtreNiveauLecture()" label="'Lecteurs confirmés'"></pretty-radio>-->
                 <li class="active" ng-model="niveauLecture" btn-radio="''" ng-change="filtreNiveauLecture()">
                     <a>Tous niveaux</a>
                 </li>
@@ -104,9 +198,9 @@
                 <li style="padding-left:20px;" ng-model="niveauLecture" btn-radio="'confirmes'" ng-change="filtreNiveauLecture()">
                     <a>Confirmés</a>
                 </li>
-                <!--http://isteven.github.io/angular-multi-select/-->
-                <li>
+                <li style="overflow:visible">
                     <div multi-select
+                       
                          class="transparent-multi-select-input"
                          input-model="tags"
                          button-label="Name"
@@ -119,21 +213,9 @@
                     </div>
                 </li>
 
-                <li><div>
-                        <md-select ng-model="themeMultiselectmodel" 
-                                   multiple="true"
-                                   style="min-width: 200px;">
-                            <md-select-label>{{ themeMultiselectmodel.length > 0 ? theme.Name : 'Themes' }}</md-select-label>
-                            <md-option ng-value="theme" ng-repeat="theme in tags">{{theme.Name}}</md-option>
-                        </md-select>
-
-                    </div></li>
-                <!--<select id="themes" ng-model="selected" ng-options="item.Name for item in tags"></select>-->
-                <!--<div ng-dropdown-multiselect="" options="tags" selected-model="themeMultiselectmodel" extra-settings="themeMultiselectSettings"></div>-->
-                <!--<a href="#sortBy=date" ng-click="sort()">by date</a>-->
 
             </ul>
-        </md-sidenav>
+        </md-sidenav>-->
       
 
             <!-- Page Content -->
@@ -248,8 +330,8 @@
         //    $container.css('overflow', 'visible');
         //}
     });
-
-
+   
+  
     // Ripple click effect
     var parent, ink, d, x, y;
     $("ul li a").click(function (e) {

@@ -1,12 +1,11 @@
 ﻿.tilesContainer {
-  margin-top: 100px;
   /*http://www.colorzilla.com/gradient-editor/*/
   padding-left: 150px;
-  padding-bottom: 50px;
-  height: -moz-calc(100% - 100px) !important;
-  height: -webkit-calc(100% - 100px)!important;
-  height: -o-calc(100% - 100px)!important;
-  height: calc(100% - 100px)!important;
+  padding-bottom: 30px;
+  height: -moz-calc(100% - 80px) !important;
+  height: -webkit-calc(100% - 80px)!important;
+  height: -o-calc(100% - 80px)!important;
+  height: calc(100% - 80px)!important;
   width: -moz-calc(100% - 150px) !important;
   width: -webkit-calc(100% - 150px)!important;
   width: -o-calc(100% - 150px)!important;

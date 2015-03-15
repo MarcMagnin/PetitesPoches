@@ -1,4 +1,4 @@
-﻿var app = angular.module('PetitesPoches', ['multi-select', 'lumx',"ui.router", "ui.bootstrap", "ngMaterial", 'ngMdIcons', 'ngAnimate', 'monospaced.mousewheel']);
+﻿var app = angular.module('PetitesPoches', ['multi-select',"ui.router", "ui.bootstrap", "ngMaterial", 'ngMdIcons', 'ngAnimate', 'monospaced.mousewheel']);
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     // for any unmatched url

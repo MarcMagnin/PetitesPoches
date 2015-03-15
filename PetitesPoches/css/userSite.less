@@ -2,6 +2,8 @@
  
 @import "bottom-sheet";
 @import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
+@import "filter-terms";
+@import "menuBar";
 
 
 @btnHeaderHeight :40px;
@@ -10,6 +12,14 @@ body {
   background-color: transparent;
 }
 
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 #page-content-wrapper {
     padding:0;
     padding-bottom:0;
@@ -92,16 +102,16 @@ visibility: visible;
 
 
 
-.navbar-header a{
-text-decoration: none;
+a{
+text-decoration: none !important;
 }
-.navbar-header a:active,
-.navbar-header a:hover,
-.navbar-header a:focus {
-    text-decoration: none;
+a:active,
+a:hover,
+ a:focus {
+    text-decoration: none !important;
+    outline:0 !important;
     color: @textColor;
 }
-
 .header-btn-icon{
      padding: 0 8px;
 }

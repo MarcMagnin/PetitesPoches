@@ -17,31 +17,14 @@
     this.LienVideo = "";
     this.LienIssu = ""
 };
-app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet, parentScope) {
-    //$scope.items = [
-    //  { name: 'Share', icon: 'share' },
-    //  { name: 'Upload', icon: 'upload' },
-    //  { name: 'Copy', icon: 'copy' },
-    //  { name: 'Print this page', icon: 'print' },
-    //];
-    $scope.parentScope = parentScope;
-    $scope.listItemClick = function($index) {
-        var clickedItem = $scope.items[$index];
-        $mdBottomSheet.hide(clickedItem);
-    };
+//app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet, parentScope) {
+//    $scope.parentScope = parentScope;
+//    $scope.listItemClick = function($index) {
+//        var clickedItem = $scope.items[$index];
+//        $mdBottomSheet.hide(clickedItem);
+//    };
    
-
-    $scope.toppings = [
-   { category: 'meat', name: 'Pepperoni' },
-   { category: 'meat', name: 'Sausage' },
-   { category: 'meat', name: 'Ground Beef' },
-   { category: 'meat', name: 'Bacon' },
-   { category: 'veg', name: 'Mushrooms' },
-   { category: 'veg', name: 'Onion' },
-   { category: 'veg', name: 'Green Pepper' },
-   { category: 'veg', name: 'Green Olives' },
-    ];
-})
+//})
 
 
 app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
@@ -51,96 +34,69 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.selectedItem = "";
     $scope.searchedAuteur = "";
     $scope.searchedText = "";
+    $scope.searchSelectedItem = "";
     $scope.whiteSpacePattern = '/ /g'
     $scope.searchTimeout;
     $scope.container = $('.tilesContainer');
     $scope.niveauLecture = '';
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
-    $scope.themeMultiselectmodel = undefined;
+    $scope.themeMultiselectmodel = [];
     $scope.searchItems = [];
-    $scope.people = [
-    { name: 'Adam', email: 'adam@email.com', age: 10 },
-    { name: 'Amalie', email: 'amalie@email.com', age: 12 },
-    { name: 'Wladimir', email: 'wladimir@email.com', age: 30 },
-    { name: 'Samantha', email: 'samantha@email.com', age: 31 },
-    { name: 'Estefanía', email: 'estefanía@email.com', age: 16 },
-    { name: 'Natasha', email: 'natasha@email.com', age: 54 },
-    { name: 'Nicole', email: 'nicole@email.com', age: 43 },
-    { name: 'Adrian', email: 'adrian@email.com', age: 21 }
-    ];
+    
 
-    $scope.selectSections = {
-        'Sub header 1': [
-            { uid: '1', name: 'Adam' },
-            { uid: '2', name: 'Amalie' },
-            { uid: '3', name: 'Wladimir' },
-            { uid: '4', name: 'Samantha' }
-        ],
-        '<i class="mdi mdi-android"></i> Sub header 2': [
-            { uid: '5', name: 'Estefanía' },
-            { uid: '6', name: 'Natasha' },
-            { uid: '7', name: 'Nicole' }
-        ]
-    };
 
-    $scope.ajax = {
-        selected: 'Inception',
-        list: [],
-        update: function (newFilter) {
-            if (newFilter) {
-                $scope.ajax.loading = true;
-                $http.get('http://www.omdbapi.com/?s=' + escape(newFilter)).
-                    success(function (data) {
-                        $scope.ajax.list = data.Search;
-                        $scope.ajax.loading = false;
-                    }).
-                    error(function () {
-                        $scope.ajax.loading = false;
-                    });
-            }
-            else {
-                $scope.ajax.list = false;
-            }
-        },
-        toModel: function (data, callback) {
-            if (data) {
-                callback(data.Title);
-            }
-            else {
-                callback();
-            }
-        },
-        toSelection: function (data, callback) {
-            if (data) {
-                $http.get('http://www.omdbapi.com/?s=' + escape(data)).
-                    success(function (response) {
-                        callback(response.Search[0]);
-                    }).
-                    error(function () {
-                        callback();
-                    });
-            }
-            else {
-                callback();
-            }
-        },
-        loading: false
-    };
 
-    $scope.cbSelect = {
-        exec: function (newVal, oldVal) {
-            LxNotificationService.notify('Change detected!');
-            console.log('oldVal: ', oldVal);
-            console.log('newVal: ', newVal);
-        }
-    };
+    $scope.$watch('themeMultiselectmodel.length', function (newValue) {
+        $scope.filtreThemes();
+        //console.log($scope.themeMultiselectmodel)
+        //if ($scope.themeMultiselectmodel.length >=0) {
+        //    var test = $('.dropdown-menu li');
+        //    //test.attr('disabled', true); //add
+           
+        //    //test.unbind('click');
+        //    //test.on('click', function (event) {
+        //    //    // if we have no href url, then don't navigate anywhere.
+        //    //    event.preventDefault();
+        //    //    event.stopPropagation();
+        //    //});
 
-    $scope.selects = {
-        selectedPerson: undefined,
-        selectedPersons: [$scope.people[2], $scope.people[4]],
-        selectedPersons2: []
-    };
+        //    var notSelected = test.not('.lx-select__choice--is-selected');
+        //    notSelected.addClass("disabled")
+        //    notSelected.unbind('click');
+        //    notSelected.on('click', function (event) {
+        //        // if we have no href url, then don't navigate anywhere.
+        //            event.preventDefault();
+        //            event.stopPropagation();
+        //    });
+        //} else {
+        //}
+    });
+
+
+   
     $scope.init = function () {
+
+        //$("#searchitem").on("click", function () {
+        //   $(this).addClass("toggled");
+        //   $("#searchIcon").addClass("toggled");
+        //   $("#search2").addClass("toggled");
+        //    //$("#search2").focus();
+          
+
+        //});
+        $("#searchitem, #searchbutton").focusout(function ($event) {
+            if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
+                return;
+            }
+
+            $("#searchitem").removeClass("toggled");
+            $(this).removeClass("toggled");
+            $(this).find("#searchIcon").removeClass("toggled");
+            $("#searchbutton").removeClass("toggled");
+            $("#search2").removeClass("toggled");
+            searchToggled = false;
+        });
+
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
@@ -180,6 +136,32 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
 
     };
    
+    var searchToggled = false;
+    $scope.toggleSearch = function () {
+        setTimeout(function () {
+            $("#search2").focus();
+        }, 150)
+        if (searchToggled)
+            return;
+        searchToggled = true;
+        $("#searchitem").addClass("toggled");
+        $("#searchIcon").addClass("toggled");
+        $("#searchbutton").addClass("toggled");
+        $("#search2").addClass("toggled");
+     
+        
+    }
+
+    $scope.toggleLeft = function () {
+        var leftSideNave = $mdSidenav('left');
+
+        leftSideNave.toggle().then(function () {
+            if (leftSideNave.isOpen()) {
+                $('#search').focus();
+            }
+        });
+    }
+
     $scope.showListBottomSheet = function ($event) {
         $mdBottomSheet.show({
             templateUrl: 'templates/bottomSheet.tmpl.html',
@@ -196,6 +178,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.sideNavIcon = "search";
     $scope.toggleLeft = function () {
         var leftSideNave = $mdSidenav('left');
+
         leftSideNave.toggle().then(function () {
             if (leftSideNave.isOpen()) {
                 $('#search').focus();
@@ -204,53 +187,66 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     }
     $scope.closeLeft = function () {
         var leftSideNave = $mdSidenav('left');
-        leftSideNave.close();
+        leftSideNave.close
+        $(".clear-icon").removeClass("toggled");
     }
     $scope.openLeft = function () {
         var leftSideNave = $mdSidenav('left');
         leftSideNave.open();
+    
+        $(".clear-icon").addClass("toggled");
     }
 
-    $scope.$watch(function () { return $('.md-sidenav-left').attr('class'); }, function (newValue) {
-        var leftSideNave = $mdSidenav('left');
-        console.log(leftSideNave);
-        if (leftSideNave.isOpen() && !$('.md-sidenav-left').hasClass('md-closed')) {
-            $scope.sideNavIcon = "chevron_left";
-        } else {
-            $scope.sideNavIcon = "search";
-        }
-    });
+    //$scope.$watch(function () { return $('.md-sidenav-left').attr('class'); }, function (newValue) {
+    //    var leftSideNave = $mdSidenav('left');
+    //    console.log(leftSideNave);
+    //    if (leftSideNave.isOpen() && !$('.md-sidenav-left').hasClass('md-closed')) {
+    //        //$scope.sideNavIcon = "chevron_left";
+    //        $('#search').focus();
+    //    } else {
+    //        //$scope.sideNavIcon = "search";
+    //        $(".clear-icon").removeClass("toggled");
+    //    }
+    //});
 
 
     $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;
 
-        $mdDialog.show({
-            targetEvent: $event,
-            templateUrl: 'templates/livreDialog.tmpl.html',
-            controller: 'ModalInstanceCtrl',
-            onComplete: afterShowLivreDialog,
-            locals: {
-                selectedItem: $scope.selectedItem,
-                parentScope: $scope
-            }
-        });
-
+        
         //// prevent the modal to show if we click on a nested link
-        //if (!$($event.target).closest('a').length) {
-        //    var modalInstance = $modal.open({
-        //        templateUrl: 'myModalContent.html',
-        //        controller: 'ModalInstanceCtrl',
-        //        size: size,
-        //        resolve: {
-        //            selectedItem: function () {
-        //                return $scope.selectedItem;
-        //            },
-        //            parentScope: function () {
-        //                return $scope;
-        //            },
-        //        }
-        //    });
+        if (!$($event.target).closest('a').length) {
+
+            $mdDialog.show({
+                targetEvent: $event,
+                templateUrl: 'templates/livreDialog.tmpl.html',
+                controller: 'ModalInstanceCtrl',
+                onComplete: afterShowLivreDialog,
+                locals: {
+                    selectedItem: $scope.selectedItem,
+                    parentScope: $scope
+                }
+            });
+  
+
+            //var modalInstance = $modal.open({
+            //    templateUrl: 'myModalContent.html',
+            //    controller: 'ModalInstanceCtrl',
+            //    size: size,
+            //    resolve: {
+            //        selectedItem: function () {
+            //            return $scope.selectedItem;
+            //        },
+            //        parentScope: function () {
+            //            return $scope;
+            //        },
+            //    }
+            //});
+
+
+
+        }
+      
 
 
         //    modalInstance.result.then(function () {
@@ -282,6 +278,8 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     }
 
 
+
+    var results = [];
     $scope.searchSuggestionsValue;
     $scope.searchLivreSuggestions = function (value) {
         $scope.searchSuggestionsValue = value;
@@ -296,16 +294,39 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             }
         }).then(function (res) {
             $scope.loadingSearchSuggestions = false;
+            results.length = 0;
             res.data.Results.forEach(function (item) {
-                item.imageUrl = $scope.apiRootUrl + "/" + item.Couverture;
+                results.push({
+                    Titre: item.Titre, Auteur: {
+                        Nom: item.Auteur.Nom,
+                        Prenom : item.Auteur.Prenom
+                    },
+                    imageUrl : $scope.apiRootUrl + "/" + item.Couverture
+                })
             });
-            return res.data.Results;
+            return results;
         });
     }
+
+
+    $scope.$watch('searchedText', function (newValue) {
+        $scope.validateFilter();
+    });
+
+    $scope.$watch('searchSelectedItem', function (newValue) {
+        if ($scope.searchSelectedItem && $scope.searchSelectedItem.Auteur
+            && ($scope.searchSelectedItem.Auteur.Nom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1
+            || $scope.searchSelectedItem.Auteur.Prenom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1)) {
+            $scope.searchedText = $scope.searchSelectedItem.Auteur.Prenom + " " + $scope.searchSelectedItem.Auteur.Nom;
+        }
+        $scope.validateFilter();
+    });
+
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
+      
         $scope.validateFilter();
     }
 
@@ -333,7 +354,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
                 $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
                     return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
                 }).join('');
-                $rootScope.$broadcast('updateThemesFilter', searchItem.value);
+               // $rootScope.$broadcast('updateThemesFilter', searchItem.value);
                 break;
         } 
 
@@ -349,11 +370,11 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         
         
         $scope.searchItems.length = 0;
-        if ($scope.searchedText || $scope.searchedText.Titre) {
+        if ($scope.searchedText) {
             $scope.searchItems.push(
             {
                 key : "text",
-                value: $scope.searchedText.Titre ? $scope.searchedText.Titre : $scope.searchedText
+                value: $scope.searchedText
             });
         }
         if ($scope.searchPatternEBook) {
@@ -478,13 +499,18 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         //$("#search").removeClass("toggled");
         //$(".searchSideBar").removeClass("toggled");
     }
-    $scope.validateSearch = function (keyEvent) {
+
+    $scope.validateSearch = function (text) {
         if ($scope.searchTimeout) {
             clearTimeout($scope.searchTimeout);
         }
+        console.log(text)
+        console.log("text: " +$scope.searchedText)
+
 
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
+         
             if ($scope.searchedText.Titre) {
                 $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
             } else {
@@ -496,6 +522,8 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
                     }).join('');
                 }
             }
+           
+
             $scope.validateFilter();
         }, 100);
     }
