@@ -20,7 +20,8 @@
     }
 }*/
 .menuBar {
-  margin-top: 20px;
+  height: 70px;
+  margin-top: 70px;
 }
 .menuBar md-item {
   position: relative;
@@ -30,6 +31,7 @@
 }
 .menuBar .md-button {
   position: relative;
+  text-transform: none;
   width: 100%;
   height: 100%;
   opacity: 0.6;
@@ -41,8 +43,8 @@
   color: #00fce4 !important;
 }
 .menuBar .md-icon-container md-icon {
-  height: 45px;
-  width: 45px;
+  height: 46px;
+  width: 46px;
   margin-bottom: 10px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);

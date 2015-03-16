@@ -325,7 +325,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
-        }
+        } 
       
         $scope.validateFilter();
     }
@@ -336,6 +336,11 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             case "text":
                 $scope.searchedText = "";
                 $scope.searchPatternRecherche = null;
+                break;
+
+            case "fichePedago":
+                $scope.searchPatternFichePedagogiques= null;
+                $scope.checkboxFichePedagogiques = false;
                 break;
             case "ebook":
                 $scope.searchPatternEBook = null;
@@ -364,6 +369,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
             + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '')
+            + ($scope.searchPatternFichePedagogiques ? $scope.searchPatternFichePedagogiques : '')
             + ($scope.searchPatternEBook ?  $scope.searchPatternEBook : '')
             + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
@@ -374,9 +380,22 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             $scope.searchItems.push(
             {
                 key : "text",
-                value: $scope.searchedText
+                value: $scope.searchedText.Titre ? $scope.searchedText.Titre : $scope.searchedText
+            });
+            $('#searchbutton').addClass("active");
+        } else {
+            $('#searchbutton').removeClass("active");
+        }
+
+        
+        if ($scope.searchPatternFichePedagogiques) {
+            $scope.searchItems.push(
+            {
+                key: "fichePedago",
+                value: "Fiches pédagogiques"
             });
         }
+
         if ($scope.searchPatternEBook) {
             $scope.searchItems.push(
             {
@@ -420,6 +439,9 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
                  });
             });
          
+            $('#ThemesButton').addClass("active");
+        } else {
+            $('#ThemesButton').removeClass("active");
         }
 
 
@@ -446,6 +468,12 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
         $scope.validateFilter();
     }
+
+    $scope.searchFichePedagogiques = function () {
+        $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.fil-pedago' : '';
+        $scope.validateFilter();
+    }
+    
 
     $scope.searchPrixLitteraires = function () {
         $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';

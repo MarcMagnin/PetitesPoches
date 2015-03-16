@@ -2,11 +2,22 @@
 
 
 
-md-select, md-option {
- margin-top:0;
+md-select{
  color:white;
+ width:100%;
+ height:100%;
+ margin:0;
 }
-
+md-option {
+ color:white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+ margin:0;
+}
 md-select-menu.md-default-theme md-option[selected]:focus,
 md-select-menu.md-default-theme md-option[selected] {
 background-color: transparent;
@@ -47,7 +58,13 @@ padding-left:12px;
 color:lighten(@primaryColor,20%);
 }
 
+.md-select-icon{
+    display:none;
+}
+
 .md-select-label{
+    display:block;
+    height:100%;
     font: normal 14px/38px Montserrat;
     padding:0;
     border-bottom: none;

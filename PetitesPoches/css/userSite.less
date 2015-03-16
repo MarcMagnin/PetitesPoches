@@ -3,7 +3,7 @@
 @import "bottom-sheet";
 @import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
 @import "filter-terms";
-@import "menuBar";
+@import "menuBar"; 
 
 
 @btnHeaderHeight :40px;
@@ -144,10 +144,17 @@ background:rgba(196, 201, 204,0.5);border-radius:5px;display:block;height:50px
 }
 
  .filter-terms{
-     min-height:65px;
-     margin-top:30px;
+     min-height:45px;
+     margin-top:30px;   
      padding-left : 150px;
  }
+
+ @media only screen and (max-width:768px){
+     .filter-terms{
+    padding-left:0;
+    }
+}
+
 
  /**
      Animations tests
