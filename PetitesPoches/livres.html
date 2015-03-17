@@ -66,10 +66,10 @@
                        ng-change="searchFichePedagogiques()"
                        ng-model="checkboxFichePedagogiques">
                 <div class="md-icon-container">
-                    <md-icon md-svg-src="../images/ebook2.svg"></md-icon>
+                    <md-icon md-svg-src="../images/pedago.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text"> Fiches pédagogiques </p>
+                <p class="md-grid-text"> Fiches pédago </p>
             </md-button>
 
         </md-item>
@@ -134,7 +134,7 @@
                     <md-button id="ThemesButton" class="md-primary md-grid-item-content"
                                 aria-label="Thèmes" >
                         <div class="md-icon-container">
-                            <md-icon md-svg-src="../images/prix.svg"></md-icon>
+                            <md-icon md-svg-src="../images/themes.svg"></md-icon>
                         </div>
                         <p class="md-grid-text"> Thèmes</p>
                     </md-button>
@@ -149,11 +149,11 @@
 
 
 
-    <div class="filter-terms" layout="row" layout-align="start center">
-        <div class="tags" ng-repeat="searchItem in searchItems">
-            <md-button ng-click="removeFilter(searchItem)" >
+    <div class="filter-terms" layout="row" layout-align="center center">
+        <div class="tags repeat-item" ng-repeat="searchItem in searchItems">
+            <button ng-click="removeFilter(searchItem)" class="btn filterButton">
                 {{::searchItem.value}}
-            </md-button>
+            </button>
         </div>
     </div>
     

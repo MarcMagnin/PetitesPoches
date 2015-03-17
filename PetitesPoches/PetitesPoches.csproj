@@ -83,6 +83,12 @@
     <Content Include="css\client-bootstrap-override.min.css">
       <DependentUpon>client-bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\filter-terms.css">
+      <DependentUpon>filter-terms.less</DependentUpon>
+    </Content>
+    <Content Include="css\filter-terms.min.css">
+      <DependentUpon>filter-terms.css</DependentUpon>
+    </Content>
     <Content Include="css\menuBar.css">
       <DependentUpon>menuBar.less</DependentUpon>
     </Content>
@@ -327,6 +333,10 @@
     <Content Include="css\menuBar.less" />
     <Content Include="css\menuBar.css.map">
       <DependentUpon>menuBar.css</DependentUpon>
+    </Content>
+    <Content Include="css\filter-terms.less" />
+    <Content Include="css\filter-terms.css.map">
+      <DependentUpon>filter-terms.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

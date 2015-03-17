@@ -28,7 +28,7 @@
 
 
 .menuBar {
-    height:70px;
+    height: 70px;
     margin-top: 70px;
 
     & md-item {
@@ -40,11 +40,12 @@
 
     & .md-button {
         position: relative;
-        text-transform:none;
-        width: 100%;
+        text-transform: none;
         height: 100%;
+        width: 100%;
         opacity: 0.6;
         border-radius: 50%;
+        padding: 0;
         color: @textColor !important;
 
         &.active {
@@ -64,6 +65,18 @@
     &.md-font::before {
         font-size: 2.6em;
         vertical-align: middle;
+    }
+}
+
+@media only screen and (max-width:530px) {
+    .menuBar {
+        & p {
+            display:none;
+        }
+       & md-item {
+        height: 80px;
+        width: 80px;
+        }
     }
 }
 
@@ -126,21 +139,18 @@
     opacity: 0;
 }
 
-#searchitem.toggled{
-    opacity:1;
+#searchitem.toggled {
+    opacity: 1;
 }
 
 
 md-autocomplete ul li {
-     background-color:white;
-    width:600px;
-    height:65px;
-}
-md-autocomplete ul{
-    background-color:white;
-    overflow: visible;
+    background-color: white;
+    width: 600px;
+    height: 65px;
 }
 
-.filter-button{
-    background-color:
+md-autocomplete ul {
+    background-color: white;
+    overflow: visible;
 }

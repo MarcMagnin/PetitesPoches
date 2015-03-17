@@ -32,10 +32,11 @@
 .menuBar .md-button {
   position: relative;
   text-transform: none;
-  width: 100%;
   height: 100%;
+  width: 100%;
   opacity: 0.6;
   border-radius: 50%;
+  padding: 0;
   color: #f3f3f3 !important;
 }
 .menuBar .md-button.active {
@@ -52,6 +53,15 @@
 .menuBar.md-font::before {
   font-size: 2.6em;
   vertical-align: middle;
+}
+@media only screen and (max-width: 530px) {
+  .menuBar p {
+    display: none;
+  }
+  .menuBar md-item {
+    height: 80px;
+    width: 80px;
+  }
 }
 .dropdown-menu {
   z-index: 3000;

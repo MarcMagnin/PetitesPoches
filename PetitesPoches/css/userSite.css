@@ -59,10 +59,70 @@ md-inline-list-icon {
   background-color: transparent !important;
 }
 .filter-terms {
+  z-index: 2;
   color: #f3f3f3;
+  min-height: 45px;
+  margin-top: 15px;
+  margin-bottom: 25px;
 }
 .filter-terms .tags {
-  padding-right: 10px;
+  padding: 0 5px;
+}
+@media only screen and (max-width: 768px) {
+  .filter-terms {
+    padding-left: 0;
+  }
+}
+.filterButton {
+  background-color: rgba(0, 252, 228, 0.1);
+  color: white;
+  border-radius: 3px;
+  border: none;
+  min-height: 30px;
+  line-height: 19px;
+  z-index: 1;
+  padding: 0 8px;
+  cursor: pointer;
+  -moz-transition: all  0.2s ease !important;
+  -o-transition: all  0.2s ease !important;
+  -webkit-transition: all  0.2s ease !important;
+  transition: all  0.2s ease !important;
+}
+.filterButton:hover {
+  background-color: rgba(0, 201, 182, 0.8);
+}
+.repeat-item.ng-enter {
+  -webkit-transition: 0.5s ease-out all;
+  -moz-transition: 0.5s ease-out all;
+  -o-transition: 0.5s ease-out all;
+  transition: 0.5s ease-out all;
+  opacity: 0;
+  -moz-transform: translateX(-30px);
+  -ms-transform: translateX(-30px);
+  -o-transform: translateX(-30px);
+  -webkit-transform: translateX(-30px);
+  transform: translateX(-30px);
+}
+.repeat-item.ng-leave {
+  -webkit-transition: 0 linear all;
+  -moz-transition: 0 linear all;
+  -o-transition: 0 linear all;
+  transition: 0 linear all;
+  opacity: 0;
+}
+.repeat-item.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+.repeat-item.ng-enter.ng-enter-active {
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+  opacity: 1;
+}
+.repeat-item.ng-enter.ng-enter-active .filterButton {
+  background-color: #00b09f;
 }
 /*.md-fab {
     padding: 1px;
@@ -98,10 +158,11 @@ md-inline-list-icon {
 .menuBar .md-button {
   position: relative;
   text-transform: none;
-  width: 100%;
   height: 100%;
+  width: 100%;
   opacity: 0.6;
   border-radius: 50%;
+  padding: 0;
   color: #f3f3f3 !important;
 }
 .menuBar .md-button.active {
@@ -118,6 +179,15 @@ md-inline-list-icon {
 .menuBar.md-font::before {
   font-size: 2.6em;
   vertical-align: middle;
+}
+@media only screen and (max-width: 530px) {
+  .menuBar p {
+    display: none;
+  }
+  .menuBar md-item {
+    height: 80px;
+    width: 80px;
+  }
 }
 .dropdown-menu {
   z-index: 3000;
@@ -321,16 +391,6 @@ a:focus {
   border-radius: 5px;
   display: block;
   height: 50px;
-}
-.filter-terms {
-  min-height: 45px;
-  margin-top: 30px;
-  padding-left: 150px;
-}
-@media only screen and (max-width: 768px) {
-  .filter-terms {
-    padding-left: 0;
-  }
 }
 /**
      Animations tests

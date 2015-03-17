@@ -332,6 +332,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
 
     
     $scope.removeFilter = function (searchItem) {
+        console.log(searchItem.key)
         switch (searchItem.key) {
             case "text":
                 $scope.searchedText = "";
@@ -341,10 +342,12 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             case "fichePedago":
                 $scope.searchPatternFichePedagogiques= null;
                 $scope.checkboxFichePedagogiques = false;
+                $scope.searchItems.splice($scope.searchItems.indexOf(pedagoFilterItem), 1)
                 break;
             case "ebook":
                 $scope.searchPatternEBook = null;
                 $scope.checkboxSearchEBook = false;
+                $scope.searchItems.splice($scope.searchItems.indexOf(ebookFilterItem), 1)
                 break;
             case "prix":
                 $scope.searchPatternPrixLitteraires = null;
@@ -375,8 +378,8 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
         
         
-        $scope.searchItems.length = 0;
-        if ($scope.searchedText) {
+
+        if ($scope.searchedText && $.grep($scope.searchItems, function (e) { return e.key == "text"; }).length == 0) {
             $scope.searchItems.push(
             {
                 key : "text",
@@ -388,28 +391,28 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         }
 
         
-        if ($scope.searchPatternFichePedagogiques) {
-            $scope.searchItems.push(
-            {
-                key: "fichePedago",
-                value: "Fiches pédagogiques"
-            });
-        }
+        //if ($scope.searchPatternFichePedagogiques && $.grep($scope.searchItems, function (e) { return e.key == "fichePedago"; }).length == 0) {
+        //    $scope.searchItems.push(
+        //    {
+        //        key: "fichePedago",
+        //        value: "Fiches pédagogiques"
+        //    });
+        //}
 
-        if ($scope.searchPatternEBook) {
-            $scope.searchItems.push(
-            {
-                key: "ebook",
-                value: "E-books"
-            });
-        }
-        if ($scope.searchPatternPrixLitteraires) {
-            $scope.searchItems.push(
-               {
-                   key: "prix",
-                   value: "Prix Littéraires"
-               });
-        }
+        //if ($scope.searchPatternEBook && $.grep($scope.searchItems, function (e) { return e.key == "ebook"; }).length == 0) {
+        //    $scope.searchItems.push(
+        //    {
+        //        key: "ebook",
+        //        value: "E-books"
+        //    });
+        //}
+        //if ($scope.searchPatternPrixLitteraires) {
+        //    $scope.searchItems.push(
+        //       {
+        //           key: "prix",
+        //           value: "Prix Littéraires"
+        //       });
+        //}
         if ($scope.filterPatternNiveauLecture) {
             var label;
             switch ($scope.niveauLecture) {
@@ -464,13 +467,34 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     }
 
 
+    var ebookFilterItem = {
+        key: "ebook",
+        value: "E-books"
+    };
     $scope.searchEBook = function () {
-        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
+        if( $scope.checkboxSearchEBook){
+            $scope.searchPatternEBook = '.fil-ebook' ;
+            $scope.searchItems.unshift(ebookFilterItem);
+        }else{
+            $scope.searchPatternEBook = '';
+            $scope.searchItems.splice($scope.searchItems.indexOf(ebookFilterItem), 1)
+        }
         $scope.validateFilter();
     }
 
+    var pedagoFilterItem = {
+        key: "fichePedago",
+        value: "Fiches pédagogiques"
+    };
     $scope.searchFichePedagogiques = function () {
-        $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.fil-pedago' : '';
+        if ($scope.checkboxFichePedagogiques) {
+            $scope.searchPatternFichePedagogiques = '.fil-pedago';
+            $scope.searchItems.unshift(pedagoFilterItem);
+        } else {
+            $scope.searchPatternFichePedagogiques = '';
+            $scope.searchItems.splice($scope.searchItems.indexOf(pedagoFilterItem), 1)
+        }
+
         $scope.validateFilter();
     }
     
@@ -532,8 +556,6 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         if ($scope.searchTimeout) {
             clearTimeout($scope.searchTimeout);
         }
-        console.log(text)
-        console.log("text: " +$scope.searchedText)
 
 
         $scope.searchTimeout = setTimeout(function () {
