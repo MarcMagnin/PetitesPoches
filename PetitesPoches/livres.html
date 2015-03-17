@@ -25,23 +25,13 @@
 <div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
 
     <md-list class="menuBar" layout="row" layout-align="center center">
-        <!--<md-item>
-            <md-autocomplete md-selected-item="searchSelectedItem"
-                             md-search-text="searchedText"
-                             md-items="item in searchLivreSuggestions(searchedText)"
-                             md-item-text="searchSelectedItemText">
-                <img src="{{::item.imageUrl}}" width="45" />
-                <span md-highlight-text="searchedText">{{::item.Titre}}</span>
-                <span md-highlight-text="searchedText">de {{item.Auteur.Prenom}}</span>
-                <span md-highlight-text="searchedText">{{item.Auteur.Nom}}</span>
-            </md-autocomplete>
-        </md-item>-->
+
         <md-item id="searchitem" ng-click="toggleSearch()">
             <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
                        aria-label="Recherche">
                 <!--<div id="searchIcon" class="md-icon-container toggled">
-                <md-icon md-font-icon="fa-search" class="fa"></md-icon>
-            </div>-->
+                    <md-icon md-font-icon="fa-search" class="fa"></md-icon>
+                </div>-->
                 <div id="searchIcon" class="md-icon-container ">
                     <md-icon md-svg-src="../images/search.svg"></md-icon>
                 </div>
@@ -55,7 +45,7 @@
                        typeahead-template-url="livreSearchTemplate.html"
                        typeahead-wait-ms="300"
                        typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
-                       class="form-control form-control-inline transparentInput" />   
+                       class="form-control form-control-inline transparentInput" />
             </md-button>
 
         </md-item>
@@ -129,10 +119,10 @@
 
         <md-item>
             <md-select ng-model="themeMultiselectmodel"
-                        multiple="true">
+                       multiple="true">
                 <md-select-label>
                     <md-button id="ThemesButton" class="md-primary md-grid-item-content"
-                                aria-label="Thèmes" >
+                               aria-label="Thèmes">
                         <div class="md-icon-container">
                             <md-icon md-svg-src="../images/themes.svg"></md-icon>
                         </div>
