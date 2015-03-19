@@ -44,35 +44,6 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.searchItems = [];
     
 
-
-
-    $scope.$watch('themeMultiselectmodel.length', function (newValue) {
-        $scope.filtreThemes();
-        //console.log($scope.themeMultiselectmodel)
-        //if ($scope.themeMultiselectmodel.length >=0) {
-        //    var test = $('.dropdown-menu li');
-        //    //test.attr('disabled', true); //add
-           
-        //    //test.unbind('click');
-        //    //test.on('click', function (event) {
-        //    //    // if we have no href url, then don't navigate anywhere.
-        //    //    event.preventDefault();
-        //    //    event.stopPropagation();
-        //    //});
-
-        //    var notSelected = test.not('.lx-select__choice--is-selected');
-        //    notSelected.addClass("disabled")
-        //    notSelected.unbind('click');
-        //    notSelected.on('click', function (event) {
-        //        // if we have no href url, then don't navigate anywhere.
-        //            event.preventDefault();
-        //            event.stopPropagation();
-        //    });
-        //} else {
-        //}
-    });
-
-
    
     $scope.init = function () {
 
@@ -310,6 +281,9 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
 
 
     $scope.$watch('searchedText', function (newValue) {
+
+
+
         $scope.validateFilter();
     });
 
@@ -325,29 +299,78 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
-        } 
+        }
       
         $scope.validateFilter();
     }
 
-    
+    $scope.$watch('themeMultiselectmodel.length', function (items) {
+        //if (previousThemeMultiselectmodel) {
+        //    angular.forEach(items, function (item) {
+        //        var found = false;
+        //        for (var i = 0; i < previousThemeMultiselectmodel.length; i++) {
+        //            if (previousThemeMultiselectmodel[i].Name == item.Name) {
+        //                found = true;
+        //            }
+        //        }
+        //    })
+        //}
+        //angular.forEach(items, function(item){
+        //    var found = false;
+        //    for (var i = 0; i < $scope.searchItems.length; i++) {
+        //        if ($scope.searchItems[i].value == item.Name) {
+        //            found = true;
+        //            $scope.searchItems.splice($scope.searchItems[i], 1);
+        //            break;
+        //        }
+        //    }
+        //    if (!found) {
+        //        $scope.searchItems.unshift(
+        //        {
+        //            key: "theme",
+        //            value: item.Name,
+        //            item: item
+        //        });
+        //    }
+        //})
+
+
+        $scope.filtreThemes();
+    });
+
+    $scope.removeFilterTheme = function (item) {
+        //// trick to enable unselect on ms-select
+        $scope.themeMultiselectmodel.splice($scope.themeMultiselectmodel.indexOf(item), 1);
+        var back = $scope.themeMultiselectmodel;
+        $scope.themeMultiselectmodel = undefined;
+        $scope.themeMultiselectmodel = [];
+        angular.forEach(back, function (theme) {
+            $scope.themeMultiselectmodel.push(theme);
+        });
+        var backTags = [];
+        angular.forEach($scope.tags, function (theme) {
+            backTags.push(theme);
+        });
+        $scope.tags.length = 0;
+        $scope.tags = backTags;
+    }
+
     $scope.removeFilter = function (searchItem) {
-        console.log(searchItem.key)
+
+        $scope.searchItems.splice($scope.searchItems.indexOf(searchItem), 1)
+
         switch (searchItem.key) {
             case "text":
                 $scope.searchedText = "";
                 $scope.searchPatternRecherche = null;
                 break;
-
             case "fichePedago":
                 $scope.searchPatternFichePedagogiques= null;
                 $scope.checkboxFichePedagogiques = false;
-                $scope.searchItems.splice($scope.searchItems.indexOf(pedagoFilterItem), 1)
                 break;
             case "ebook":
                 $scope.searchPatternEBook = null;
                 $scope.checkboxSearchEBook = false;
-                $scope.searchItems.splice($scope.searchItems.indexOf(ebookFilterItem), 1)
                 break;
             case "prix":
                 $scope.searchPatternPrixLitteraires = null;
@@ -356,13 +379,6 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             case "niveau":
                 $scope.niveauLecture = "";
                 $scope.filterPatternNiveauLecture = "";
-                break;
-            case "theme":
-                $scope.themeMultiselectmodel.splice($scope.themeMultiselectmodel.indexOf(searchItem.item), 1);
-                $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
-                    return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
-                }).join('');
-               // $rootScope.$broadcast('updateThemesFilter', searchItem.value);
                 break;
         } 
 
@@ -432,32 +448,12 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
                 value: label
             });
         }
-        if ($scope.searchPatternTheme) {
-            angular.forEach($scope.themeMultiselectmodel, function (theme) {
-                $scope.searchItems.push(
-                 {
-                     key: "theme",
-                     value: theme.Name,
-                     item: theme
-                 });
-            });
-         
-            $('#ThemesButton').addClass("active");
-        } else {
-            $('#ThemesButton').removeClass("active");
-        }
+    
 
 
 
         $scope.container.isotope({ filter: searchPattern });
-
-        var filterActive = searchPattern.length > 1;
-        if (filterActive) {
-            $("#clearFilter").addClass("toggled");
-        }
-        else {
-            $("#clearFilter").removeClass("toggled");
-        }
+     
     }
 
 
@@ -466,49 +462,38 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         $scope.validateFilter();
     }
 
-
-    var ebookFilterItem = {
-        key: "ebook",
-        value: "E-books"
-    };
     $scope.searchEBook = function () {
-        if( $scope.checkboxSearchEBook){
-            $scope.searchPatternEBook = '.fil-ebook' ;
-            $scope.searchItems.unshift(ebookFilterItem);
-        }else{
-            $scope.searchPatternEBook = '';
-            $scope.searchItems.splice($scope.searchItems.indexOf(ebookFilterItem), 1)
-        }
+        $scope.searchPatternEBook  = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
         $scope.validateFilter();
     }
 
-    var pedagoFilterItem = {
-        key: "fichePedago",
-        value: "Fiches pédagogiques"
-    };
     $scope.searchFichePedagogiques = function () {
-        if ($scope.checkboxFichePedagogiques) {
-            $scope.searchPatternFichePedagogiques = '.fil-pedago';
-            $scope.searchItems.unshift(pedagoFilterItem);
-        } else {
-            $scope.searchPatternFichePedagogiques = '';
-            $scope.searchItems.splice($scope.searchItems.indexOf(pedagoFilterItem), 1)
-        }
-
+        $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.fil-pedago' : '';
         $scope.validateFilter();
     }
     
-
     $scope.searchPrixLitteraires = function () {
         $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';
         $scope.validateFilter();
     }
+
+
     $scope.filtreThemes = function () {
         $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
             return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
         }).join('');
+       
+        if ($scope.searchPatternTheme) {
+            $('#ThemesButton').addClass("active");
+        } else {
+            $('#ThemesButton').removeClass("active");
+        }
+
         $scope.validateFilter();
+
     }
+
+
     $scope.filtreAuteur = function (auteur) {
         //$scope.openLeft();
 

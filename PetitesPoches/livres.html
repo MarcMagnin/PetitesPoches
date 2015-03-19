@@ -122,6 +122,7 @@
                        multiple="true">
                 <md-select-label>
                     <md-button id="ThemesButton" class="md-primary md-grid-item-content"
+                              
                                aria-label="Thèmes">
                         <div class="md-icon-container">
                             <md-icon md-svg-src="../images/themes.svg"></md-icon>
@@ -129,10 +130,8 @@
                         <p class="md-grid-text"> Thèmes</p>
                     </md-button>
                 </md-select-label>
-                <md-option ng-value="theme" ng-repeat="theme in tags">{{theme.Name}}</md-option>
+                <md-option ng-value="theme"  ng-repeat="theme in tags | orderBy:'Name'" >{{theme.Name}}</md-option>
             </md-select>
-
-
         </md-item>
     </md-list>
 
@@ -143,6 +142,12 @@
         <div class="tags repeat-item" ng-repeat="searchItem in searchItems">
             <button ng-click="removeFilter(searchItem)" class="btn filterButton">
                 {{::searchItem.value}}
+            </button>
+        </div>
+
+        <div class="tags repeat-item" ng-repeat="item in themeMultiselectmodel">
+            <button ng-click="removeFilterTheme(item)" class="btn filterButton">
+                {{::item.Name}}
             </button>
         </div>
     </div>
