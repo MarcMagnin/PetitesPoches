@@ -88,6 +88,10 @@ md-inline-list-icon {
   -webkit-transition: all  0.2s ease !important;
   transition: all  0.2s ease !important;
 }
+.filterButton.dark {
+  margin-right: 5px;
+  background-color: rgba(0, 150, 136, 0.7);
+}
 .filterButton:hover {
   background-color: rgba(0, 201, 182, 0.8);
 }
@@ -154,6 +158,7 @@ md-inline-list-icon {
   color: #f3f3f3;
   height: 100px;
   width: 100px;
+  margin: 0 20px;
 }
 .menuBar .md-button {
   position: relative;
@@ -167,6 +172,10 @@ md-inline-list-icon {
 }
 .menuBar .md-button > .md-icon-container {
   opacity: 0.2;
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 .menuBar .md-button > .md-grid-text {
   opacity: 0.5;
@@ -178,6 +187,10 @@ md-inline-list-icon {
   -o-transform: translate(-50%, 0);
   -webkit-transform: translate(-50%, 0);
   transform: translate(-50%, 0);
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
 }
 .menuBar .md-button.active {
   color: #00fce4 !important;
@@ -208,13 +221,14 @@ md-inline-list-icon {
   font-size: 2.6em;
   vertical-align: middle;
 }
-@media only screen and (max-width: 530px) {
+@media only screen and (max-width: 630px) {
   .menuBar p {
     display: none;
   }
   .menuBar md-item {
     height: 80px;
     width: 80px;
+    margin: 0;
   }
 }
 .dropdown-menu {
@@ -226,21 +240,18 @@ md-inline-list-icon {
   width: 150px;
   overflow: visible;
 }
+.searchButton > .md-icon-container {
+  -moz-transition: all 0s linear !important;
+  -o-transition: all 0s linear !important;
+  -webkit-transition: all 0s linear !important;
+  transition: all 0s linear !important;
+}
 .searchButton.toggled {
   opacity: 1;
 }
-.searchButton .md-ripple-container {
-  overflow: hidden;
-  border-radius: 50%;
-  -moz-transform: scale(0.95);
-  -ms-transform: scale(0.95);
-  -o-transform: scale(0.95);
-  -webkit-transform: scale(0.95);
-  transform: scale(0.95);
-}
 #search2 {
   position: absolute;
-  top: 35%;
+  top: 45%;
   left: 50%;
   margin-right: -50%;
   -moz-transform: translate(-50%, -50%);

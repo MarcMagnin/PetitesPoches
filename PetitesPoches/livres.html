@@ -35,7 +35,7 @@
                 <div id="searchIcon" class="md-icon-container ">
                     <md-icon md-svg-src="../images/search.svg"></md-icon>
                 </div>
-                <p class="md-grid-text"> Recherche </p>
+                <p class="md-grid-text">Recherche</p>
                 <input type="text"
                        id="search2"
                        ng-model='$parent.searchedText'
@@ -51,6 +51,25 @@
         </md-item>
 
         <md-item>
+            <md-select ng-model="niveauLecture">
+                <md-select-label>
+                    <md-button id="NiveauxButton" class="md-primary md-grid-item-content"
+                               aria-label="Niveaux">
+                        <div class="md-icon-container">
+                            <md-icon md-svg-src="../images/themes.svg"></md-icon>
+                        </div>
+                        <p class="md-grid-text">Niveaux</p>
+                    </md-button>
+                </md-select-label>
+                <md-option value="">Tous niveaux</md-option>
+                <md-option value="premierspas">Permiers pas</md-option>
+                <md-option value="debutants">Débutants</md-option>
+                <md-option value="confirmes">Confirmés</md-option>
+            </md-select>
+
+        </md-item>
+
+        <md-item>
             <md-button btn-checkbox="" class="md-primary md-grid-item-content"
                        aria-label="Fiche pédagogiques"
                        ng-change="searchFichePedagogiques()"
@@ -59,7 +78,7 @@
                     <md-icon md-svg-src="../images/pedago.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text"> Fiches pédago </p>
+                <p class="md-grid-text">Fiches pédagogiques</p>
             </md-button>
 
         </md-item>
@@ -74,11 +93,10 @@
                     <md-icon md-svg-src="../images/ebook2.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text"> E-books </p>
+                <p class="md-grid-text">E-books</p>
             </md-button>
 
         </md-item>
-
 
         <md-item>
             <md-button btn-checkbox="" class="md-primary md-grid-item-content"
@@ -89,7 +107,7 @@
                     <md-icon md-svg-src="../images/prix.svg"></md-icon>
                 </div>
                 <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
-                <p class="md-grid-text"> Prix littéraires </p>
+                <p class="md-grid-text">Prix littéraires</p>
             </md-button>
 
         </md-item>
@@ -118,16 +136,14 @@
             </div>-->
 
         <md-item>
-            <md-select ng-model="themeMultiselectmodel"
-                       multiple="true">
+            <md-select ng-model="themeMultiselectmodel" multiple="true">
                 <md-select-label>
                     <md-button id="ThemesButton" class="md-primary md-grid-item-content"
-                              
                                aria-label="Thèmes">
                         <div class="md-icon-container">
                             <md-icon md-svg-src="../images/themes.svg"></md-icon>
                         </div>
-                        <p class="md-grid-text"> Thèmes</p>
+                        <p class="md-grid-text">Thèmes</p>
                     </md-button>
                 </md-select-label>
                 <md-option ng-value="theme"  ng-repeat="theme in tags | orderBy:'Name'" >{{theme.Name}}</md-option>
@@ -136,18 +152,16 @@
     </md-list>
 
 
-
-
     <div class="filter-terms" layout="row" layout-align="center center">
         <div class="tags repeat-item" ng-repeat="searchItem in searchItems">
             <button ng-click="removeFilter(searchItem)" class="btn filterButton">
-                {{::searchItem.value}}
+                {{searchItem.value}}
             </button>
         </div>
 
         <div class="tags repeat-item" ng-repeat="item in themeMultiselectmodel">
             <button ng-click="removeFilterTheme(item)" class="btn filterButton">
-                {{::item.Name}}
+                {{item.Name}}
             </button>
         </div>
     </div>
@@ -244,21 +258,33 @@
                                      isotopethis sort="date" ng-click="select(item, 'lg', $event)">
                                     <!--href="#responsive" data-toggle="modal"-->
                                     <div class="inner-tile">
-                                        <i title="{{::item.PrixLitteraire}}" class="fa fa-certificate fa-price bottomLeft" ng-show="item.PrixLitteraire"></i>
+
+                                       
+
                                         <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                        <div class="moreInfoButtonWrapper bottomRight">
-                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
-                                               class="transparentButton background-circle">
-                                                <i class="fa fa-file-text" />
-                                            </a>
-                                            <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}" target="_blank"
-                                               title="E-book"
-                                               ng-show="item.EBookUrl"
-                                               class="transparentButton background-circle">
-                                                <i class="fa fa-tablet" />
+                                        <!--<div class="bottomLeft" ng-show="::item.PrixLitteraire">
+                                            <a class="transparentButton" href="#"
+                                               title="E-book">
+                                                <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
                                             </a>
                                         </div>
+
+                                        <div class="moreInfoButtonWrapper bottomRight">
+                                            <div ng-show="::item.EBookUrl">
+                                                <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
+                                                    target="_blank" title="E-book">
+                                                    <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                                </a>
+                                            </div>
+
+                                            <div ng-show="::item.FichePedago">
+                                                <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
+                                                   target="_blank" title="Fiche pédagogique">
+                                                    <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
+                                                </a>
+                                            </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

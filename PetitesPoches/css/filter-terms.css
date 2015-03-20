@@ -28,6 +28,10 @@
   -webkit-transition: all  0.2s ease !important;
   transition: all  0.2s ease !important;
 }
+.filterButton.dark {
+  margin-right: 5px;
+  background-color: rgba(0, 150, 136, 0.7);
+}
 .filterButton:hover {
   background-color: rgba(0, 201, 182, 0.8);
 }

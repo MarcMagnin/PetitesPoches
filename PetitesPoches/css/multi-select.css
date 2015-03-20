@@ -55,9 +55,10 @@ md-select-menu.md-default-theme md-option {
   display: block;
   height: 100%;
   font: normal 14px/38px Montserrat;
-  padding: 0;
-  border-bottom: none;
+  padding: 0 !important;
+  border-bottom: none !important;
   text-indent: 0;
+  min-width: 0;
 }
 /* 
  * Don't modify things marked with ! - unless you know what you're doing
@@ -166,7 +167,6 @@ md-select-menu.md-default-theme md-option {
   margin-right: 30px;
   margin-top: 41px;
   margin-left: 20px;
-  min-width: 150px;
   width: 210px;
 }
 /* container of helper elements */
@@ -253,7 +253,6 @@ md-select-menu.md-default-theme md-option {
   user-select: none;
   border: 0;
   width: 100%;
-  min-width: 50px;
   color: #f3f3f3;
   position: relative;
   cursor: pointer;

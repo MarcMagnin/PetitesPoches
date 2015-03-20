@@ -279,10 +279,25 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         });
     }
 
-
+    var searchedTextItemFilterButton = {
+        key: "text",
+        value: ""
+    }
     $scope.$watch('searchedText', function (newValue) {
-
-
+        console.log(newValue)
+        if ($scope.searchedText && $scope.searchItems.indexOf(searchedTextItemFilterButton) == -1) {
+            $scope.searchItems.push(searchedTextItemFilterButton);
+        
+        
+            $('#searchbutton').addClass("active");
+        } else {
+            if (!$scope.searchedText) {
+                $scope.searchItems.splice($scope.searchItems.indexOf(searchedTextItemFilterButton), 1);
+                $('#searchbutton').removeClass("active");
+            }
+                
+        }
+        searchedTextItemFilterButton.value = newValue;
 
         $scope.validateFilter();
     });
@@ -300,7 +315,9 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
-      
+        else {
+            $scope.searchedText = $item.Titre;
+        }
         $scope.validateFilter();
     }
 
@@ -395,17 +412,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         
         
 
-        if ($scope.searchedText && $.grep($scope.searchItems, function (e) { return e.key == "text"; }).length == 0) {
-            $scope.searchItems.push(
-            {
-                key : "text",
-                value: $scope.searchedText.Titre ? $scope.searchedText.Titre : $scope.searchedText
-            });
-            $('#searchbutton').addClass("active");
-        } else {
-            $('#searchbutton').removeClass("active");
-        }
-
+     
         
         //if ($scope.searchPatternFichePedagogiques && $.grep($scope.searchItems, function (e) { return e.key == "fichePedago"; }).length == 0) {
         //    $scope.searchItems.push(
@@ -429,25 +436,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         //           value: "Prix Littéraires"
         //       });
         //}
-        if ($scope.filterPatternNiveauLecture) {
-            var label;
-            switch ($scope.niveauLecture) {
-                case "premierspas":
-                    label = "Premiers Pas";
-                    break;
-                case "debutants":
-                    label = "Débutants";
-                    break;
-                case "confirmes":
-                    label = "Confirmés";
-                    break;
-            }
-            $scope.searchItems.push(
-            {
-                key: "niveau",
-                value: label
-            });
-        }
+       
     
 
 
@@ -456,11 +445,40 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
      
     }
 
-
-    $scope.filtreNiveauLecture = function () {
+    $scope.niveauLecture = "";
+    var filterItemNiveau= {
+        key: "niveau",
+        value: ""
+    };
+    $scope.$watch('niveauLecture', function (newValue) {
         $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
         $scope.validateFilter();
-    }
+
+        if ($scope.searchItems.indexOf(filterItemNiveau) != -1)
+            $scope.searchItems.splice($scope.searchItems.indexOf(filterItemNiveau), 1);
+        if ($scope.filterPatternNiveauLecture) {
+            $('#NiveauxButton').addClass("active");
+            var label
+            switch ($scope.niveauLecture) {
+                case "premierspas":
+                    label = "Premiers pas";
+                    break;
+                case "debutants":
+                    label = "Débutants";
+                    break;
+                case "confirmes":
+                    label = "Confirmés";
+                    break;
+            }
+            filterItemNiveau = {
+                key: "niveau",
+                value: label
+            };
+            $scope.searchItems.push(filterItemNiveau);
+        } else {
+            $('#NiveauxButton').removeClass("active");
+        }
+    });
 
     $scope.searchEBook = function () {
         $scope.searchPatternEBook  = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
@@ -477,12 +495,27 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         $scope.validateFilter();
     }
 
+ 
+    $scope.filtreNiveauLecture = function () {
+        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
+        $scope.validateFilter();
+    }
 
-    $scope.filtreThemes = function () {
+
+
+    var selectedFromLivre = { Name: "" };
+    $scope.filtreThemes = function (tag) {
+        if (tag) {
+            selectedFromLivre.Name = tag;
+            if ($.grep($scope.themeMultiselectmodel, function (e) { return e.Name == tag; }).length == 0) {
+                $scope.themeMultiselectmodel.push(selectedFromLivre)
+            }
+        }
+
         $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
             return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
         }).join('');
-       
+
         if ($scope.searchPatternTheme) {
             $('#ThemesButton').addClass("active");
         } else {

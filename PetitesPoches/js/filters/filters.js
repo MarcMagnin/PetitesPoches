@@ -13,3 +13,10 @@ app.filter('filterString', function () {
         }).join(' ');
     };
 });
+
+app.filter('dateCleaner', function () {
+    return function (date) {
+        return moment(date).format('DD/MM/YYYY');
+    };
+});
+

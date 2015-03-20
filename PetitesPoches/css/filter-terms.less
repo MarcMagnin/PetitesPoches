@@ -23,7 +23,7 @@
     }
 }
 
- .filterButton {
+.filterButton {
       background-color: fadeout(lighten(@primaryColor,20%),90%);
       color:white;
       border-radius: 3px;
@@ -37,6 +37,10 @@
       -o-transition: all  0.2s ease !important;
       -webkit-transition: all  0.2s ease !important;
       transition: all  0.2s ease !important;
+      &.dark{
+          margin-right:5px;
+           background-color: fadeout(@primaryColor,30%);
+      }
     }
 .filterButton:hover {
     background-color: fadeout(lighten(@primaryColor,10%),20%);

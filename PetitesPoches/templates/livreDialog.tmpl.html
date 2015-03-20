@@ -21,69 +21,88 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
+                        <img style="width:100%" src="{{::parentScope.apiRootUrl}}/{{::selectedItem.Couverture}}" />
 
-                        <p>Publication : {{::selectedItem.datePublication}}</p>
+                        <p>Publication : {{::selectedItem.datePublication | dateCleaner}}</p>
                         <p ng-show="::selectedItem.ISBN">ISBN : {{::selectedItem.ISBN}}</p>
-                        <p>
-                            <div ng-switch="selectedItem.NiveauLecture">
-                                <label ng-switch-when="premierspas">Permiers pas</label>
-                                <label ng-switch-when="debutans">Débutants</label>
-                                <label ng-switch-when="confirmes">Confirmés</label>
+                        
+                        <div class="flex-col">
+                            <div class="md-icon-container inline-flex">
+                                <md-icon class="md-icon" md-svg-src="../images/themes.svg"></md-icon>
+                                <div class="md-icon-text" ng-switch="selectedItem.NiveauLecture">
+                                    <span ng-switch-default>Tous niveaux</span>
+                                    <span ng-switch-when="premierspas">Permiers pas</span>
+                                    <span ng-switch-when="debutans">Débutants</span>
+                                    <span ng-switch-when="confirmes">Confirmés</span>
+                                </div>
                             </div>
-                        </p>
+
+                            <div class="md-icon-container inline-flex" ng-show="selectedItem.PrixLitteraire.length">
+                                <md-icon class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <span>{{::selectedItem.PrixLitteraire}}</span>
+                                </div>
+                            </div>
 
 
-                        <label class="control-label" for="PrixLitteraire" ng-show="::selectedItem.PrixLitteraire">Prix littéraire</label>
-                        <p>{{::selectedItem.PrixLitteraire}}</p>
-                        <label class="control-label" ng-show="::selectedItem.Tags.length > 0">Thèmes</label>
-                        <div class="tags">
-                            <button ng-click="parentScope.filtreTheme(tag)"
-                                    class="btn btn-info"
-                                    ng-repeat="(idx, tag) in selectedItem.Tags track by $index">
-                                {{::tag}}
-                            </button>
+                            <div class="md-icon-container inline-flex" ng-show="selectedItem.Tags.length > 0">
+                                <md-icon class="md-icon" md-svg-src="../images/themes.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <button ng-click="parentScope.filtreThemes(tag)"
+                                            class="btn filterButton dark"
+                                            ng-repeat="(idx, tag) in selectedItem.Tags track by $index">
+                                        {{::tag}}
+                                    </button>
+                                </div>
+                            </div>
                         </div>
+                     
 
                     </div>
                     <div class="col-md-8">
-                        <label class="control-label" for="Extrait" ng-show="::selectedItem.Extrait">Extrait</label>
-                        <p>{{::selectedItem.Extrait}}</p>
-                        <br />
+                        <div style="margin-top:-10px" ng-show="::selectedItem.Extrait">
+                            <label class="control-label" for="Extrait">Extrait</label>
+                            <p>{{::selectedItem.Extrait}}</p>
+                        </div>
 
-                        <p>
-                            <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
-                               target="_blank" title="Fiche pédagogique"
-                               ng-show="::selectedItem.FichePedago">
-                                <i class="fa fa-file-text" />
-                                Fiche pédagogique
-                            </a>
-                        </p>
-
-                        <p>
-                            <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.EBookUrl}}"
-                               target="_blank" title="E-book"
-                               ng-show="::selectedItem.EBookUrl">
-                                <i class="fa fa-tablet" />
-                                Version E-book
-                            </a>
-                        </p>
-
-                        <p>
-                            <a class="transparentButton" href="{{::selectedItem.LienIssu}}"
-                               target="_blank" title="Fiche pédagogique"
-                               ng-show="::selectedItem.LienIssu">
-                                Extrait Issu
-                            </a>
-                        </p>
-
-                        <p>
-                            <a class="transparentButton" href="{{::selectedItem.LienVideo}}"
-                               target="_blank"
-                               ng-show="::selectedItem.LienVideo">
-                                Vidéo
-                            </a>
-                        </p>
+                        <div class="flex-col">
+                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.FichePedago">
+                                <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
+                                       target="_blank" title="Fiche pédagogique">
+                                        Fiche pédagogique
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.EBookUrl">
+                                <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.EBookUrl}}"
+                                        target="_blank" title="E-book">
+                                        Version E-book
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.LienIssu">
+                                <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" href="{{::selectedItem.LienIssu}}"
+                                        target="_blank">
+                                        Extrait Issu
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.LienVideo">
+                                <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" href="{{::selectedItem.LienVideo}}"
+                                        target="_blank">
+                                        Vidéo
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,20 +118,24 @@
                 <div class="row">
                     <div class="col-md-4">
                         <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{::selectedItem.Auteur.Photo}}" />
-                        <p>
-                            <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
-                               target="_blank" title="Fiche pédagogique"
-                               ng-show="::selectedItem.Auteur.LienBiblio">
-                                Bibliographie
-                            </a>
-                        </p>
                     </div>
                     <div class="col-md-8">
-                        <p>
-                            <button class="md-button md-default-theme" ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()">
-                                <span>Voir tous ses livres</span>
-                            </button>
-                        </p>
+                        <div class="flex-col">
+                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.Auteur.LienBiblio">
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" href="{{::selectedItem.Auteur.LienBiblio}}" target="_blank">
+                                        Bibliographie
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="md-icon-container inline-flex">
+                                <div class="md-icon-text">
+                                    <a class="transparentButton" ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()">
+                                        Voir tous ses livres
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,6 +146,6 @@
 
             </div>
         </div>
-        </div>
+      
     </md-content>
 </md-dialog>

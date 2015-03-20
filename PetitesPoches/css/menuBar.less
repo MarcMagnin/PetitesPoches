@@ -36,6 +36,7 @@
         color: @textColor;
         height: 100px;
         width: 100px;
+        margin:0 20px;
     }
 
     & .md-button {
@@ -51,6 +52,10 @@
     
         > .md-icon-container {
             opacity: 0.2;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
         }
         > .md-grid-text {
             opacity:0.5;
@@ -62,12 +67,17 @@
             -o-transform: translate(-50%, 0);
             -webkit-transform: translate(-50%, 0);
             transform: translate(-50%, 0);
+               -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            -webkit-transition: all 0.2s linear;
+            transition: all 0.2s linear;
         }
         &.active {
             color: lighten(@primaryColor, 20%) !important;
 
             > .md-icon-container {
-                opacity: 0.9;
+                opacity: 0.9;         
+
             } > .md-grid-text {
             opacity:0.8;
 
@@ -101,7 +111,7 @@
     }
 }
 
-@media only screen and (max-width:530px) {
+@media only screen and (max-width:630px) {
     .menuBar {
         & p {
             display: none;
@@ -110,6 +120,7 @@
         & md-item {
             height: 80px;
             width: 80px;
+            margin:0;
         }
     }
 }
@@ -124,27 +135,26 @@
     height: 150px;
     width: 150px;
     overflow: visible;
+     > .md-icon-container {
+      -moz-transition: all 0s linear !important;
+            -o-transition: all 0s linear !important;
+            -webkit-transition: all 0s linear !important;
+            transition: all 0s linear !important;
+        }
+       
 }
 
 .searchButton.toggled {
     opacity: 1;
 }
 
-.searchButton .md-ripple-container {
-    overflow: hidden;
-    border-radius: 50%;
-    -moz-transform: scale(0.95);
-    -ms-transform: scale(0.95);
-    -o-transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-    transform: scale(0.95);
-}
+
 
 
 
 #search2 {
     position: absolute;
-    top: 35%;
+    top: 45%;
     left: 50%;
     margin-right: -50%;
     -moz-transform: translate(-50%, -50%);

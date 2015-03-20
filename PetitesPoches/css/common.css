@@ -50,16 +50,17 @@ a:hover, a:visited, a:link, a:active
 }
 
 .topRight{
-    bottom:auto;
+    position: absolute;
     top:0px;
     right:0px;
 }
 
 .bottomLeft{
+    position: absolute;
     top:auto;
     right:auto;
-    left : 5px;
-    bottom:5px;
+    left : 0;
+    bottom:0;
     
 }
 .moreInfoButtonWrapper{
