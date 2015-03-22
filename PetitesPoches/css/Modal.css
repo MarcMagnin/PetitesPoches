@@ -53,6 +53,28 @@ md-dialog .md-default-theme {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
+.iconedLink {
+  text-decoration: none;
+  opacity: 0.6;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.iconedLink:link,
+.iconedLink :visited,
+.iconedLink :active {
+  color: #009688;
+  opacity: 0.6;
+}
+.iconedLink:hover {
+  color: #000000 ;
+  opacity: 1;
+}
+.iconedLink .iconedLink-text {
+  margin-left: 5px;
+}
 .modal-title {
   color: #f3f3f3;
   float: left;
@@ -64,7 +86,7 @@ md-dialog .md-default-theme {
 }
 .modal-header {
   background-color: rgba(0, 0, 0, 0.9);
-  min-height: 55px;
+  min-height: 65px;
   box-shadow: inset 0 0 180px rgba(0, 150, 136, 0.8);
   color: #f3f3f3;
   -webkit-border-radius: 2px 2px 0 0;

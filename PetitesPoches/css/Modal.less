@@ -5,90 +5,119 @@
 
 */
 .md-subheader.md-default-theme {
-  background-color: transparent;
-  margin: 0px; 
+    background-color: transparent;
+    margin: 0px;
 }
 
 md-dialog.md-default-theme {
-border-radius: 4px;
-background-color: transparent;
-max-width:700px;
+    border-radius: 4px;
+    background-color: transparent;
+    max-width: 700px;
 }
+
 md-content.md-default-theme {
- background-color: transparent;
+    background-color: transparent;
 }
+
 md-dialog md-content {
-    padding:0;
+    padding: 0;
     overflow: auto;
 }
 
 md-dialog {
-  overflow: visible;
-  box-shadow: none;
+    overflow: visible;
+    box-shadow: none;
 }
- md-dialog.transition-in {
-    height:80%;
 
- }
-.md-subheader{
-    padding:0;
-    background:transparent;
+md-dialog.transition-in {
+    height: 80%;
+}
+
+.md-subheader {
+    padding: 0;
+    background: transparent;
 }
 
 md-dialog .md-default-theme {
-  color:black;
+    color: black;
 }
 /*
     MODAL
 */
 
-.modal-backdrop{
-    height:100%;
-    background-color:@darkColor;
+.modal-backdrop {
+    height: 100%;
+    background-color: @darkColor;
 }
 
 .modal-backdrop.in {
-filter: alpha(opacity=70);
-opacity: .7;
+    filter: alpha(opacity=70);
+    opacity: .7;
 }
 
-.modal-content{
-    color : black;
-     background-color:transparent;
-background-clip: padding-box;
-/* border-radius: 6px; */
-border:none;
-outline: 0;
--webkit-box-shadow: none;
-box-shadow:none;
+.modal-content {
+    color: black;
+    background-color: transparent;
+    background-clip: padding-box;
+    /* border-radius: 6px; */
+    border: none;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.iconedLink {
+    text-decoration: none;
+    opacity: 0.6;
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    &:link,
+    :visited,
+    :active {
+        color: @primaryColor;
+        opacity: 0.6;
+    }
+    &:hover {
+        color: #000000 ;
+        opacity: 1;
+    }
+    .iconedLink-text {
+        margin-left:5px;
+    }
 }
 
 
-
-.modal-title{
-    color:@textColor;
-    float:left;
+.modal-title {
+    color: @textColor;
+    float: left;
 }
+
 .modal-wrapper {
     box-shadow: 0 3px 9px rgba(0,0,0,.5);
     margin-left: auto;
     margin-right: auto;
 }
-.modal-header{
-    background-color:hsla(0, 0%, 0%, 0.9);
-    min-height:55px;
-    box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);    
-    color:@textColor;
-       -webkit-border-radius: 2px 2px 0 0;
+
+.modal-header {
+    background-color: hsla(0, 0%, 0%, 0.9);
+    min-height: 65px;
+    box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);
+    color: @textColor;
+    -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
-    position:relative;
-    border-bottom:0;
+    position: relative;
+    border-bottom: 0;
 }
-.modal-inner-header{
-     box-shadow: inset 0 0 180px lighten(@darkColor,30%);  
-     background:white;  
+
+.modal-inner-header {
+    box-shadow: inset 0 0 180px lighten(@darkColor,30%);
+    background: white;
 }
+
 .modal-header-title {
     position: absolute;
     left: ~"calc(100% + 85px)";
@@ -107,51 +136,52 @@ box-shadow:none;
     transform-origin: top left 0;
 }
 
-.modal-footer{
+.modal-footer {
     background-color: @textColor;
-    box-shadow: inset 0 0 180px lighten(@textColor,10%);    
-    color:@textColor;
+    box-shadow: inset 0 0 180px lighten(@textColor,10%);
+    color: @textColor;
     -webkit-border-radius: 0 0 2px 2px;
     -moz-border-radius: 0 0 2px 2px;
     border-radius: 0 0 2px 2px;
 }
 
-.modal-body{
-  box-shadow: inset 0 0 20px white;    
-  background-color: @textColor;
+.modal-body {
+    box-shadow: inset 0 0 20px white;
+    background-color: @textColor;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .modal-lg {
-    width: 750px;
+        width: 750px;
     }
 }
 
 
 
-.btn-close{
-    color:black;
- }
+.btn-close {
+    color: black;
+}
 
 .prix {
     top: -25px;
     right: -10px;
-  position: absolute;
-  width: 50px;
-  z-index:100;
+    position: absolute;
+    width: 50px;
+    z-index: 100;
 }
 
-.inline-flex{
-    display:inline-flex;
-    float:left;
-    > md-icon{
-        min-width :27px;
-        min-height:27px;
+.inline-flex {
+    display: inline-flex;
+    float: left;
+
+    > md-icon {
+        min-width: 27px;
+        min-height: 27px;
     }
 }
 
-.md-icon-text{
-    margin-left:5px;
+.md-icon-text {
+    margin-left: 5px;
 }
 
 .flex-col {
