@@ -65,6 +65,7 @@
     <Content Include="admin\js\directives\adminDirectives.js" />
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="appTest.js" />
+    <Content Include="auteurs.html" />
     <Content Include="css\bootstrap-override.css">
       <DependentUpon>bootstrap-override.less</DependentUpon>
     </Content>
@@ -140,6 +141,7 @@
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="images\prix.png" />
+    <Content Include="js\controllers\auteursController.js" />
     <Content Include="js\controllers\mainController.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
@@ -338,6 +340,7 @@
     <Content Include="css\filter-terms.css.map">
       <DependentUpon>filter-terms.css</DependentUpon>
     </Content>
+    <Content Include="templates\auteurDialog.tmpl.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

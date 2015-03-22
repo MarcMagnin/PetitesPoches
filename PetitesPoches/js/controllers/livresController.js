@@ -44,7 +44,10 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
     $scope.searchItems = [];
     
 
-   
+    $scope.closeSearch = function () {
+        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
+        searchToggled = false;
+    }
     $scope.init = function () {
 
         //$("#searchitem").on("click", function () {
@@ -59,13 +62,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
                 return;
             }
-
-            $("#searchitem").removeClass("toggled");
-            $(this).removeClass("toggled");
-            $(this).find("#searchIcon").removeClass("toggled");
-            $("#searchbutton").removeClass("toggled");
-            $("#search2").removeClass("toggled");
-            searchToggled = false;
+            $scope.closeSearch();
         });
 
         itemAdded = 0;
@@ -319,6 +316,7 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             $scope.searchedText = $item.Titre;
         }
         $scope.validateFilter();
+        $scope.closeSearch();
     }
 
     $scope.$watch('themeMultiselectmodel.length', function (items) {
@@ -410,37 +408,6 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
             + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
         
-        
-
-     
-        
-        //if ($scope.searchPatternFichePedagogiques && $.grep($scope.searchItems, function (e) { return e.key == "fichePedago"; }).length == 0) {
-        //    $scope.searchItems.push(
-        //    {
-        //        key: "fichePedago",
-        //        value: "Fiches pédagogiques"
-        //    });
-        //}
-
-        //if ($scope.searchPatternEBook && $.grep($scope.searchItems, function (e) { return e.key == "ebook"; }).length == 0) {
-        //    $scope.searchItems.push(
-        //    {
-        //        key: "ebook",
-        //        value: "E-books"
-        //    });
-        //}
-        //if ($scope.searchPatternPrixLitteraires) {
-        //    $scope.searchItems.push(
-        //       {
-        //           key: "prix",
-        //           value: "Prix Littéraires"
-        //       });
-        //}
-       
-    
-
-
-
         $scope.container.isotope({ filter: searchPattern });
      
     }

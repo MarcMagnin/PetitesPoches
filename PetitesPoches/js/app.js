@@ -8,7 +8,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //    enabled: true,
     //    requireBase: false
     //});
-
+    
 
     $stateProvider.state('tabs', {
         abstract: true,

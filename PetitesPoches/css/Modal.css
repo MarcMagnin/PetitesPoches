@@ -19,9 +19,6 @@ md-dialog md-content {
   overflow: auto;
 }
 md-dialog {
-  /*overflow:initial;*/
-}
-md-dialog {
   overflow: visible;
   box-shadow: none;
 }

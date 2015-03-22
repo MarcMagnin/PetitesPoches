@@ -1,0 +1,121 @@
+﻿<script type="text/ng-template" id="auteurSearchTemplate.html">
+    <a>
+        <img src="{{match.model.Photo}}" width="40" />
+        <span bind-html-unsafe="match.model.Prenom | typeaheadHighlight:query"></span>
+        <span bind-html-unsafe="match.model.Nom | typeaheadHighlight:query"></span>
+    </a>
+</script>
+
+
+<div class="viewContainer" ng-controller="auteursController" ng-init="init()" layout="column">
+
+    <md-list class="menuBar" layout="row" layout-align="center center">
+
+        <md-item id="searchitem" ng-click="toggleSearch()">
+            <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
+                       aria-label="Recherche">
+                <!--<div id="searchIcon" class="md-icon-container toggled">
+                    <md-icon md-font-icon="fa-search" class="fa"></md-icon>
+                </div>-->
+                <div id="searchIcon" class="md-icon-container ">
+                    <md-icon md-svg-src="../images/search.svg"></md-icon>
+                </div>
+                <p class="md-grid-text">Recherche</p>
+                <input type="text"
+                       id="search2"
+                       ng-model='$parent.searchedText'
+                       ng-change='validateSearch($viewValue)'
+                       typeahead="val as val.Titre for val in searchSuggestions($viewValue)"
+                       typeahead-loading="loadingSearchSuggestions"
+                       typeahead-template-url="auteurSearchTemplate.html"
+                       typeahead-wait-ms="300"
+                       typeahead-on-select="validateSearchTextBox($item, $model, $label, $viewValue)"
+                       class="form-control form-control-inline transparentInput" />
+            </md-button>
+
+        </md-item>
+
+    </md-list>
+
+
+    <div class="filter-terms" layout="row" layout-align="center center">
+        <div class="tags repeat-item" ng-repeat="searchItem in searchItems">
+            <button ng-click="removeFilter(searchItem)" class="btn filterButton">
+                {{searchItem.value}}
+            </button>
+        </div>
+    </div>
+
+
+    <section layout="row" flex>
+        <div id="page-content-wrapper" style="height:100%">
+            <div style="height:100%; padding-bottom: 105px;">
+                <div class="col-lg-12" style="height:100%; padding:0">
+                    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
+                        <div class="tile isotopey tile-admin f-{{item.Nom|lowercase}} f-{{item.Prenom|lowercase}}"
+                             ng-repeat=" item in items"
+                             isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
+                            <div class="inner-tile">
+
+                                <img class="tile-image" src="{{::item.Photo}}" ng-show="::item.Photo" />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section>
+</div>
+<script>
+    var $container = $('.tilesContainer');
+    $container.isotope({
+        layoutMode: 'masonryHorizontal',
+        itemSelector: '.isotopey',
+        masonryHorizontal: { rowHeight: 20 },
+        getSortData: {
+            nom: function (elem) {
+                var scope = $(elem).scope();
+                if (scope && scope.item && scope.item.Nom) {
+                    return scope.item.Nom.toLowerCase();
+                }
+                // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste
+                return "aaaaaa";
+            }
+        },
+
+        sortAscending: false,
+    });
+
+
+    // Ripple click effect
+    var parent, ink, d, x, y;
+    $("ul li a").click(function (e) {
+
+        parent = $(this).parent();
+        //create .ink element if it doesn't exist
+        if (parent.find(".ink").length == 0)
+            parent.prepend("<span class='ink'></span>");
+
+        ink = parent.find(".ink");
+        //incase of quick double clicks stop the previous animation
+        ink.removeClass("animate");
+
+        //set size of .ink
+        if (!ink.height() && !ink.width()) {
+            //use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+            d = Math.max(parent.outerWidth(), parent.outerHeight());
+            ink.css({ height: d, width: d });
+        }
+
+        //get click coordinates
+        //logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
+        x = e.pageX - parent.offset().left - ink.width() / 2;
+        y = e.pageY - parent.offset().top - ink.height() / 2;
+        //set the position and add class .animate
+        ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
+    })
+</script>

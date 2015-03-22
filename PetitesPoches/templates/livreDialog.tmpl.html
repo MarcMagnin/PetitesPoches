@@ -20,8 +20,8 @@
         <div class="modal-wrapper">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4">
-                        <img style="width:100%" src="{{::parentScope.apiRootUrl}}/{{::selectedItem.Couverture}}" />
+                    <div class="col-md-4" style="min-width:180px;">
+                        <img class="tile-image" src="{{::parentScope.apiRootUrl}}/{{::selectedItem.Couverture}}" />
 
                         <p>Publication : {{::selectedItem.datePublication | dateCleaner}}</p>
                         <p ng-show="::selectedItem.ISBN">ISBN : {{::selectedItem.ISBN}}</p>
@@ -59,7 +59,7 @@
                      
 
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-8" style="min-width:250px">
                         <div style="margin-top:-10px" ng-show="::selectedItem.Extrait">
                             <label class="control-label" for="Extrait">Extrait</label>
                             <p>{{::selectedItem.Extrait}}</p>
@@ -116,7 +116,7 @@
 
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" style="min-width:180px;">
                         <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{::selectedItem.Auteur.Photo}}" />
                     </div>
                     <div class="col-md-8">

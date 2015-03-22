@@ -9,11 +9,10 @@ app.directive("isotopethis", function () {
             //    window.open($(this).attr("href"), $(this).attr("target"));
             //});
             itemAdded++;
-            var tileImage = elm.find(".tileHeroImage");
             // $container.isotope('insert', elm);
             // advantage : don't filter
             //$container.isotope('appended', elm
-
+            $container = $('.tilesContainer');
 
             // just add the item to the isotope collection without any layout modification
             //$container.isotope('appended2', elm);
@@ -30,10 +29,6 @@ app.directive("isotopethis", function () {
             //    console.log("SORT : " + attrs.sort)
             //    $container.isotope({ sortBy: attrs.sort });
             //}
-            tileImage.load(function () {
-                
-               // $container.isotope('reLayout');
-            });
           
 
         }
