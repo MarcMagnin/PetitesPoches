@@ -268,27 +268,20 @@
 
                                 <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                <div class="bottomLeft" ng-show="::item.PrixLitteraire">
-                                    <a class="transparentButton" href="#"
-                                       title="E-book">
+                                <div class="moreInfoButtonWrapper bottomLeft" ng-show="::item.PrixLitteraire">
                                         <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
-                                    </a>
                                 </div>
 
                                 <div class="moreInfoButtonWrapper bottomRight">
-                                    <div ng-show="::item.EBookUrl">
-                                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
-                                           target="_blank" title="E-book">
-                                            <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
-                                        </a>
-                                    </div>
+                                    <a class="icon-button" ng-show="::item.EBookUrl" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
+                                        target="_blank" title="E-book">
+                                        <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                    </a>
 
-                                    <div ng-show="::item.FichePedago">
-                                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
-                                           target="_blank" title="Fiche pédagogique">
-                                            <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
-                                        </a>
-                                    </div>
+                                    <a class="icon-button" ng-show="::item.FichePedago" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
+                                        target="_blank" title="Fiche pédagogique">
+                                        <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
+                                    </a>
                                 </div>
                             </div>
                         </div>

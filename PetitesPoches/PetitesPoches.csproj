@@ -84,6 +84,9 @@
     <Content Include="css\client-bootstrap-override.min.css">
       <DependentUpon>client-bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\common.min.css">
+      <DependentUpon>common.css</DependentUpon>
+    </Content>
     <Content Include="css\filter-terms.css">
       <DependentUpon>filter-terms.less</DependentUpon>
     </Content>
@@ -141,7 +144,7 @@
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="images\prix.png" />
-    <Content Include="js\controllers\auteursController.js" />
+    <Content Include="js\controllers\auteurController.js" />
     <Content Include="js\controllers\mainController.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
@@ -259,7 +262,7 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="js\app.js" />
-    <Content Include="js\controllers\livresController.js" />
+    <Content Include="js\controllers\livreController.js" />
     <Content Include="js\directives\commonDirectives.js" />
     <Content Include="js\filters\filters.js" />
     <Content Include="js\packages\angular.min.js.map" />
@@ -341,6 +344,10 @@
       <DependentUpon>filter-terms.css</DependentUpon>
     </Content>
     <Content Include="templates\auteurDialog.tmpl.html" />
+    <Content Include="css\common.less" />
+    <Content Include="css\common.css.map">
+      <DependentUpon>common.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -400,6 +407,7 @@
     <Content Include="livres.html" />
     <Content Include="templates\bottomSheet.tmpl.html" />
     <Content Include="templates\livreDialog.tmpl.html" />
+    <Content Include="templates\tabs.tmpl.html" />
     <Content Include="test.html" />
     <Content Include="Web.config" />
   </ItemGroup>

@@ -13,23 +13,25 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider.state('tabs', {
         abstract: true,
-        url: '^',
-        
+        url: '/',
+        controller: "mainController"
     })
     .state('collection', {
-        url: 'collection:auteur',
+        url: '/collection:auteur',
         data: {
             'selectedTab': 0
         },
         templateUrl: "/livres.html",
-        controller:"livreController"
+        controller: "livreController"
+
     })
     .state('auteurs', {
-        url: 'auteurs',
+        url: '/auteurs',
         data: {
             'selectedTab': 1
         },
         templateUrl: "/auteurs.html",
+        controller: "auteurController"
     })
 
 
