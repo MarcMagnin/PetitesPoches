@@ -27,7 +27,7 @@
 //})
 
 
-app.controller("livreController", function ($scope, $rootScope, $stateParams, $mdBottomSheet, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
+app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.tags = [];
