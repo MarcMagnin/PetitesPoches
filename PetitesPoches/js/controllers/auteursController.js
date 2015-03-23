@@ -46,6 +46,11 @@ app.controller("auteursController", function ($scope, $rootScope, $http, $timeou
             })
     };
 
+    $scope.voirTousSesLivres = function (auteur) {
+        console.log(auteur)
+        $rootScope.$broadcast('goToCollection', auteur);
+    }
+
     var searchToggled = false;
     $scope.toggleSearch = function () {
         setTimeout(function () {

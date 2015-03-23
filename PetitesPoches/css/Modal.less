@@ -67,6 +67,7 @@ md-dialog .md-default-theme {
 }
 
 .iconedLink {
+    color: @primaryColor;
     text-decoration: none;
     opacity: 0.6;
     padding: 0;
@@ -77,12 +78,15 @@ md-dialog .md-default-theme {
     &:link,
     :visited,
     :active {
-        color: @primaryColor;
+        color: darken(@primaryColor,20%);
         opacity: 0.6;
     }
     &:hover {
         color: #000000 ;
         opacity: 1;
+    }
+    .md-default-theme{
+        color: @primaryColor;
     }
     .iconedLink-text {
         margin-left:5px;

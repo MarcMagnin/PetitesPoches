@@ -24,7 +24,7 @@
     </a>
 </script>
 
-<div class="viewContainer" ng-controller="livreController" ng-init="init()" layout="column">
+<div class="viewContainer" ng-init="init()" layout="column">
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
@@ -80,7 +80,12 @@
                     <md-icon md-svg-src="../images/pedago.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text">Fiches pédagogiques</p>
+                <p class="md-grid-text">
+                    Fiches
+                </p>
+                <p style="margin-top:20px" class="md-grid-text">
+                    pédagogiques
+                </p>
             </md-button>
 
         </md-item>
@@ -148,7 +153,7 @@
                         <p class="md-grid-text">Thèmes</p>
                     </md-button>
                 </md-select-label>
-                <md-option ng-value="theme"  ng-repeat="theme in tags | orderBy:'Name'" >{{theme.Name}}</md-option>
+                <md-option ng-value="theme" ng-repeat="theme in tags | orderBy:'Name'">{{theme.Name}}</md-option>
             </md-select>
         </md-item>
     </md-list>
@@ -167,10 +172,10 @@
             </button>
         </div>
     </div>
-    
+
 
     <section layout="row" flex>
-     
+
 
 
 
@@ -187,8 +192,8 @@
         </div>
 
         <md-sidenav class="md-sidenav-left md-whiteframe-z2 md-closed" md-component-id="left">
-         
-       
+
+
             <ul class="sidebar-nav">
                 <div class="inner-search-bar">
                     <input type="text"
@@ -199,7 +204,7 @@
                            typeahead-loading="loadingSearchSuggestions"
                            typeahead-template-url="livreSearchTemplate.html"
                            typeahead-wait-ms="300"
-                           
+
                            typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
                            class="form-control form-control-inline transparentInput" />
 
@@ -225,7 +230,7 @@
                 </li>
                 <li style="overflow:visible">
                     <div multi-select
-                       
+
                          class="transparent-multi-select-input"
                          input-model="tags"
                          button-label="Name"
@@ -241,63 +246,61 @@
 
             </ul>
         </md-sidenav>-->
-      
-
-            <!-- Page Content -->
-            <div id="page-content-wrapper" style="height:100%">
-                    <div style="height:100%; padding-bottom: 105px;">
-                        <div class="col-lg-12" style="height:100%; padding:0">
-                            <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
-                                <!--| orderBy:'Index':true-->
-                                <div class="tile isotopey tile-admin {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
-                                     {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
-                                     {{::item.PrixLitteraire && 'fil-prix' || ''}}
-                                     {{::item.EBookUrl && 'fil-ebook' || ''}}
-                                     {{::item.FichePedago && 'fil-pedago' || ''}}
-                                     {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-                                     {{::item.Tags && item.Tags || '' | filterString}} "
+        <!-- Page Content -->
+        <div id="page-content-wrapper" style="height:100%">
+            <div style="height:100%; padding-bottom: 105px;">
+                <div class="col-lg-12" style="height:100%; padding:0">
+                    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" bg>
+                        <!--| orderBy:'Index':true-->
+                        <div class="tile isotopey tile-admin {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+                             {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
+                             {{::item.PrixLitteraire && 'fil-prix' || ''}}
+                             {{::item.EBookUrl && 'fil-ebook' || ''}}
+                             {{::item.FichePedago && 'fil-pedago' || ''}}
+                             {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+                             {{::item.Tags && item.Tags || '' | filterString}} "
                                 ng-repeat=" item in items"
-                                     isotopethis sort="date" ng-click="select(item, 'lg', $event)">
-                                    <!--href="#responsive" data-toggle="modal"-->
-                                    <div class="inner-tile">
+                             isotopethis sort="date" ng-click="select(item, 'lg', $event)">
+                            <!--href="#responsive" data-toggle="modal"-->
+                            <div class="inner-tile">
 
-                                       
 
-                                        <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                        <div class="bottomLeft" ng-show="::item.PrixLitteraire">
-                                            <a class="transparentButton" href="#"
-                                               title="E-book">
-                                                <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
-                                            </a>
-                                        </div>
+                                <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                                        <div class="moreInfoButtonWrapper bottomRight">
-                                            <div ng-show="::item.EBookUrl">
-                                                <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
-                                                    target="_blank" title="E-book">
-                                                    <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
-                                                </a>
-                                            </div>
+                                <div class="bottomLeft" ng-show="::item.PrixLitteraire">
+                                    <a class="transparentButton" href="#"
+                                       title="E-book">
+                                        <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
+                                    </a>
+                                </div>
 
-                                            <div ng-show="::item.FichePedago">
-                                                <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
-                                                   target="_blank" title="Fiche pédagogique">
-                                                    <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
-                                                </a>
-                                            </div>
-                                        </div>
+                                <div class="moreInfoButtonWrapper bottomRight">
+                                    <div ng-show="::item.EBookUrl">
+                                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
+                                           target="_blank" title="E-book">
+                                            <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                                        </a>
+                                    </div>
+
+                                    <div ng-show="::item.FichePedago">
+                                        <a class="transparentButton" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
+                                           target="_blank" title="Fiche pédagogique">
+                                            <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
+
+                </div>
             </div>
+        </div>
 
 
 
-    <section>
+        <section>
 </div>
 
 
@@ -324,7 +327,7 @@
     //    $("#search").addClass("toggled");
     //    $(".searchSideBar").addClass("toggled");
     //});
-    
+
     var $container = $('.tilesContainer');
 
     // change layout mode
@@ -371,8 +374,8 @@
         //    $container.css('overflow', 'visible');
         //}
     });
-   
-  
+
+
     // Ripple click effect
     var parent, ink, d, x, y;
     $("ul li a").click(function (e) {

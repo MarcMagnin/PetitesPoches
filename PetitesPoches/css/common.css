@@ -60,13 +60,13 @@ a:hover, a:visited, a:link, a:active
     top:auto;
     right:auto;
     left : 0;
-     bottom:-5px;
+    bottom:-2px;
     
 }
 .moreInfoButtonWrapper{
     position:absolute;
     display:inline-flex;
-    bottom:-5px;
+    bottom:-2px;
     right:0px;
 }
 

@@ -25,10 +25,10 @@
 }
 .menuBar md-item {
   position: relative;
-  color: #f3f3f3;
+  color: white;
   height: 100px;
   width: 100px;
-  margin: 0 20px;
+  margin: 0;
 }
 .menuBar .md-button {
   position: relative;
@@ -37,11 +37,11 @@
   width: 100%;
   border-radius: 50%;
   padding: 0;
-  color: #f3f3f3 !important;
+  color: white !important;
   overflow: visible;
 }
 .menuBar .md-button > .md-icon-container {
-  opacity: 0.2;
+  opacity: 0.5;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;
   -webkit-transition: all 0.2s linear;
@@ -139,7 +139,7 @@
   transition: all 0.5s ease;
 }
 #search2.toggled {
-  width: 180px;
+  width: 150px;
   height: auto;
   opacity: 1;
 }

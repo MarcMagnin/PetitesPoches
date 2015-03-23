@@ -27,7 +27,7 @@
 //})
 
 
-app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
+app.controller("livreController", function ($scope, $rootScope, $stateParams, $mdBottomSheet, $http, $timeout, $state, $modal, $q, $mdSidenav, livreService, $mdDialog) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.tags = [];
@@ -88,6 +88,10 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
                     $scope.items.push(item);
                 });
 
+                if ($stateParams.auteur) {
+                    $scope.searchedText = $stateParams.auteur;
+                    $scope.validateSearch();
+                }
             })
 
 
@@ -501,6 +505,15 @@ app.controller("livreController", function ($scope, $rootScope, $mdBottomSheet, 
         $scope.validateSearch();
     }
 
+
+    $scope.$on('FilterAvecAuteur', function (event, args) {
+        var test = $stateParams.auteur;
+        console.log(test);
+        if (args) {
+            $scope.searchedText = args.Prenom + " " + args.Nom;
+            $scope.validateSearch();
+        }
+    });
 
     var previousTag;
     $scope.filtreTheme = function (tag) {

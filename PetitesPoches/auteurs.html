@@ -56,9 +56,10 @@
                              ng-repeat=" item in items"
                              isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
                             <div class="inner-tile">
-
                                 <img class="tile-image" src="{{::item.Photo}}" ng-show="::item.Photo" />
-
+                            </div>
+                            <div class="tile-text-wrapper">
+                                <p class="tile-text">{{item.Prenom}} {{item.Nom|uppercase}}</p>
                             </div>
                         </div>
                     </div>

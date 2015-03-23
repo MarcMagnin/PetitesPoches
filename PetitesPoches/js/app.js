@@ -2,7 +2,7 @@
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     // for any unmatched url
-    //$urlRouterProvider.otherwise("/collection");
+    $urlRouterProvider.otherwise("/collection");
 
     //$locationProvider.html5Mode({
     //    enabled: true,
@@ -10,24 +10,22 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     //});
     
 
+
     $stateProvider.state('tabs', {
         abstract: true,
-        url: '/tabs',
-        controller: function ($scope) {
-            $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-                $scope.currentTab = toState.data.selectedTab;
-            });
-        }
+        url: '^',
+        
     })
     .state('collection', {
-        url: '/collection',
+        url: 'collection:auteur',
         data: {
             'selectedTab': 0
         },
         templateUrl: "/livres.html",
+        controller:"livreController"
     })
     .state('auteurs', {
-        url: '/auteurs',
+        url: 'auteurs',
         data: {
             'selectedTab': 1
         },
@@ -42,13 +40,13 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         '200': '80DEEA',
         '300': '4DD0E1',
         '400': '26C6DA',
-        '500': '00BCD4',
+        '500': '26C6DA', // 
         '600': '00ACC1',
         '700': '0097A7',
         '800': '00838F',
         '900': '006064',
         'A100': '84FFFF',
-        'A200': '18FFFF',
+        'A200': '26C6DA', // under
         'A400': '00E5FF',
         'A700': '00B8D4',
         'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
