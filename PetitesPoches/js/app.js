@@ -32,6 +32,12 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         },
         templateUrl: "/auteurs.html",
         controller: "auteurController"
+    }).state('contacts', {
+        url: '/contacts',
+        data: {
+            'selectedTab': 2
+        },
+        templateUrl: "/contacts.html",
     })
 
 

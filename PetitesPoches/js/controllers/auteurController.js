@@ -12,7 +12,7 @@ var Update = function () {
 
 
 
-app.controller("auteurController", function ($scope, $rootScope, $http, $timeout, $state, $modal, $q, auteurService, $mdDialog) {
+app.controller("auteurController", function ($scope, $rootScope, $http, $state, $q, auteurService, $mdDialog) {
     $scope.entityName = "Auteur";
     $scope.items = [];
     $scope.tags = [];

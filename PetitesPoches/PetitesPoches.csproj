@@ -66,6 +66,7 @@
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="appTest.js" />
     <Content Include="auteurs.html" />
+    <Content Include="contacts.html" />
     <Content Include="css\bootstrap-override.css">
       <DependentUpon>bootstrap-override.less</DependentUpon>
     </Content>
@@ -84,8 +85,17 @@
     <Content Include="css\client-bootstrap-override.min.css">
       <DependentUpon>client-bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\common.css">
+      <DependentUpon>common.less</DependentUpon>
+    </Content>
     <Content Include="css\common.min.css">
       <DependentUpon>common.css</DependentUpon>
+    </Content>
+    <Content Include="css\contacts.css">
+      <DependentUpon>contacts.less</DependentUpon>
+    </Content>
+    <Content Include="css\contacts.min.css">
+      <DependentUpon>contacts.css</DependentUpon>
     </Content>
     <Content Include="css\filter-terms.css">
       <DependentUpon>filter-terms.less</DependentUpon>
@@ -345,6 +355,10 @@
     </Content>
     <Content Include="templates\auteurDialog.tmpl.html" />
     <Content Include="css\common.less" />
+    <Content Include="css\contacts.less" />
+    <Content Include="css\contacts.css.map">
+      <DependentUpon>contacts.css</DependentUpon>
+    </Content>
     <Content Include="css\common.css.map">
       <DependentUpon>common.css</DependentUpon>
     </Content>
@@ -375,7 +389,6 @@
     <Content Include="admin\main.html" />
     <Content Include="css\bootstrap-modal-bs3patch.css" />
     <Content Include="css\bootstrap-modal.css" />
-    <Content Include="css\common.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="js\img\sprites-sfa68604977.png" />

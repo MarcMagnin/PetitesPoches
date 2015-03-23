@@ -82,7 +82,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $m
                 //    $scope.$apply();
                 //});
 
-
+                
                 angular.forEach(livres, function (item, index) {
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);

@@ -39,9 +39,9 @@ app.directive("bg", function ($window) {
     return {
         link: function (scope, elm, attrs) {
             var counter = 0;
-            var previousRandom = 1;
+            var random = 1;
+            var previousRandom = 0;
             var previousLayer;
-   
             scope.updateColor = function (i) {
                 previousRandom = i;
                 if (previousLayer)
@@ -69,14 +69,8 @@ app.directive("bg", function ($window) {
             //};
             //elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
             setInterval(function () {
-                var random = Math.floor(Math.random() * 4) + 1;
-                if (random == previousRandom) {
-                    if (random == 4) {
-                        random = 1;
-                    }
-                    else {
-                        random = random++;
-                    }
+                while (random == previousRandom){
+                    random = Math.floor(Math.random() * 4) + 1;
                 }
                 scope.updateColor(random);
             }, 10000);

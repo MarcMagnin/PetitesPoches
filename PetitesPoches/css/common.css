@@ -21,7 +21,11 @@ a:active {
   text-decoration: none;
 }
 .tab-view {
-  height: 100%;
+  padding-top: 80px;
+  height: -moz-calc(100% - 50px) !important;
+  height: -webkit-calc(100% - 50px)!important;
+  height: -o-calc(100% - 50px)!important;
+  height: calc(100% - 50px)!important;
   width: 100%;
 }
 .viewContainer {
