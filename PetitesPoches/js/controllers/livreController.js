@@ -17,14 +17,6 @@
     this.LienVideo = "";
     this.LienIssu = ""
 };
-//app.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet, parentScope) {
-//    $scope.parentScope = parentScope;
-//    $scope.listItemClick = function($index) {
-//        var clickedItem = $scope.items[$index];
-//        $mdBottomSheet.hide(clickedItem);
-//    };
-   
-//})
 
 
 app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog) {
@@ -42,7 +34,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
     $scope.themeMultiselectmodel = [];
     $scope.searchItems = [];
-    
+    $scope.dataReady = false;
 
     $scope.closeSearch = function () {
         $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
@@ -69,12 +61,12 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         livreService.getLivres()
             .then(function (livres) {
 
-                for (var i = 0; i < 200; i++) {
-                    var livre = new Livre();
-                    livre['@metadata'] ="";
-                    livre['@metadata']['@id'] = 0;
-                    $scope.items.push(livre);
-                }
+                //for (var i = 0; i < 200; i++) {
+                //    var livre = new Livre();
+                //    livre['@metadata'] ="";
+                //    livre['@metadata']['@id'] = 0;
+                //    $scope.items.push(livre);
+                //}
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
@@ -82,12 +74,14 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 //    $scope.$apply();
                 //});
 
+                //$timeout(function () {
+                    angular.forEach(livres, function (item, index) {
+                        item.Id = item['@metadata']['@id'];
+                        $scope.items.push(item);
+                    });
+                //}, 1000);
                 
-                angular.forEach(livres, function (item, index) {
-                    item.Id = item['@metadata']['@id'];
-                    $scope.items.push(item);
-                });
-
+                    $scope.dataReady = true;
                 if ($stateParams.auteur) {
                     $scope.searchedText = $stateParams.auteur;
                     $scope.validateSearch();
@@ -404,6 +398,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.validateFilter();
     }
     $scope.validateFilter = function () {
+        if(!$scope.dataReady)
+            return;
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
             + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '')

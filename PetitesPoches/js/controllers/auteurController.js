@@ -19,6 +19,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     $scope.searchItems = [];
     $scope.selectedItem = "";
     $scope.container = $('.tilesContainer');
+    $scope.dataReady = false;
 
 
     $scope.closeSearch = function () {
@@ -42,6 +43,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);
                 });
+                $scope.dataReady = true;
 
             })
     };
@@ -212,6 +214,8 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         $scope.validateFilter();
     }
     $scope.validateFilter = function () {
+        if(!$scope.dataReady)
+            return;
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
         console.log($scope.searchPatternRecherche);
