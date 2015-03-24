@@ -69,12 +69,12 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         livreService.getLivres()
             .then(function (livres) {
 
-                //for (var i = 0; i < 200; i++) {
-                //    var livre = new Livre();
-                //    livre['@metadata'] ="";
-                //    livre['@metadata']['@id'] = 0;
-                //    $scope.items.push(livre);
-                //}
+                for (var i = 0; i < 200; i++) {
+                    var livre = new Livre();
+                    livre['@metadata'] ="";
+                    livre['@metadata']['@id'] = 0;
+                    $scope.items.push(livre);
+                }
 
                 //delayLoop(data.Results, 0, function (item) {
                 //    item.Id = item['@metadata']['@id'];
