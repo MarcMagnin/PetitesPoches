@@ -56,7 +56,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             }
             $scope.closeSearch();
         });
-
+        
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
