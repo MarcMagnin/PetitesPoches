@@ -36,7 +36,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.themeMultiselectmodel = [];
     $scope.searchItems = [];
     $scope.dataReady = false;
-
+     
     $scope.closeSearch = function () {
         $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
         searchToggled = false;
