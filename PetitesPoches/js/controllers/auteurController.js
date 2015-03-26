@@ -15,6 +15,7 @@ var Update = function () {
 app.controller("auteurController", function ($scope, $rootScope, $http, $state, $q, auteurService, $mdDialog) {
     $scope.entityName = "Auteur";
     $scope.items = [];
+    $scope.itemsPool = [];
     $scope.tags = [];
     $scope.searchItems = [];
     $scope.selectedItem = "";
@@ -28,7 +29,17 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     }
 
     $scope.init = function () {
-
+        $("md-item").click(function () {
+            //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+            TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
+        });
+        // delay rendering
+        $(".menuBar").addClass("toggled");
+        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.5, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.2,
+          onCompleteAll = function () {
+              $scope.menuShown = true;
+          });
+        TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
         $("#searchitem, #searchbutton").focusout(function ($event) {
             if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
                 return;
@@ -39,11 +50,21 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         itemAdded = 0;
         auteurService.getAuteurs()
             .then(function (auteurs) {
-                angular.forEach(auteurs, function (item, index) {
+                $scope.itemsPool = auteurs;
+
+                delayLoop(auteurs, 0, 0.0001, function (item) {
                     item.Id = item['@metadata']['@id'];
+
                     $scope.items.push(item);
+                    if ($scope.items.length == auteurs.length) {
+                        $scope.dataReady = true;
+                        TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+                    }
+                    $scope.$apply();
+
                 });
-                $scope.dataReady = true;
+
+           
 
             })
     };

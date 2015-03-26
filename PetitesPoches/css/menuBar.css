@@ -19,8 +19,12 @@
         height: 100%;
     }
 }*/
+.menuBar.toggled {
+  display: flex;
+}
 .menuBar {
   height: 70px;
+  display: none;
 }
 .menuBar md-item {
   position: relative;

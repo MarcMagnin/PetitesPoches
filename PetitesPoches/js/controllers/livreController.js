@@ -22,6 +22,7 @@
 app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog) {
     $scope.entityName = "Livre";
     $scope.items = [];
+    $scope.itemsPool = [];
     $scope.tags = [];
     $scope.selectedItem = "";
     $scope.searchedAuteur = "";
@@ -41,6 +42,18 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         searchToggled = false;
     }
     $scope.init = function () {
+      
+        $("md-item").click(function () {
+            //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+            TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
+        });
+        // delay rendering
+        $(".menuBar").addClass("toggled");
+        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.5, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.1,
+            onCompleteAll = function () {
+                $scope.menuShown = true;
+            });
+        TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
 
         //$("#searchitem").on("click", function () {
         //   $(this).addClass("toggled");
@@ -56,36 +69,50 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             }
             $scope.closeSearch();
         });
-        
+        $scope.menuShown = false;
+
+       
+
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
+                $scope.itemsPool = livres;
+
 
                 //for (var i = 0; i < 200; i++) {
                 //    var livre = new Livre();
                 //    livre['@metadata'] ="";
                 //    livre['@metadata']['@id'] = 0;
-                //    $scope.items.push(livre);
+                //    livres.push(livre);
                 //}
 
-                //delayLoop(data.Results, 0, function (item) {
-                //    item.Id = item['@metadata']['@id'];
-                //    $scope.items.push(item);
-                //    $scope.$apply();
-                //});
+                delayLoop(livres, 0, 0.0001, function (item) {
+                    item.Id = item['@metadata']['@id'];
+                   
+                    $scope.items.push(item);
+                    if ($scope.items.length == livres.length) {
+                        $scope.dataReady = true;
+                        TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+                    }
+                    $scope.$apply();
 
-                //$timeout(function () {
-                    angular.forEach(livres, function (item, index) {
-                        item.Id = item['@metadata']['@id'];
-                        $scope.items.push(item);
-                    });
-                //}, 1000);
+                });
                 
-                    $scope.dataReady = true;
+                //$timeout(function () {
+                //    //angular.forEach(livres, function (item, index) {
+                //    //    item.Id = item['@metadata']['@id'];
+                //    //    $scope.items.push(item);
+                //    //});
+                //    $scope.items = livres;
+                //    $(".progressIndicator").addClass("toggled");
+                    
+                //}, 1000);
+               
                 if ($stateParams.auteur) {
                     $scope.searchedText = $stateParams.auteur;
-                    $scope.validateSearch();
+                    $scope.setSearchPattern();
                 }
+
             })
 
 
@@ -279,7 +306,6 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         value: ""
     }
     $scope.$watch('searchedText', function (newValue) {
-        console.log(newValue)
         if ($scope.searchedText && $scope.searchItems.indexOf(searchedTextItemFilterButton) == -1) {
             $scope.searchItems.push(searchedTextItemFilterButton);
         
@@ -400,6 +426,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.validateFilter = function () {
         if(!$scope.dataReady)
             return;
+      
+
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
             + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '')
@@ -546,6 +574,19 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //$(".searchSideBar").removeClass("toggled");
     }
 
+    $scope.setSearchPattern = function () {
+        if ($scope.searchedText.Titre) {
+            $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
+        } else {
+            if ($scope.searchedText.length == 0) {
+                $scope.searchPatternRecherche = '*';
+            } else {
+                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
+                    return '[class*=\'fil-' + val.toLowerCase() + '\']';
+                }).join('');
+            }
+        }
+    }
     $scope.validateSearch = function (text) {
         if ($scope.searchTimeout) {
             clearTimeout($scope.searchTimeout);
@@ -553,21 +594,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
         $scope.searchTimeout = setTimeout(function () {
-            var searchPattern;
-         
-            if ($scope.searchedText.Titre) {
-                $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
-            } else {
-                if ($scope.searchedText.length == 0) {
-                    $scope.searchPatternRecherche = '*';
-                } else {
-                    $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                        return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                    }).join('');
-                }
-            }
-           
-
+      
+            $scope.setSearchPattern();
+        
             $scope.validateFilter();
         }, 100);
     }

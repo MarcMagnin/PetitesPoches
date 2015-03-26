@@ -17,7 +17,7 @@ md-option {
 md-select-menu.md-default-theme md-option[selected]:focus,
 md-select-menu.md-default-theme md-option[selected] {
   background-color: transparent;
-  color: cyan;
+  color: #00ffff;
 }
 md-select-menu.md-default-theme md-option:focus:not([selected]) {
   background-color: transparent;

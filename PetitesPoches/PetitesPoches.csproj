@@ -121,6 +121,12 @@
     <Content Include="css\multi-select.min.css">
       <DependentUpon>multi-select.css</DependentUpon>
     </Content>
+    <Content Include="css\progressBar.css">
+      <DependentUpon>progressBar.less</DependentUpon>
+    </Content>
+    <Content Include="css\progressBar.min.css">
+      <DependentUpon>progressBar.css</DependentUpon>
+    </Content>
     <Content Include="css\ressources.css">
       <DependentUpon>ressources.less</DependentUpon>
     </Content>
@@ -361,6 +367,10 @@
     </Content>
     <Content Include="css\common.css.map">
       <DependentUpon>common.css</DependentUpon>
+    </Content>
+    <Content Include="css\progressBar.less" />
+    <Content Include="css\progressBar.css.map">
+      <DependentUpon>progressBar.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

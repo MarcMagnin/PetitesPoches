@@ -11,15 +11,33 @@ app.directive("isotopethis", function () {
             itemAdded++;
             // $container.isotope('insert', elm);
             // advantage : don't filter
-            //$container.isotope('appended', elm
-            $container = $('.tilesContainer');
+            $container = $('.tilesContainer')
 
             // just add the item to the isotope collection without any layout modification
             //$container.isotope('appended2', elm);
             $container.isotope('appended2', elm);
 
-            if (scope.items.length == itemAdded) {
-                $container.isotope({ sortBy: attrs.sort});
+            if (scope.itemsPool.length == itemAdded) {
+                scope.dataReady = true;
+
+                var delay = 100;
+                if (!scope.menuShown) {
+                    delay = 500;
+                }
+                setTimeout(function () {
+                    $container.isotope({ sortBy: attrs.sort });
+                    TweenMax.to(".tile", 0.2, { opacity: 1 });
+                    $(".tile").click(function () {
+                        //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+                        TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
+                    });
+                    setTimeout(function () {
+                        scope.validateFilter();
+                    }, 100)
+                }, delay)
+
+               
+               
             }
 
             // get a reference for 

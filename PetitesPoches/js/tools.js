@@ -6,15 +6,17 @@
     }
 })(jQuery);
 
-function delayLoop(collection, index, action) {           //  create a loop function
+function delayLoop(collection,index, timer, action) {
+    var i = 0;
+    //  create a loop function
     setTimeout(function () {    //  call a 3s setTimeout when the loop is called
         action(collection[index]);
-        //  your code here
-        index++;                     //  increment the counter
+        index++;
+                         
         if (index < collection.length) {            //  if the counter < 10, call the loop function
-            delayLoop(collection, index, action);             //  ..  again which will trigger another 
+            delayLoop(collection, index, timer, action);             //  ..  again which will trigger another 
         }                        //  ..  setTimeout()
-    }, 3)
+    }, timer)
 }
 
 

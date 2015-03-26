@@ -24,8 +24,9 @@
     </a>
 </script>
 
-<div class="viewContainer" ng-init="init()" layout="column">
 
+<div class="viewContainer" ng-init="init()" layout="column">
+   
     <md-list class="menuBar" layout="row" layout-align="center center">
 
         <md-item id="searchitem" ng-click="toggleSearch()">
@@ -176,23 +177,22 @@
 
     <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+        <div class="tile isotopey {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
                 {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
                 {{::item.PrixLitteraire && 'fil-prix' || ''}}
                 {{::item.EBookUrl && 'fil-ebook' || ''}}
                 {{::item.FichePedago && 'fil-pedago' || ''}}
                 {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
                 {{::item.Tags && item.Tags || '' | filterString}} "
-                ng-repeat=" item in items"
+                ng-repeat="item in items"
                 isotopethis sort="date" ng-click="select(item, 'lg', $event)">
             <!--href="#responsive" data-toggle="modal"-->
-            <div class="inner-tile">
-
+        
 
 
                 <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
-                <div class="moreInfoButtonWrapper bottomLeft" ng-show="::item.PrixLitteraire">
+                <!--<div class="moreInfoButtonWrapper bottomLeft" ng-show="::item.PrixLitteraire">
                         <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="images/prix.svg"></md-icon>
                 </div>
 
@@ -206,8 +206,8 @@
                         target="_blank" title="Fiche pédagogique">
                         <md-icon class="md-icon" md-svg-src="images/pedago.svg"></md-icon>
                     </a>
-                </div>
-            </div>
+                </div>-->
+          
         </div>
     </div>
 

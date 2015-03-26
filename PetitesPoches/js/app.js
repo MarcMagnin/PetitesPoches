@@ -22,7 +22,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             'selectedTab': 0
         },
         templateUrl: "/livres.html",
-        controller: "livreController"
+        controller: "livreController",
 
     })
     .state('auteurs', {

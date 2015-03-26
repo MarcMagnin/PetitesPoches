@@ -32,33 +32,18 @@
   }
 }
 .tile {
-  cursor: pointer;
+  opacity: 0;
   margin-right: 35px;
   margin-top: 5px;
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.05);
   -o-transition: all .3s;
   -moz-transition: all .3s;
   -webkit-transition: all 0.3s;
-  transition: all .3s ;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  transition: all .3s;
+  background-color: rgba(255, 255, 255, 0.05);
+  height: 286px;
 }
 .tile:hover {
   background-color: #009688;
-  -o-transition: background-color 0.1s ease-out;
-  -moz-transition: background-color 0.1s ease-out;
-  -webkit-transition: background-color 0.1s ease-out;
-  transition: background-color 0.1s ease-out;
-}
-.inner-tile {
-  position: relative;
-  width: 180px;
-  height: 286px;
 }
 .tile-image {
   width: 180px;
