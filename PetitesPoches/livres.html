@@ -35,7 +35,7 @@
                     <md-icon md-font-icon="fa-search" class="fa"></md-icon>
                 </div>-->
                 <div id="searchIcon" class="md-icon-container ">
-                    <md-icon md-svg-src="../images/search.svg"></md-icon>
+                    <md-icon md-svg-src="images/search.svg"></md-icon>
                 </div>
                 <p class="md-grid-text">Recherche</p>
                 <input type="text"
@@ -58,7 +58,7 @@
                     <md-button id="NiveauxButton" class="md-primary md-grid-item-content"
                                aria-label="Niveaux">
                         <div class="md-icon-container">
-                            <md-icon md-svg-src="../images/themes.svg"></md-icon>
+                            <md-icon md-svg-src="images/themes.svg"></md-icon>
                         </div>
                         <p class="md-grid-text">Niveaux</p>
                     </md-button>
@@ -77,7 +77,7 @@
                        ng-change="searchFichePedagogiques()"
                        ng-model="checkboxFichePedagogiques">
                 <div class="md-icon-container">
-                    <md-icon md-svg-src="../images/pedago.svg"></md-icon>
+                    <md-icon md-svg-src="images/pedago.svg"></md-icon>
                 </div>
 
                 <p class="md-grid-text">
@@ -97,7 +97,7 @@
                        ng-change="searchEBook()"
                        ng-model="checkboxSearchEBook">
                 <div class="md-icon-container">
-                    <md-icon md-svg-src="../images/ebook2.svg"></md-icon>
+                    <md-icon md-svg-src="images/ebook2.svg"></md-icon>
                 </div>
 
                 <p class="md-grid-text">E-books</p>
@@ -111,7 +111,7 @@
                        ng-change="searchPrixLitteraires()"
                        ng-model="checkboxPrixLitteraire">
                 <div class="md-icon-container">
-                    <md-icon md-svg-src="../images/prix.svg"></md-icon>
+                    <md-icon md-svg-src="images/prix.svg"></md-icon>
                 </div>
                 <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
                 <p class="md-grid-text">Prix littéraires</p>
@@ -148,7 +148,7 @@
                     <md-button id="ThemesButton" class="md-primary md-grid-item-content"
                                aria-label="Thèmes">
                         <div class="md-icon-container">
-                            <md-icon md-svg-src="../images/themes.svg"></md-icon>
+                            <md-icon md-svg-src="images/themes.svg"></md-icon>
                         </div>
                         <p class="md-grid-text">Thèmes</p>
                     </md-button>
@@ -193,18 +193,18 @@
                 <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
 
                 <div class="moreInfoButtonWrapper bottomLeft" ng-show="::item.PrixLitteraire">
-                        <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="../images/prix.svg"></md-icon>
+                        <md-icon title="{{::item.PrixLitteraire}}" class="md-icon" md-svg-src="images/prix.svg"></md-icon>
                 </div>
 
                 <div class="moreInfoButtonWrapper bottomRight">
                     <a class="icon-button" ng-show="::item.EBookUrl" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.EBookUrl}}"
                         target="_blank" title="E-book">
-                        <md-icon class="md-icon" md-svg-src="../images/ebook2.svg"></md-icon>
+                        <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
                     </a>
 
                     <a class="icon-button" ng-show="::item.FichePedago" href="{{::apiRootUrl}}/static/{{::item.Id}}/{{::item.FichePedago}}"
                         target="_blank" title="Fiche pédagogique">
-                        <md-icon class="md-icon" md-svg-src="../images/pedago.svg"></md-icon>
+                        <md-icon class="md-icon" md-svg-src="images/pedago.svg"></md-icon>
                     </a>
                 </div>
             </div>
