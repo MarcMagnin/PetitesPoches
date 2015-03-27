@@ -40,7 +40,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.closeSearch = function () {
         $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
         searchToggled = false;
-    }
+    } 
     $scope.init = function () {
       
         $("md-item").click(function () {
@@ -61,7 +61,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //   $("#search2").addClass("toggled");
         //    //$("#search2").focus();
           
-
+        
         //});
         $("#searchitem, #searchbutton").focusout(function ($event) {
             if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
