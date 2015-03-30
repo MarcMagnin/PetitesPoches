@@ -29,7 +29,7 @@ var Update = function () {
 
 
 app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', '$q', 'livreService', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal, $q, livreService) {
-    
+    $scope.itemsPool = [];
     $scope.items = [];
     $scope.tags = [];
     $scope.selectedItem = "";
@@ -43,12 +43,13 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.niveauLecture = '';
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
     $scope.themeMultiselectmodel = [];
+    $scope.menuShown = true;
 
     $scope.init = function () {
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
-
+                $scope.itemsPool = livres;
                 //for (var i = 0; i < 100; i++) {
                 //    var livre = new Livre();
                 //    livre['@metadata'] ="";

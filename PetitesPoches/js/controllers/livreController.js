@@ -64,8 +64,12 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         
         //});
         $("#searchitem, #searchbutton").focusout(function ($event) {
-            if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
-                return;
+            //// Can't rely on that, relatedTarget is null on firefox
+            ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
+            ////    return;
+            ////}
+            if (preventFocusOut) {
+                return
             }
             $scope.closeSearch();
         });
@@ -130,12 +134,17 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     };
    
     var searchToggled = false;
+    var preventFocusOut = false;
     $scope.toggleSearch = function () {
         setTimeout(function () {
             $("#search2").focus();
         }, 150)
         if (searchToggled)
             return;
+        preventFocusOut = true;
+        setTimeout(function () {
+            preventFocusOut = false;
+        }, 200)
         searchToggled = true;
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");

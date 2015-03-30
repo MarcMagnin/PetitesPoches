@@ -37,6 +37,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         data: {
             'selectedTab': 2
         },
+        controller: "contactController",
         templateUrl: "/contacts.html",
     })
 
