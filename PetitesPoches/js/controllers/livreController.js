@@ -49,7 +49,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         });
         // delay rendering
         $(".menuBar").addClass("toggled");
-        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.5, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.1,
+        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.1,
             onCompleteAll = function () {
                 $scope.menuShown = true;
             });
