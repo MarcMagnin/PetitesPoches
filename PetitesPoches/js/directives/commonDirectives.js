@@ -27,10 +27,10 @@ app.directive("isotopethis", function () {
                 setTimeout(function () {
                     $container.isotope({ sortBy: attrs.sort });
                     TweenMax.to(".tile", 0.2, { opacity: 1 });
-                    $(".tile").click(function () {
-                        //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
-                        TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
-                    });
+                    //$(".tile").click(function () {
+                    //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+                    //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
+                    //});
                     setTimeout(function () {
                         scope.validateFilter();
                     }, 100)

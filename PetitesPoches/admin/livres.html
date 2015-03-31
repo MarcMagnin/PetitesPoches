@@ -245,7 +245,7 @@
             </button>
             <!--href="#responsive" data-toggle="modal"-->
             <div class="inner-tile">
-                <i title="{{item.PrixLitteraire}}" class="fa fa-certificate fa-price" ng-show="item.PrixLitteraire"></i>
+              
                 <img class="tile-image" src="{{::apiRootUrl}}/{{item.Couverture}}" />
 
                 <div class="tile-text-wrapper">
@@ -254,6 +254,10 @@
                 </div>
 
                 <div class="moreInfoButtonWrapper topRight">
+                    <div class="bottomLeft" ng-show="item.PrixLitteraire">
+                        <md-icon title="{{item.PrixLitteraire}}" md-svg-src="../images/prix.svg"></md-icon>
+                        <img style="width:24px;height:24px" src="../images/prix.svg" />
+                    </div>
                     <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
                        class="transparentButton background-circle">
                         <i class="fa fa-file-text" />

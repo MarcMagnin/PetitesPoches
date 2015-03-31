@@ -75,13 +75,6 @@ body {
   -webkit-border-radius: 6px;
   border-radius: 6px;
 }
-/*
-    BUTTON OVERRIDES
-*/
-/*.btn, .btn-primary{
-    background-color: @buttonColor;
-    border-color: darken(@buttonColor, 10%);
-}*/
 @font-face {
   font-family: 'fontawesome-webfont';
   src: url('fontawesome-webfont.eot') format('embedded-opentype');
@@ -125,12 +118,6 @@ a:active {
 }
 .fa-3 {
   font-size: 4em;
-}
-.fa-price {
-  position: absolute;
-  left: 5px;
-  top: 5px;
-  color: orange;
 }
 .topRight {
   position: absolute;
@@ -245,5 +232,46 @@ a:active {
 }
 .inline-block {
   display: inline-block;
+}
+.drop-zone {
+  position: relative;
+  border: dashed 2px;
+  min-height: 50px;
+  height: auto;
+}
+.clickable {
+  cursor: pointer;
+}
+.drop-zone > p {
+  /*position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);*/
+  text-align: center;
+  vertical-align: middle;
+}
+.drop-box {
+  transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -webkit-transition: all 0.3s ease-out;
+}
+.drop-box.dragover {
+  background: rgba(100, 255, 100, 0.5);
+}
+/*.auteur-placeholder-wrapper{
+    display:block;
+    height:100px;
+}*/
+.hiddendiv {
+  display: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  /* future version of deprecated 'word-wrap' */
+}
+.close-override {
+  float: none;
 }
 /*# sourceMappingURL=admin.css.map */

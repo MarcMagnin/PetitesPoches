@@ -323,6 +323,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }).success(function (data, status, headers, config) {
             item.Id = data.Key;
             item.new = true;
+            $scope.itemsPool.unshift(item);
             $scope.items.unshift(item);
 
             var modalInstance = $modal.open({

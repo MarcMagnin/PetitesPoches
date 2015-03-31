@@ -98,9 +98,16 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
     $scope.add = function () {
         var item = new Auteur;
         $scope.selectedItem = item;
-        $scope.$parent.add(item, $scope).success(function (data, status, headers, config) {
+        $http({
+            method: 'PUT',
+            headers: { 'Raven-Entity-Name': $scope.entityName },
+            url: $rootScope.apiRootUrl + '/docs/' + $scope.entityName + '%2F',
+            data: angular.toJson(item)
+        }).success(function (data, status, headers, config) {
             item.Id = data.Key;
             item.new = true;
+
+            $scope.itemsPool.unshift(item);
             $scope.items.unshift(item);
 
             var modalInstance = $modal.open({
