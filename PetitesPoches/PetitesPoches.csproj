@@ -386,6 +386,7 @@
     <Content Include="admin\css\contactsAdmin.css.map">
       <DependentUpon>contactsAdmin.css</DependentUpon>
     </Content>
+    <Content Include="css\bootstrapCustom.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
