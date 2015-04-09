@@ -106,15 +106,16 @@ md-dialog .md-default-theme {
 }
 
 .modal-header {
-    background-color: hsla(0, 0%, 0%, 0.9);
-    min-height: 65px;
-    box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);
+    background-color: @primaryColor;
+    min-height: 70px;   
+    /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
     color: @textColor;
     -webkit-border-radius: 2px 2px 0 0;
     -moz-border-radius: 2px 2px 0 0;
     border-radius: 2px 2px 0 0;
     position: relative;
     border-bottom: 0;
+    padding: 8px;
 }
 
 .modal-inner-header {
@@ -152,6 +153,9 @@ md-dialog .md-default-theme {
 .modal-body {
     box-shadow: inset 0 0 20px white;
     background-color: @textColor;
+    .tile-image{
+        border : 1px solid @primaryColor;
+    }
 }
 
 @media (min-width: 992px) {
@@ -193,4 +197,11 @@ md-dialog .md-default-theme {
     -ms-flex-direction: column;
     flex-direction: column;
     align-items: flex-start;
+}
+
+.close-button .md-default-theme{
+    position:absolute;
+    top:5px;
+    left:5px;
+    color:white;
 }

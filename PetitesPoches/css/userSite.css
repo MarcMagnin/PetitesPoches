@@ -1,5 +1,4 @@
-﻿@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
-@import url('bootstrap-override.css');
+﻿@import url('bootstrap-override.css');
 md-bottom-sheet {
   overflow-y: hidden;
   background-color: rgba(255, 255, 255, 0.42);
@@ -58,6 +57,11 @@ md-inline-list-icon {
 }
 .md-ripple-container {
   background-color: transparent !important;
+}
+/*@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');*/
+@font-face {
+  font-family: 'eureka-sans-regular';
+  src: url('../fonts/eureka-sans-regular.woff') format('woff');
 }
 .filter-terms {
   z-index: 2;
@@ -711,7 +715,8 @@ md-autocomplete ul {
   display: inline-block;
 }
 body {
-  font: normal 14px/38px Montserrat;
+  font-family: eureka-sans-regular !important;
+  font-size: 2em;
   background-color: transparent;
 }
 p {

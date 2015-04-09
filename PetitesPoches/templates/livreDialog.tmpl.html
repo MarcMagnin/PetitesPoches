@@ -1,24 +1,34 @@
 ﻿<md-dialog msd-wheel="modalMouseWheel($event, $delta, $deltaX, $deltaY)" aria-label="{{::selectedItem.Titre}}">
 
     <div class="modal-header">
+        <a class="iconedLink close-button" ng-click="closeDialog()">
+            <div class="inline-flex">
+                <md-icon class="md-icon" md-svg-src="images/close.svg"></md-icon>
+            </div>
+        </a>
 
 
-        <img class="prix" src="images/prix.png" />
-
-        <div layout="row" layout-align="space-between center" style="margin-bottom:10px">
-            <h2 class="modal-title">
+        <div layout="column" layout-align="center center">
+            <h1 class="modal-title" style="font-size:1.5em">
                 {{::selectedItem.Titre}}
-            </h2>
-            <a class="header-btn filterButton" href="{{::selectedItem.SiteMarchand}}"
-               target="_blank"
-               ng-show="::selectedItem.SiteMarchand">
-                Commander
-            </a>
+            </h1>
+            <h3 class="modal-title" style="margin-top:-10px; font-size:1em">
+                {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
+            </h3>
         </div>
+        
     </div>
     <md-content>
         <div class="modal-wrapper">
             <div class="modal-body">
+
+                <!--<img class="prix" src="images/prix.png" />
+                <a class="header-btn filterButton" href="{{::selectedItem.SiteMarchand}}"
+                   target="_blank"
+                   ng-show="::selectedItem.SiteMarchand">
+                    Commander
+                </a>-->
+
                 <div class="row">
                     <div class="col-md-4" style="min-width:180px;">
                         <img class="tile-image" src="{{::parentScope.apiRootUrl}}/{{::selectedItem.Couverture}}" />
@@ -60,7 +70,7 @@
 
                     </div>
                     <div class="col-md-8" style="min-width:250px">
-                        <div style="margin-top:-10px" ng-show="::selectedItem.Extrait">
+                        <div style="margin-top:-6px" ng-show="::selectedItem.Extrait">
                             <label class="control-label" for="Extrait">Extrait</label>
                             <p>{{::selectedItem.Extrait}}</p>
                         </div>

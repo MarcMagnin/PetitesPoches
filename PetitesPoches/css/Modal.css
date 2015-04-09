@@ -89,15 +89,16 @@ md-dialog .md-default-theme {
   margin-right: auto;
 }
 .modal-header {
-  background-color: rgba(0, 0, 0, 0.9);
-  min-height: 65px;
-  box-shadow: inset 0 0 180px rgba(0, 150, 136, 0.8);
+  background-color: #009688;
+  min-height: 70px;
+  /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
   color: #f3f3f3;
   -webkit-border-radius: 2px 2px 0 0;
   -moz-border-radius: 2px 2px 0 0;
   border-radius: 2px 2px 0 0;
   position: relative;
   border-bottom: 0;
+  padding: 8px;
 }
 .modal-inner-header {
   box-shadow: inset 0 0 180px #797979;
@@ -132,6 +133,9 @@ md-dialog .md-default-theme {
   box-shadow: inset 0 0 20px white;
   background-color: #f3f3f3;
 }
+.modal-body .tile-image {
+  border: 1px solid #009688;
+}
 @media (min-width: 992px) {
   .modal-lg {
     width: 750px;
@@ -164,4 +168,10 @@ md-dialog .md-default-theme {
   flex-direction: column;
   align-items: flex-start;
 }
-/*# sourceMappingURL=Modal.css.map */
+.close-button .md-default-theme {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: white;
+}
+/*# sourceMappingURL=modal.css.map */

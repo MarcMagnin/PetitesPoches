@@ -1,7 +1,12 @@
 ﻿@import "ressources";
  
 @import "bottom-sheet";
-@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
+/*@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');*/
+@font-face {
+    font-family: 'eureka-sans-regular';
+    src: url('../fonts/eureka-sans-regular.woff') format('woff');
+}
+
 @import "filter-terms";
 @import "menuBar"; 
 @import url('bootstrap-override.css');
@@ -140,7 +145,8 @@ height: 30px;
 }
 @btnHeaderHeight :40px;
 body {
- font: normal 14px/38px Montserrat;
+ font-family: eureka-sans-regular !important;
+ font-size:2em;
   background-color: transparent;
 }
 p{

@@ -82,6 +82,12 @@
     <Content Include="css\bootstrap-override.min.css">
       <DependentUpon>bootstrap-override.css</DependentUpon>
     </Content>
+    <Content Include="css\bootstrapCustom.css">
+      <DependentUpon>bootstrapCustom.less</DependentUpon>
+    </Content>
+    <Content Include="css\bootstrapCustom.min.css">
+      <DependentUpon>bootstrapCustom.css</DependentUpon>
+    </Content>
     <Content Include="css\bottom-sheet.css">
       <DependentUpon>bottom-sheet.less</DependentUpon>
     </Content>
@@ -387,6 +393,9 @@
       <DependentUpon>contactsAdmin.css</DependentUpon>
     </Content>
     <Content Include="css\bootstrapCustom.less" />
+    <Content Include="css\bootstrapCustom.css.map">
+      <DependentUpon>bootstrapCustom.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1388,10 +1388,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-.row {
-  margin-right: -15px;
-  margin-left: -15px;
-}
 .col-xs-1,
 .col-sm-1,
 .col-md-1,
@@ -5584,11 +5580,6 @@ button.close {
   filter: alpha(opacity=50);
   opacity: .5;
 }
-.modal-header {
-  min-height: 16.43px;
-  padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
-}
 .modal-header .close {
   margin-top: -2px;
 }
@@ -5598,7 +5589,10 @@ button.close {
 }
 .modal-body {
   position: relative;
-  padding: 15px;
+  padding-top: 25px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
 }
 .modal-footer {
   padding: 15px;
