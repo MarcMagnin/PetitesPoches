@@ -43,10 +43,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     } 
     $scope.init = function () {
       
-        $("md-item").click(function () {
-            //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
-            TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
-        });
+        //$("md-item").click(function () {
+        //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+        //    TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
+        //});
         // delay rendering
         $(".menuBar").addClass("toggled");
         var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.1,

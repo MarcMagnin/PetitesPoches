@@ -9,78 +9,67 @@
 
 
         <div layout="column" layout-align="center center">
-            <h1 class="modal-title" style="font-size:1.5em">
+            <h1 class="modal-title title" >
                 {{::selectedItem.Titre}}
             </h1>
-            <h3 class="modal-title" style="margin-top:-10px; font-size:1em">
+            <h3 class="modal-title subtitle" >
                 {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
             </h3>
         </div>
         
+
+        <img class="prix" src="images/prix.png" />
+        <a class="flat-btn commander-btn" href="{{::selectedItem.SiteMarchand}}"
+           target="_blank"
+           ng-show="::selectedItem.SiteMarchand">
+            commander
+        </a>
     </div>
     <md-content>
         <div class="modal-wrapper">
             <div class="modal-body">
 
-                <!--<img class="prix" src="images/prix.png" />
-                <a class="header-btn filterButton" href="{{::selectedItem.SiteMarchand}}"
-                   target="_blank"
-                   ng-show="::selectedItem.SiteMarchand">
-                    Commander
-                </a>-->
 
                 <div class="row">
-                    <div class="col-md-4" style="min-width:180px;">
+                    <div class="col-md-5" style="min-width:320px;">
                         <img class="tile-image" src="{{::parentScope.apiRootUrl}}/{{::selectedItem.Couverture}}" />
+                        <br /><br />
+                        <p><span class="labelText">publié le </span>{{::selectedItem.datePublication | dateCleaner}}</p>
+                        <p ng-show="::selectedItem.ISBN"><span class="labelText">isbn </span>{{::selectedItem.ISBN}}</p>
+                        <p><span class="labelText">format </span>10,5 x 15 cm</p>
+                        <p>48 pages</p>
+                        <p ng-show="::selectedItem.PrixLitteraire.length"><span class="labelText">{{::selectedItem.PrixLitteraire}}</span></p>
 
-                        <p>Publication : {{::selectedItem.datePublication | dateCleaner}}</p>
-                        <p ng-show="::selectedItem.ISBN">ISBN : {{::selectedItem.ISBN}}</p>
-
-                        <div>
-                            <div class="md-icon-container inline-flex">
-                                <md-icon class="md-icon" md-svg-src="images/niveaux.svg"></md-icon>
-                                <div class="md-icon-text" ng-switch="selectedItem.NiveauLecture">
-                                    <span ng-switch-default>Tous niveaux</span>
-                                    <span ng-switch-when="premierspas">Permiers pas</span>
-                                    <span ng-switch-when="debutans">Débutants</span>
-                                    <span ng-switch-when="confirmes">Confirmés</span>
-                                </div>
-                            </div>
-
-                            <div class="md-icon-container inline-flex" ng-show="selectedItem.PrixLitteraire.length">
-                                <md-icon class="md-icon" md-svg-src="images/prix.svg"></md-icon>
-                                <div class="md-icon-text">
-                                    <span>{{::selectedItem.PrixLitteraire}}</span>
-                                </div>
-                            </div>
-
-
-                            <div class="md-icon-container inline-flex" ng-show="selectedItem.Tags.length > 0">
-                                <md-icon class="md-icon" md-svg-src="images/themes.svg"></md-icon>
-                                <div class="md-icon-text">
-                                    <button ng-click="parentScope.filtreThemes(tag)"
-                                            class="btn filterButton dark"
-                                            ng-repeat="(idx, tag) in selectedItem.Tags track by $index">
-                                        {{::tag}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
+                        <p  ng-show="selectedItem.Tags.length > 0">
+                            <!--<md-icon class="md-icon" md-svg-src="images/themes.svg"></md-icon>-->
+                            <span class="labelText">thèmes</span>
+                            
+                            <a class="simple-link" ng-click="parentScope.filtreThemes(tag)"
+                               ng-repeat="(idx, tag) in selectedItem.Tags track by $index">
+                                {{::tag | lowercase }}
+                            </a>
+                         </p>
+                            <!--<md-icon class="md-icon" md-svg-src="images/niveaux.svg"></md-icon>-->
+                        <p class="labelText" ng-switch="selectedItem.NiveauLecture">
+                            <span ng-switch-default>tous niveaux</span>
+                            <span ng-switch-when="premierspas">permiers pas</span>
+                            <span ng-switch-when="debutans">débutants</span>
+                            <span ng-switch-when="confirmes">confirmés</span>
+                        </p>
 
                     </div>
-                    <div class="col-md-8" style="min-width:250px">
+                    <div class="col-md-6" style="min-width:250px">
                         <div style="margin-top:-6px" ng-show="::selectedItem.Extrait">
-                            <label class="control-label" for="Extrait">Extrait</label>
+                            <p class="extrait-header">extrait</p>
                             <p>{{::selectedItem.Extrait}}</p>
                         </div>
-
+                        <br />
                         <div class="flex-col">
                             <a class="iconedLink" ng-show="::selectedItem.FichePedago" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/pedago.svg"></md-icon>
-                                    <span class="iconedLink-text">Fiche pédagogique</span>
+                                    <span class="iconedLink-text">fiche pédagogique</span>
                                 </div>
                             </a>
 
@@ -88,21 +77,21 @@
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
-                                    <span class="iconedLink-text">Version E-book</span>
+                                    <span class="iconedLink-text">version e-book</span>
                                 </div>
                             </a>
                             <a class="iconedLink" ng-show="::selectedItem.LienIssu" href="{{::selectedItem.LienIssu}}"
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/issuu.svg"></md-icon>
-                                    <span class="iconedLink-text">Extrait Issu</span>
+                                    <span class="iconedLink-text">extrait issuu</span>
                                 </div>
                             </a>
                             <a class="iconedLink" ng-show="::selectedItem.LienVideo" href="{{::selectedItem.LienVideo}}"
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
-                                    <span class="iconedLink-text">Vidéo</span>
+                                    <span class="iconedLink-text">vidéo</span>
                                 </div>
                             </a>
                         </div>
