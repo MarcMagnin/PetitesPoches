@@ -1,17 +1,53 @@
 ﻿<md-dialog msd-wheel="modalMouseWheel($event, $delta, $deltaX, $deltaY)" aria-label="{{::selectedItem.Nom}}">
 
     <div class="modal-header">
-        <div layout="row" layout-align="space-between center" style="margin-bottom:10px">
-            <h2 class="modal-title">
+
+        <a class="iconedLink close-button" ng-click="closeDialog()">
+            <div class="inline-flex">
+                <md-icon class="md-icon" md-svg-src="images/close.svg"></md-icon>
+            </div>
+        </a>
+
+
+        <div layout="column" layout-align="center center">
+            <h1 class="modal-title title" style="margin-top:12px">
                 {{::selectedItem.Prenom}} {{::selectedItem.Nom|uppercase}}
-            </h2>
+            </h1>
         </div>
+
+
     </div>
     <md-content>
         <div class="modal-wrapper">
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-4" style="min-width:180px;">
+                    <div class="col-md-5" style="min-width:320px;">
+                        <img class="tile-image" ng-show="selectedItem.Photo" src="{{::selectedItem.Photo}}" />
+                        <br /><br /><br />
+                    </div>
+                    <div class="col-md-6" style="min-width:250px">
+                        <div class="flex-col">
+
+                            <a class="iconedLink" ng-show="::selectedItem.LienBiblio" href="{{::selectedItem.LienBiblio}}"
+                               target="_blank">
+                                <div class="inline-flex">
+                                    <md-icon class="md-icon" md-svg-src="images/biblio.svg"></md-icon>
+                                    <span class="iconedLink-text">sa biographie</span>
+                                </div>
+                            </a>
+                            <a class="iconedLink" ui-sref="collection({auteur:selectedItem.Prenom + ' ' + selectedItem.Nom})" ng-click="parentScope.voirTousSesLivres(selectedItem); closeDialog()">
+                                <div class="inline-flex">
+                                    <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
+                                    <span class="iconedLink-text">voir toutes ses Petite Poche</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <br /><br /><br /><br /><br />
+                </div>
+
+
+                    <!--<div class="col-md-5" style="min-width:320px;">
                         <img class="tile-image" src="{{::selectedItem.Photo}}" />
                     </div>
                     <div class="col-md-8">
@@ -31,14 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="md-button md-default-theme" ng-click="closeDialog()">
-                    <span>Fermer</span>
-                </button>
-
+                    </div>-->
             </div>
         </div>
 

@@ -2,11 +2,23 @@
   z-index: 2;
   color: #f3f3f3;
   min-height: 45px;
-  margin-top: 30px;
+  margin-top: 55px;
   margin-bottom: 5px;
 }
 .filter-terms .tags {
   padding: 0 5px;
+}
+@media only screen and (max-width: 630px) {
+  .filter-terms {
+    margin-top: 5px;
+  }
+}
+.filter-terms-icon {
+  opacity: 0.5;
+  height: 13px;
+  width: 13px;
+  margin-bottom: 2px;
+  margin-left: 2px;
 }
 @media only screen and (max-width: 768px) {
   .filter-terms {
@@ -14,7 +26,7 @@
   }
 }
 .filterButton {
-  background-color: rgba(0, 252, 228, 0.1);
+  background-color: rgba(21, 254, 237, 0.1);
   color: white;
   border-radius: 3px;
   border: none;
@@ -23,17 +35,17 @@
   z-index: 1;
   padding: 0 8px;
   cursor: pointer;
-  -moz-transition: all  0.2s ease !important;
-  -o-transition: all  0.2s ease !important;
-  -webkit-transition: all  0.2s ease !important;
-  transition: all  0.2s ease !important;
+  -moz-transition: all 0.2s ease !important;
+  -o-transition: all 0.2s ease !important;
+  -webkit-transition: all 0.2s ease !important;
+  transition: all 0.2s ease !important;
 }
 .filterButton.dark {
   margin-right: 5px;
-  background-color: rgba(0, 150, 136, 0.7);
+  background-color: rgba(1, 172, 160, 0.7);
 }
 .filterButton:hover {
-  background-color: rgba(0, 201, 182, 0.8);
+  background-color: rgba(1, 223, 207, 0.8);
 }
 .repeat-item.ng-enter {
   -webkit-transition: 0.5s ease-out all;
@@ -66,6 +78,6 @@
   opacity: 1;
 }
 .repeat-item.ng-enter.ng-enter-active .filterButton {
-  background-color: #00b09f;
+  background-color: #01c5b8;
 }
 /*# sourceMappingURL=filter-terms.css.map */

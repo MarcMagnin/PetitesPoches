@@ -30,7 +30,7 @@ md-dialog {
 }
 
 md-dialog.transition-in {
-    height: 100%;
+    /*height: 100%;*/
 }
 
 .md-subheader {
@@ -75,7 +75,7 @@ md-dialog .md-default-theme {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    background-color : @primaryColor;
+    background-color: @primaryColor;
     color: @textColor;
     display: block;
     float: left;
@@ -84,16 +84,17 @@ md-dialog .md-default-theme {
     padding: 0 8px;
     margin-right: 8px;
     min-width: 30px;
-    cursor:pointer;
+    cursor: pointer;
     text-decoration: none;
 }
 
 .commander-btn {
-    position:absolute;
-    right:2px;
-    top:108px;
-    z-index:50;
+    position: absolute;
+    right: 2px;
+    top: 108px;
+    z-index: 50;
 }
+
 .prix {
     top: 78px;
     right: -20px;
@@ -101,12 +102,14 @@ md-dialog .md-default-theme {
     width: 40px;
     z-index: 100;
 }
-@media (max-width:895px){
-.prix {
-    right: 0;
+
+@media (max-width:895px) {
+    .prix {
+        right: 0;
+    }
 }
-}
-.simple-link{
+
+.simple-link {
     color: black;
     text-decoration: none;
     padding: 0;
@@ -115,19 +118,22 @@ md-dialog .md-default-theme {
     border: 0;
     -webkit-appearance: none;
 
-    &:link{
-            color: black;
-    }
-
-    &:visited{
-            color: black;
-    }
-    &:active{
-            color: black;
-    }
-    &:focus{
+    &:link {
         color: black;
     }
+
+    &:visited {
+        color: black;
+    }
+
+    &:active {
+        color: black;
+    }
+
+    &:focus {
+        color: black;
+    }
+
     &:hover {
         color: @primaryColor;
     }
@@ -136,15 +142,18 @@ md-dialog .md-default-theme {
         color: black;
     }
 }
-.extrait-header{
-    color:@primaryColor;
-}
 
+.extrait-header {
+    color: @primaryColor;
+}
+.extrait{
+    line-height:1.2;
+}
 
 .iconedLink {
     color: @primaryColor;
     text-decoration: none;
-    padding-top: 10px;
+    padding-bottom: 10px;
     cursor: pointer;
     background: transparent;
     border: 0;
@@ -178,18 +187,15 @@ md-dialog .md-default-theme {
     margin-left: auto;
     margin-right: auto;
 }
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
-    padding-left:40px;
-    padding-top:40px;
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    padding-left: 40px;
+    padding-top: 40px;
 }
-@media (max-width:592px) {
-    .col-md-5{
-        text-align:center;
-    }
-}
-.modal-header {
+
+.modal-header-inner{
     background-color: @primaryColor;
-    min-height: 100px;
+    min-height:100px;
     /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
     color: @textColor;
     -webkit-border-radius: 2px 2px 0 0;
@@ -198,23 +204,57 @@ md-dialog .md-default-theme {
     position: relative;
     border-bottom: 0;
     padding: 8px;
+
     .modal-title {
         color: @textColor;
         float: left;
     }
-    .title{
-        font-size:2em;
-        font-weight:bold;
-    }
-    .subtitle{
-        font-size:1.2em;
-        margin-top:-6px;
+
+    .title {
+        font-size: 2em;
+        font-weight: bold;
     }
 }
 
-.modal-inner-header {
-    box-shadow: inset 0 0 180px lighten(@darkColor,30%);
-    background: white;
+.modal-header {
+    background-color: @primaryColor;
+    min-height:100px;
+    /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
+    color: @textColor;
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    border-radius: 2px 2px 0 0;
+    position: relative;
+    border-bottom: 0;
+    padding: 8px;
+
+    .modal-title {
+        color: @textColor;
+        float: left;
+    }
+
+    .title {
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+        margin-top: -6px;
+    }
+}
+
+@media (max-width:692px) {
+    .modal-header {
+        padding:20px;
+        min-height: 170px;
+    }
+}
+
+@media (max-width:592px) {
+    .col-md-5 {
+        text-align: center;
+    }
 }
 
 .modal-header-title {
@@ -296,4 +336,50 @@ md-dialog .md-default-theme {
     top: 5px;
     left: 5px;
     color: white;
+}
+
+
+
+/* ************************************
+    Scrollbar
+*/
+.u-fancy-scrollbar-light {
+    -webkit-overflow-scrolling: touch;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-button:start:decrement, .u-fancy-scrollbar::-webkit-scrollbar-button:end:increment {
+    background: transparent;
+    display: none;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece {
+    background: rgba(214, 218, 220,0.1);
+}
+
+.u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
+    border-radius: 5px5px00;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:vertical:end {
+    border-radius: 005px5px;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:horizontal:start {
+    border-radius: 5px005px;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:horizontal:end {
+    border-radius: 05px5px0;
+}
+
+.u-fancy-scrollbar-light::-webkit-scrollbar-thumb:vertical, .u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal {
+    background: rgba(196, 201, 204,0.5);
+    border-radius: 5px;
+    display: block;
+    height: 50px;
 }

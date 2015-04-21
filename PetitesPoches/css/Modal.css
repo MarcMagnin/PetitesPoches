@@ -23,7 +23,7 @@ md-dialog {
   box-shadow: none;
 }
 md-dialog.transition-in {
-  height: 100%;
+  /*height: 100%;*/
 }
 .md-subheader {
   padding: 0;
@@ -61,7 +61,7 @@ md-dialog .md-default-theme {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  background-color: #009688;
+  background-color: #01aca0;
   color: #f3f3f3;
   display: block;
   float: left;
@@ -113,18 +113,21 @@ md-dialog .md-default-theme {
   color: black;
 }
 .simple-link:hover {
-  color: #009688;
+  color: #01aca0;
 }
 .simple-link .md-default-theme {
   color: black;
 }
 .extrait-header {
-  color: #009688;
+  color: #01aca0;
+}
+.extrait {
+  line-height: 1.2;
 }
 .iconedLink {
-  color: #009688;
+  color: #01aca0;
   text-decoration: none;
-  padding-top: 10px;
+  padding-bottom: 10px;
   cursor: pointer;
   background: transparent;
   border: 0;
@@ -133,14 +136,14 @@ md-dialog .md-default-theme {
 .iconedLink:link,
 .iconedLink :visited,
 .iconedLink :active {
-  color: #009688;
+  color: #01aca0;
 }
 .iconedLink:hover {
   color: #000000;
   opacity: 1;
 }
 .iconedLink .md-default-theme {
-  color: #009688;
+  color: #01aca0;
 }
 .iconedLink .iconedLink-text {
   margin-left: 5px;
@@ -201,13 +204,28 @@ md-dialog .md-default-theme {
   padding-left: 40px;
   padding-top: 40px;
 }
-@media (max-width: 592px) {
-  .col-md-5 {
-    text-align: center;
-  }
+.modal-header-inner {
+  background-color: #01aca0;
+  min-height: 100px;
+  /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
+  color: #f3f3f3;
+  -webkit-border-radius: 2px 2px 0 0;
+  -moz-border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
+  position: relative;
+  border-bottom: 0;
+  padding: 8px;
+}
+.modal-header-inner .modal-title {
+  color: #f3f3f3;
+  float: left;
+}
+.modal-header-inner .title {
+  font-size: 2em;
+  font-weight: bold;
 }
 .modal-header {
-  background-color: #009688;
+  background-color: #01aca0;
   min-height: 100px;
   /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
   color: #f3f3f3;
@@ -230,9 +248,16 @@ md-dialog .md-default-theme {
   font-size: 1.2em;
   margin-top: -6px;
 }
-.modal-inner-header {
-  box-shadow: inset 0 0 180px #797979;
-  background: white;
+@media (max-width: 692px) {
+  .modal-header {
+    padding: 20px;
+    min-height: 170px;
+  }
+}
+@media (max-width: 592px) {
+  .col-md-5 {
+    text-align: center;
+  }
 }
 .modal-header-title {
   position: absolute;
@@ -264,7 +289,7 @@ md-dialog .md-default-theme {
   background-color: #f3f3f3;
 }
 .modal-body .tile-image {
-  border: 2px solid #009688;
+  border: 2px solid #01aca0;
   width: 300px;
 }
 @media (min-width: 992px) {
@@ -300,5 +325,42 @@ md-dialog .md-default-theme {
   top: 5px;
   left: 5px;
   color: white;
+}
+/* ************************************
+    Scrollbar
+*/
+.u-fancy-scrollbar-light {
+  -webkit-overflow-scrolling: touch;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-button:start:decrement,
+.u-fancy-scrollbar::-webkit-scrollbar-button:end:increment {
+  background: transparent;
+  display: none;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece {
+  background: rgba(214, 218, 220, 0.1);
+}
+.u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
+  border-radius: 5px5px00;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:vertical:end {
+  border-radius: 005px5px;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:horizontal:start {
+  border-radius: 5px005px;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-track-piece:horizontal:end {
+  border-radius: 05px5px0;
+}
+.u-fancy-scrollbar-light::-webkit-scrollbar-thumb:vertical,
+.u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal {
+  background: rgba(196, 201, 204, 0.5);
+  border-radius: 5px;
+  display: block;
+  height: 50px;
 }
 /*# sourceMappingURL=modal.css.map */

@@ -11,12 +11,12 @@
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
-        <md-item id="searchitem" ng-click="toggleSearch()">
+        <md-item id="searchitem" ng-click="toggleSearch()" style="z-index:50">
             <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
                        aria-label="Recherche">
                 <!--<div id="searchIcon" class="md-icon-container toggled">
-                    <md-icon md-font-icon="fa-search" class="fa"></md-icon>
-                </div>-->
+                <md-icon md-font-icon="fa-search" class="fa"></md-icon>
+            </div>-->
                 <div id="searchIcon" class="md-icon-container ">
                     <md-icon md-svg-src="images/search.svg"></md-icon>
                 </div>
@@ -42,6 +42,7 @@
         <div class="tags repeat-item" ng-repeat="searchItem in searchItems">
             <button ng-click="removeFilter(searchItem)" class="btn filterButton">
                 {{searchItem.value}}
+                <md-icon class="md-icon filter-terms-icon" md-svg-src="images/close.svg"></md-icon>
             </button>
         </div>
     </div>

@@ -130,6 +130,12 @@
     <Content Include="css\modal.min.css">
       <DependentUpon>Modal.css</DependentUpon>
     </Content>
+    <Content Include="css\multi-select-cleaned.css">
+      <DependentUpon>multi-select-cleaned.less</DependentUpon>
+    </Content>
+    <Content Include="css\multi-select-cleaned.min.css">
+      <DependentUpon>multi-select-cleaned.css</DependentUpon>
+    </Content>
     <Content Include="css\multi-select.css">
       <DependentUpon>multi-select.less</DependentUpon>
     </Content>
@@ -395,6 +401,10 @@
     <Content Include="css\bootstrapCustom.less" />
     <Content Include="css\bootstrapCustom.css.map">
       <DependentUpon>bootstrapCustom.css</DependentUpon>
+    </Content>
+    <Content Include="css\multi-select-cleaned.less" />
+    <Content Include="css\multi-select-cleaned.css.map">
+      <DependentUpon>multi-select-cleaned.css</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

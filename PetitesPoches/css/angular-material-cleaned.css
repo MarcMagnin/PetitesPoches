@@ -7,10 +7,6 @@
 button, select, html, textarea, input {
   font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif; }
 
-body {
-  margin: 0;
-  padding: 0;
-  outline: none; }
 
 .inset {
   padding: 10px; }
@@ -517,9 +513,6 @@ md-select {
   padding-top: 9px;
   padding-right: 32px;
   padding-bottom: 8px;
-  border-bottom: 1px solid;
-  font-size: 0.875em;
-  line-height: 0.8em;
   position: relative;
   box-sizing: border-box;
   min-width: 64px; }

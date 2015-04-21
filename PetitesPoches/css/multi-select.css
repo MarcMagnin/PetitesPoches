@@ -17,7 +17,7 @@ md-option {
 md-select-menu.md-default-theme md-option[selected]:focus,
 md-select-menu.md-default-theme md-option[selected] {
   background-color: transparent;
-  color: #00ffff;
+  color: cyan;
 }
 md-select-menu.md-default-theme md-option:focus:not([selected]) {
   background-color: transparent;
@@ -46,7 +46,7 @@ md-select-menu.md-default-theme md-option {
 }
 .md-select-label:hover,
 .md-select-label .md-select-icon:hover {
-  color: #00fce4;
+  color: #15feed;
 }
 .md-select-icon {
   display: none;
@@ -54,10 +54,8 @@ md-select-menu.md-default-theme md-option {
 .md-select-label {
   display: block;
   height: 100%;
-  font: normal 14px/38px Montserrat;
   padding: 0 !important;
   border-bottom: none !important;
-  text-indent: 0;
   min-width: 0;
 }
 /* 
@@ -114,10 +112,10 @@ md-select-menu.md-default-theme md-option {
 }
 .transparent-multi-select-input > button:hover {
   background-color: transparent;
-  color: #30ffec;
+  color: #48fef1;
 }
 .transparent-multi-select-input > button:focus {
-  border-top: 4px solid #30ffec;
+  border-top: 4px solid #48fef1;
 }
 /* button: hover */
 .multiSelect .button:hover {
@@ -132,7 +130,7 @@ md-select-menu.md-default-theme md-option {
   display: inline-block;
 }
 .multiSelect .active {
-  color: #30ffec;
+  color: #48fef1;
   background-color: transparent;
 }
 /* downward pointing arrow */
@@ -148,7 +146,7 @@ md-select-menu.md-default-theme md-option {
   border-bottom: 0 dotted;
 }
 .transparent-multi-select-input > button:hover > .caret {
-  border-top: 4px solid #30ffec;
+  border-top: 4px solid #48fef1;
 }
 .multiSelect {
   width: 100%;
@@ -260,7 +258,7 @@ md-select-menu.md-default-theme md-option {
 }
 /* Item labels: selected - Enable this if you want to apply styling on selected items */
 .multiSelect .multiSelectItem:not(.multiSelectGroup).selected {
-  color: #00e3cd;
+  color: #01f8e7;
   cursor: pointer;
   border: 0;
 }
@@ -269,7 +267,7 @@ md-select-menu.md-default-theme md-option {
 .multiSelect .multiSelectGroup:hover {
   border: 0;
   cursor: pointer;
-  color: #30ffec;
+  color: #48fef1;
 }
 /* item labels focus using keyboard */
 .multiSelect .multiSelectFocus {
@@ -293,7 +291,7 @@ md-select-menu.md-default-theme md-option {
   right: 10px;
   top: 7px;
   font-size: 10px;
-  color: #30ffec;
+  color: #48fef1;
 }
 /* hide the original HTML checkbox away */
 .multiSelect .checkbox {

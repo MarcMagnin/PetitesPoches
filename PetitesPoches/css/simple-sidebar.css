@@ -159,11 +159,11 @@ md-sidenav {
   overflow: hidden;
 }
 .sidebar-nav li.active > a {
-  color: #00e3cd;
+  color: #01f8e7;
 }
 .sidebar-nav li a:hover {
   text-decoration: none;
-  color: #30ffec;
+  color: #48fef1;
   background-color: transparent;
 }
 .sidebar-nav .tickMark {
@@ -172,7 +172,7 @@ md-sidenav {
   right: 10px;
   top: 1px;
   font-size: 10px;
-  color: #30ffec;
+  color: #48fef1;
 }
 .sidebar-nav li a {
   display: block;
@@ -203,7 +203,7 @@ md-sidenav {
 .ink {
   display: block;
   position: absolute;
-  background: rgba(0, 150, 136, 0.3);
+  background: rgba(1, 172, 160, 0.3);
   border-radius: 100%;
   transform: scale(0);
 }
@@ -288,33 +288,4 @@ input[type="color"]:focus,
   color: #fff;
   background: none;
 }
-/*
-   
-/*@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-}*/
 /*# sourceMappingURL=simple-sidebar.css.map */

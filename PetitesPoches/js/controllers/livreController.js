@@ -446,7 +446,14 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
         
         $scope.container.isotope({ filter: searchPattern });
-     
+
+
+        // enable to fix an offset bug when filtering
+        // set the offset to 0 directly
+        $scope.searchTimeout = setTimeout(function () {
+            $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+        }, 200);
+
     }
 
     $scope.niveauLecture = "";

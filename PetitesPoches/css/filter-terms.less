@@ -4,17 +4,27 @@
     z-index: 2;
     color: @textColor;
     min-height: 45px;
-    margin-top: 30px;
+    margin-top: 55px;
     margin-bottom: 5px;
 
     & .tags {
         padding: 0 5px;
-        
     }
+}
 
-    
-   
 
+@media only screen and (max-width:@sizeHideToolbarText) {
+    .filter-terms {
+        margin-top: 5px;
+    }
+}
+
+.filter-terms-icon {
+    opacity:0.5;
+    height: 13px;
+    width: 13px;
+    margin-bottom: 2px;
+    margin-left:2px;
 }
 
 @media only screen and (max-width:768px) {
@@ -24,27 +34,30 @@
 }
 
 .filterButton {
-      background-color: fadeout(lighten(@primaryColor,20%),90%);
-      color:white;
-      border-radius: 3px;
-      border: none;
-      min-height: 30px;
-      line-height: 19px;
-      z-index: 1;
-      padding: 0 8px;
-      cursor:pointer;
-        -moz-transition: all  0.2s ease !important;
-      -o-transition: all  0.2s ease !important;
-      -webkit-transition: all  0.2s ease !important;
-      transition: all  0.2s ease !important;
-      &.dark{
-          margin-right:5px;
-           background-color: fadeout(@primaryColor,30%);
-      }
+    background-color: fadeout(lighten(@primaryColor,20%),90%);
+    color: white;
+    border-radius: 3px;
+    border: none;
+    min-height: 30px;
+    line-height: 19px;
+    z-index: 1;
+    padding: 0 8px;
+    cursor: pointer;
+    -moz-transition: all 0.2s ease !important;
+    -o-transition: all 0.2s ease !important;
+    -webkit-transition: all 0.2s ease !important;
+    transition: all 0.2s ease !important;
+
+    &.dark {
+        margin-right: 5px;
+        background-color: fadeout(@primaryColor,30%);
     }
+}
+
 .filterButton:hover {
     background-color: fadeout(lighten(@primaryColor,10%),20%);
 }
+
 .repeat-item.ng-enter {
     -webkit-transition: 0.5s ease-out all;
     -moz-transition: 0.5s ease-out all;
@@ -56,8 +69,10 @@
     -o-transform: translateX(-30px);
     -webkit-transform: translateX(-30px);
     transform: translateX(-30px);
-}.repeat-item.ng-leave {
--webkit-transition: 0 linear all; 
+}
+
+.repeat-item.ng-leave {
+    -webkit-transition: 0 linear all;
     -moz-transition: 0 linear all;
     -o-transition: 0 linear all;
     transition: 0 linear all;
@@ -65,8 +80,9 @@
 }
 
 .repeat-item.ng-leave.ng-leave-active {
-  opacity:0;
+    opacity: 0;
 }
+
 .repeat-item.ng-enter.ng-enter-active {
     .filterButton {
         background-color: lighten(@primaryColor,5%);
