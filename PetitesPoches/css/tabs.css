@@ -1,5 +1,6 @@
 ﻿md-tabs.md-default-theme md-tab {
   color: #f3f3f3;
+  font: normal 14px/38px Montserrat;
 }
 .md-header {
   float: right;

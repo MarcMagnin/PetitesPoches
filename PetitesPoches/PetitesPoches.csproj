@@ -59,34 +59,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\contacts.html" />
     <Content Include="admin\css\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
-    <Content Include="admin\css\contactsAdmin.css">
-      <DependentUpon>contactsAdmin.less</DependentUpon>
-    </Content>
-    <Content Include="admin\css\contactsAdmin.min.css">
-      <DependentUpon>contactsAdmin.css</DependentUpon>
-    </Content>
-    <Content Include="admin\js\controllers\contactController.js" />
     <Content Include="admin\js\directives\adminDirectives.js" />
     <Content Include="admin\js\filter\filters.js" />
     <Content Include="appTest.js" />
     <Content Include="auteurs.html" />
-    <Content Include="bower_components\greensock-js\src\uncompressed\TweenMax.js" />
     <Content Include="contacts.html" />
     <Content Include="css\bootstrap-override.css">
       <DependentUpon>bootstrap-override.less</DependentUpon>
     </Content>
     <Content Include="css\bootstrap-override.min.css">
       <DependentUpon>bootstrap-override.css</DependentUpon>
-    </Content>
-    <Content Include="css\bootstrapCustom.css">
-      <DependentUpon>bootstrapCustom.less</DependentUpon>
-    </Content>
-    <Content Include="css\bootstrapCustom.min.css">
-      <DependentUpon>bootstrapCustom.css</DependentUpon>
     </Content>
     <Content Include="css\bottom-sheet.css">
       <DependentUpon>bottom-sheet.less</DependentUpon>
@@ -129,12 +114,6 @@
     </Content>
     <Content Include="css\modal.min.css">
       <DependentUpon>Modal.css</DependentUpon>
-    </Content>
-    <Content Include="css\multi-select-cleaned.css">
-      <DependentUpon>multi-select-cleaned.less</DependentUpon>
-    </Content>
-    <Content Include="css\multi-select-cleaned.min.css">
-      <DependentUpon>multi-select-cleaned.css</DependentUpon>
     </Content>
     <Content Include="css\multi-select.css">
       <DependentUpon>multi-select.less</DependentUpon>
@@ -182,7 +161,6 @@
     <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="images\prix.png" />
     <Content Include="js\controllers\auteurController.js" />
-    <Content Include="js\controllers\contactController.js" />
     <Content Include="js\controllers\mainController.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
@@ -394,18 +372,6 @@
     <Content Include="css\progressBar.css.map">
       <DependentUpon>progressBar.css</DependentUpon>
     </Content>
-    <Content Include="admin\css\contactsAdmin.less" />
-    <Content Include="admin\css\contactsAdmin.css.map">
-      <DependentUpon>contactsAdmin.css</DependentUpon>
-    </Content>
-    <Content Include="css\bootstrapCustom.less" />
-    <Content Include="css\bootstrapCustom.css.map">
-      <DependentUpon>bootstrapCustom.css</DependentUpon>
-    </Content>
-    <Content Include="css\multi-select-cleaned.less" />
-    <Content Include="css\multi-select-cleaned.css.map">
-      <DependentUpon>multi-select-cleaned.css</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -466,7 +432,9 @@
     <Content Include="templates\livreDialog.tmpl.html" />
     <Content Include="templates\tabs.tmpl.html" />
     <Content Include="test.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
