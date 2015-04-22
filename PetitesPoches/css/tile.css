@@ -60,6 +60,7 @@
 }
 .tile-text {
   text-align: center;
+  text-shadow: 0 0 3px black;
   color: whitesmoke;
 }
 /*# sourceMappingURL=tile.css.map */

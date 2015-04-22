@@ -48,41 +48,35 @@
     </div>
 
 
-    <section layout="row" flex>
-        <div id="page-content-wrapper" style="height:100%">
-            <div style="height:100%; padding-bottom: 105px;">
-                <div class="col-lg-12" style="height:100%; padding:0">
-                    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
-                        <div class="tile isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
-                             ng-repeat="item in items"
-                             isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
-                            <div class="inner-tile">
-                                <img class="tile-image" src="{{::item.Photo}}" ng-show="::item.Photo" />
-                                <div class="placeholder" style="margin-top:20px;" ng-hide="::item.Photo">
-                                    <i class="fa fa-user fa-6 inner-placeholder " />
-                                </div>
 
-                            </div>
-
-                            <div class="tile-text-wrapper">
-                                <p class="tile-text">{{::item.Prenom}} {{::item.Nom|uppercase}}</p>
-                            </div>
-                        </div>
-                    </div>
+    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
+        <div class="tile isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
+                ng-repeat="item in items"
+                isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
+            <div class="inner-tile">
+                <img class="tile-image" src="{{::item.Photo}}" ng-show="::item.Photo" />
+                <div class="placeholder" style="margin-top:20px;" ng-hide="::item.Photo">
+                    <i class="fa fa-user fa-6 inner-placeholder " />
                 </div>
+
+            </div>
+
+            <div class="tile-text-wrapper">
+                <p class="tile-text">{{::item.Prenom}} {{::item.Nom|uppercase}}</p>
             </div>
         </div>
+    </div>
+       
 
 
 
-        <section>
 </div>
 <script>
     var $container = $('.tilesContainer');
     $container.isotope({
         layoutMode: 'masonryHorizontal',
         itemSelector: '.isotopey',
-        masonryHorizontal: { rowHeight: 20 },
+        masonry: { rowHeight: 230 },
         getSortData: {
             nom: function (elem) {
                 var scope = $(elem).scope();
