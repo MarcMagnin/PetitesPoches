@@ -214,7 +214,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
     $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;
-
+        
         
         //// prevent the modal to show if we click on a nested link
         if (!$($event.target).closest('a').length) {

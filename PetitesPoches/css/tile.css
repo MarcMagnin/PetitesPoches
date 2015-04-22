@@ -35,7 +35,7 @@
   -webkit-transition: all 0.3s;
   transition: all .3s;
   background-color: rgba(255, 255, 255, 0.05);
-  height: 286px;
+  height: 266px;
   width: 180px;
 }
 .tile:hover {

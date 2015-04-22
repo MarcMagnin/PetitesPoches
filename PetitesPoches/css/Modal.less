@@ -4,6 +4,12 @@
     Material Modal
 
 */
+@font-face {
+    font-family: 'NeutraDisp-Titling';
+    src: url('../fonts/NeutraDisp-Titling.woff') format('woff');
+}
+
+
 .md-subheader.md-default-theme {
     background-color: transparent;
     margin: 0px;
@@ -146,8 +152,9 @@ md-dialog .md-default-theme {
 .extrait-header {
     color: @primaryColor;
 }
-.extrait{
-    line-height:1.2;
+
+.extrait {
+    line-height: 1.2;
 }
 
 .iconedLink {
@@ -193,9 +200,9 @@ md-dialog .md-default-theme {
     padding-top: 40px;
 }
 
-.modal-header-inner{
+.modal-header-inner {
     background-color: @primaryColor;
-    min-height:100px;
+    min-height: 100px;
     /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
     color: @textColor;
     -webkit-border-radius: 2px 2px 0 0;
@@ -218,7 +225,7 @@ md-dialog .md-default-theme {
 
 .modal-header {
     background-color: @primaryColor;
-    min-height:100px;
+    min-height: 100px;
     /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
     color: @textColor;
     -webkit-border-radius: 2px 2px 0 0;
@@ -246,7 +253,7 @@ md-dialog .md-default-theme {
 
 @media (max-width:692px) {
     .modal-header {
-        padding:20px;
+        padding: 20px;
         min-height: 170px;
     }
 }
@@ -382,4 +389,57 @@ md-dialog .md-default-theme {
     border-radius: 5px;
     display: block;
     height: 50px;
+}
+
+
+
+.pastille-prix {
+    font-family: 'NeutraDisp-Titling';
+    line-height: 1;
+    background: @primaryColor;
+    /*background: rgb(242, 156, 15);*/
+    border: 2px solid white;
+    /*-webkit-box-shadow: 0px 0px 7px 1px black;
+    -moz-box-shadow: 0px 0px 7px 1px black;
+    box-shadow: 0px 0px 7px 1px black;*/
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    position: relative;
+}
+
+.pastille-prix .pastille-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-shadow: 1px 1px @primaryColor;
+}
+
+.pastille-prix .pastille-container .inner-pastille-container {
+    display: flex;
+
+    line-height: 1;
+}
+
+.pastille-prix .pastille-container .symbol {
+font-size: 0.58em;
+  line-height: 0.6;
+}
+
+.pastille-prix .pastille-container .second-value {
+  font-size: 0.5em;
+  line-height: 1.25;
+}
+
+.pastille-prix .pastille-container .pastille-right-part {
+    display: flex;
+        margin-left: 1px;
+    -ms-flex-flow: column;
+    flex-flow: column;
 }
