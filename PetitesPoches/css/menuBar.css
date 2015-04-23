@@ -1,10 +1,16 @@
-﻿.menuBar.toggled {
-  display: flex;
-}
-.menuBar {
+﻿.menuBar {
   font: normal 14px/38px Montserrat;
   height: 70px;
-  display: none;
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /*display:none;*/
 }
 .menuBar md-item {
   position: relative;

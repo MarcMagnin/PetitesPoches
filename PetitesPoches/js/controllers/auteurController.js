@@ -34,8 +34,8 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         //    TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
         //});
         // delay rendering
-        $(".menuBar").addClass("toggled");
-        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.1,
+        //$(".menuBar").addClass("toggled");
+        var menuBarAnimation = TweenMax.staggerFrom("md-item", 2, { scale: 0.85, opacity: 0, ease: Elastic.easeOut, force3D: true }, 0.15,
           onCompleteAll = function () {
               $scope.menuShown = true;
           });
