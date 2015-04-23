@@ -1,4 +1,5 @@
-﻿.box {
+﻿@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
+.box {
   color: #7c4dff;
   border-color: #ede6ff;
 }
@@ -84,7 +85,7 @@ body {
   height: 100% !important;
   width: 100% !important;
   /*'Josefin Slab', 'Architects Daughter',*/
-  font-family: "Helvetica Neue", "Helvetica", serif;
+  font-family: 'Montserrat';
   color: #232323;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
