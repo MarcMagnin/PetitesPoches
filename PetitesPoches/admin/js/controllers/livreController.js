@@ -258,6 +258,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             prom.push(defer.promise);
             $scope.addLivre(livre).success(function (data, status, headers, config) {
                 livre.Id = data.Key;
+                $scope.itemsPool.push(livre);
                 $scope.items.push(livre);
                 defer.resolve();
                 var fileReader = new FileReader();
@@ -325,6 +326,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             item.new = true;
             $scope.itemsPool.unshift(item);
             $scope.items.unshift(item);
+           
+            TweenMax.to(".tile", 0.2, { opacity: 1 });
 
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',

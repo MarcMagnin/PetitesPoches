@@ -16,9 +16,9 @@ app.directive("isotopethis", function () {
             // just add the item to the isotope collection without any layout modification
             //$container.isotope('appended2', elm);
             $container.isotope('appended2', elm);
-
             if (scope.itemsPool.length == itemAdded) {
                 scope.dataReady = true;
+    
 
                 var delay = 100;
                 if (!scope.menuShown) {
