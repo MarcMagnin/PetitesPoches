@@ -422,8 +422,11 @@ md-dialog .md-default-theme {
 }
 
 .pastille-prix .pastille-container .inner-pastille-container {
+   display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
     display: flex;
-
     line-height: 1;
 }
 
@@ -438,8 +441,13 @@ font-size: 0.58em;
 }
 
 .pastille-prix .pastille-container .pastille-right-part {
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
     display: flex;
-        margin-left: 1px;
+    margin-left: 1px;
     -ms-flex-flow: column;
+    -webkit-flex-flow: column;
     flex-flow: column;
 }
