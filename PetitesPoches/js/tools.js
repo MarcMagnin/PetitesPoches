@@ -28,7 +28,7 @@ $(document).ready(function () {
             if ($('.modal-backdrop').length == 0 && orientation == "h") {
                 $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
-
+            //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
             }
 
         //console.log(event.deltaX, event.deltaY, event.deltaFactor);
@@ -47,7 +47,6 @@ $(document).ready(function () {
 
             // change layout mode
             $container.isotope({
-                resizable: false,
                 layoutMode: 'masonryHorizontal',
                 masonry: { rowHeight: 230 },
             });
@@ -58,12 +57,12 @@ $(document).ready(function () {
 
             // change layout mode
             $container.isotope({
-                resizable: false,
-                layoutMode: 'fitRows',
+                layoutMode: 'masonry',
 
             });
-            $container.isotope("shuffle");
+            
         }
+        
     }
     $(window).resize(function () {
         checkMasonryOrientation();
@@ -73,64 +72,62 @@ $(document).ready(function () {
     }, 200);
 
 
+    //$.Isotope.prototype._getCenteredMasonryColumns = function () {
 
+    //    this.width = this.element.width();
 
-    $.Isotope.prototype._getCenteredMasonryColumns = function () {
+    //    var parentWidth = this.element.parent().width();
 
-        this.width = this.element.width();
+    //    var colW = this.options.masonry && this.options.masonry.columnWidth || // i.e. options.masonry && options.masonry.columnWidth
 
-        var parentWidth = this.element.parent().width();
+    //    this.$filteredAtoms.outerWidth(true) || // or use the size of the first item
 
-        var colW = this.options.masonry && this.options.masonry.columnWidth || // i.e. options.masonry && options.masonry.columnWidth
+    //    parentWidth; // if there's no items, use size of container
 
-        this.$filteredAtoms.outerWidth(true) || // or use the size of the first item
+    //    var cols = Math.floor(parentWidth / colW);
 
-        parentWidth; // if there's no items, use size of container
+    //    cols = Math.max(cols, 1);
 
-        var cols = Math.floor(parentWidth / colW);
+    //    this.masonry.cols = cols; // i.e. this.masonry.cols = ....
+    //    this.masonry.columnWidth = colW; // i.e. this.masonry.columnWidth = ...
+    //};
 
-        cols = Math.max(cols, 1);
+    //$.Isotope.prototype._masonryReset = function () {
 
-        this.masonry.cols = cols; // i.e. this.masonry.cols = ....
-        this.masonry.columnWidth = colW; // i.e. this.masonry.columnWidth = ...
-    };
+    //    this.masonry = {}; // layout-specific props
+    //    this._getCenteredMasonryColumns(); // FIXME shouldn't have to call this again
 
-    $.Isotope.prototype._masonryReset = function () {
+    //    var i = this.masonry.cols;
 
-        this.masonry = {}; // layout-specific props
-        this._getCenteredMasonryColumns(); // FIXME shouldn't have to call this again
+    //    this.masonry.colYs = [];
+    //    while (i--) {
+    //        this.masonry.colYs.push(0);
+    //    }
+    //};
 
-        var i = this.masonry.cols;
+    //$.Isotope.prototype._masonryResizeChanged = function () {
 
-        this.masonry.colYs = [];
-        while (i--) {
-            this.masonry.colYs.push(0);
-        }
-    };
+    //    var prevColCount = this.masonry.cols;
 
-    $.Isotope.prototype._masonryResizeChanged = function () {
+    //    this._getCenteredMasonryColumns(); // get updated colCount
+    //    return (this.masonry.cols !== prevColCount);
+    //};
 
-        var prevColCount = this.masonry.cols;
+    //$.Isotope.prototype._masonryGetContainerSize = function () {
 
-        this._getCenteredMasonryColumns(); // get updated colCount
-        return (this.masonry.cols !== prevColCount);
-    };
+    //    var unusedCols = 0,
 
-    $.Isotope.prototype._masonryGetContainerSize = function () {
+    //    i = this.masonry.cols;
+    //    while (--i) { // count unused columns
+    //        if (this.masonry.colYs[i] !== 0) {
+    //            break;
+    //        }
+    //        unusedCols++;
+    //    }
 
-        var unusedCols = 0,
-
-        i = this.masonry.cols;
-        while (--i) { // count unused columns
-            if (this.masonry.colYs[i] !== 0) {
-                break;
-            }
-            unusedCols++;
-        }
-
-        return {
-            height: Math.max.apply(Math, this.masonry.colYs),
-            width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth // fit container to columns that have been used;
-        };
-    };
+    //    return {
+    //        height: Math.max.apply(Math, this.masonry.colYs),
+    //        width: (this.masonry.cols - unusedCols) * this.masonry.columnWidth // fit container to columns that have been used;
+    //    };
+    //};
 });
