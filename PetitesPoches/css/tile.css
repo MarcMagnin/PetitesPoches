@@ -16,30 +16,40 @@
   -webkit-box-sizing: content-box !important;
   -moz-box-sizing: content-box !important;
   box-sizing: content-box !important;
+  margin-right: auto;
+  margin-left: auto;
 }
-@media only screen and (max-width: 768px) {
+.tile {
+  opacity: 0;
+  margin-right: 35px;
+  margin-left: 0;
+  margin-top: 30px;
+  -o-transition: all .3s;
+  -moz-transition: all .3s;
+  -webkit-transition: all 0.3s;
+  transition: all .3s;
+  background-color: rgba(255, 255, 255, 0.02);
+  height: 266px;
+  width: 180px;
+}
+.tile:hover {
+  background-color: #01aca0;
+}
+@media only screen and (max-width: 500px) {
   .tilesContainer {
     padding-left: 0;
     width: -moz-calc(100%) !important;
     width: -webkit-calc(100%)!important;
     width: -o-calc(100%)!important;
     width: calc(100%)!important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
   }
-}
-.tile {
-  opacity: 0;
-  margin-right: 35px;
-  margin-top: 30px;
-  -o-transition: all .3s;
-  -moz-transition: all .3s;
-  -webkit-transition: all 0.3s;
-  transition: all .3s;
-  background-color: rgba(255, 255, 255, 0.05);
-  height: 266px;
-  width: 180px;
-}
-.tile:hover {
-  background-color: #009688;
+  .tile {
+    margin-left: auto;
+    margin-right: auto;
+    right: 0;
+  }
 }
 .tile-image {
   width: 180px;

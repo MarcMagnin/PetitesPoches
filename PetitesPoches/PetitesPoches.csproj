@@ -382,6 +382,9 @@
     <Content Include="css\bootstrapCustom.css.map">
       <DependentUpon>bootstrapCustom.css</DependentUpon>
     </Content>
+    <Content Include="css\test.css.map">
+      <DependentUpon>test.css</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

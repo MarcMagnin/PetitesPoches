@@ -906,10 +906,6 @@ body {
   outline: none;
   line-height: 1.42857143;
 }
-pre {
-  font-family: 'Montserrat';
-  font-size: 14px;
-}
 .tab-view {
   height: -moz-calc(100% - 50px) !important;
   height: -webkit-calc(100% - 50px)!important;
@@ -1143,16 +1139,16 @@ a:focus {
   background: rgba(214, 218, 220, 0.1);
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
-  border-radius: 5px5px00;
+  border-radius: 5px 5px 0;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:end {
-  border-radius: 005px5px;
+  border-radius: 5px 5px;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:start {
-  border-radius: 5px005px;
+  border-radius: 5px 5px;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:end {
-  border-radius: 05px5px0;
+  border-radius: 5px 5px 0;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-thumb:vertical,
 .u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal {
