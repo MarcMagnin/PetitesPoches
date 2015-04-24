@@ -67,9 +67,6 @@ $(document).ready(function () {
     $(window).resize(function () {
         checkMasonryOrientation();
     });
-    setTimeout(function () {
-        checkMasonryOrientation()
-    }, 200);
 
 
     //$.Isotope.prototype._getCenteredMasonryColumns = function () {

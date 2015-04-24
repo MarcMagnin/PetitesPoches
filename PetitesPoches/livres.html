@@ -243,11 +243,14 @@
     //});
 
     var $container = $('.tilesContainer');
-
+    var layoutMode = 'masonryHorizontal'
+    if ($(window).width() < 500) {
+      layoutMode = 'masonry';
+    }
     // change layout mode
     //$container.isotope({ layoutMode: "masonryHorizontal" });
     $container.isotope({
-        layoutMode: 'masonryHorizontal',
+        layoutMode: layoutMode,
         itemSelector: '.isotopey',
         masonry: { rowHeight: 230 },
         getSortData: {

@@ -72,9 +72,14 @@
 
 </div>
 <script>
+    var layoutMode = 'masonryHorizontal'
+    if ($(window).width() < 500) {
+        layoutMode = 'masonry';
+    }
+
     var $container = $('.tilesContainer');
     $container.isotope({
-        layoutMode: 'masonryHorizontal',
+        layoutMode: layoutMode,
         itemSelector: '.isotopey',
         masonry: { rowHeight: 230 },
         getSortData: {
