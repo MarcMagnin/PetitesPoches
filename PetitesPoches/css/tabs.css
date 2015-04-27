@@ -1,4 +1,5 @@
-﻿md-tabs.md-default-theme md-tab {
+﻿md-tabs.md-default-theme md-tab,
+md-tabs.md-default-theme md-tab:focus {
   color: #f3f3f3;
   font: normal 14px/38px Montserrat;
 }

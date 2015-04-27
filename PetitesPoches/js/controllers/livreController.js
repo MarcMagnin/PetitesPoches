@@ -37,10 +37,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.searchItems = [];
     $scope.dataReady = false;
      
-    $scope.closeSearch = function () {
-        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
-        searchToggled = false;
-    } 
+    
     $scope.init = function () {
       
         //$("md-item").click(function () {
@@ -71,6 +68,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             if (preventFocusOut) {
                 return
             }
+
             $scope.closeSearch();
         });
         $scope.menuShown = false;
@@ -136,22 +134,27 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
+        console.log("toggleSearch");
         setTimeout(function () {
             $("#search2").focus();
         }, 150)
         if (searchToggled)
             return;
+        searchToggled = true;
         preventFocusOut = true;
         setTimeout(function () {
             preventFocusOut = false;
         }, 200)
-        searchToggled = true;
+        
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
         $("#searchbutton").addClass("toggled");
         $("#search2").addClass("toggled");
-     
-        
+    }
+
+    $scope.closeSearch = function () {
+        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
+        searchToggled = false;
     }
 
     $scope.toggleLeft = function () {

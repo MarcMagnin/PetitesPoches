@@ -383,6 +383,10 @@ md-dialog .md-default-theme {
   text-shadow: 1px 1px #01aca0;
 }
 .pastille-prix .pastille-container .inner-pastille-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   line-height: 1;
 }
@@ -395,10 +399,17 @@ md-dialog .md-default-theme {
   line-height: 1.25;
 }
 .pastille-prix .pastille-container .pastille-right-part {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
   display: flex;
   margin-left: 1px;
   -ms-flex-flow: column;
   flex-flow: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 @media (max-width: 592px) {
   .col-md-5 {

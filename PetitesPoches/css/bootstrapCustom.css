@@ -3633,6 +3633,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-brand > img {
   display: block;
 }
+@media (max-width: 592px) {
+  .navbar-brand > img {
+    width: 70%;
+  }
+}
 .navbar-toggle {
   position: relative;
   float: right;

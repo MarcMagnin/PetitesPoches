@@ -23,10 +23,6 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     $scope.dataReady = false;
 
 
-    $scope.closeSearch = function () {
-        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
-        searchToggled = false;
-    }
 
     $scope.init = function () {
         //$("md-item").click(function () {
@@ -41,10 +37,15 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
           });
         TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
         $("#searchitem, #searchbutton").focusout(function ($event) {
-            if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
-                return;
+            //// Can't rely on that, relatedTarget is null on firefox
+            ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
+            ////    return;
+            ////}
+            if (preventFocusOut) {
+                return
             }
             $scope.closeSearch();
+
         });
 
         itemAdded = 0;
@@ -75,20 +76,31 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     }
 
     var searchToggled = false;
+    var preventFocusOut = false;
     $scope.toggleSearch = function () {
+        console.log("toggleSearch");
         setTimeout(function () {
             $("#search2").focus();
         }, 150)
         if (searchToggled)
             return;
         searchToggled = true;
+        preventFocusOut = true;
+        setTimeout(function () {
+            preventFocusOut = false;
+        }, 200)
+
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
         $("#searchbutton").addClass("toggled");
         $("#search2").addClass("toggled");
-
-
     }
+
+    $scope.closeSearch = function () {
+        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
+        searchToggled = false;
+    }
+
 
     $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;

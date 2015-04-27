@@ -374,7 +374,7 @@ md-inline-list-icon {
 }
 @media only screen and (max-width: 630px) {
   .filter-terms {
-    margin-top: 5px;
+    margin: 0;
   }
 }
 .filter-terms-icon {
@@ -461,9 +461,9 @@ md-inline-list-icon {
 .menuBar md-item {
   position: relative;
   color: white;
-  height: 100px;
-  width: 100px;
-  margin: 0;
+  height: 45px;
+  width: 45px;
+  margin: 0 2%;
 }
 .menuBar .md-button {
   position: relative;
@@ -516,8 +516,8 @@ md-inline-list-icon {
   transform: scale(0.95);
 }
 .menuBar .md-icon-container md-icon {
-  height: 46px;
-  width: 46px;
+  height: 100%;
+  width: 100%;
   margin-bottom: 10px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -531,9 +531,9 @@ md-inline-list-icon {
     display: none;
   }
   .menuBar md-item {
-    height: 80px;
-    width: 80px;
-    margin: 0;
+    height: 35px;
+    width: 35px;
+    margin: 0 5px;
   }
 }
 .dropdown-menu {
@@ -921,6 +921,11 @@ pre {
   height: 100%;
   width: 100%;
 }
+@media (max-width: 592px) {
+  .viewContainer {
+    padding-top: 45px;
+  }
+}
 .fa-price {
   position: absolute;
   left: 5px;
@@ -1142,16 +1147,16 @@ a:focus {
   background: rgba(214, 218, 220, 0.1);
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:start {
-  border-radius: 5px 5px 0;
+  border-radius: 5px5px00;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:vertical:end {
-  border-radius: 5px 5px;
+  border-radius: 005px5px;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:start {
-  border-radius: 5px 5px;
+  border-radius: 5px005px;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-track-piece:horizontal:end {
-  border-radius: 5px 5px 0;
+  border-radius: 05px5px0;
 }
 .u-fancy-scrollbar::-webkit-scrollbar-thumb:vertical,
 .u-fancy-scrollbar::-webkit-scrollbar-thumb:horizontal {
