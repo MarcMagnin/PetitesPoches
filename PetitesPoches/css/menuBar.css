@@ -30,6 +30,8 @@
   overflow: visible;
 }
 .menuBar .md-button > .md-icon-container {
+  height: 100%;
+  width: 100%;
   opacity: 0.5;
   -moz-transition: all 0.2s linear;
   -o-transition: all 0.2s linear;

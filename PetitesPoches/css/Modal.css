@@ -6,6 +6,10 @@
   font-family: 'NeutraDisp-Titling';
   src: url('../fonts/NeutraDisp-Titling.woff') format('woff');
 }
+md-backdrop.md-opaque.md-default-theme,
+.md-dialog-container {
+  position: fixed;
+}
 .md-subheader.md-default-theme {
   background-color: transparent;
   margin: 0px;

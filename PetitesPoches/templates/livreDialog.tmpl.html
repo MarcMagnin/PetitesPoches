@@ -1,4 +1,4 @@
-﻿<md-dialog msd-wheel="modalMouseWheel($event, $delta, $deltaX, $deltaY)" aria-label="{{::selectedItem.Titre}}">
+﻿<md-dialog md-scroll-y msd-wheel="modalMouseWheel($event, $delta, $deltaX, $deltaY)" aria-label="{{::selectedItem.Titre}}">
 
     <div class="modal-header">
         <a class="iconedLink close-button" ng-click="closeDialog()">
@@ -9,14 +9,14 @@
 
 
         <div layout="column" layout-align="center center">
-            <h1 class="modal-title title" >
+            <h1 class="modal-title title">
                 {{::selectedItem.Titre}}
             </h1>
-            <h3 class="modal-title subtitle" >
+            <h3 class="modal-title subtitle">
                 {{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}
             </h3>
         </div>
-        
+
 
         <div class="prix" price value="::selectedItem.Prix" />
         <a class="flat-btn commander-btn" href="{{::selectedItem.SiteMarchand}}"
