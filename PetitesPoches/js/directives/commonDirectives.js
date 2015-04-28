@@ -31,6 +31,12 @@ app.directive("isotopethis", function () {
                     //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
                     //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
                     //});
+
+                    // correct a bug where the relayout will prevent a correct redesign of the content
+                    setTimeout(function () {
+                        $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+                    }, 1500);
+
                     setTimeout(function () {
                         scope.validateFilter();
                     }, 100)
