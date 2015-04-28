@@ -329,7 +329,15 @@ md-dialog .md-default-theme {
   position: absolute;
   top: 5px;
   left: 5px;
+  width: 25px;
+  height: 25px;
   color: white;
+}
+@media (max-width: 630px) {
+  .close-button .md-default-theme {
+    width: 45px;
+    height: 45px;
+  }
 }
 /* ************************************
     Scrollbar

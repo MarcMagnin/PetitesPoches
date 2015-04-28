@@ -19,7 +19,7 @@ md-dialog.md-default-theme {
     border-radius: 4px;
     background-color: transparent;
     max-width: 855px;
-    height:100%;
+    height: 100%;
 }
 
 md-content.md-default-theme {
@@ -29,7 +29,7 @@ md-content.md-default-theme {
 md-dialog md-content {
     padding: 0;
     overflow: auto;
-     margin-bottom:auto;
+    margin-bottom: auto;
 }
 
 md-dialog {
@@ -226,7 +226,7 @@ md-dialog .md-default-theme {
 }
 
 .modal-header {
-    margin-top:auto;
+    margin-top: auto;
     background-color: @primaryColor;
     min-height: 100px;
     /*box-shadow: inset 0 0 180px fadeout(@primaryColor,20%);*/
@@ -275,15 +275,16 @@ md-dialog .md-default-theme {
 
 
 @media (max-width:@sizeSmallModal) {
-.modal-header {
-    .title {
-        font-size: 1em;
-        margin: 0 30px;
+    .modal-header {
+        .title {
+            font-size: 1em;
+            margin: 0 30px;
+        }
+
+        .subtitle {
+            font-size: 0.9em;
+        }
     }
-    .subtitle {
-        font-size: 0.9em;
-    }
-}
 }
 
 
@@ -347,7 +348,18 @@ md-dialog .md-default-theme {
     position: absolute;
     top: 5px;
     left: 5px;
+    width: 25px;
+    height: 25px;
     color: white;
+}
+
+
+
+@media (max-width:@sizeHideToolbarText) {
+    .close-button .md-default-theme {
+        width: 45px;
+        height: 45px;
+    }
 }
 
 

@@ -50,14 +50,20 @@
 
 
     <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
-        <div class="tile isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
-                ng-repeat="item in items"
-                isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
+        <div class="tile tile-author isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
+             ng-repeat="item in items"
+             isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
             <div class="inner-tile">
-                <img class="tile-image" src="{{::item.Photo}}" ng-show="::item.Photo" />
-                <div class="placeholder" style="margin-top:20px;" ng-hide="::item.Photo">
-                    <i class="fa fa-user fa-6 inner-placeholder " />
+                <!--<img class="author-image" src="{{::item.Photo}}" ng-show="::item.Photo" />-->
+
+                <div class="round">
+                    <img src="{{::item.Photo}}" ng-show="::item.Photo" />
+                    <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo" />
                 </div>
+                <!--<img class="tile-image" ng-show="selectedItem.Photo" style='background-image: url({{::selectedItem.Photo}})' />-->
+
+
+              
 
             </div>
 

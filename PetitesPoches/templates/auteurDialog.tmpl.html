@@ -20,14 +20,14 @@
     <md-content>
         <div class="modal-wrapper">
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-5" style="min-width:320px;">
-                        <img class="tile-image" ng-show="selectedItem.Photo" src="{{::selectedItem.Photo}}" />
-                        <br /><br /><br />
-                    </div>
-                    <div class="col-md-6" style="min-width:250px">
+                <div class="row" style="padding:20px;">
+                    <div >
+                        <div class="round" style="margin-left:auto; margin-right:auto;" >
+                            <img src="{{::selectedItem.Photo}}" ng-show="::selectedItem.Photo" />
+                            <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::selectedItem.Photo" />
+                        </div>
+                        <br />
                         <div class="flex-col">
-
                             <a class="iconedLink" ng-show="::selectedItem.LienBiblio" href="{{::selectedItem.LienBiblio}}"
                                target="_blank">
                                 <div class="inline-flex">
@@ -42,9 +42,9 @@
                                 </div>
                             </a>
                         </div>
+                    </div><br />
                     </div>
-                    <br /><br /><br /><br /><br />
-                </div>
+                  
 
 
                     <!--<div class="col-md-5" style="min-width:320px;">

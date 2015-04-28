@@ -21,16 +21,15 @@ function delayLoop(collection, index, timer, action) {
 
 
 $(document).ready(function () {
+    var orientation = "h";
     $('body, html').mousewheel(function (event) {
-
-        if (event.deltaY != 0)
-
-            if ($('.modal-backdrop').length == 0 && orientation == "h") {
+        if (event.deltaY != 0) {
+            if (($('.modal-backdrop') && $('.modal-backdrop').length == 0) && orientation == "h") {
                 $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
             //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
             }
-
+        }
         //console.log(event.deltaX, event.deltaY, event.deltaFactor);
 
     });
@@ -50,6 +49,12 @@ $(document).ready(function () {
                 layoutMode: 'masonryHorizontal',
                 masonry: { rowHeight: 230 },
             });
+
+            // correct a bug where the relayout will prevent a correct redesign of the content
+            setTimeout(function () {
+                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+            }, 500);
+            
             return;
         } else if ($(window).width() < maxWidth && orientation != "v") {
             orientation = "v";
@@ -60,6 +65,11 @@ $(document).ready(function () {
                 layoutMode: 'masonry',
 
             });
+
+            // correct a bug where the relayout will prevent a correct redesign of the content
+            setTimeout(function () {
+                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+            }, 500);
             
         }
         
