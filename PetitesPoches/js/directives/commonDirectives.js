@@ -87,6 +87,9 @@ app.directive("bg", function ($window) {
             //};
             //elm.on("scroll", scope.$apply.bind(scope, scope.onScroll));
             setInterval(function () {
+                if ($(window).width() <= 699) {
+                    return;
+                }
                 while (random == previousRandom){
                     random = Math.floor(Math.random() * 4) + 1;
                 }
@@ -94,7 +97,7 @@ app.directive("bg", function ($window) {
             }, 10000);
 
 
-            scope.updateColor(1);
+            scope.updateColor(2);
         }
     }
 });
