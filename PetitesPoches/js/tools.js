@@ -40,8 +40,8 @@ $(document).ready(function () {
 
 
     var checkMasonryOrientation = function () {
-        console.log($('body').height() - 80);
-        $('#booksContainer').height($('body').height() - 80);
+        console.log($('md-tabs').outerHeight()  + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() +100);
+        $('#booksContainer').height($('body').height() - ($('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() + 100));
 
 
         if ($(window).width() > maxWidth && orientation != "h") {
