@@ -339,7 +339,7 @@
     visibleStyle: { opacity: 1, scale:1},
     containerStyle: {
       position: 'relative',
-      overflow: 'hidden'
+      //overflow: 'hidden'
     },
     animationEngine: 'best-available',
     animationOptions: {
@@ -368,8 +368,8 @@
       this.originalStyle = {};
       // keep track of container styles
       var containerStyles = isoContainerStyles.slice(0);
-      for ( var prop in this.options.containerStyle ) {
-        containerStyles.push( prop );
+      for (var prop in this.options.containerStyle) {
+          containerStyles.push(prop);
       }
       for ( var i=0, len = containerStyles.length; i < len; i++ ) {
         prop = containerStyles[i];
@@ -685,10 +685,10 @@
       this[ '_' +  layoutMode + 'Layout' ]( $elems );
 
       // set the size of the container
-      if (this.options.resizesContainer) {
-        var containerStyle = this[ '_' +  layoutMode + 'GetContainerSize' ]();
-        this.styleQueue.push({ $el: this.element, style: containerStyle });
-      }
+      //if (this.options.resizesContainer) {
+      //  var containerStyle = this[ '_' +  layoutMode + 'GetContainerSize' ]();
+      //  this.styleQueue.push({ $el: this.element, style: containerStyle });
+      //}
 
       this._processStyleQueue( $elems, callback );
 
