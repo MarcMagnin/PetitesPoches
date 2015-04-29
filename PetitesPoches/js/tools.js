@@ -40,6 +40,10 @@ $(document).ready(function () {
 
 
     var checkMasonryOrientation = function () {
+        console.log($('body').height() - 80);
+        $('#booksContainer').height($('body').height() - 80);
+
+
         if ($(window).width() > maxWidth && orientation != "h") {
             orientation = "h"
             var $container = $('.tilesContainer');
@@ -77,6 +81,10 @@ $(document).ready(function () {
     $(window).resize(function () {
         checkMasonryOrientation();
     });
+
+    setTimeout(function () {
+        checkMasonryOrientation();
+    }, 1200)
 
 
     //$.Isotope.prototype._getCenteredMasonryColumns = function () {
