@@ -1,10 +1,15 @@
-﻿.tilesContainer {
-  /*http://www.colorzilla.com/gradient-editor/*/
-  padding-bottom: 30px;
+﻿.tilesContainerContainer {
   height: -moz-calc(100% - 80px) !important;
   height: -webkit-calc(100% - 80px)!important;
   height: -o-calc(100% - 80px)!important;
   height: calc(100% - 80px)!important;
+  width: 100%;
+  display: block;
+}
+.tilesContainer {
+  /*http://www.colorzilla.com/gradient-editor/*/
+  padding-bottom: 30px;
+  height: 100%;
   width: 100%;
   display: block;
   overflow-y: hidden !important;
