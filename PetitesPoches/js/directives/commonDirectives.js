@@ -35,7 +35,6 @@ app.directive("isotopethis", function () {
                     // correct a bug where the relayout will prevent a correct redesign of the content
                     setTimeout(function () {
                         $('#booksContainer').stop().animate({ scrollLeft: '+=' + (20) + 'px' }, 200);
-                        $container.isotope('reLayout');
                     }, 2500);
                     
                     setTimeout(function () {
