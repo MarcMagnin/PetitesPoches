@@ -4,9 +4,8 @@ body {
   width: 100% !important;
   /*'Josefin Slab', 'Architects Daughter',*/
   color: #232323;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
   -webkit-font-smoothing: antialiased;
+  /*overflow: hidden !important;*/
 }
 a:hover,
 a:visited,
