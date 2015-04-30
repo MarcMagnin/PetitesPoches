@@ -103,7 +103,7 @@ app.directive("bg", function ($window) {
                 scope.updateColor(random);
             }, 10000);
 
-
+     
             scope.updateColor(2);
         }
     }

@@ -240,11 +240,16 @@
     //    $(".searchSideBar").addClass("toggled");
     //});
 
+    // prevent a bug on IPAD where scroll is not working 
+    $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
+  
+
     var $container = $('.tilesContainer');
     var layoutMode = 'masonryHorizontal'
     if ($(window).width() < 500) {
       layoutMode = 'masonry';
     }
+
     // change layout mode
     //$container.isotope({ layoutMode: "masonryHorizontal" });
     $container.isotope({

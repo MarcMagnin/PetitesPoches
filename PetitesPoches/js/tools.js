@@ -41,6 +41,7 @@ $(document).ready(function () {
     
     var checkMasonryOrientation = function () {
         //console.log($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() );
+        // prevent a bug on IPAD where scroll is not working 
         $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() ));
 
         if ($(window).width() > maxWidth && orientation != "h") {
