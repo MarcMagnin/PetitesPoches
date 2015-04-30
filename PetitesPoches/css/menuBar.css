@@ -10,6 +10,7 @@
   display: -webkit-flex;
   /* NEW - Chrome */
   display: flex;
+  width: 100%;
   /*display:none;*/
 }
 .menuBar md-item {
