@@ -42,8 +42,8 @@ $(document).ready(function () {
     var checkMasonryOrientation = function () {
         //console.log($('md-tabs').outerHeight()  + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() +100);
         //$('#booksContainer').height($('body').height() - ($('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() + 100));
-
-
+        alert($('#booksContainer').height());
+        $('#booksContainer').height($('#booksContainer').height());
         if ($(window).width() > maxWidth && orientation != "h") {
             orientation = "h"
             var $container = $('.tilesContainer');
@@ -84,7 +84,7 @@ $(document).ready(function () {
 
     setTimeout(function () {
         checkMasonryOrientation();
-    }, 1200)
+    }, 500)
 
 
     //$.Isotope.prototype._getCenteredMasonryColumns = function () {
