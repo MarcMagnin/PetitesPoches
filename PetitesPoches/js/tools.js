@@ -38,12 +38,11 @@ $(document).ready(function () {
     var orientation;
 
 
-
+    
     var checkMasonryOrientation = function () {
-        //console.log($('md-tabs').outerHeight()  + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() +100);
-        //$('#booksContainer').height($('body').height() - ($('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() + 100));
-        alert($('#booksContainer').height());
-        $('#booksContainer').height($('#booksContainer').height());
+        //console.log($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() );
+        $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() ));
+
         if ($(window).width() > maxWidth && orientation != "h") {
             orientation = "h"
             var $container = $('.tilesContainer');
