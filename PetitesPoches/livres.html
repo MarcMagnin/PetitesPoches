@@ -24,8 +24,8 @@
     </a>
 </script>
 
-
 <div class="viewContainer" ng-init="init()">
+   
    
     <md-list class="menuBar" layout="row" layout-align="center center">
 
@@ -60,13 +60,18 @@
                 <p class="md-grid-text">
                     Fiches
                 </p>
-                <p style="margin-top:20px" class="md-grid-text">
+                <p style="margin-top:15px" class="md-grid-text">
                     pédagogiques
                 </p>
             </md-button>
-
+            <md-button class="md-primary md-grid-item-content sendFP" ng-show="checkboxFichePedagogiques">
+                <div class="md-icon-container">
+                    <md-icon md-svg-src="images/niveaux.svg"></md-icon>
+                </div>
+            </md-button>    
         </md-item>
 
+       
 
         <md-item>
             <md-button btn-checkbox="" class="md-primary md-grid-item-content"

@@ -3,6 +3,9 @@ md-tabs.md-default-theme md-tab:focus {
   color: #f3f3f3;
   font: normal 14px/38px Montserrat;
 }
+md-tabs.md-default-theme md-tab.active {
+  color: #26c6da !important;
+}
 .md-header {
   float: right;
   overflow: hidden;
@@ -52,5 +55,10 @@ md-tabs.md-default-theme md-tab:focus {
 .navbar-collapse {
   display: block;
   float: right;
+}
+@media (max-width: 592px) {
+  md-tabs.md-default-theme md-tabs-ink-bar {
+    opacity: 0;
+  }
 }
 /*# sourceMappingURL=tabs.css.map */

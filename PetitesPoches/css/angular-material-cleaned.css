@@ -571,7 +571,7 @@ md-option {
           align-items: center;
   width: auto;
   padding: 0 16px 0 16px;
-  height: 48px; }
+  height: 35px; }
   md-option .md-text {
     width: auto;
     white-space: nowrap;
@@ -729,6 +729,7 @@ md-tab {
   overflow: hidden;
   height: 100%;
   text-align: center;
+
   cursor: pointer;
   padding: 20px 24px;
   box-sizing: border-box;

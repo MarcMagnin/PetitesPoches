@@ -8,9 +8,15 @@
 .filter-terms .tags {
   padding: 0 5px;
 }
+.filter-terms-author {
+  margin-top: 40px;
+}
 @media only screen and (max-width: 630px) {
   .filter-terms {
     margin: 0;
+  }
+  .filter-terms-author {
+    margin-top: 0;
   }
 }
 .filter-terms-icon {

@@ -2,6 +2,12 @@
 
 @import "bottom-sheet";
 @import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
+
+@font-face {
+    font-family: 'Carrosserie-Bold';
+    src: url('../fonts/Carrosserie-Bold.otf') format('opentype');
+}
+
 @import "background";
 
 @font-face {
@@ -379,3 +385,30 @@ a:focus {
 .custom-move.custom-move-active {
     opacity: 1;
 }
+
+.site-title{
+    margin-top:10px;
+}
+
+
+.logo-right {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+
+@media only screen and (max-width:1100px) {
+    .logo-right {
+        display: none;
+    }
+}
+.logo-middle{
+}
+
+@media only screen and (min-width:1100px) {
+    .logo-middle {
+        display: none;
+    }
+}
+
+

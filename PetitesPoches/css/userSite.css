@@ -59,6 +59,10 @@ md-inline-list-icon {
 .md-ripple-container {
   background-color: transparent !important;
 }
+@font-face {
+  font-family: 'Carrosserie-Bold';
+  src: url('../fonts/Carrosserie-Bold.otf') format('opentype');
+}
 /*  Menu animations
 ~-----------------------------------------*/
 .containContent3 {
@@ -372,9 +376,15 @@ md-inline-list-icon {
 .filter-terms .tags {
   padding: 0 5px;
 }
+.filter-terms-author {
+  margin-top: 40px;
+}
 @media only screen and (max-width: 630px) {
   .filter-terms {
     margin: 0;
+  }
+  .filter-terms-author {
+    margin-top: 0;
   }
 }
 .filter-terms-icon {
@@ -446,7 +456,7 @@ md-inline-list-icon {
 }
 .menuBar {
   font: normal 14px/38px Montserrat;
-  height: 70px;
+  height: 50px;
   display: -webkit-box;
   /* OLD - iOS 6-, Safari 3.1-6 */
   display: -moz-box;
@@ -457,6 +467,7 @@ md-inline-list-icon {
   /* NEW - Chrome */
   display: flex;
   width: 100%;
+  padding-top: 40px;
   /*display:none;*/
 }
 .menuBar md-item {
@@ -471,7 +482,6 @@ md-inline-list-icon {
   text-transform: none;
   height: 100%;
   width: 100%;
-  border-radius: 50%;
   padding: 0;
   color: white !important;
   overflow: visible;
@@ -529,7 +539,29 @@ md-inline-list-icon {
   font-size: 2.6em;
   vertical-align: middle;
 }
+.sendFP {
+  position: absolute;
+  width: 55px;
+  height: 55px;
+  left: 45px;
+  top: -45px;
+}
+.sendFP .md-icon-container md-icon {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+@media only screen and (max-width: 1100px) {
+  .menuBar {
+    padding-top: 0;
+  }
+}
 @media only screen and (max-width: 630px) {
+  .menuBar {
+    padding-top: 0;
+  }
   .menuBar p {
     display: none;
   }
@@ -1194,5 +1226,23 @@ a:focus {
 }
 .custom-move.custom-move-active {
   opacity: 1;
+}
+.site-title {
+  margin-top: 10px;
+}
+.logo-right {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+@media only screen and (max-width: 1100px) {
+  .logo-right {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .logo-middle {
+    display: none;
+  }
 }
 /*# sourceMappingURL=userSite.css.map */

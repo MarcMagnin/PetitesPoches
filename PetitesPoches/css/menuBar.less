@@ -3,16 +3,16 @@
 
 .menuBar {
     font: normal 14px/38px Montserrat;
-    height: 70px;
+    height: 50px;
     display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
     display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
     display: flex;
     width: 100%;
+    padding-top:40px;
     // to trigger an appear animation
     /*display:none;*/
-    
     & md-item {
         position: relative;
         color: white;
@@ -25,7 +25,6 @@
         text-transform: none;
         height: 100%;
         width: 100%;
-        border-radius: 50%;
         padding: 0;
         color: white !important;
         overflow: visible;
@@ -42,7 +41,7 @@
             opacity:0.5;
             position: absolute;
             left: 50%;
-            margin-right: -50%;
+            margin-right: -50%;              
             -moz-transform: translate(-50%, 0);
             -ms-transform: translate(-50%, 0);
             -o-transform: translate(-50%, 0);
@@ -88,9 +87,30 @@
         vertical-align: middle;
     }
 }
+.sendFP{
+    position:absolute;
+    width:55px;
+    height:55px;
+    left:45px;
+    top:-45px;
+    & .md-icon-container md-icon {
+        height: 100%;
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 50%;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    }
+}
+
+@media only screen and (max-width:1100px) {
+   .menuBar {
+        padding-top:0;
+    }
+}
 
 @media only screen and (max-width:@sizeHideToolbarText) {
     .menuBar {
+        padding-top:0;
         & p {
             display: none;
         }

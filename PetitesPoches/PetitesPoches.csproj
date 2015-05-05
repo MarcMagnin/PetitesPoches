@@ -67,6 +67,7 @@
     <Content Include="appTest.js" />
     <Content Include="auteurs.html" />
     <Content Include="contacts.html" />
+    <Content Include="css\angular-material-cleaned.css" />
     <Content Include="css\bootstrap-override.css">
       <DependentUpon>bootstrap-override.less</DependentUpon>
     </Content>
