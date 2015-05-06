@@ -520,6 +520,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     var selectedFromLivre = { Name: "" };
     $scope.filtreThemes = function (tag) {
         if (tag) {
+            tag = tag.toLowerCase();
             selectedFromLivre.Name = tag;
             if ($.grep($scope.themeMultiselectmodel, function (e) { return e.Name == tag; }).length == 0) {
                 $scope.themeMultiselectmodel.push(selectedFromLivre)

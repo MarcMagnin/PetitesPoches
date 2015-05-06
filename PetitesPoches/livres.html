@@ -24,9 +24,15 @@
     </a>
 </script>
 
+<div class="md-icon-container sendFP" ng-show="checkboxFichePedagogiques">
+    <a href="mailto:etm@editions-thierry-magnier.com">Soumettre vos outils pédagogiques</a>
+</div>
+
+
 <div class="viewContainer" ng-init="init()">
    
-   
+    
+
     <md-list class="menuBar" layout="row" layout-align="center center">
 
         <md-item>
@@ -64,11 +70,7 @@
                     pédagogiques
                 </p>
             </md-button>
-            <md-button class="md-primary md-grid-item-content sendFP" ng-show="checkboxFichePedagogiques">
-                <div class="md-icon-container">
-                    <md-icon md-svg-src="images/niveaux.svg"></md-icon>
-                </div>
-            </md-button>    
+           
         </md-item>
 
        

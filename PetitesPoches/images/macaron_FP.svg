@@ -1,20 +1,151 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="595.28px" height="841.89px" viewBox="0 0 595.28 841.89" enable-background="new 0 0 595.28 841.89" xml:space="preserve">
-<g>
-	<defs>
-		<rect id="SVGID_1_" x="224" y="359.041" width="147.186" height="125.85"/>
-	</defs>
-	<clipPath id="SVGID_2_">
-		<use xlink:href="#SVGID_1_"  overflow="visible"/>
-	</clipPath>
-	<path clip-path="url(#SVGID_2_)" d="M295.925,484.891c34.752,0,62.924-28.174,62.924-62.925c0-34.753-28.172-62.925-62.924-62.925
-		c-34.753,0-62.925,28.172-62.925,62.925C233,456.717,261.172,484.891,295.925,484.891"/>
-</g>
-<text transform="matrix(1 0 0 1 281.4834 397.0845)" fill="#FFFFFF" font-family="'Montserrat-Bold'" font-size="12">Pour </text>
-<text transform="matrix(1 0 0 1 247.5112 415.0845)" fill="#FFFFFF" font-family="'Montserrat-Bold'" font-size="12">nous soumettre </text>
-<text transform="matrix(1 0 0 1 241.7876 433.084)"><tspan x="0" y="0" fill="#FFFFFF" font-family="'Montserrat-Bold'" font-size="12">v</tspan><tspan x="6.648" y="0" fill="#FFFFFF" font-family="'Montserrat-Bold'" font-size="12">os propres outils </tspan></text>
-<text transform="matrix(1 0 0 1 252.2515 452.0801)" fill="#FFFFFF" font-family="'Montserrat-Bold'" font-size="12">pédagogiques</text>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg2"
+   height="80mm"
+   viewBox="0 0 283.46453 283.46456"
+   width="80mm"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="macaron_FP.svg">
+  <defs
+     id="defs4176">
+    <clipPath
+       id="SVGID_2_">
+      <rect
+         height="125.85"
+         width="147.186"
+         y="359.04099"
+         x="224"
+         id="use4143" />
+    </clipPath>
+    <clipPath
+       id="SVGID_2_-1">
+      <use
+         height="100%"
+         width="100%"
+         y="0"
+         x="0"
+         style="overflow:visible"
+         xlink:href="#SVGID_1_"
+         overflow="visible"
+         id="use4143-1" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1304"
+     inkscape:window-height="745"
+     id="namedview4174"
+     showgrid="false"
+     inkscape:zoom="1.1774114"
+     inkscape:cx="38.806241"
+     inkscape:cy="142.43588"
+     inkscape:window-x="54"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     transform="matrix(.65221 0 0 .64443 69.797 -435.33)">
+    <a
+       id="a3396" />
+  </g>
+  <g
+     id="g4816"
+     transform="matrix(2.2566727,0,0,2.256655,513.07589,201.36362)">
+    <g
+       id="g4137"
+       transform="translate(-460.4781,-448.39065)">
+      <defs
+         id="defs4139">
+        <rect
+           height="125.85"
+           width="147.186"
+           y="359.04099"
+           x="224"
+           id="SVGID_1_" />
+      </defs>
+      <clipPath
+         id="clipPath4769">
+        <use
+           id="use4771"
+           overflow="visible"
+           xlink:href="#SVGID_1_"
+           style="overflow:visible"
+           x="0"
+           y="0"
+           width="100%"
+           height="100%" />
+      </clipPath>
+      <path
+         id="path4145"
+         d="m 295.925,484.891 c 34.752,0 62.924,-28.174 62.924,-62.925 0,-34.753 -28.172,-62.925 -62.924,-62.925 -34.753,0 -62.925,28.172 -62.925,62.925 0,34.751 28.172,62.925 62.925,62.925"
+         clip-path="url(#SVGID_2_-1)"
+         inkscape:connector-curvature="0" />
+    </g>
+    <text
+       id="text4147"
+       font-size="12"
+       style="font-size:12px;font-family:Montserrat-Bold;fill:#ffffff"
+       x="-178.99469"
+       y="-51.306156">Pour</text>
+    <text
+       id="text4149"
+       font-size="12"
+       style="font-size:12px;font-family:Montserrat-Bold;fill:#ffffff"
+       x="-212.96689"
+       y="-33.306156">nous soumettre</text>
+    <text
+       id="text4151"
+       x="-218.69049"
+       y="-15.306657">
+      <tspan
+         id="tspan4153"
+         font-size="12"
+         y="-15.306657"
+         x="-218.69049"
+         style="font-size:12px;font-family:Montserrat-Bold;fill:#ffffff">v</tspan>
+      <tspan
+         id="tspan4155"
+         font-size="12"
+         y="-15.306657"
+         x="-212.0425"
+         style="font-size:12px;font-family:Montserrat-Bold;fill:#ffffff">os propres outils</tspan>
+    </text>
+    <text
+       id="text4157"
+       font-size="12"
+       style="font-size:12px;font-family:Montserrat-Bold;fill:#ffffff"
+       x="-208.22659"
+       y="3.6894457">pédagogiques</text>
+  </g>
 </svg>
