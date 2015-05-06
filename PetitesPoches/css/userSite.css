@@ -541,14 +541,19 @@ md-inline-list-icon {
 }
 .sendFP {
   position: absolute;
+  -ms-transform: rotate(-10deg);
+  -moz-transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+  -o-transform: rotate(-10deg);
+  transform: rotate(-10deg);
+  padding: 15px;
   z-index: 100;
   width: 115px;
   height: 115px;
   left: 45px;
   top: 100px;
-  padding: 20px;
   border-radius: 50% !important;
-  background: #01aca0;
+  background: rgba(1, 172, 160, 0.8);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   cursor: pointer;
   text-align: center;
@@ -571,7 +576,6 @@ md-inline-list-icon {
   text-wrap: normal;
   white-space: normal;
   color: #f3f3f3;
-  text-transform: none;
 }
 @media only screen and (max-width: 950px) {
   .sendFP {
