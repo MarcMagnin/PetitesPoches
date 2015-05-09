@@ -141,17 +141,28 @@
                 <label class="control-label" for="FichePedago">Fiche Pédagogique</label>
                 <p>
 
-                    <div ng-file-drop ng-model="files" class="drop-box drop-zone form-control"
+                    <div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control"
                          drag-over-class="dragover" multiple="false"
-                         allow-dir="false" accept="*"
+                         allow-dir="false" accept="*" ng-file-select=""
                          ng-file-change="$parent.addFile($files, $event, 'FichePedago')">
                         <a href="{{::apiRootUrl}}/static/{{selectedItem.Id}}/{{selectedItem.FichePedago}}" target="_blank" ng-show="selectedItem.FichePedago">{{selectedItem.FichePedago}}</a>
-                       
+
                         <div class="placeholder" ng-hide="selectedItem.FichePedago">
-                            <p class="inner-placeholder">
-                                <i class="fa fa-download fa-2 inner-placeholder " />
-                            </p>
-                        </div>
+                <p class="inner-placeholder">
+                    <i class="fa fa-download fa-2 inner-placeholder " />
+                </p>
+            </div>
+
+
+           <!--<div ng-file-drop ng-model="files" class="drop-box drop-zone clickable form-control" drag-over-class="dragover" multiple="false"
+            allow-dir="false" accept="*" ng-file-select="" ng-file-change="$parent.updateAttachment($files, $event, 'Couverture')">
+            <img style="width:100%" ng-show="selectedItem.Couverture" src="{{::apiRootUrl}}/{{selectedItem.Couverture}}" />
+            <div class="placeholder" ng-hide="selectedItem.Couverture">
+                <p class="inner-placeholder">
+                    <i class="fa fa-download fa-2 inner-placeholder " />
+                </p>
+            </div>
+        </div>-->
 
 
         </div>

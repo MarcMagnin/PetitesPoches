@@ -475,13 +475,13 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             var label
             switch ($scope.niveauLecture) {
                 case "premierspas":
-                    label = "Premiers pas";
+                    label = "lecteur *";
                     break;
                 case "debutants":
-                    label = "Débutants";
+                    label = "lecteur **";
                     break;
                 case "confirmes":
-                    label = "Confirmés";
+                    label = "lecteur ***";
                     break;
             }
             filterItemNiveau = {
