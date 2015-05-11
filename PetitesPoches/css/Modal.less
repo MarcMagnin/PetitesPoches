@@ -29,13 +29,13 @@ md-content.md-default-theme {
 md-dialog md-content {
     padding: 0;
     overflow-y: auto;
-    overflow-x :hidden;
+    overflow-x: hidden;
     margin-bottom: auto;
 }
 
 md-dialog {
     overflow-y: auto;
-    overflow-x :hidden;
+    overflow-x: hidden;
     box-shadow: none;
 }
 
@@ -160,7 +160,69 @@ md-dialog .md-default-theme {
 .extrait {
     line-height: 1.2;
 }
+.iconedThemes {
+    color: @primaryColor;
+    text-decoration: none;
+    padding-bottom: 10px;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
 
+     &:link,
+    :visited,
+    :active{
+           color: @primaryColor;
+        opacity: 1;
+    }
+    &:focus{
+        color: @primaryColor;
+        opacity: 1;
+    }
+    .md-default-theme {
+        color: @primaryColor;
+    }
+
+    .iconedLink-text {
+        margin-left: 5px;
+    }
+}
+
+.iconedThemesNoneSelectable{
+    color: black;
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+
+      .iconedLink-text {
+        margin-left: 5px;
+    }
+}
+
+.iconedLinkThemes{
+    color: @primaryColor;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+
+    
+    &:link,
+    :visited,
+    :active{
+           color: @primaryColor;
+        opacity: 1;
+    }
+    &:focus{
+        color: @primaryColor;
+        opacity: 1;
+    }
+    &:hover{
+        color: #000000;
+        opacity: 1;
+    }
+}
 .iconedLink {
     color: @primaryColor;
     text-decoration: none;
@@ -170,13 +232,17 @@ md-dialog .md-default-theme {
     border: 0;
     -webkit-appearance: none;
 
-    &:link,
+     &:link,
     :visited,
-    :active {
-        color: @primaryColor;
+    :active{
+           color: @primaryColor;
+        opacity: 1;
     }
-
-    &:hover {
+    &:focus{
+        color: @primaryColor;
+        opacity: 1;
+    }
+    &:hover{
         color: #000000;
         opacity: 1;
     }
@@ -214,7 +280,8 @@ md-dialog .md-default-theme {
     position: relative;
     border-bottom: 0;
     padding: 12px;
-    text-align:center;
+    text-align: center;
+
     .modal-title {
         color: @textColor;
         float: left;
@@ -328,7 +395,7 @@ md-dialog .md-default-theme {
     display: inline-flex;
     float: left;
 
-    > md-icon {
+    & md-icon {
         min-width: 27px;
         min-height: 27px;
     }
@@ -339,9 +406,16 @@ md-dialog .md-default-theme {
 }
 
 .flex-col {
+    display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox; /* TWEENER - IE 10 */
+    display: -webkit-flex; /* NEW - Chrome */
     display: flex;
+    -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
     align-items: flex-start;
 }
 

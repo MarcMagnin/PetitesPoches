@@ -85,11 +85,11 @@
 }
 .sendFP {
   position: absolute;
-  -ms-transform: rotate(-10deg);
-  -moz-transform: rotate(-10deg);
-  -webkit-transform: rotate(-10deg);
-  -o-transform: rotate(-10deg);
-  transform: rotate(-10deg);
+  -ms-transform: scale(1) rotate(-10deg);
+  -moz-transform: scale(1) rotate(-10deg);
+  -webkit-transform: scale(1) rotate(-10deg);
+  -o-transform: scale(1) rotate(-10deg);
+  transform: scale(1) rotate(-10deg);
   padding: 15px;
   z-index: 100;
   width: 115px;

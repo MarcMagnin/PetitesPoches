@@ -104,7 +104,10 @@
 
 
                 <tags item="selectedItem" entityname="Livre"></tags>
-                <label class="control-label" for="PrixLitteraire">Prix littéraire</label>
+
+                <prixlitteraires item="selectedItem" entityname="Livre"></prixlitteraires>
+
+                <!--<label class="control-label" for="PrixLitteraire">Prix littéraire</label>
                 <p>
                     <input type="text"
                            id="PrixLitteraire"
@@ -114,7 +117,9 @@
                            typeahead-template-url="simpleSuggestionTemplate.html"
                            class="form-control">
                     </input>
-                </p>
+                </p>-->
+
+
                 <label class="control-label" for="LienEbook">Lien E-book</label>
                 <p><input id="LienEbook" class="form-control" type="text" ng-model="selectedItem.EBookUrl" /></p>
                 <label class="control-label" for="LienIssu">Lien Issuu</label>

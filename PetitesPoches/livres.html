@@ -24,7 +24,7 @@
     </a>
 </script>
 
-<div class="md-icon-container sendFP" ng-show="checkboxFichePedagogiques">
+<div class="md-icon-container sendFP animate-show" ng-show="checkboxFichePedagogiques">
     <a href="mailto:etm@editions-thierry-magnier.com">Soumettre vos outils pédagogiques</a>
 </div>
 
@@ -189,7 +189,7 @@
             <!--| orderBy:'Index':true-->
             <div class="tile isotopey {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
                  {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
-                 {{::item.PrixLitteraire && 'fil-prix' || ''}}
+                 {{::item.PrixLitteraires && 'fil-prix' || ''}}
                  {{::item.EBookUrl && 'fil-ebook' || ''}}
                  {{::item.FichePedago && 'fil-pedago' || ''}}
                  {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}

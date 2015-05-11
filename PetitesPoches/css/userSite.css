@@ -421,6 +421,21 @@ md-inline-list-icon {
 .filterButton:hover {
   background-color: rgba(1, 223, 207, 0.8);
 }
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -moz-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -o-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.animate-show.ng-hide {
+  opacity: 0;
+  -moz-transform: scale(0) rotate(90deg);
+  -ms-transform: scale(0) rotate(90deg);
+  -o-transform: scale(0) rotate(90deg);
+  -webkit-transform: scale(0) rotate(90deg);
+  transform: scale(0) rotate(90deg);
+}
 .repeat-item.ng-enter {
   -webkit-transition: 0.5s ease-out all;
   -moz-transition: 0.5s ease-out all;
@@ -541,11 +556,11 @@ md-inline-list-icon {
 }
 .sendFP {
   position: absolute;
-  -ms-transform: rotate(-10deg);
-  -moz-transform: rotate(-10deg);
-  -webkit-transform: rotate(-10deg);
-  -o-transform: rotate(-10deg);
-  transform: rotate(-10deg);
+  -ms-transform: scale(1) rotate(-10deg);
+  -moz-transform: scale(1) rotate(-10deg);
+  -webkit-transform: scale(1) rotate(-10deg);
+  -o-transform: scale(1) rotate(-10deg);
+  transform: scale(1) rotate(-10deg);
   padding: 15px;
   z-index: 100;
   width: 115px;

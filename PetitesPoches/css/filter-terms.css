@@ -53,6 +53,21 @@
 .filterButton:hover {
   background-color: rgba(1, 223, 207, 0.8);
 }
+.animate-show.ng-hide-add.ng-hide-add-active,
+.animate-show.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -moz-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  -o-transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.animate-show.ng-hide {
+  opacity: 0;
+  -moz-transform: scale(0) rotate(90deg);
+  -ms-transform: scale(0) rotate(90deg);
+  -o-transform: scale(0) rotate(90deg);
+  -webkit-transform: scale(0) rotate(90deg);
+  transform: scale(0) rotate(90deg);
+}
 .repeat-item.ng-enter {
   -webkit-transition: 0.5s ease-out all;
   -moz-transition: 0.5s ease-out all;

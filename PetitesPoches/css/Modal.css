@@ -132,6 +132,62 @@ md-dialog .md-default-theme {
 .extrait {
   line-height: 1.2;
 }
+.iconedThemes {
+  color: #01aca0;
+  text-decoration: none;
+  padding-bottom: 10px;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.iconedThemes:link,
+.iconedThemes :visited,
+.iconedThemes :active {
+  color: #01aca0;
+  opacity: 1;
+}
+.iconedThemes:focus {
+  color: #01aca0;
+  opacity: 1;
+}
+.iconedThemes .md-default-theme {
+  color: #01aca0;
+}
+.iconedThemes .iconedLink-text {
+  margin-left: 5px;
+}
+.iconedThemesNoneSelectable {
+  color: black;
+  text-decoration: none;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.iconedThemesNoneSelectable .iconedLink-text {
+  margin-left: 5px;
+}
+.iconedLinkThemes {
+  color: #01aca0;
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.iconedLinkThemes:link,
+.iconedLinkThemes :visited,
+.iconedLinkThemes :active {
+  color: #01aca0;
+  opacity: 1;
+}
+.iconedLinkThemes:focus {
+  color: #01aca0;
+  opacity: 1;
+}
+.iconedLinkThemes:hover {
+  color: #000000;
+  opacity: 1;
+}
 .iconedLink {
   color: #01aca0;
   text-decoration: none;
@@ -145,6 +201,11 @@ md-dialog .md-default-theme {
 .iconedLink :visited,
 .iconedLink :active {
   color: #01aca0;
+  opacity: 1;
+}
+.iconedLink:focus {
+  color: #01aca0;
+  opacity: 1;
 }
 .iconedLink:hover {
   color: #000000;
@@ -314,7 +375,7 @@ md-dialog .md-default-theme {
   display: inline-flex;
   float: left;
 }
-.inline-flex > md-icon {
+.inline-flex md-icon {
   min-width: 27px;
   min-height: 27px;
 }
@@ -322,9 +383,20 @@ md-dialog .md-default-theme {
   margin-left: 5px;
 }
 .flex-col {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
   display: flex;
+  -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
   align-items: flex-start;
 }
 .close-button .md-default-theme {
