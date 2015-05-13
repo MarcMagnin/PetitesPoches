@@ -11,28 +11,21 @@
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
-        <md-item id="searchitem" ng-click="toggleSearch()" style="z-index:50">
-            <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
-                       aria-label="Recherche">
-                <!--<div id="searchIcon" class="md-icon-container toggled">
-                <md-icon md-font-icon="fa-search" class="fa"></md-icon>
-            </div>-->
-                <div id="searchIcon" class="md-icon-container ">
-                    <md-icon md-svg-src="images/search.svg"></md-icon>
-                </div>
-                <p class="md-grid-text">Recherche</p>
-                <input type="text"
-                       id="search2"
-                       ng-model='$parent.searchedText'
-                       ng-change='validateSearch($viewValue)'
-                       typeahead="val as val.Titre for val in searchSuggestions($viewValue)"
-                       typeahead-loading="loadingSearchSuggestions"
-                       typeahead-template-url="auteurSearchTemplate.html"
-                       typeahead-wait-ms="300"
-                       typeahead-on-select="validateSearchTextBox($item, $model, $label, $viewValue)"
-                       class="form-control form-control-inline transparentInput" />
-            </md-button>
-
+        <md-item id="searchitem" style="z-index:50">
+            <div id="searchIcon" class="md-icon-container ">
+                <md-icon md-svg-src="images/search.svg"></md-icon>
+            </div>
+            <p class="toobar-button-label">Recherche</p>
+            <input type="text"
+                   id="search2"
+                   ng-model='searchedText'
+                   ng-change='validateSearch($viewValue)'
+                   typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                   typeahead-loading="loadingSearchSuggestions"
+                   typeahead-template-url="livreSearchTemplate.html"
+                   typeahead-wait-ms="300"
+                   typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                   class="form-control form-control-inline transparentInput" />
         </md-item>
 
     </md-list>

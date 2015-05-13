@@ -36,16 +36,24 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
               $scope.menuShown = true;
           });
         TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
-        $("#searchitem, #searchbutton").focusout(function ($event) {
+        $("#search2").focusin(function ($event) {
+            if (preventSearchFocusIn) {
+                $("#search2").blur();
+                return
+            }
+            $scope.toggleSearch();
+        });
+
+
+        $("#search2").focusout(function ($event) {
             //// Can't rely on that, relatedTarget is null on firefox
             ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
             ////    return;
             ////}
-            if (preventFocusOut) {
-                return
-            }
+            //if (preventFocusOut) {
+            //    return
+            //}
             $scope.closeSearch();
-
         });
 
         itemAdded = 0;
@@ -78,27 +86,21 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
-        console.log("toggleSearch");
-        setTimeout(function () {
-            $("#search2").focus();
-        }, 150)
         if (searchToggled)
             return;
         searchToggled = true;
-        preventFocusOut = true;
-        setTimeout(function () {
-            preventFocusOut = false;
-        }, 200)
-
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
-        $("#searchbutton").addClass("toggled");
         $("#search2").addClass("toggled");
     }
 
+
     $scope.closeSearch = function () {
-        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
-        searchToggled = false;
+        setTimeout(function () {
+            $("#searchitem, #searchIcon, #search2").removeClass("toggled");
+            searchToggled = false;
+        }, 100)
+
     }
 
 
@@ -158,11 +160,9 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             $scope.searchItems.push(searchedTextItemFilterButton);
 
 
-            $('#searchbutton').addClass("active");
         } else {
             if (!$scope.searchedText) {
                 $scope.searchItems.splice($scope.searchItems.indexOf(searchedTextItemFilterButton), 1);
-                $('#searchbutton').removeClass("active");
             }
 
         }
@@ -179,8 +179,13 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         }
         $scope.validateFilter();
     });
-
+    var preventSearchFocusIn = false;
     $scope.validateSearchTextBox = function ($item, $model, $label) {
+        preventSearchFocusIn = true;
+        setTimeout(function () {
+            preventSearchFocusIn = false;
+        }, 200);
+
         if ($item.Nom) {
             $scope.searchedText = $item.Prenom + " " + $item.Nom;
         }

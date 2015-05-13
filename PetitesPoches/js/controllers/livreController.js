@@ -67,8 +67,6 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 $("#search2").blur();
                 return
             }
-            console.log("FOCUS IN");
-           
             $scope.toggleSearch();
         });
 
@@ -81,7 +79,6 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             //if (preventFocusOut) {
             //    return
             //}
-            console.log("FOCUS OUT");
             $scope.closeSearch();
         });
         $scope.menuShown = false;
@@ -146,15 +143,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
-        //setTimeout(function () {
-
-        //}, 150)
-
         if (searchToggled)
             return;
         searchToggled = true;
-
-
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
         $("#search2").addClass("toggled");
