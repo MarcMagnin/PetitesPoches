@@ -36,10 +36,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.themeMultiselectmodel = [];
     $scope.searchItems = [];
     $scope.dataReady = false;
-     
-    
+
+
     $scope.init = function () {
-      
+
         //$("md-item").click(function () {
         //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
         //    TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
@@ -57,23 +57,35 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //   $("#searchIcon").addClass("toggled");
         //   $("#search2").addClass("toggled");
         //    //$("#search2").focus();
-          
-        
+
+
         //});
-        $("#searchitem, #searchbutton").focusout(function ($event) {
+
+
+        $("#search2").focusin(function ($event) {
+            if (preventSearchFocusIn) {
+                $("#search2").blur();
+                return
+            }
+            console.log("FOCUS IN");
+           
+            $scope.toggleSearch();
+        });
+
+
+        $("#search2").focusout(function ($event) {
             //// Can't rely on that, relatedTarget is null on firefox
             ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
             ////    return;
             ////}
-            if (preventFocusOut) {
-                return
-            }
-
+            //if (preventFocusOut) {
+            //    return
+            //}
+            console.log("FOCUS OUT");
             $scope.closeSearch();
         });
         $scope.menuShown = false;
 
-       
 
         itemAdded = 0;
         livreService.getLivres()
@@ -90,7 +102,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
                 delayLoop(livres, 0, 0.0001, function (item) {
                     item.Id = item['@metadata']['@id'];
-                   
+
                     $scope.items.push(item);
                     if ($scope.items.length == livres.length) {
                         $scope.dataReady = true;
@@ -99,7 +111,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     $scope.$apply();
 
                 });
-                
+
                 //$timeout(function () {
                 //    //angular.forEach(livres, function (item, index) {
                 //    //    item.Id = item['@metadata']['@id'];
@@ -107,9 +119,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 //    //});
                 //    $scope.items = livres;
                 //    $(".progressIndicator").addClass("toggled");
-                    
+
                 //}, 1000);
-               
+
                 if ($stateParams.auteur) {
                     $scope.searchedText = $stateParams.auteur;
                     $scope.setSearchPattern();
@@ -126,46 +138,37 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             error(function (data, status, headers, config) {
                 console.log(data);
             });
-      
-        
+
+
 
     };
-   
+
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
-        console.log("toggleSearch");
-        setTimeout(function () {
-            $("#search2").focus();
-        }, 150)
+        //setTimeout(function () {
+
+        //}, 150)
+
         if (searchToggled)
             return;
         searchToggled = true;
-        preventFocusOut = true;
-        setTimeout(function () {
-            preventFocusOut = false;
-        }, 200)
-        
+
+
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
-        $("#searchbutton").addClass("toggled");
         $("#search2").addClass("toggled");
     }
 
+
     $scope.closeSearch = function () {
-        $("#searchitem, #searchbutton, #searchIcon, #search2").removeClass("toggled");
-        searchToggled = false;
+        setTimeout(function () {
+            $("#searchitem, #searchIcon, #search2").removeClass("toggled");
+            searchToggled = false;
+        }, 100)
+
     }
 
-    $scope.toggleLeft = function () {
-        var leftSideNave = $mdSidenav('left');
-
-        leftSideNave.toggle().then(function () {
-            if (leftSideNave.isOpen()) {
-                $('#search').focus();
-            }
-        });
-    }
 
     $scope.showListBottomSheet = function ($event) {
         $mdBottomSheet.show({
@@ -188,7 +191,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             if (leftSideNave.isOpen()) {
                 $('#search').focus();
             }
-        }); 
+        });
     }
     $scope.closeLeft = function () {
         var leftSideNave = $mdSidenav('left');
@@ -198,7 +201,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.openLeft = function () {
         var leftSideNave = $mdSidenav('left');
         leftSideNave.open();
-    
+
         $(".clear-icon").addClass("toggled");
     }
 
@@ -217,8 +220,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
     $scope.select = function (item, size, $event) {
         $scope.selectedItem = item;
-        
-        
+
+
         //// prevent the modal to show if we click on a nested link
         if (!$($event.target).closest('a').length) {
 
@@ -232,7 +235,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     parentScope: $scope
                 }
             });
-  
+
 
             //var modalInstance = $modal.open({
             //    templateUrl: 'myModalContent.html',
@@ -251,7 +254,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
         }
-      
+
 
 
         //    modalInstance.result.then(function () {
@@ -304,9 +307,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 results.push({
                     Titre: item.Titre, Auteur: {
                         Nom: item.Auteur.Nom,
-                        Prenom : item.Auteur.Prenom
+                        Prenom: item.Auteur.Prenom
                     },
-                    imageUrl : $scope.apiRootUrl + "/" + item.Couverture
+                    imageUrl: $scope.apiRootUrl + "/" + item.Couverture
                 })
             });
             return results;
@@ -320,18 +323,14 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.$watch('searchedText', function (newValue) {
         if ($scope.searchedText && $scope.searchItems.indexOf(searchedTextItemFilterButton) == -1) {
             $scope.searchItems.push(searchedTextItemFilterButton);
-        
-        
             $('#searchbutton').addClass("active");
         } else {
             if (!$scope.searchedText) {
                 $scope.searchItems.splice($scope.searchItems.indexOf(searchedTextItemFilterButton), 1);
                 $('#searchbutton').removeClass("active");
             }
-                
         }
         searchedTextItemFilterButton.value = newValue;
-
         $scope.validateFilter();
     });
 
@@ -344,7 +343,13 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.validateFilter();
     });
 
+    var preventSearchFocusIn = false;
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
+        preventSearchFocusIn = true;
+        setTimeout(function () {
+            preventSearchFocusIn = false;
+        } , 200);
+
         if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
@@ -353,6 +358,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         }
         $scope.validateFilter();
         $scope.closeSearch();
+     
+
     }
 
     $scope.$watch('themeMultiselectmodel.length', function (items) {
@@ -413,10 +420,11 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         switch (searchItem.key) {
             case "text":
                 $scope.searchedText = "";
+                $("#search2").val('');
                 $scope.searchPatternRecherche = null;
                 break;
             case "fichePedago":
-                $scope.searchPatternFichePedagogiques= null;
+                $scope.searchPatternFichePedagogiques = null;
                 $scope.checkboxFichePedagogiques = false;
                 break;
             case "ebook":
@@ -431,23 +439,22 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 $scope.niveauLecture = "";
                 $scope.filterPatternNiveauLecture = "";
                 break;
-        } 
-
+        }
         $scope.validateFilter();
     }
     $scope.validateFilter = function () {
-        if(!$scope.dataReady)
+        if (!$scope.dataReady)
             return;
-      
+
 
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
             + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '')
             + ($scope.searchPatternFichePedagogiques ? $scope.searchPatternFichePedagogiques : '')
-            + ($scope.searchPatternEBook ?  $scope.searchPatternEBook : '')
+            + ($scope.searchPatternEBook ? $scope.searchPatternEBook : '')
             + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
-        
+
         $scope.container.isotope({ filter: searchPattern });
 
 
@@ -460,7 +467,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     }
 
     $scope.niveauLecture = "";
-    var filterItemNiveau= {
+    var filterItemNiveau = {
         key: "niveau",
         value: ""
     };
@@ -495,7 +502,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     });
 
     $scope.searchEBook = function () {
-        $scope.searchPatternEBook  = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
+        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
         $scope.validateFilter();
     }
 
@@ -503,13 +510,13 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.fil-pedago' : '';
         $scope.validateFilter();
     }
-    
+
     $scope.searchPrixLitteraires = function () {
         $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';
         $scope.validateFilter();
     }
 
- 
+
     $scope.filtreNiveauLecture = function () {
         $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
         $scope.validateFilter();
@@ -569,7 +576,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //}
         //previousTag = tag;
 
-       // $scope.openLeft();
+        // $scope.openLeft();
         //$("#wrapper").addClass("toggled");
         //$("#search").addClass("toggled");
         //$(".searchSideBar").addClass("toggled");
@@ -614,9 +621,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
         $scope.searchTimeout = setTimeout(function () {
-      
+
             $scope.setSearchPattern();
-        
+
             $scope.validateFilter();
         }, 100);
     }

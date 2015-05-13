@@ -78,6 +78,9 @@ app.directive('prixlitteraires', function ($http, $rootScope) {
             // This is the ng-click handler to remove an item
             $scope.remove = function (idx) {
                 $scope.item.PrixLitteraires.splice(idx, 1);
+                if ($scope.item.PrixLitteraires.length == 0) {
+                    delete $scope.item.PrixLitteraires
+                }
                 $scope.update();
             };
 

@@ -19,4 +19,4 @@ app.filter('dateCleaner', function () {
         return moment(date).format('DD/MM/YYYY');
     };
 });
-  
+

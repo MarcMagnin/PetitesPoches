@@ -1,4 +1,19 @@
-﻿.menuBar {
+﻿.toobar-button-label {
+  opacity: 0.5;
+  position: absolute;
+  left: 50%;
+  margin-right: -50%;
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -o-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  -moz-transition: all 0.2s linear;
+  -o-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+.menuBar {
   font: normal 14px/38px Montserrat;
   height: 50px;
   display: -webkit-box;
@@ -15,6 +30,7 @@
   /*display:none;*/
 }
 .menuBar md-item {
+  cursor: pointer;
   position: relative;
   color: white;
   height: 45px;
@@ -33,31 +49,11 @@
 .menuBar .md-button > .md-icon-container {
   height: 100%;
   width: 100%;
-  opacity: 0.5;
-  -moz-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
-}
-.menuBar .md-button > .md-grid-text {
-  opacity: 0.5;
-  position: absolute;
-  left: 50%;
-  margin-right: -50%;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -o-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-  -moz-transition: all 0.2s linear;
-  -o-transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
-  transition: all 0.2s linear;
 }
 .menuBar .md-button.active {
   color: #15feed !important;
 }
-.menuBar .md-button.active > .md-icon-container {
+.menuBar .md-button.active > .md-icon-container md-icon {
   opacity: 0.9;
 }
 .menuBar .md-button.active > .md-grid-text {
@@ -75,9 +71,13 @@
 .menuBar .md-icon-container md-icon {
   height: 100%;
   width: 100%;
-  margin-bottom: 10px;
   border-radius: 50%;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  opacity: 0.5;
+  -moz-transition: opacity 0.2s linear;
+  -o-transition: opacity 0.2s linear;
+  -webkit-transition: opacity 0.2s linear;
+  transition: opacity 0.2s linear;
 }
 .menuBar.md-font::before {
   font-size: 2.6em;
@@ -159,21 +159,17 @@
   -webkit-transition: all 0s linear !important;
   transition: all 0s linear !important;
 }
-.searchButton.toggled {
-  opacity: 1;
-}
 #search2 {
   position: absolute;
   top: 45%;
   left: 50%;
-  margin-right: -50%;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
+  width: 38px;
+  height: 38px;
   opacity: 0;
   min-width: 0;
   -moz-transition: all 0.5s ease;
@@ -183,12 +179,25 @@
 }
 #search2.toggled {
   width: 150px;
-  height: auto;
   opacity: 1;
 }
+@media only screen and (max-width: 630px) {
+  #search2 {
+    top: 2px;
+    left: auto;
+    right: 0;
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  #search2.toggled {
+    width: 260px;
+  }
+}
 #searchIcon.toggled {
-  width: 0;
-  opacity: 0;
+  opacity: 0.01;
 }
 #searchitem.toggled {
   opacity: 1;

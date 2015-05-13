@@ -169,6 +169,7 @@
     <Content Include="images\prix.png" />
     <Content Include="js\controllers\auteurController.js" />
     <Content Include="js\controllers\mainController.js" />
+    <Content Include="js\directives\price.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />

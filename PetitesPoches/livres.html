@@ -43,7 +43,7 @@
                         <div class="md-icon-container">
                             <md-icon md-svg-src="images/niveaux.svg"></md-icon>
                         </div>
-                        <p class="md-grid-text">Niveaux</p>
+                        <p class="toobar-button-label">Niveaux</p>
                     </md-button>
                 </md-select-label>
                 <md-option value="">Tous niveaux</md-option>
@@ -63,10 +63,10 @@
                     <md-icon md-svg-src="images/pedago.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text">
+                <p class="toobar-button-label">
                     Fiches
                 </p>
-                <p style="margin-top:15px" class="md-grid-text">
+                <p style="margin-top:15px" class="toobar-button-label">
                     pédagogiques
                 </p>
             </md-button>
@@ -84,7 +84,7 @@
                     <md-icon md-svg-src="images/ebook2.svg"></md-icon>
                 </div>
 
-                <p class="md-grid-text">E-books</p>
+                <p class="toobar-button-label">E-books</p>
             </md-button>
 
         </md-item>
@@ -98,7 +98,7 @@
                     <md-icon md-svg-src="images/prix.svg"></md-icon>
                 </div>
                 <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
-                <p class="md-grid-text">Prix littéraires</p>
+                <p class="toobar-button-label">Prix littéraires</p>
             </md-button>
 
         </md-item>
@@ -134,36 +134,33 @@
                         <div class="md-icon-container">
                             <md-icon md-svg-src="images/themes.svg"></md-icon>
                         </div>
-                        <p class="md-grid-text">Thèmes</p>
+                        <p class="toobar-button-label">Thèmes</p>
                     </md-button>
                 </md-select-label>
                 <md-option ng-value="theme" ng-repeat="theme in tags | orderBy:'Name'">{{theme.Name}}</md-option>
             </md-select>
         </md-item>
 
-
-        <md-item id="searchitem" ng-click="toggleSearch()" style="z-index:50">
-            <md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
+        <!--ng-click="toggleSearch()"-->
+        <md-item id="searchitem"  style="z-index:50">
+            <!--<md-button id="searchbutton" class="searchButton  md-primary md-grid-item-content"
                        aria-label="Recherche">
-                <!--<div id="searchIcon" class="md-icon-container toggled">
-                <md-icon md-font-icon="fa-search" class="fa"></md-icon>
-            </div>-->
-                <div id="searchIcon" class="md-icon-container ">
-                    <md-icon md-svg-src="images/search.svg"></md-icon>
-                </div>
-                <p class="md-grid-text">Recherche</p>
-                <input type="text"
-                       id="search2"
-                       ng-model='$parent.searchedText'
-                       ng-change='validateSearch($viewValue)'
-                       typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
-                       typeahead-loading="loadingSearchSuggestions"
-                       typeahead-template-url="livreSearchTemplate.html"
-                       typeahead-wait-ms="300"
-                       typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
-                       class="form-control form-control-inline transparentInput" />
-            </md-button>
-
+               ...
+            </md-button>-->
+            <div id="searchIcon" class="md-icon-container ">
+                <md-icon md-svg-src="images/search.svg"></md-icon>
+            </div>
+            <p class="toobar-button-label">Recherche</p>
+            <input type="text"
+                   id="search2"
+                   ng-model='searchedText'
+                   ng-change='validateSearch($viewValue)'
+                   typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                   typeahead-loading="loadingSearchSuggestions"
+                   typeahead-template-url="livreSearchTemplate.html"
+                   typeahead-wait-ms="300"
+                   typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                   class="form-control form-control-inline transparentInput" />
         </md-item>
 
     </md-list>

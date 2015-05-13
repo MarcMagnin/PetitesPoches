@@ -25,8 +25,7 @@
                     </div>
 
 
-                    <!--<div class="prix" price value="::selectedItem.Prix" />-->
-
+                   
                 </div>
 
 
@@ -44,16 +43,17 @@
                         <p ng-show="::selectedItem.ISBN"><span class="labelText">isbn </span>{{::selectedItem.ISBN}}</p>
                         <p><span class="labelText">format </span>10,5 x 15 cm</p>
                         <p>48 pages</p>
-                        <!--<p ng-show="::selectedItem.PrixLitteraire.length"><span class="labelText">{{::selectedItem.PrixLitteraire}}</span></p>-->
+
+
+
 
 
                         <!--<md-icon class="md-icon" md-svg-src="images/niveaux.svg"></md-icon>-->
-                        <p class="labelText" ng-switch="selectedItem.NiveauLecture">
-                            <span ng-switch-default>tous niveaux</span>
-                            <span ng-switch-when="premierspas">lecteur *</span>
-                            <span ng-switch-when="debutans">lecteur **</span>
-                            <span ng-switch-when="confirmes">lecteur ***</span>
-                        </p>
+                      
+
+                     <div price value="::selectedItem.Prix" />
+
+
                     </div>
                     <div class="col-md-6" style="min-width:250px">
                         <div style="margin-top:-6px" ng-show="::selectedItem.Extrait">
@@ -86,6 +86,27 @@
                                 </div>
                             </a>
 
+                            <a class="iconedLink" ng-show="::selectedItem.LienVideo" href="{{::selectedItem.LienVideo}}"
+                               target="_blank">
+                                <div class="inline-flex">
+                                    <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
+                                    <span class="iconedLink-text">vidéo</span>
+                                </div>
+                            </a>
+
+                            <div class="inline-flex iconedThemesNoneSelectable" ng-show="::selectedItem.Tags.length > 0">
+                                <div>
+                                    <md-icon class="md-icon" md-svg-src="images/niveaux.svg"></md-icon>
+                                </div>
+                                <div class="flex-col">
+                                    <p class="iconedLink-text" ng-switch="::selectedItem.NiveauLecture">
+                                        <span ng-switch-default>tous niveaux</span>
+                                        <span ng-switch-when="premierspas">lecteur *</span>
+                                        <span ng-switch-when="debutans">lecteur **</span>
+                                        <span ng-switch-when="confirmes">lecteur ***</span>
+                                    </p>
+                                </div>
+                            </div>
 
                             <div class="inline-flex iconedThemesNoneSelectable" ng-show="::selectedItem.Tags.length > 0">
                                 <div>
@@ -114,13 +135,7 @@
 
 
 
-                            <a class="iconedLink" ng-show="::selectedItem.LienVideo" href="{{::selectedItem.LienVideo}}"
-                               target="_blank">
-                                <div class="inline-flex">
-                                    <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
-                                    <span class="iconedLink-text">vidéo</span>
-                                </div>
-                            </a>
+                         
                         </div>
                     </div>
                 </div>
@@ -137,32 +152,35 @@
             </div>
 
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-5" style="min-width:320px;">
-                        <img class="tile-image" ng-show="selectedItem.Auteur.Photo" src="{{::selectedItem.Auteur.Photo}}" />
-                        <br /><br /><br />
-                    </div>
-                    <div class="col-md-6" style="min-width:250px">
-                        <div class="flex-col">
 
-                            <a class="iconedLink" ng-show="::selectedItem.Auteur.LienBiblio" href="{{::selectedItem.Auteur.LienBiblio}}"
-                               target="_blank">
-                                <div class="inline-flex">
-                                    <md-icon class="md-icon" md-svg-src="images/biblio.svg"></md-icon>
-                                    <span class="iconedLink-text">sa biographie</span>
-                                </div>
-                            </a>
-                            <a class="iconedLink" ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()"
-                               target=" _blank">
-                                <div class="inline-flex">
-                                    <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
-                                    <span class="iconedLink-text">voir toutes ses Petite Poche</span>
-                                </div>
-                            </a>
+                <div class="row" style="padding:20px;">
+                    <div>
+                        <div class="round" style="margin-left:auto; margin-right:auto;">
+                            <img src="{{::selectedItem.Auteur.Photo}}" ng-show="::selectedItem.Auteur.Photo" />
+                            <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::selectedItem.Auteur.Photo" />
                         </div>
-                    </div>
-                    <br /><br /><br /><br /><br />
+                        <br />
+                        <div layout="row" layout-align="center center">
+                            <div layout="column">
+                                <a class="iconedLink" ng-show="::selectedItem.Auteur.LienBiblio" href="{{::selectedItem.Auteur.LienBiblio}}"
+                                   target="_blank">
+                                    <div class="inline-flex">
+                                        <md-icon class="md-icon" md-svg-src="images/biblio.svg"></md-icon>
+                                        <span class="iconedLink-text">sa biographie</span>
+                                    </div>
+                                </a>
+                                <a class="iconedLink" ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()">
+                                    <div class="inline-flex">
+                                        <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
+                                        <span class="iconedLink-text">voir toutes ses Petite Poche</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div><br />
                 </div>
+
+            
             </div>
         </div>
 

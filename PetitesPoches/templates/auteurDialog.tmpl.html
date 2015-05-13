@@ -21,53 +21,34 @@
         <div class="modal-wrapper">
             <div class="modal-body">
                 <div class="row" style="padding:20px;">
-                    <div >
-                        <div class="round" style="margin-left:auto; margin-right:auto;" >
+                    <div>
+                        <div class="round" style="margin-left:auto; margin-right:auto;">
                             <img src="{{::selectedItem.Photo}}" ng-show="::selectedItem.Photo" />
                             <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::selectedItem.Photo" />
                         </div>
                         <br />
-                        <div class="flex-col">
-                            <a class="iconedLink" ng-show="::selectedItem.LienBiblio" href="{{::selectedItem.LienBiblio}}"
-                               target="_blank">
-                                <div class="inline-flex">
-                                    <md-icon class="md-icon" md-svg-src="images/biblio.svg"></md-icon>
-                                    <span class="iconedLink-text">sa biographie</span>
-                                </div>
-                            </a>
-                            <a class="iconedLink" ui-sref="collection({auteur:selectedItem.Prenom + ' ' + selectedItem.Nom})" ng-click="parentScope.voirTousSesLivres(selectedItem); closeDialog()">
-                                <div class="inline-flex">
-                                    <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
-                                    <span class="iconedLink-text">voir toutes ses Petite Poche</span>
-                                </div>
-                            </a>
+                        <div layout="row" layout-align="center center">
+                            <div layout="column">
+                                <a class="iconedLink" ng-show="::selectedItem.LienBiblio" href="{{::selectedItem.LienBiblio}}"
+                                   target="_blank">
+                                    <div class="inline-flex">
+                                        <md-icon class="md-icon" md-svg-src="images/biblio.svg"></md-icon>
+                                        <span class="iconedLink-text">sa biographie</span>
+                                    </div>
+                                </a>
+                                <a class="iconedLink" ui-sref="collection({auteur:selectedItem.Prenom + ' ' + selectedItem.Nom})" ng-click="parentScope.voirTousSesLivres(selectedItem); closeDialog()">
+                                    <div class="inline-flex">
+                                        <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
+                                        <span class="iconedLink-text">voir toutes ses Petite Poche</span>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div><br />
+                        </div><br />
                     </div>
                   
 
 
-                    <!--<div class="col-md-5" style="min-width:320px;">
-                        <img class="tile-image" src="{{::selectedItem.Photo}}" />
-                    </div>
-                    <div class="col-md-8">
-                        <div class="flex-col">
-                            <div class="md-icon-container inline-flex" ng-show="::selectedItem.LienBiblio">
-                                <div class="md-icon-text">
-                                    <a class="transparentButton" href="{{::selectedItem.LienBiblio}}" target="_blank">
-                                        Bibliographie
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="md-icon-container inline-flex">
-                                <div class="md-icon-text">
-                                    <a class="transparentButton" ui-sref="collection({auteur:selectedItem.Prenom + ' ' + selectedItem.Nom})" ng-click="parentScope.voirTousSesLivres(selectedItem); closeDialog()">
-                                        Toutes les petites poches de {{::selectedItem.Prenom}} {{::selectedItem.Nom|uppercase}}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
             </div>
         </div>
 

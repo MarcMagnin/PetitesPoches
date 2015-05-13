@@ -105,19 +105,6 @@ md-dialog .md-default-theme {
     z-index: 50;
 }
 
-.prix {
-    top: 78px;
-    right: -20px;
-    position: absolute;
-    width: 40px;
-    z-index: 100;
-}
-
-@media (max-width:895px) {
-    .prix {
-        right: 0;
-    }
-}
 
 .simple-link {
     color: black;
@@ -193,7 +180,7 @@ md-dialog .md-default-theme {
     background: transparent;
     border: 0;
     -webkit-appearance: none;
-
+     padding-bottom: 10px;
       .iconedLink-text {
         margin-left: 5px;
     }
@@ -398,6 +385,7 @@ md-dialog .md-default-theme {
     & md-icon {
         min-width: 27px;
         min-height: 27px;
+        color:@primaryColor;
     }
 }
 
@@ -487,17 +475,20 @@ md-dialog .md-default-theme {
 
 .pastille-prix {
     font-family: 'NeutraDisp-Titling';
+    color:@primaryColor;
     line-height: 1;
-    background: @primaryColor;
+    /*background: @primaryColor;*/
     /*background: rgb(242, 156, 15);*/
-    border: 2px solid white;
+    /*border: 2px solid white;*/
     /*-webkit-box-shadow: 0px 0px 7px 1px black;
     -moz-box-shadow: 0px 0px 7px 1px black;
     box-shadow: 0px 0px 7px 1px black;*/
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     height: 40px;
     width: 40px;
     position: relative;
+    margin-top:10px;
+    margin-left:5px;
 }
 
 .pastille-prix .pastille-container {
@@ -510,10 +501,11 @@ md-dialog .md-default-theme {
     -o-transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    text-shadow: 1px 1px @primaryColor;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.65);
 }
 
 .pastille-prix .pastille-container .inner-pastille-container {
+        font-size:1.5em;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -523,8 +515,8 @@ md-dialog .md-default-theme {
 }
 
 .pastille-prix .pastille-container .symbol {
-    font-size: 0.58em;
-    line-height: 0.6;
+    font-size: 0.7em;
+    line-height: 0.5;
 }
 
 .pastille-prix .pastille-container .second-value {

@@ -81,11 +81,11 @@
   transform: translateX(-30px);
 }
 .repeat-item.ng-leave {
-  -webkit-transition: 0 linear all;
-  -moz-transition: 0 linear all;
-  -o-transition: 0 linear all;
-  transition: 0 linear all;
-  opacity: 0;
+  /*-webkit-transition: 0 linear all;
+    -moz-transition: 0 linear all;
+    -o-transition: 0 linear all;
+    transition: 0 linear all;
+    opacity: 0;*/
 }
 .repeat-item.ng-leave.ng-leave-active {
   opacity: 0;
