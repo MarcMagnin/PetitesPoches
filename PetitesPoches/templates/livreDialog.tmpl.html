@@ -63,7 +63,7 @@
                         <br />
                         <div class="flex-col">
 
-                            <a class="iconedLink" ng-show="::selectedItem.EBookUrl" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.EBookUrl}}"
+                              <a class="iconedLink" ng-show="::selectedItem.EBookUrl" href="{{::selectedItem.EBookUrl}}"
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/ebook2.svg"></md-icon>
@@ -78,7 +78,7 @@
                                 </div>
                             </a>
 
-                            <a class="iconedLink" ng-show="::selectedItem.FichePedago" href="{{::apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
+                            <a class="iconedLink" ng-show="::selectedItem.FichePedago" href="{{::parentScope.apiRootUrl}}/static/{{::selectedItem.Id}}/{{::selectedItem.FichePedago}}"
                                target="_blank">
                                 <div class="inline-flex">
                                     <md-icon class="md-icon" md-svg-src="images/pedago.svg"></md-icon>
@@ -130,12 +130,6 @@
                                     </p>
                                 </div>
                             </div>
-
-
-
-
-
-                         
                         </div>
                     </div>
                 </div>
