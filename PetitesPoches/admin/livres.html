@@ -249,7 +249,7 @@
          allow-dir="false" accept="image/*"
          ng-file-change="addLivreByDragAndDrop($files, $event)">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin fil-{{item.Titre | lowercase | nospace}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
+        <div class="tile isotopey tile-admin fil-{{item.filTitre}} {{item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
              {{item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}} {{item.PrixLitteraire && 'fil-prix' || ''}} {{item.EBookUrl && 'fil-ebook' || ''}}
              {{item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
              {{item.Tags && item.Tags || '' | filterString}}"

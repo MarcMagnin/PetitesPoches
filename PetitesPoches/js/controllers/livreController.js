@@ -99,6 +99,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
                 delayLoop(livres, 0, 0.0001, function (item) {
                     item.Id = item['@metadata']['@id'];
+                    item.filTitre = "fil-"+cleanString(item.Titre);
+                    if (item.Auteur.Nom)
+                        item.filAuteur = "fil-" + cleanString(item.Auteur.Prenom+item.Auteur.Nom);
+
 
                     $scope.items.push(item);
                     if ($scope.items.length == livres.length) {
@@ -324,7 +328,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         }
 
         searchedTextItemFilterButton.value = newValue;
-       // $scope.validateFilter();
+      
     });
 
  
@@ -342,7 +346,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         else {
             $scope.searchedText = $item.Titre;
         }
-        $scope.validateFilter();
+       
+
+        $scope.validateSearch();
         $scope.closeSearch();
      
 
@@ -587,18 +593,23 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //$(".searchSideBar").removeClass("toggled");
     }
 
+
     $scope.setSearchPattern = function () {
+
+
         if ($scope.searchedText.Titre) {
-            $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
+            $scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText.Titre) + '\']';
         } else {
             if ($scope.searchedText.length == 0) {
                 $scope.searchPatternRecherche = '*';
             } else {
-                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                }).join('');
+                $scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText) + '\']';
+                //$scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
+                //    return '[class*=\'fil-' + val.toLowerCase() + '\']';
+                //}).join('');
             }
         }
+        console.log("Search:" + $scope.searchPatternRecherche);
     }
     $scope.validateSearch = function (text) {
         if ($scope.searchTimeout) {

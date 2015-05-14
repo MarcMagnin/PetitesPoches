@@ -158,8 +158,7 @@
 
         <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
             <!--| orderBy:'Index':true-->
-            <div class="tile isotopey {{::item.Titre && 'fil-'+item.Titre || '' | lowercase | nospace}} {{::item.Auteur.Prenom && 'fil-'+item.Auteur.Prenom || ''  | lowercase | nospace}}
-                 {{::item.Auteur.Nom && 'fil-'+item.Auteur.Nom || '' | lowercase | nospace}}
+            <div class="tile isotopey {{::item.filTitre}} {{::item.filAuteur}} 
                  {{::item.PrixLitteraires && 'fil-prix' || ''}}
                  {{::item.EBookUrl && 'fil-ebook' || ''}}
                  {{::item.FichePedago && 'fil-pedago' || ''}}

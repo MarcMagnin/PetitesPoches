@@ -20,6 +20,10 @@ function delayLoop(collection, index, timer, action) {
 }
 
 
+function cleanString(string) {
+    return string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '');
+}
+
 $(document).ready(function () {
     var orientation = "h";
     $('body, html').mousewheel(function (event) {
