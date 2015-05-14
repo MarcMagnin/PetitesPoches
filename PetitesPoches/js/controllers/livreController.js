@@ -289,7 +289,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             params: {
                 query: "Titre:" + value + "* OR Nom:" + value + "* OR Prenom:" + value + "*",
                 //resultsTransformer: "AuteurSearchTransform",
-                pageSize: 10
+                pageSize: 6,
+                foobar: new Date().getTime() 
             }
         }).then(function (res) {
             $scope.loadingSearchSuggestions = false;
@@ -321,18 +322,12 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 $('#searchbutton').removeClass("active");
             }
         }
+
         searchedTextItemFilterButton.value = newValue;
-        $scope.validateFilter();
+       // $scope.validateFilter();
     });
 
-    $scope.$watch('searchSelectedItem', function (newValue) {
-        if ($scope.searchSelectedItem && $scope.searchSelectedItem.Auteur
-            && ($scope.searchSelectedItem.Auteur.Nom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1
-            || $scope.searchSelectedItem.Auteur.Prenom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1)) {
-            $scope.searchedText = $scope.searchSelectedItem.Auteur.Prenom + " " + $scope.searchSelectedItem.Auteur.Nom;
-        }
-        $scope.validateFilter();
-    });
+ 
 
     var preventSearchFocusIn = false;
     $scope.validateSearchFromLivre = function ($item, $model, $label) {
@@ -340,8 +335,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         setTimeout(function () {
             preventSearchFocusIn = false;
         } , 200);
-
-        if ($item.Auteur && $item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1) {
+        
+        if ($item.Auteur && $item.Auteur.Nom  && ($item.Auteur.Nom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1 || $item.Auteur.Prenom.toLowerCase().indexOf($scope.searchSuggestionsValue.toLowerCase()) > -1)) {
             $scope.searchedText = $item.Auteur.Prenom + " " + $item.Auteur.Nom;
         }
         else {

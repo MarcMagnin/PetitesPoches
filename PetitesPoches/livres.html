@@ -13,8 +13,8 @@
 
         <img src="{{match.model.imageUrl}}" width="40" />
         <span bind-html-unsafe="match.model.Titre | typeaheadHighlight:query"></span>
-        <span bind-html-unsafe="match.model.Auteur.Prenom | typeaheadHighlight:query"></span>
-        <span bind-html-unsafe="match.model.Auteur.Nom | typeaheadHighlight:query"></span>
+        <span ng-show="match.model.Auteur.Prenom" bind-html-unsafe="match.model.Auteur.Prenom | typeaheadHighlight:query"></span>
+        <span ng-show="match.model.Auteur.Nom" bind-html-unsafe="match.model.Auteur.Nom | typeaheadHighlight:query"></span>
     </a>
 </script>
 

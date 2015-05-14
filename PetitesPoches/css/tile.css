@@ -23,6 +23,9 @@
   height: 266px;
   width: 180px;
 }
+.tile:hover {
+  background: #01aca0;
+}
 .tile:hover .round {
   -webkit-box-shadow: 0 0 8px #01aca0;
   -moz-box-shadow: 0 0 8px #01aca0;

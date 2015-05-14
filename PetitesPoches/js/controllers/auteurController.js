@@ -142,7 +142,8 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             params: {
                 query: "Nom:" + value + "* OR Prenom:" + value + "*",
                 resultsTransformer: "AuteurSearchTransform",
-                pageSize: 10
+                pageSize: 6,
+                foobar: new Date().getTime()
             }
         }).then(function (res) {
             $scope.loadingSearchSuggestions = false;
@@ -155,10 +156,8 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         value: ""
     }
     $scope.$watch('searchedText', function (newValue) {
-        console.log(newValue)
         if ($scope.searchedText && $scope.searchItems.indexOf(searchedTextItemFilterButton) == -1) {
             $scope.searchItems.push(searchedTextItemFilterButton);
-
 
         } else {
             if (!$scope.searchedText) {
@@ -168,17 +167,10 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         }
         searchedTextItemFilterButton.value = newValue;
 
-        $scope.validateFilter();
+       // $scope.validateFilter();
     });
 
-    $scope.$watch('searchSelectedItem', function (newValue) {
-        if ($scope.searchSelectedItem && $scope.searchSelectedItem.Auteur
-            && ($scope.searchSelectedItem.Auteur.Nom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1
-            || $scope.searchSelectedItem.Auteur.Prenom.toLowerCase().indexOf($scope.searchedText.toLowerCase()) > -1)) {
-            $scope.searchedText = $scope.searchSelectedItem.Auteur.Prenom + " " + $scope.searchSelectedItem.Auteur.Nom;
-        }
-        $scope.validateFilter();
-    });
+ 
     var preventSearchFocusIn = false;
     $scope.validateSearchTextBox = function ($item, $model, $label) {
         preventSearchFocusIn = true;
@@ -201,26 +193,9 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             }).join('');
         }
 
-        $scope.validateFilter();
         $scope.closeSearch();
     }
 
-    $scope.removeFilterTheme = function (item) {
-        //// trick to enable unselect on ms-select
-        $scope.themeMultiselectmodel.splice($scope.themeMultiselectmodel.indexOf(item), 1);
-        var back = $scope.themeMultiselectmodel;
-        $scope.themeMultiselectmodel = undefined;
-        $scope.themeMultiselectmodel = [];
-        angular.forEach(back, function (theme) {
-            $scope.themeMultiselectmodel.push(theme);
-        });
-        var backTags = [];
-        angular.forEach($scope.tags, function (theme) {
-            backTags.push(theme);
-        });
-        $scope.tags.length = 0;
-        $scope.tags = backTags;
-    }
 
     $scope.removeFilter = function (searchItem) {
 
@@ -231,22 +206,6 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
                 $scope.searchedText = "";
                 $scope.searchPatternRecherche = null;
                 break;
-            case "fichePedago":
-                $scope.searchPatternFichePedagogiques = null;
-                $scope.checkboxFichePedagogiques = false;
-                break;
-            case "ebook":
-                $scope.searchPatternEBook = null;
-                $scope.checkboxSearchEBook = false;
-                break;
-            case "prix":
-                $scope.searchPatternPrixLitteraires = null;
-                $scope.checkboxPrixLitteraire = false;
-                break;
-            case "niveau":
-                $scope.niveauLecture = "";
-                $scope.filterPatternNiveauLecture = "";
-                break;
         }
 
         $scope.validateFilter();
@@ -256,29 +215,28 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             return;
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
-        console.log($scope.searchPatternRecherche);
 
         $scope.container.isotope({ filter: searchPattern });
 
     }
 
     $scope.filtreAuteur = function (auteur) {
-        //$scope.openLeft();
-
         $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
         $scope.validateSearch();
     }
 
 
-    $scope.validateSearch = function () {
+    $scope.validateSearch = function ($item, $model, $label, $viewValue) {
         if ($scope.searchTimeout) {
             clearTimeout($scope.searchTimeout);
         }
 
-
+        if ($item && $item.Nom) {
+            $scope.searchedText = $item.Prenom + " " + $item.Nom;
+        }
+        
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
-
             if ($scope.searchedText.length == 0) {
                 $scope.searchPatternRecherche = '*';
             } else {

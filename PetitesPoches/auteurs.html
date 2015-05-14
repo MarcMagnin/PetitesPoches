@@ -20,11 +20,11 @@
                    id="search2"
                    ng-model='searchedText'
                    ng-change='validateSearch($viewValue)'
-                   typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
+                   typeahead="val as val.Titre for val in searchAuteurSuggestions($viewValue)"
                    typeahead-loading="loadingSearchSuggestions"
-                   typeahead-template-url="livreSearchTemplate.html"
+                   typeahead-template-url="auteurSearchTemplate.html"
                    typeahead-wait-ms="300"
-                   typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
+                   typeahead-on-select="validateSearch($item, $model, $label, $viewValue)"
                    class="form-control form-control-inline transparentInput" />
         </md-item>
 
@@ -53,10 +53,6 @@
                     <img src="{{::item.Photo}}" ng-show="::item.Photo" />
                     <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo" />
                 </div>
-                <!--<img class="tile-image" ng-show="selectedItem.Photo" style='background-image: url({{::selectedItem.Photo}})' />-->
-
-
-              
 
             </div>
 
