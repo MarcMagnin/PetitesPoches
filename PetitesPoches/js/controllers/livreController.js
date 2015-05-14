@@ -18,6 +18,9 @@
     this.LienIssu = ""
 };
 
+function cleanString(string) {
+    return string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '');
+}
 
 app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog) {
     $scope.entityName = "Livre";
