@@ -158,13 +158,8 @@
 
         <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
             <!--| orderBy:'Index':true-->
-            <div class="tile isotopey {{::item.filTitre}} {{::item.filAuteur}} 
-                 {{::item.PrixLitteraires && 'fil-prix' || ''}}
-                 {{::item.EBookUrl && 'fil-ebook' || ''}}
-                 {{::item.FichePedago && 'fil-pedago' || ''}}
-                 {{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-                 {{::item.Tags && item.Tags || '' | filterString}} "
-                ng-repeat=" item in items"
+            <div class="tile isotopey {{::item.filter}}"
+                 ng-repeat=" item in items"
                  isotopethis sort="date" ng-click="select(item, 'lg', $event)">
                 <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
             </div>

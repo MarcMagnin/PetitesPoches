@@ -21,7 +21,7 @@ function delayLoop(collection, index, timer, action) {
 
 
 function cleanString(string) {
-    return string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '');
+    return string ?  "" : string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '') ;
 }
 
 $(document).ready(function () {

@@ -22,7 +22,7 @@ function cleanString(string) {
     return string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '');
 }
 
-app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog) {
+app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog, $filter) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.itemsPool = [];
@@ -102,9 +102,33 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
                 delayLoop(livres, 0, 0.0001, function (item) {
                     item.Id = item['@metadata']['@id'];
-                    item.filTitre = "fil-"+cleanString(item.Titre);
+
+
+                    item.filter = "fil-" + cleanString(item.Titre);
+
                     if (item.Auteur.Nom)
-                        item.filAuteur = "fil-" + cleanString(item.Auteur.Prenom+item.Auteur.Nom);
+                        item.filter += " fil-" + cleanString(item.Auteur.Prenom+item.Auteur.Nom);
+
+                    if (item.PrixLitteraires)
+                        item.filter += " fil-prix";
+
+                    if (item.EBookUrl)
+                        item.filter += " fil-ebook";
+             
+                    if (item.FichePedago)
+                        item.filter += " fil-pedago";
+                    
+                    if (item.NiveauLecture)
+                        item.filter += " fil-" + item.NiveauLecture;
+                 
+                    if (item.Tags)
+                        item.filter += " "+ $filter('filterString')(item.Tags);
+
+                    //{{::item.PrixLitteraires && 'fil-prix' || ''}}
+                    //{{::item.EBookUrl && 'fil-ebook' || ''}}
+                    //{{::item.FichePedago && 'fil-pedago' || ''}}
+                    //{{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
+                    //{{::item.Tags && item.Tags || '' | filterString}} "
 
 
                     $scope.items.push(item);
