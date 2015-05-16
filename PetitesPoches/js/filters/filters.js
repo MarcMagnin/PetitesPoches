@@ -9,7 +9,7 @@ app.filter('filterString', function () {
         if (!array || array.length == 0)
             return '';
         return array.map(function (val) {
-            return 'f-' + val.toLowerCase().replace(/ /g, '');
+            return 'f-' + val.toLowerCase().replace(/[^\w\s-]/g, '').replace(/ /g, '');
         }).join(' ');
     };
 });

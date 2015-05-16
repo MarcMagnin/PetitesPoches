@@ -19,8 +19,6 @@ app.directive("isotopethis", function () {
             //$container.isotope('appended2', elm);
             
             
-            
-            TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
 
             if (itemAdded < 30) {
                 $(elm).css({ display: "block" });
@@ -29,12 +27,17 @@ app.directive("isotopethis", function () {
                     // to set the item at the correct position, otherwise the item is on the second item position
                     $container.isotope({ sortBy: attrs.sort });
                 }
-                
             } else {
                 $container.isotope('appended2', elm);
             }
+            // si jamais un filtre est activé par changement direct de page
+            if (itemAdded == 29) {
+                    scope.validateFilter();
+            }
+
 
             if (scope.itemsPool.length == itemAdded) {
+                TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
                 scope.dataReady = true;
                 var delay = 100;
                 if (!scope.menuShown) {

@@ -129,9 +129,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     if (item.NiveauLecture)
                         item.filter += " f-" + item.NiveauLecture;
                  
-                    if (item.Tags)
-                        item.filter += " "+ $filter('filterString')(item.Tags);
-
+                    if (item.Tags) 
+                        item.filter += " " + $filter('filterString')(item.Tags);
+                        
                     //{{::item.PrixLitteraires && 'fil-prix' || ''}}
                     //{{::item.EBookUrl && 'fil-ebook' || ''}}
                     //{{::item.FichePedago && 'fil-pedago' || ''}}
@@ -470,8 +470,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.validateFilter();
     }
     $scope.validateFilter = function () {
-        if (!$scope.dataReady)
-            return;
+        //if (!$scope.dataReady)
+        //    return;
 
 
         var searchPattern =
@@ -499,7 +499,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         value: ""
     };
     $scope.$watch('niveauLecture', function (newValue) {
-        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
+        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.f-' + $scope.niveauLecture : ''
         $scope.validateFilter();
 
         if ($scope.searchItems.indexOf(filterItemNiveau) != -1)
@@ -562,7 +562,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         }
 
         $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
-            return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
+            return '.f-' + cleanString(val.Name);
         }).join('');
 
         if ($scope.searchPatternTheme) {
