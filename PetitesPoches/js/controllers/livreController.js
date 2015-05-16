@@ -40,7 +40,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.searchItems = [];
     $scope.dataReady = false;
 
-
+    $scope.loadMore = function () {
+        alert('test');
+    }
     $scope.init = function () {
 
         //$("md-item").click(function () {
@@ -100,26 +102,32 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 //    livres.push(livre);
                 //}
 
-                delayLoop(livres, 0, 0.0001, function (item) {
+
+                delayLoop(livres, 0, 0, function (item) {
                     item.Id = item['@metadata']['@id'];
 
+                    //item.filter = "fil-" + cleanString(item.Titre);
 
-                    item.filter = "fil-" + cleanString(item.Titre);
+                    item.filter = item.Titre.split(" ").map(function (val) {
+                        return '[class*=\'fil-' + cleanString(val) + '\']';
+                    }).join('');
 
                     if (item.Auteur.Nom)
-                        item.filter += " fil-" + cleanString(item.Auteur.Prenom+item.Auteur.Nom);
+                        item.filter += " fil-" + cleanString(item.Auteur.Nom);
+                    if (item.Auteur.Prenom)
+                        item.filter += " fil-" + cleanString(item.Auteur.Prenom);
 
                     if (item.PrixLitteraires)
-                        item.filter += " fil-prix";
+                        item.filter += " f-prix";
 
                     if (item.EBookUrl)
-                        item.filter += " fil-ebook";
+                        item.filter += " f-ebook";
              
                     if (item.FichePedago)
-                        item.filter += " fil-pedago";
+                        item.filter += " f-pedago";
                     
                     if (item.NiveauLecture)
-                        item.filter += " fil-" + item.NiveauLecture;
+                        item.filter += " f-" + item.NiveauLecture;
                  
                     if (item.Tags)
                         item.filter += " "+ $filter('filterString')(item.Tags);
@@ -131,10 +139,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     //{{::item.Tags && item.Tags || '' | filterString}} "
 
 
-                    $scope.items.push(item);
+                    $scope.items.unshift(item);
                     if ($scope.items.length == livres.length) {
                         $scope.dataReady = true;
-                        TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+                        
                     }
                     $scope.$apply();
 
@@ -521,23 +529,23 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     });
 
     $scope.searchEBook = function () {
-        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
+        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.f-ebook' : '';
         $scope.validateFilter();
     }
 
     $scope.searchFichePedagogiques = function () {
-        $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.fil-pedago' : '';
+        $scope.searchPatternFichePedagogiques = $scope.checkboxFichePedagogiques ? '.f-pedago' : '';
         $scope.validateFilter();
     }
 
     $scope.searchPrixLitteraires = function () {
-        $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';
+        $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.f-prix' : '';
         $scope.validateFilter();
     }
 
 
     $scope.filtreNiveauLecture = function () {
-        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
+        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.f-' + $scope.niveauLecture : ''
         $scope.validateFilter();
     }
 
@@ -630,10 +638,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             if ($scope.searchedText.length == 0) {
                 $scope.searchPatternRecherche = '*';
             } else {
-                $scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText) + '\']';
-                //$scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                //    return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                //}).join('');
+                //$scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText) + '\']';
+                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
+                    return '[class*=\'fil-' + cleanString(val) + '\']';
+                }).join('');
             }
         }
         console.log("Search:" + $scope.searchPatternRecherche);

@@ -85,14 +85,16 @@
             nom: function (elem) {
                 var scope = $(elem).scope();
                 if (scope && scope.item && scope.item.Nom) {
-                    return scope.item.Nom.toLowerCase();
+                    var test = scope.item.Nom.toLowerCase().replace(/ /g, '')
+                    console.log(test);
+                    return test;
                 }
                 // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste
-                return "aaaaaa";
+                return "aaaa";
             }
         },
-
-        sortAscending: false,
+        sortBy: 'nom',
+        sortAscending: true,
     });
 
 

@@ -552,7 +552,7 @@
           
           return $atomsToShow;
       }else{
-          console.log("Filter...");
+          //console.log("Filter...");
           if (!filter) {
               this.styleQueue.push({ $el: $atomsToShow, style: this.options.visibleStyle });
               $atomsToShow.removeClass(hiddenClass);

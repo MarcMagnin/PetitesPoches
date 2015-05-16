@@ -24,10 +24,12 @@
     </a>
 </script>
 
-<div class="md-icon-container sendFP animate-show" ng-show="checkboxFichePedagogiques">
-    <a href="mailto:etm@editions-thierry-magnier.com">Soumettre vos outils pédagogiques</a>
-</div>
 
+<div class="md-icon-container sendFP circle animate-show" ng-show="checkboxFichePedagogiques">
+    <div class="sendFPinnerCircle circle">
+        <a href="mailto:etm@editions-thierry-magnier.com">Soumettre vos outils pédagogiques</a>
+    </div>
+</div>
 
 <div class="viewContainer" ng-init="init()">
    
@@ -156,14 +158,14 @@
         </div>
     </div>
 
-        <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
-            <!--| orderBy:'Index':true-->
-            <div class="tile isotopey {{::item.filter}}"
-                 ng-repeat=" item in items"
-                 isotopethis sort="date" ng-click="select(item, 'lg', $event)">
-                <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
-            </div>
+    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" when-scrolled="loadMore()">
+        <!--| orderBy:'Index':true-->
+        <div class="tile isotopey {{::item.filter}}"
+             ng-repeat=" item in items"
+             isotopethis sort="date" ng-click="select(item, 'lg', $event)">
+            <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
         </div>
+    </div>
 </div>
 
 

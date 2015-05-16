@@ -11,22 +11,39 @@ app.directive("isotopethis", function () {
             itemAdded++;
             // $container.isotope('insert', elm);
             // advantage : don't filter
+
+            // TODO KEEP THIS
             $container = $('.tilesContainer')
 
             // just add the item to the isotope collection without any layout modification
             //$container.isotope('appended2', elm);
-            $container.isotope('appended2', elm);
+            
+            
+            
+            TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+
+            if (itemAdded < 30) {
+                $(elm).css({ display: "block" });
+                $container.isotope('appended', elm);
+                if (itemAdded == 3) {
+                    // to set the item at the correct position, otherwise the item is on the second item position
+                    $container.isotope({ sortBy: attrs.sort });
+                }
+                
+            } else {
+                $container.isotope('appended2', elm);
+            }
+
             if (scope.itemsPool.length == itemAdded) {
                 scope.dataReady = true;
-    
-                console.log(scope.itemsPool.length)
                 var delay = 100;
                 if (!scope.menuShown) {
                     delay = 500;
                 }
                 setTimeout(function () {
                     $container.isotope({ sortBy: attrs.sort });
-                    TweenMax.to(".tile", 0.2, { opacity: 1 });
+                    $container.isotope({ sortBy: attrs.sort });
+                    TweenMax.to(".tile", 0, { delay: .3, opacity: 1, display: "block" });
                     //$(".tile").click(function () {
                     //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
                     //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
@@ -108,3 +125,35 @@ app.directive("bg", function ($window) {
         }
     }
 });
+
+
+//<body ng-app="scroll" ng-controller="Main">
+//  <div when-scrolled="loadMore()">
+//  <ul>
+//    <li ng-repeat="i in items">{{i.id}}</li>
+//  </ul>  
+//</div>
+   
+ 
+    //var counter = 0;
+    //$scope.loadMore = function() {
+    //    for (var i = 0; i < 10; i++) {
+    //        $scope.items.push({id: counter});
+    //        counter += 10;
+    //    }
+    //};
+     
+    //$scope.loadMore();
+ 
+//app .directive('whenScrolled', function() {
+//    return function(scope, elm, attr) {
+//        var raw = elm[0];
+         
+//        elm.bind('scroll', function() {
+//            if (raw.scrollLeft + raw.offsetWidth >= raw.scrollWidth) {
+//                scope.$apply(attr.whenScrolled);
+//            }
+//        });
+//    };
+//});
+ 

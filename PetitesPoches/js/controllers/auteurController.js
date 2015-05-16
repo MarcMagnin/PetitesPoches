@@ -272,7 +272,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
 
     $scope.sort = function () {
         setTimeout(function () {
-            $scope.container.isotope({ sortBy: 'date' });
+            $scope.container.isotope({ sortBy: 'nom' });
         }, 100)
 
     }
