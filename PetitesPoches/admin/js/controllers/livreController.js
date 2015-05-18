@@ -65,6 +65,25 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
 
                 angular.forEach(livres, function (item, index) {
+                    if (item.PrixLitteraire) {
+                        if (!item.PrixLitteraires)
+                            item.PrixLitteraires = new Array();
+                        item.PrixLitteraires.push(item.PrixLitteraire)
+                        item.PrixLitteraire = "";
+                        console.log("item " + item['@metadata']['@id'] + " updated")
+                        $http({
+                            method: 'PUT',
+                            headers: { 'Raven-Entity-Name': 'Livre' },
+                            url: $rootScope.apiRootUrl + '/docs/' + item['@metadata']['@id'],
+                            data: angular.toJson(item)
+                        }).
+                    success(function (data, status, headers, config) {
+
+                    }).
+                    error(function (data, status, headers, config) {
+                        console.log(data);
+                    });
+                    }
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);
                 });

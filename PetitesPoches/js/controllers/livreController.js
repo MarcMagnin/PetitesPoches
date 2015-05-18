@@ -103,9 +103,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 //}
 
 
-                delayLoop(livres, 0, 0, function (item) {
+                delayLoop(livres, 0, 0.1, function (item) {                    
                     item.Id = item['@metadata']['@id'];
-
+                    
                     //item.filter = "fil-" + cleanString(item.Titre);
 
                     item.filter = item.Titre.split(" ").map(function (val) {
