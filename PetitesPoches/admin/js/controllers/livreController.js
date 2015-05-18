@@ -50,40 +50,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         livreService.getLivres()
             .then(function (livres) {
                 $scope.itemsPool = livres;
-                //for (var i = 0; i < 100; i++) {
-                //    var livre = new Livre();
-                //    livre['@metadata'] ="";
-                //    livre['@metadata']['@id'] = 0;
-                //    data.Results.push(livre);
-                //}
-
-                //delayLoop(data.Results, 0, function (item) {
-                //    item.Id = item['@metadata']['@id'];
-                //    $scope.items.push(item);
-                //    $scope.$apply();
-                //});
-
 
                 angular.forEach(livres, function (item, index) {
-                    if (item.PrixLitteraire) {
-                        if (!item.PrixLitteraires)
-                            item.PrixLitteraires = new Array();
-                        item.PrixLitteraires.push(item.PrixLitteraire)
-                        item.PrixLitteraire = "";
-                        console.log("item " + item['@metadata']['@id'] + " updated")
-                        $http({
-                            method: 'PUT',
-                            headers: { 'Raven-Entity-Name': 'Livre' },
-                            url: $rootScope.apiRootUrl + '/docs/' + item['@metadata']['@id'],
-                            data: angular.toJson(item)
-                        }).
-                    success(function (data, status, headers, config) {
-
-                    }).
-                    error(function (data, status, headers, config) {
-                        console.log(data);
-                    });
-                    }
                     item.Id = item['@metadata']['@id'];
                     $scope.items.push(item);
                 });
