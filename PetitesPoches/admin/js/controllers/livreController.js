@@ -28,7 +28,7 @@ var Update = function () {
 
 
 
-app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', '$q', 'livreService', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal, $q, livreService) {
+app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', '$upload', '$state', '$modal', '$q', '$filter', 'livreService', function ($scope, $rootScope, $http, $timeout, $upload, $state, $modal, $q, $filter, livreService) {
     $scope.itemsPool = [];
     $scope.items = [];
     $scope.tags = [];
@@ -53,6 +53,32 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
                 angular.forEach(livres, function (item, index) {
                     item.Id = item['@metadata']['@id'];
+
+                    item.filter = item.Titre.split(" ").map(function (val) {
+                        return 'fil-' + cleanString(val);
+                    }).join(' ');
+
+                    if (item.Auteur.Nom)
+                        item.filter += " fil-" + cleanString(item.Auteur.Nom);
+                    if (item.Auteur.Prenom)
+                        item.filter += " fil-" + cleanString(item.Auteur.Prenom);
+
+                    if (item.PrixLitteraires)
+                        item.filter += " f-prix";
+                    console.log(item)
+                    if (item.EBookUrl)
+                        item.filter += " f-ebook";
+
+                    if (item.FichePedago)
+                        item.filter += " f-pedago";
+
+                    if (item.NiveauLecture)
+                        item.filter += " f-" + item.NiveauLecture;
+
+                    if (item.Tags)
+                        item.filter += " " + $filter('filterString')(item.Tags);
+
+
                     $scope.items.push(item);
                 });
              
@@ -423,18 +449,18 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     }
 
     $scope.filtreNiveauLecture = function () {
-        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.fil-' + $scope.niveauLecture : ''
+        $scope.filterPatternNiveauLecture = $scope.niveauLecture ? '.f-' + $scope.niveauLecture : ''
         $scope.validateFilter();
     }
 
 
     $scope.searchEBook = function () {
-        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.fil-ebook' : '';
+        $scope.searchPatternEBook = $scope.checkboxSearchEBook ? '.f-ebook' : '';
         $scope.validateFilter();
     }
 
     $scope.searchPrixLitteraires = function () {
-        $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.fil-prix' : '';
+        $scope.searchPatternPrixLitteraires = $scope.checkboxPrixLitteraire ? '.f-prix' : '';
         $scope.validateFilter();
     }
     $scope.filtreThemes = function () {
@@ -454,11 +480,16 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.searchTimeout = setTimeout(function () {
             var searchPattern;
             if ($scope.searchedText.Titre) {
-                $scope.searchPatternRecherche = '[class*=\'fil-' + $scope.searchedText.Titre.toLowerCase().replace(/ /g, '') + '\']';
+              
+                $scope.searchPatternRecherche = $scope.searchedText.Titre.split(" ").map(function (val) {
+                    return '[class*=\'fil-' + cleanString(val) + '\']';
+                }).join('');
+
+                console.log($scope.searchPatternRecherche)
             } else {
                 $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'fil-' + val.toLowerCase() + '\']';
-                }).join(',');
+                    return '[class*=\'fil-' + cleanString(val) + '\']';
+                }).join('');
             }
 
             $scope.validateFilter();

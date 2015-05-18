@@ -109,8 +109,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     //item.filter = "fil-" + cleanString(item.Titre);
 
                     item.filter = item.Titre.split(" ").map(function (val) {
-                        return '[class*=\'fil-' + cleanString(val) + '\']';
-                    }).join('');
+                        return 'fil-'+ cleanString(val);
+                    }).join(' ');
 
                     if (item.Auteur.Nom)
                         item.filter += " fil-" + cleanString(item.Auteur.Nom);
@@ -633,7 +633,9 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
         if ($scope.searchedText.Titre) {
-            $scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText.Titre) + '\']';
+            $scope.searchPatternRecherche = $scope.searchedText.Titre.split(" ").map(function (val) {
+                return '[class*=\'fil-' + cleanString(val) + '\']';
+            }).join('');
         } else {
             if ($scope.searchedText.length == 0) {
                 $scope.searchPatternRecherche = '*';
@@ -644,7 +646,6 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 }).join('');
             }
         }
-        console.log("Search:" + $scope.searchPatternRecherche);
     }
     $scope.validateSearch = function (text) {
         if ($scope.searchTimeout) {
