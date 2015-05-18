@@ -62,8 +62,33 @@
     <Content Include="admin\css\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
+    <Content Include="admin\js\appAdmin.min.js">
+      <DependentUpon>appAdmin.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\auteurController.min.js">
+      <DependentUpon>auteurController.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\contactController.js" />
+    <Content Include="admin\js\controllers\contactController.min.js">
+      <DependentUpon>contactController.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\livreController.min.js">
+      <DependentUpon>livreController.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\mainControllerAdmin.min.js">
+      <DependentUpon>mainControllerAdmin.js</DependentUpon>
+    </Content>
     <Content Include="admin\js\directives\adminDirectives.js" />
+    <Content Include="admin\js\directives\adminDirectives.min.js">
+      <DependentUpon>adminDirectives.js</DependentUpon>
+    </Content>
     <Content Include="admin\js\filter\filters.js" />
+    <Content Include="admin\js\filter\filters.min.js">
+      <DependentUpon>filters.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\general.min.js">
+      <DependentUpon>general.js</DependentUpon>
+    </Content>
     <Content Include="appTest.js" />
     <Content Include="auteurs.html" />
     <Content Include="contacts.html" />
@@ -164,12 +189,41 @@
     <Content Include="css\userSite.min.css">
       <DependentUpon>userSite.css</DependentUpon>
     </Content>
+    <Content Include="gruntfile.js" />
     <Content Include="images\background.jpg" />
     <Content Include="images\Logo-Petite-poche.png" />
     <Content Include="images\prix.png" />
+    <Content Include="js\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
     <Content Include="js\controllers\auteurController.js" />
+    <Content Include="js\controllers\auteurController.min.js">
+      <DependentUpon>auteurController.js</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\contactController.js" />
+    <Content Include="js\controllers\contactController.min.js">
+      <DependentUpon>contactController.js</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\livreController.min.js">
+      <DependentUpon>livreController.js</DependentUpon>
+    </Content>
     <Content Include="js\controllers\mainController.js" />
+    <Content Include="js\controllers\mainController.min.js">
+      <DependentUpon>mainController.js</DependentUpon>
+    </Content>
+    <Content Include="js\directives\commonDirectives.min.js">
+      <DependentUpon>commonDirectives.js</DependentUpon>
+    </Content>
     <Content Include="js\directives\price.js" />
+    <Content Include="js\directives\price.min.js">
+      <DependentUpon>price.js</DependentUpon>
+    </Content>
+    <Content Include="js\filters\filters.min.js">
+      <DependentUpon>filters.js</DependentUpon>
+    </Content>
+    <Content Include="js\jquery.isotope.min.js">
+      <DependentUpon>jquery.isotope.js</DependentUpon>
+    </Content>
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
@@ -367,6 +421,12 @@
     <Content Include="css\filter-terms.css.map">
       <DependentUpon>filter-terms.css</DependentUpon>
     </Content>
+    <Content Include="js\services\services.min.js">
+      <DependentUpon>services.js</DependentUpon>
+    </Content>
+    <Content Include="js\tools.min.js">
+      <DependentUpon>tools.js</DependentUpon>
+    </Content>
     <Content Include="templates\auteurDialog.tmpl.html" />
     <Content Include="css\common.less" />
     <Content Include="css\contacts.less" />
@@ -386,6 +446,63 @@
     </Content>
     <Content Include="css\test.css.map">
       <DependentUpon>test.css</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\auteurController.min.js.map">
+      <DependentUpon>auteurController.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\livreController.min.js.map">
+      <DependentUpon>livreController.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\mainController.min.js.map">
+      <DependentUpon>mainController.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\directives\commonDirectives.min.js.map">
+      <DependentUpon>commonDirectives.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\auteurController.min.js.map">
+      <DependentUpon>auteurController.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\contactController.min.js.map">
+      <DependentUpon>contactController.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\livreController.min.js.map">
+      <DependentUpon>livreController.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\controllers\mainControllerAdmin.min.js.map">
+      <DependentUpon>mainControllerAdmin.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\filter\filters.min.js.map">
+      <DependentUpon>filters.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\directives\adminDirectives.min.js.map">
+      <DependentUpon>adminDirectives.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\appAdmin.min.js.map">
+      <DependentUpon>appAdmin.min.js</DependentUpon>
+    </Content>
+    <Content Include="admin\js\general.min.js.map">
+      <DependentUpon>general.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\jquery.isotope.min.js.map">
+      <DependentUpon>jquery.isotope.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\app.min.js.map">
+      <DependentUpon>app.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\controllers\contactController.min.js.map">
+      <DependentUpon>contactController.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\filters\filters.min.js.map">
+      <DependentUpon>filters.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\services\services.min.js.map">
+      <DependentUpon>services.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\directives\price.min.js.map">
+      <DependentUpon>price.min.js</DependentUpon>
+    </Content>
+    <Content Include="js\tools.min.js.map">
+      <DependentUpon>tools.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

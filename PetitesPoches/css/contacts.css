@@ -5,9 +5,9 @@
   overflow-x: hidden;
   color: #f3f3f3;
   text-align: center;
-  margin-top: 80px;
 }
 .contact pre {
+  font: normal 14px/22px Montserrat;
   overflow-x: hidden;
   width: 100%;
   margin-top: 4%;

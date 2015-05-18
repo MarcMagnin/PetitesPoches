@@ -60,23 +60,23 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         //$("#searchitem").on("click", function () {
         //   $(this).addClass("toggled");
         //   $("#searchIcon").addClass("toggled");
-        //   $("#search2").addClass("toggled");
-        //    //$("#search2").focus();
+        //   $(".searchBar").addClass("toggled");
+        //    //$(".searchBar").focus();
 
 
         //});
 
 
-        $("#search2").focusin(function ($event) {
+        $(".searchBar").focusin(function ($event) {
             if (preventSearchFocusIn) {
-                $("#search2").blur();
+                $(".searchBar").blur();
                 return
             }
             $scope.toggleSearch();
         });
 
 
-        $("#search2").focusout(function ($event) {
+        $(".searchBar").focusout(function ($event) {
             //// Can't rely on that, relatedTarget is null on firefox
             ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
             ////    return;
@@ -187,13 +187,13 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         searchToggled = true;
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
-        $("#search2").addClass("toggled");
+        $(".searchBar").addClass("toggled");
     }
 
 
     $scope.closeSearch = function () {
         setTimeout(function () {
-            $("#searchitem, #searchIcon, #search2").removeClass("toggled");
+            $("#searchitem, #searchIcon, .searchBar").removeClass("toggled");
             searchToggled = false;
         }, 100)
 
@@ -447,7 +447,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         switch (searchItem.key) {
             case "text":
                 $scope.searchedText = "";
-                $("#search2").val('');
+                $(".searchBar").val('');
                 $scope.searchPatternRecherche = null;
                 break;
             case "fichePedago":

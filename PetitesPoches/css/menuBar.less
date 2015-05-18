@@ -199,9 +199,9 @@
 
 
 
-#search2 {
+.searchBar {
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -218,14 +218,14 @@
     transition: all 0.5s ease;
 }
 
-#search2.toggled {
+.searchBar.toggled {
     width: 150px;
     opacity: 1;
 }
 
 
 @media only screen and (max-width:@sizeHideToolbarText) {
-    #search2 {
+    .searchBar {
         top: 2px;
         left: auto;
         right: 0;
@@ -234,12 +234,24 @@
         -o-transform: translate(0, 0);
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
+         
     }
 
-
-    #search2.toggled {
+    .searchAuteur{
+         top: 60%;
+            left: 50% !important;
+            right:50% !important;
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            }
+    .searchBar.toggled {
         width: 260px;
     }
+
+   
 }
 
 #searchIcon.toggled {

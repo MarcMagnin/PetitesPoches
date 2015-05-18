@@ -36,16 +36,16 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
               $scope.menuShown = true;
           });
         TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
-        $("#search2").focusin(function ($event) {
+        $(".searchBar").focusin(function ($event) {
             if (preventSearchFocusIn) {
-                $("#search2").blur();
+                $(".searchBar").blur();
                 return
             }
             $scope.toggleSearch();
         });
 
 
-        $("#search2").focusout(function ($event) {
+        $(".searchBar").focusout(function ($event) {
             //// Can't rely on that, relatedTarget is null on firefox
             ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
             ////    return;
@@ -91,13 +91,13 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         searchToggled = true;
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
-        $("#search2").addClass("toggled");
+        $(".searchBar").addClass("toggled");
     }
 
 
     $scope.closeSearch = function () {
         setTimeout(function () {
-            $("#searchitem, #searchIcon, #search2").removeClass("toggled");
+            $("#searchitem, #searchIcon, .searchBar").removeClass("toggled");
             searchToggled = false;
         }, 100)
 
