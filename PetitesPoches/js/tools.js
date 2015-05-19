@@ -28,6 +28,10 @@ $(document).ready(function () {
     var orientation = "h";
     $('body, html').mousewheel(function (event) {
         if (event.deltaY != 0) {
+            // prevent scroll of content when select control is open
+            if ($('.md-select-backdrop') && $('.md-select-backdrop').length != 0) {
+                return;
+            }
             if (($('.modal-backdrop') && $('.modal-backdrop').length == 0) && orientation == "h") {
                 $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {

@@ -92,7 +92,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
 
         // Load tags
-        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Tags?pageSize=30&sort=Name&noCache=1015157938&_=' + Date.now() }).
+        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/Tags?pageSize=200&sort=Name&noCache=1015157938&_=' + Date.now() }).
             success(function (data, status, headers, config) {
                 $scope.tags = data.Results;
             }).
