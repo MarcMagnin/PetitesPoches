@@ -204,13 +204,7 @@
     <Content Include="js\controllers\contactController.min.js">
       <DependentUpon>contactController.js</DependentUpon>
     </Content>
-    <Content Include="js\controllers\livreController.min.js">
-      <DependentUpon>livreController.js</DependentUpon>
-    </Content>
     <Content Include="js\controllers\mainController.js" />
-    <Content Include="js\controllers\mainController.min.js">
-      <DependentUpon>mainController.js</DependentUpon>
-    </Content>
     <Content Include="js\directives\commonDirectives.min.js">
       <DependentUpon>commonDirectives.js</DependentUpon>
     </Content>
@@ -449,12 +443,6 @@
     </Content>
     <Content Include="js\controllers\auteurController.min.js.map">
       <DependentUpon>auteurController.min.js</DependentUpon>
-    </Content>
-    <Content Include="js\controllers\livreController.min.js.map">
-      <DependentUpon>livreController.min.js</DependentUpon>
-    </Content>
-    <Content Include="js\controllers\mainController.min.js.map">
-      <DependentUpon>mainController.min.js</DependentUpon>
     </Content>
     <Content Include="js\directives\commonDirectives.min.js.map">
       <DependentUpon>commonDirectives.min.js</DependentUpon>

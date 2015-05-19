@@ -1,6 +1,6 @@
 ﻿app.controller("mainController", function ($scope, $rootScope, $http, $timeout, $state) {
-  //  $rootScope.apiRootUrl = "http://62.23.104.30:8181/databases/PetitesPoches";
-  $rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
+    $rootScope.apiRootUrl = "http://62.23.104.30:8181/databases/PetitesPoches";
+  //$rootScope.apiRootUrl = "http://localhost:8086/databases/PetitesPoches";
 
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         $scope.currentTab = toState.data.selectedTab;
