@@ -474,8 +474,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         $scope.validateFilter();
     }
     $scope.filtreThemes = function () {
-        $scope.searchPatternTheme =   $scope.themeMultiselectmodel.map(function (val) {
-            return '.f-' + val.Name.toLowerCase().replace(/ /g, '');
+        $scope.searchPatternTheme = $scope.themeMultiselectmodel.map(function (val) {
+            return '.f-' + cleanString(val.Name);
         }).join('');
         $scope.validateFilter();
     }
