@@ -58,14 +58,20 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                         return 'fil-' + cleanString(val);
                     }).join(' ');
 
-                    if (item.Auteur.Nom)
-                        item.filter += " fil-" + cleanString(item.Auteur.Nom);
-                    if (item.Auteur.Prenom)
-                        item.filter += " fil-" + cleanString(item.Auteur.Prenom);
+                    if (item.Auteur.Nom) {
+                        item.filter += " fil-" + item.Auteur.Nom.split(" ").map(function (val) {
+                            return 'fil-' + cleanString(val);
+                        }).join(' ');
+                    }
+                    if (item.Auteur.Prenom) {
+                        item.filter += " fil-" + item.Auteur.Prenom.split(" ").map(function (val) {
+                            return 'fil-' + cleanString(val);
+                        }).join(' ');
+                    }
 
                     if (item.PrixLitteraires)
                         item.filter += " f-prix";
-                    console.log(item)
+                    
                     if (item.EBookUrl)
                         item.filter += " f-ebook";
 
@@ -128,6 +134,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
     $scope.saveItem = function (item) {
         delete item.new;
+        var filter = item.filter;
+        delete item.filter;
         $http({
             method: 'PUT',
             headers: { 'Raven-Entity-Name': 'Livre' },
@@ -135,10 +143,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             data: angular.toJson(item)
         }).
         success(function (data, status, headers, config) {
+            item.filter = filter;
             $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
             $scope.container.isotope({ sortBy: 'date' });
         }).
         error(function (data, status, headers, config) {
+            item.filter = filter;
             console.log(data);
         });
     }

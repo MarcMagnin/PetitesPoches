@@ -112,10 +112,16 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                         return 'fil-'+ cleanString(val);
                     }).join(' ');
 
-                    if (item.Auteur.Nom)
-                        item.filter += " fil-" + cleanString(item.Auteur.Nom);
-                    if (item.Auteur.Prenom)
-                        item.filter += " fil-" + cleanString(item.Auteur.Prenom);
+                    if (item.Auteur.Nom) {
+                        item.filter += " fil-" + item.Auteur.Nom.split(" ").map(function (val) {
+                            return 'fil-' + cleanString(val);
+                        }).join(' ');
+                    }
+                    if (item.Auteur.Prenom) {
+                        item.filter += " fil-" + item.Auteur.Prenom.split(" ").map(function (val) {
+                            return 'fil-' + cleanString(val);
+                        }).join(' ');
+                    }
 
                     if (item.PrixLitteraires)
                         item.filter += " f-prix";
@@ -646,6 +652,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 }).join('');
             }
         }
+        console.log($scope.searchPatternRecherche);
     }
     $scope.validateSearch = function (text) {
         if ($scope.searchTimeout) {
