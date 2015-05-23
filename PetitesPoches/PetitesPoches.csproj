@@ -215,6 +215,7 @@
     <Content Include="js\filters\filters.min.js">
       <DependentUpon>filters.js</DependentUpon>
     </Content>
+    <Content Include="js\isotope2.2.js" />
     <Content Include="js\jquery.isotope.min.js">
       <DependentUpon>jquery.isotope.js</DependentUpon>
     </Content>
