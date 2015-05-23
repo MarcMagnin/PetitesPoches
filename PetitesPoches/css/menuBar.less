@@ -11,11 +11,14 @@
     -o-transform: translate(-50%, 0);
     -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    -webkit-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    -webkit-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
 }
+
+
+
 
 .menuBar {
     font: normal 14px/38px Montserrat;
@@ -30,32 +33,16 @@
     // to trigger an appear animation
     /*display:none;*/
     & md-item {
+        overflow:visible;
         cursor:pointer;
         position: relative;
         color: white;
         height: 45px;
         width: 45px;
         margin: 0 28px;
-    }
-
-    & .md-button {
-        position: relative;
-        text-transform: none;
-        height: 100%;
-        width: 100%;
-        padding: 0;
-        color: white !important;
-        overflow: visible;
-
-        > .md-icon-container {
-            height: 100%;
-            width: 100%;
-        }
-
-        &.active {
+          &.active {
             color: lighten(@primaryColor, 20%) !important;
-
-            > .md-icon-container md-icon {
+            > .md-icon-container md-icon {  
                 opacity: 0.9;
             }
 
@@ -63,20 +50,21 @@
                 opacity: 0.8;
             }
         }
-
-        > .md-ripple-container {
-            overflow: hidden;
-            border-radius: 50%;
-            -moz-transform: scale(0.95);
-            -ms-transform: scale(0.95);
-            -o-transform: scale(0.95);
-            -webkit-transform: scale(0.95);
-            transform: scale(0.95);
-        }
     }
+    
+    
+        > .md-icon-container {
+            height: 100%;
+            width: 100%;
+        }
+
+      
+
+       
+   
 
     & .md-icon-container md-icon {
-        height: 45px;
+        height: 100%;
         width: 100%;
         border-radius: 50%;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
@@ -92,6 +80,7 @@
         vertical-align: middle;
     }
 }
+
 
 .circle{
     border-radius: 50% !important;

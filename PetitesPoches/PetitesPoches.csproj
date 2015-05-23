@@ -15,7 +15,7 @@
     <RootNamespace>PetitesPoches</RootNamespace>
     <AssemblyName>PetitesPoches</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -575,7 +575,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60580</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:60580/</IISUrl>
+          <IISUrl>http://localhost/PetitesPoches</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
