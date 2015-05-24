@@ -4,6 +4,7 @@
 
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         $scope.currentTab = toState.data.selectedTab;
+        $rootScope.$broadcast('tabChanged');
     });
 
 });

@@ -21,6 +21,13 @@
 function cleanString(string) {
     return string.replace(/[^\w\s]/gi, '').toLowerCase().replace(/ /g, '');
 }
+var maxWidth = 900;
+var enableAnimation = true;
+if ($(window).width() < maxWidth) {
+    enableAnimation = false;
+} else {
+    enableAnimation = true;
+}
 
 app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog, $filter) {
     $scope.entityName = "Livre";
@@ -39,9 +46,15 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     $scope.themeMultiselectmodel = [];
     $scope.searchItems = [];
     $scope.dataReady = false;
+    $scope.userLeft = false;
+
+    // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
+    $scope.$on("tabChanged", function (event, args) {
+        $scope.userLeft = true;
+    })
 
     $scope.loadMore = function () {
-        alert('test');
+       // alert('test');
     }
     $scope.init = function () {
 
@@ -89,10 +102,15 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.menuShown = false;
 
 
+        if ($stateParams.auteur) {
+            $scope.searchedText = $stateParams.auteur;
+            $scope.setSearchPattern();
+     
+        }
+
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
-                $scope.itemsPool = livres;
 
 
                 //for (var i = 0; i < 200; i++) {
@@ -101,24 +119,29 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 //    livre['@metadata']['@id'] = 0;
                 //    livres.push(livre);
                 //}
-
-
-                delayLoop(livres, 0, 0.1, function (item) {                    
+                // TODO KEEP THIS
+                var $container = $('#Container');
+                if ($container.mixItUp('isLoaded')) {
+                    $container.mixItUp('destroy')
+                }
+                delayLoop(livres, 0, 0, function (item) {
+                    if ($scope.userLeft) {
+                        // abort the delayed process
+                        livres.length = 0;
+                    }
                     item.Id = item['@metadata']['@id'];
                     
-                    //item.filter = "fil-" + cleanString(item.Titre);
-
                     item.filter = item.Titre.split(" ").map(function (val) {
                         return 'fil-'+ cleanString(val);
                     }).join(' ');
 
                     if (item.Auteur.Nom) {
-                        item.filter += " fil-" + item.Auteur.Nom.split(" ").map(function (val) {
+                        item.filter += " " + item.Auteur.Nom.split(" ").map(function (val) {
                             return 'fil-' + cleanString(val);
                         }).join(' ');
                     }
                     if (item.Auteur.Prenom) {
-                        item.filter += " fil-" + item.Auteur.Prenom.split(" ").map(function (val) {
+                        item.filter += " " + item.Auteur.Prenom.split(" ").map(function (val) {
                             return 'fil-' + cleanString(val);
                         }).join(' ');
                     }
@@ -137,38 +160,31 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                  
                     if (item.Tags) 
                         item.filter += " " + $filter('filterString')(item.Tags);
-                        
-                    //{{::item.PrixLitteraires && 'fil-prix' || ''}}
-                    //{{::item.EBookUrl && 'fil-ebook' || ''}}
-                    //{{::item.FichePedago && 'fil-pedago' || ''}}
-                    //{{::item.NiveauLecture && 'fil-'+item.NiveauLecture || '' | lowercase | nospace}}
-                    //{{::item.Tags && item.Tags || '' | filterString}} "
 
-
-                    $scope.items.unshift(item);
-                    if ($scope.items.length == livres.length) {
-                        $scope.dataReady = true;
-                        
+                    $scope.items.push(item);
+                    if ($scope.items.length == 23) {
+                        $scope.$apply();
+                        if (!$container.mixItUp('isLoaded')) {
+                            $container.mixItUp({ animation: {enable: enableAnimation }});
+                        }
                     }
-                    $scope.$apply();
+                   
+                    if ($scope.items.length % 30 == 0) {
+                        $scope.$apply();
+                        $container.mixItUp('filter', $scope.searchPattern);
+                    }
+
+           
+                    if ($scope.items.length == livres.length) {
+                        $scope.$apply();
+                        $scope.dataReady = true;
+                        $container.mixItUp('filter', $scope.searchPattern);
+                        TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+
+                 
+                    }
 
                 });
-
-                //$timeout(function () {
-                //    //angular.forEach(livres, function (item, index) {
-                //    //    item.Id = item['@metadata']['@id'];
-                //    //    $scope.items.push(item);
-                //    //});
-                //    $scope.items = livres;
-                //    $(".progressIndicator").addClass("toggled");
-
-                //}, 1000);
-
-                if ($stateParams.auteur) {
-                    $scope.searchedText = $stateParams.auteur;
-                    $scope.setSearchPattern();
-                }
-
             })
 
 
@@ -475,6 +491,8 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         }
         $scope.validateFilter();
     }
+
+    $scope.searchPattern = "*";
     $scope.validateFilter = function () {
         //if (!$scope.dataReady)
         //    return;
@@ -488,14 +506,28 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
             + ($scope.searchPatternPrixLitteraires ? $scope.searchPatternPrixLitteraires : '')
             + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
 
-        $scope.container.isotope({ filter: searchPattern });
+        //$scope.container.isotope({ filter: searchPattern });
+
+     //   TweenMax.to(":not(" + searchPattern + ")", 0.2, { width: 0, height: 0, opacity: 0, });
+       // $('#Container').children().filter(searchPattern);
 
 
-        // enable to fix an offset bug when filtering
-        // set the offset to 0 directly
-        $scope.searchTimeout = setTimeout(function () {
-            $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
-        }, 200);
+       // $('#booksContainer').children(":not(" + searchPattern + ")").css({ display: "none" });
+      //  $('#booksContainer').children(searchPattern).animate({ width: '200px', height: '250px' }, 200);
+
+     //   $('#Container').children(searchPattern).css({ display: "block" });
+     
+        if (searchPattern.length == 0)
+            $scope.searchPattern = "*"
+        else {
+            $scope.searchPattern = searchPattern;
+        }
+        if ($('#Container').mixItUp('isLoaded')) {
+            $('#Container').mixItUp('filter', $scope.searchPattern);
+        }
+
+
+       
 
     }
 

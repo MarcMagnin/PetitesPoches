@@ -8,11 +8,17 @@
 
 function delayLoop(collection, index, timer, action) {
     var i = 0;
+    if (collection.length == 0)
+        return;
     //  create a loop function
     setTimeout(function () {    //  call a 3s setTimeout when the loop is called
         action(collection[index]);
         index++;
-
+        if (index % 26 == 0) {
+            timer = 300;
+        } else {
+            timer = 0;
+        }
         if (index < collection.length) {            //  if the counter < 10, call the loop function
             delayLoop(collection, index, timer, action);             //  ..  again which will trigger another 
         }                        //  ..  setTimeout()
@@ -33,7 +39,7 @@ $(document).ready(function () {
                 return;
             }
             if (($('.modal-backdrop') && $('.modal-backdrop').length == 0) && orientation == "h") {
-                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
+                $('#Container').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
             //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
             }
@@ -42,49 +48,65 @@ $(document).ready(function () {
 
     });
     var colW = 180;
-    var maxWidth = 500;
+    var maxWidth = 900;
     var orientation;
 
 
     
     var checkMasonryOrientation = function () {
-        //console.log($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() );
-        // prevent a bug on IPAD where scroll is not working 
-        $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() ));
+        ////console.log($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() );
+        //// prevent a bug on IPAD where scroll is not working 
+        //$('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight() ));
 
-        if ($(window).width() > maxWidth && orientation != "h") {
-            orientation = "h"
-            var $container = $('.tilesContainer');
+        //if ($(window).width() > maxWidth && orientation != "h") {
+        //    orientation = "h"
+        //    var $container = $('.tilesContainer');
 
-            // change layout mode
-            $container.isotope({
-                layoutMode: 'masonryHorizontal',
-                masonry: { rowHeight: 230 },
-            });
+        //    // change layout mode
+        //    $container.isotope({
+        //        layoutMode: 'masonry',
+        //        masonry: { rowHeight: 230 },
+        //    });
 
-            // correct a bug where the relayout will prevent a correct redesign of the content
-            setTimeout(function () {
-                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
-            }, 500);
+        //    // correct a bug where the relayout will prevent a correct redesign of the content
+        //    setTimeout(function () {
+        //        $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+        //    }, 500);
             
-            return;
-        } else if ($(window).width() < maxWidth && orientation != "v") {
-            orientation = "v";
-            var $container = $('.tilesContainer');
+        //    return;
+        //} else if ($(window).width() < maxWidth && orientation != "v") {
+        //    orientation = "v";
+        //    var $container = $('.tilesContainer');
 
-            // change layout mode
-            $container.isotope({
-                layoutMode: 'masonry',
+        //    // change layout mode
+        //    $container.isotope({
+        //        layoutMode: 'masonry',
 
-            });
+        //    });
 
-            // correct a bug where the relayout will prevent a correct redesign of the content
-            setTimeout(function () {
-                $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
-            }, 500);
+        //    // correct a bug where the relayout will prevent a correct redesign of the content
+        //    setTimeout(function () {
+        //        $('#booksContainer').stop().animate({ scrollLeft: '-=' + (1) + 'px' }, 200);
+        //    }, 500);
             
+        //}
+        if ($('#Container').mixItUp('isLoaded')) {
+            if ($(window).width() < maxWidth) {
+                $('#Container').mixItUp('setOptions', {
+                    animation: {
+                        enable: false
+                    },
+                });
+                console.log("disable animation")
+            } else {
+                $('#Container').mixItUp('setOptions', {
+                    animation: {
+                        enable: true
+                    },
+                });
+            }
         }
-        
+      
     }
     $(window).resize(function () {
         checkMasonryOrientation();

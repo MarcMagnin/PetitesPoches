@@ -37,31 +37,28 @@
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
-        <md-item>
+        <md-item id="NiveauxButton">
             <md-select ng-model="niveauLecture">
                 <md-select-label>
-                    <md-button id="NiveauxButton" class="md-primary md-grid-item-content"
-                               aria-label="Niveaux">
-                        <div class="md-icon-container">
-                            <md-icon md-svg-src="images/niveaux.svg"></md-icon>
-                        </div>
-                        <p class="toobar-button-label">Niveaux</p>
-                    </md-button>
+                    <div class="md-icon-container ">
+                        <md-icon md-svg-src="images/niveaux.svg"></md-icon>
+                    </div>
+                    <p class="toobar-button-label">Niveaux</p>
                 </md-select-label>
                 <md-option value="">Tous niveaux</md-option>
                 <md-option value="premierspas">lecteur *</md-option>
                 <md-option value="debutants">lecteur **</md-option>
                 <md-option value="confirmes">lecteur ***</md-option>
             </md-select>
-
         </md-item>
+     
 
         <md-item btn-checkbox="" 
                  aria-label="Fiche pédagogiques"
                  ng-change="searchFichePedagogiques()"
                  ng-model="checkboxFichePedagogiques">
 
-            <div class="md-icon-container ">
+            <div class="md-icon-container">
                 <md-icon md-svg-src="images/pedago.svg"></md-icon>
             </div>
             <p class="toobar-button-label">
@@ -70,59 +67,44 @@
             <p style="margin-top:15px" class="toobar-button-label">
                 pédagogiques
             </p>
-
-
-
-          
-
         </md-item>
 
        
 
-        <md-item>
-            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
-                       aria-label="E-books"
-                       ng-change="searchEBook()"
-                       ng-model="checkboxSearchEBook">
-                <div class="md-icon-container">
-                    <md-icon md-svg-src="images/ebook2.svg"></md-icon>
-                </div>
-
-                <p class="toobar-button-label">E-books</p>
-            </md-button>
-
+        <md-item btn-checkbox=""
+                 aria-label="E-books"
+                 ng-change="searchEBook()"
+                 ng-model="checkboxSearchEBook">
+            <div class="md-icon-container ">
+                <md-icon md-svg-src="images/ebook2.svg"></md-icon>
+            </div>
+            <p class="toobar-button-label">E-books</p>
         </md-item>
 
-        <md-item>
-            <md-button btn-checkbox="" class="md-primary md-grid-item-content"
-                       aria-label="Prix littéraires"
-                       ng-change="searchPrixLitteraires()"
-                       ng-model="checkboxPrixLitteraire">
-                <div class="md-icon-container">
-                    <md-icon md-svg-src="images/prix.svg"></md-icon>
-                </div>
-                <!--<ng-md-icon class="md-icon-container" icon="search" size="34" alt="search">-->
-                <p class="toobar-button-label">Prix littéraires</p>
-            </md-button>
-
+      
+        <md-item btn-checkbox=""
+                 aria-label="Prix littéraires"
+                 ng-change="searchPrixLitteraires()"
+                 ng-model="checkboxPrixLitteraire">
+            <div class="md-icon-container ">
+                <md-icon md-svg-src="images/prix.svg"></md-icon>
+            </div>
+            <p class="toobar-button-label">Prix littéraires</p>
         </md-item>
 
-        <md-item>
+        <md-item id="ThemesButton">
             <md-select ng-model="themeMultiselectmodel" multiple="true">
                 <md-select-label>
-                    <md-button id="ThemesButton" class="md-primary md-grid-item-content"
-                               aria-label="Thèmes">
-                        <div class="md-icon-container">
-                            <md-icon md-svg-src="images/themes.svg"></md-icon>
-                        </div>
-                        <p class="toobar-button-label">Thèmes</p>
-                    </md-button>
+                    <div class="md-icon-container ">
+                        <md-icon md-svg-src="images/themes.svg"></md-icon>
+                    </div>
+                    <p class="toobar-button-label">Thèmes</p>
                 </md-select-label>
                 <md-option ng-value="theme" ng-repeat="theme in tags | orderBy:'Name'">{{theme.Name}}</md-option>
             </md-select>
         </md-item>
 
- 
+
         <md-item id="searchitem"  style="z-index:50">
       
             <div id="searchIcon" class="md-icon-container ">
@@ -160,11 +142,9 @@
         </div>
     </div>
 
-    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar" when-scrolled="loadMore()">
-        <!--| orderBy:'Index':true-->
-        <div class="tile isotopey {{::item.filter}}"
-             ng-repeat=" item in items"
-             isotopethis sort="date" ng-click="select(item, 'lg', $event)">
+    <!--when-scrolled="loadMore()"-->
+    <div id="Container" class="tileContainer u-fancy-scrollbar">
+        <div class="mix tile {{::item.filter}}" ng-repeat="item in items" ng-click="select(item, 'lg', $event)">
             <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
         </div>
     </div>
@@ -176,59 +156,20 @@
 
 
     // prevent a bug on IPAD where scroll is not working 
-    $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
+  //  $('#Container').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
   
-
-    var $container = $('.tilesContainer');
-    var layoutMode = 'masonryHorizontal'
-    if ($(window).width() < 500) {
-      layoutMode = 'masonry';
-    }
-
-    // change layout mode
-    //$container.isotope({ layoutMode: "masonryHorizontal" });
-    $container.isotope({
-        layoutMode: layoutMode,
-        itemSelector: '.isotopey',
-        masonry: { rowHeight: 230 },
-        getSortData: {
-            //weight: function (itemElem) { // function
-            //    if (!$(itemElem).scope())
-            //        return 0;
-            //    if ($(itemElem).scope().item) {
-            //        //console.log($(itemElem).scope().item.Index);
-            //        return parseFloat($(itemElem).scope().item.Index);
-            //    } else {
-            //        var weight = $(itemElem).find('.index').text();
-            //        //console.log(weight);
-            //        return parseFloat(weight.replace(/[\(\)]/g, ''));
-            //    }
-
-
-            //}
-            date: function (elem) {
-
-                var scope = $(elem).scope();
-                if (!scope)
-                    return 0;
-                if (scope.item && scope.item.datePublication) {
-                    return Date.parse(scope.item.datePublication);
-                }
-                return 0;
-            }
-        },
-
-
-
-
-        //sortBy: 'date',
-        sortAscending: false,
-        // transitionDuration: 0
-        // transformsEnabled: true,
-        //onLayout: function () {
-        //    $container.css('overflow', 'visible');
-        //}
-    });
+    //$('#Container').mixItUp({
+    //            animation: {
+    //                animateResizeTargets: false,
+    //                easing: 'cubic-bezier(0.86, 0, 0.07, 1)',
+    //                duration: 400
+    //            },
+    //            controls: {
+    //                enable: false
+    //                // as we are interacting via the API, we can disable default controls to increase performance
+    //            },
+    //        });
+  
 
 
     // Ripple click effect

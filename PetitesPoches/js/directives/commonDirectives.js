@@ -1,4 +1,13 @@
 ﻿var itemAdded = 0;
+var maxWidth = 900;
+var enableAnimation = true;
+if ($(window).width() < maxWidth) {
+    enableAnimation = false;
+} else {
+    enableAnimation = true;
+}
+
+
 app.directive("isotopethis", function () {
     return {
         link: function (scope, elm, attrs) {
@@ -13,54 +22,52 @@ app.directive("isotopethis", function () {
             // advantage : don't filter
 
             // TODO KEEP THIS
-            $container = $('.tilesContainer')
+            var $container = $('#Container');
+
+            
 
             // just add the item to the isotope collection without any layout modification
             //$container.isotope('appended2', elm);
             
-            
-
-            if (itemAdded < 30) {
-                $(elm).css({ display: "block" });
-                $container.isotope('appended', elm);
-                if (itemAdded == 3) {
-                    // to set the item at the correct position, otherwise the item is on the second item position
-                    $container.isotope({ sortBy: attrs.sort });
-                }
-            } else {
-                $container.isotope('appended2', elm);
-            }
             // si jamais un filtre est activé par changement direct de page
-            if (itemAdded == 29) {
-                    scope.validateFilter();
+            if (itemAdded == 20 ) {
+                if (!$container.mixItUp('isLoaded')) {
+                    $container.mixItUp({ animation: { enable: enableAnimation } });
+                }
             }
+         
 
+            if (itemAdded % 30 == 0) {
+                $container.mixItUp('append', $('.tile'));
+            }
+           
 
             if (scope.itemsPool.length == itemAdded) {
+                $container.mixItUp('append', $('.tile'));
                 TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+
+             
                 scope.dataReady = true;
                 var delay = 100;
                 if (!scope.menuShown) {
                     delay = 500;
                 }
                 setTimeout(function () {
-                    $container.isotope({ sortBy: attrs.sort });
-                    $container.isotope({ sortBy: attrs.sort });
-                    TweenMax.to(".tile", 0, { delay: .3, opacity: 1, display: "block" });
+                //    $container.mixItUp();
+                    //$container.isotope({ sortBy: attrs.sort });
+                    //TweenMax.to(".tile", 0, { delay: .3, opacity: 1, display: "block" });
                     //$(".tile").click(function () {
                     //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
                     //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
                     //});
 
                     // correct a bug where the relayout will prevent a correct redesign of the content
-                    setTimeout(function () {
-                        $('#booksContainer').css('display', 'none');//.stop().animate({ scrollLeft: '+=' + (20) + 'px' }, 200);
-                        $('#booksContainer').css('display', 'block')
-                    }, 1500);
+                    //setTimeout(function () {
+                    //    $('#booksContainer').css('display', 'none');//.stop().animate({ scrollLeft: '+=' + (20) + 'px' }, 200);
+                    //    $('#booksContainer').css('display', 'block')
+                    //}, 1500);
                     
-                    setTimeout(function () {
-                        scope.validateFilter();
-                    }, 100)
+                
                 }, delay)
 
                

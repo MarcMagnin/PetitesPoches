@@ -21,7 +21,13 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
     $scope.selectedItem = "";
     $scope.container = $('.tilesContainer');
     $scope.dataReady = false;
+    $scope.searchPattern = "*";
+    $scope.userLeft = false;
 
+    // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
+    $scope.$on("tabChanged", function (event, args) {
+        $scope.userLeft = true;
+    })
 
 
     $scope.init = function () {
@@ -59,21 +65,59 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         itemAdded = 0;
         auteurService.getAuteurs()
             .then(function (auteurs) {
-                $scope.itemsPool = auteurs;
 
-                delayLoop(auteurs, 0, 0.0001, function (item) {
+                var $container = $('#Container');
+                if ($container.mixItUp('isLoaded')) {
+                    $container.mixItUp('destroy')
+                }
+
+                delayLoop(auteurs, 0, 0, function (item) {
+                    if ($scope.userLeft) {
+                        // abort the delayed process
+                        auteurs.length = 0;
+                    }
+
                     item.Id = item['@metadata']['@id'];
+                    item.filter = "";
+
+                    if (item.Nom) {
+                        item.filter +=item.Nom.split(" ").map(function (val) {
+                            return 'f-' + cleanString(val);
+                        }).join(' ');
+                    }
+                    if (item.Prenom) {
+                        item.filter += " "+ item.Prenom.split(" ").map(function (val) {
+                            return 'f-' + cleanString(val);
+                        }).join(' ');
+                    }
 
                     $scope.items.push(item);
+                    if ($scope.items.length == 23) {
+                        $scope.$apply();
+                        if (!$container.mixItUp('isLoaded')) {
+                            $container.mixItUp({ animation: { enable: enableAnimation } });
+                        }
+                    }
+
+                    if ($scope.items.length % 30 == 0) {
+                        $scope.$apply();
+                        if ($container.mixItUp('isLoaded')) {
+                            $container.mixItUp('filter', $scope.searchPattern);
+                        }
+                       
+                    }
+
+
                     if ($scope.items.length == auteurs.length) {
+
+                        $scope.$apply();
                         $scope.dataReady = true;
+                        $container.mixItUp('filter', $scope.searchPattern);
                         TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
                     }
-                    $scope.$apply();
 
                 });
 
-           
 
             })
     };
@@ -189,10 +233,11 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             $scope.searchPatternRecherche = '*';
         } else {
             $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                return '[class*=\'f-' + val.toLowerCase() + '\']';
+                return '[class*=\'f-' + cleanString(val) + '\']';
             }).join('');
         }
 
+      
         $scope.closeSearch();
     }
 
@@ -216,7 +261,16 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
 
-        $scope.container.isotope({ filter: searchPattern });
+        if (searchPattern.length == 0)
+            $scope.searchPattern = "*"
+        else {
+            $scope.searchPattern = searchPattern;
+        }
+        if ($('#Container').mixItUp('isLoaded')) {
+            $('#Container').mixItUp('filter', $scope.searchPattern);
+        }
+
+      
 
     }
 
@@ -241,7 +295,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
                 $scope.searchPatternRecherche = '*';
             } else {
                 $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'f-' + val.toLowerCase() + '\']';
+                    return '[class*=\'f-' + cleanString(val) + '\']';
                 }).join('');
             }
 

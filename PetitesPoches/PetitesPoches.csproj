@@ -59,6 +59,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin\contacts.html" />
     <Content Include="admin\css\admin.min.css">
       <DependentUpon>admin.css</DependentUpon>
     </Content>
@@ -219,6 +220,8 @@
     <Content Include="js\jquery.isotope.min.js">
       <DependentUpon>jquery.isotope.js</DependentUpon>
     </Content>
+    <Content Include="js\jquery.mixitup.js" />
+    <Content Include="js\masonryHorizontal.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />

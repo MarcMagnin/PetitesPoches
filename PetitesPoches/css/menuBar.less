@@ -15,9 +15,9 @@
     -o-transition: opacity 0.2s linear;
     -webkit-transition: opacity 0.2s linear;
     transition: opacity 0.2s linear;
+    white-space: nowrap;
+    overflow: hidden;
 }
-
-
 
 
 .menuBar {
@@ -33,37 +33,93 @@
     // to trigger an appear animation
     /*display:none;*/
     & md-item {
-        overflow:visible;
-        cursor:pointer;
+        overflow: visible;
+        cursor: pointer;
         position: relative;
         color: white;
         height: 45px;
         width: 45px;
         margin: 0 28px;
-          &.active {
+         md-select.md-default-theme:focus .md-select-label {
+                color:  inherit !important;
+            }
+        &.active {
             color: lighten(@primaryColor, 20%) !important;
-            > .md-icon-container md-icon {  
+
+            md-select.md-default-theme:focus .md-select-label {
+                color: lighten(@primaryColor, 20%) !important;
+            }
+
+            md-select {
+                color: lighten(@primaryColor, 20%) !important;
+
+                :hover {
+                    color: inherit !important;
+                }
+
+                :active {
+                    color: inherit !important;
+                }
+            }
+
+            & .md-icon-container md-icon {
                 opacity: 0.9;
             }
 
-            > .md-grid-text {
+            & .md-grid-text {
                 opacity: 0.8;
             }
         }
+
+        md-select {
+            :hover {
+                color: inherit !important;
+            }
+
+            :active, :focus {
+                color: inherit !important;
+            }
+        }
     }
-    
-    
+
+    & .md-button {
+        position: relative;
+        text-transform: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        color: white !important;
+        overflow: visible;
+
         > .md-icon-container {
             height: 100%;
             width: 100%;
         }
 
-      
 
-       
-   
 
-    & .md-icon-container md-icon {
+        > .md-ripple-container {
+            overflow: hidden;
+            border-radius: 50%;
+            -moz-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+    }
+
+    & .md-icon-container {
+        height: 100%;
+        width: 100%;
+    }
+
+
+
+
+
+
+    & md-icon {
         height: 100%;
         width: 100%;
         border-radius: 50%;
@@ -82,17 +138,17 @@
 }
 
 
-.circle{
+.circle {
     border-radius: 50% !important;
 }
-.sendFPinnerCircle{
-  margin:auto;
+
+.sendFPinnerCircle {
+    margin: auto;
     width: 114px;
     height: 114px;
-    margin-top:5px;
+    margin-top: 5px;
     border: 2px solid fadeout(#fff, 30%);
     padding: 15px;
-
     text-align: center;
     line-height: 1;
     display: -webkit-box;
@@ -105,15 +161,14 @@
     -webkit-align-items: center;
     align-items: center;
 
-        a {
+    a {
         font-size: 0.8em;
         text-wrap: normal;
         white-space: normal;
         color: @textColor;
     }
-
-
 }
+
 .sendFP {
     position: absolute;
     -ms-transform: scale(1) rotate(-10deg);
@@ -121,7 +176,6 @@
     -webkit-transform: scale(1) rotate(-10deg);
     -o-transform: scale(1) rotate(-10deg);
     transform: scale(1) rotate(-10deg);
-    
     z-index: 100;
     width: 124px;
     height: 124px;
@@ -130,11 +184,10 @@
     background: fadeout(@primaryColor,20%);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
     cursor: pointer;
-    
+
     &:hover {
         background: lighten(@primaryColor,10%);
     }
-
 }
 
 @media only screen and (max-width:950px) {
@@ -223,24 +276,22 @@
         -o-transform: translate(0, 0);
         -webkit-transform: translate(0, 0);
         transform: translate(0, 0);
-         
     }
 
-    .searchAuteur{
-         top: 60%;
-            left: 50% !important;
-            right:50% !important;
-            -moz-transform: translate(-50%, -50%);
-            -ms-transform: translate(-50%, -50%);
-            -o-transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            }
+    .searchAuteur {
+        top: 60%;
+        left: 50% !important;
+        right: 50% !important;
+        -moz-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
     .searchBar.toggled {
         width: 260px;
     }
-
-   
 }
 
 #searchIcon.toggled {

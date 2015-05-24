@@ -483,6 +483,8 @@ md-inline-list-icon {
   -o-transition: opacity 0.2s linear;
   -webkit-transition: opacity 0.2s linear;
   transition: opacity 0.2s linear;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .menuBar {
   font: normal 14px/38px Montserrat;
@@ -509,20 +511,64 @@ md-inline-list-icon {
   width: 45px;
   margin: 0 28px;
 }
+.menuBar md-item md-select.md-default-theme:focus .md-select-label {
+  color: inherit !important;
+}
 .menuBar md-item.active {
   color: #15feed !important;
 }
-.menuBar md-item.active > .md-icon-container md-icon {
+.menuBar md-item.active md-select.md-default-theme:focus .md-select-label {
+  color: #15feed !important;
+}
+.menuBar md-item.active md-select {
+  color: #15feed !important;
+}
+.menuBar md-item.active md-select :hover {
+  color: inherit !important;
+}
+.menuBar md-item.active md-select :active {
+  color: inherit !important;
+}
+.menuBar md-item.active .md-icon-container md-icon {
   opacity: 0.9;
 }
-.menuBar md-item.active > .md-grid-text {
+.menuBar md-item.active .md-grid-text {
   opacity: 0.8;
 }
-.menuBar > .md-icon-container {
+.menuBar md-item md-select :hover {
+  color: inherit !important;
+}
+.menuBar md-item md-select :active,
+.menuBar md-item md-select :focus {
+  color: inherit !important;
+}
+.menuBar .md-button {
+  position: relative;
+  text-transform: none;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  color: white !important;
+  overflow: visible;
+}
+.menuBar .md-button > .md-icon-container {
   height: 100%;
   width: 100%;
 }
-.menuBar .md-icon-container md-icon {
+.menuBar .md-button > .md-ripple-container {
+  overflow: hidden;
+  border-radius: 50%;
+  -moz-transform: scale(0.95);
+  -ms-transform: scale(0.95);
+  -o-transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
+}
+.menuBar .md-icon-container {
+  height: 100%;
+  width: 100%;
+}
+.menuBar md-icon {
   height: 100%;
   width: 100%;
   border-radius: 50%;
