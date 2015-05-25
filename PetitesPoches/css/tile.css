@@ -3,8 +3,7 @@
   height: -webkit-calc(100% - 185px) !important;
   height: -o-calc(100% - 185px) !important;
   height: calc(100% - 185px) !important;
-  overflow-y: hidden !important;
-  overflow-x: scroll !important;
+  overflow: auto;
   -webkit-box-sizing: content-box !important;
   -moz-box-sizing: content-box !important;
   box-sizing: content-box !important;
@@ -53,10 +52,6 @@
   -moz-box-shadow: 0 0 8px #01aca0;
   box-shadow: 0 0 8px #01aca0;
 }
-/* Flex box progressive enhancements: */
-.author-placeholder {
-  font-size: 70px;
-}
 .tile-author {
   width: 170px;
   height: 200px;
@@ -66,20 +61,29 @@
 .tile-author:hover {
   background-color: transparent;
 }
-@media (max-width: 630px) {
-  .tilesContainer {
+@media (max-width: 592px) {
+  .tileContainer {
     height: -moz-calc(100% - 165px)  !important;
     height: -webkit-calc(100% - 165px) !important;
     height: -o-calc(100% - 165px) !important;
     height: calc(100% - 165px) !important;
-    overflow-y: scroll !important;
-    overflow-x: hidden !important;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
   }
   .tile {
     margin-left: auto;
     margin-right: auto;
     right: 0;
   }
+  .tile-author {
+    margin-left: auto;
+    margin-right: auto;
+    right: 0;
+  }
+}
+.author-placeholder {
+  font-size: 70px;
 }
 .viewContainer {
   height: 100%;
