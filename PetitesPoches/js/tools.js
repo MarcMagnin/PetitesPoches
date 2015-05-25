@@ -46,8 +46,6 @@ $(document).ready(function () {
                 return;
             }
             if (($('.modal-backdrop') && $('.modal-backdrop').length == 0) && orientation == "h") {
-                //var test = container.scrollLeft() - (event.deltaY * 400);
-               // console.log(test)
                 //$('#Container').scrollLeft($('#Container')container.scrollLeft() - (event.deltaY * 60));
                 //TweenMax.to(container, 0.2, {
                 //    scrollTo: {
@@ -61,14 +59,15 @@ $(document).ready(function () {
                 container.stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
                 //TweenMax.to(container, 0.2, { scrollLeft: container.scrollLeft() - (event.deltaY * 300), ease: Linear.ease });
                
-            } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
-            //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
             }
+            //else if ($('.modal-backdrop').length == 0 && orientation == "v") {
+            ////    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
+            //}
         }
 
     });
     var colW = 180;
-    var maxWidth = 900;
+    var maxWidth = 592;
     var orientation;
 
 
@@ -81,7 +80,7 @@ $(document).ready(function () {
             orientation = "v";
         }
         if ($('#Container').mixItUp('isLoaded')) {
-            if ($(window).width() < maxWidth) {
+            if ($(window).width() < 1000) {
                 $('#Container').mixItUp('setOptions', {
                     animation: {
                         enable: false
