@@ -1,8 +1,8 @@
 ﻿.tileContainer {
-  height: -moz-calc(100% - 185px)  !important;
-  height: -webkit-calc(100% - 185px) !important;
-  height: -o-calc(100% - 185px) !important;
-  height: calc(100% - 185px) !important;
+  height: -moz-calc(100% - 215px)  !important;
+  height: -webkit-calc(100% - 215px) !important;
+  height: -o-calc(100% - 215px) !important;
+  height: calc(100% - 215px) !important;
   overflow: auto;
   -webkit-box-sizing: content-box !important;
   -moz-box-sizing: content-box !important;
@@ -60,6 +60,14 @@
 }
 .tile-author:hover {
   background-color: transparent;
+}
+@media (max-width: 1100px) {
+  .tileContainer {
+    height: -moz-calc(100% - 255px)  !important;
+    height: -webkit-calc(100% - 255px) !important;
+    height: -o-calc(100% - 255px) !important;
+    height: calc(100% - 255px) !important;
+  }
 }
 @media (max-width: 592px) {
   .tileContainer {

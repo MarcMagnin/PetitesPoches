@@ -1,10 +1,10 @@
 ﻿@import "ressources";
 
 .tileContainer {
-    height: ~"-moz-calc(100% - 185px) " !important;
-    height: ~"-webkit-calc(100% - 185px)" !important;
-    height: ~"-o-calc(100% - 185px)" !important;
-    height: ~"calc(100% - 185px)" !important;
+    height: ~"-moz-calc(100% - 215px) " !important;
+    height: ~"-webkit-calc(100% - 215px)" !important;
+    height: ~"-o-calc(100% - 215px)" !important;
+    height: ~"calc(100% - 215px)" !important;
     overflow: auto;
     -webkit-box-sizing: content-box !important;
     -moz-box-sizing: content-box !important;
@@ -70,6 +70,15 @@
     }
     
 }
+
+@media (max-width:@sizeTriggerTMLogo){
+    .tileContainer {
+    height: ~"-moz-calc(100% - 255px) " !important;
+    height: ~"-webkit-calc(100% - 255px)" !important;
+    height: ~"-o-calc(100% - 255px)" !important;
+    height: ~"calc(100% - 255px)" !important;
+}}
+
 @media (max-width:@sizeSmallModal){
     .tileContainer {
     height: ~"-moz-calc(100% - 165px) " !important;
