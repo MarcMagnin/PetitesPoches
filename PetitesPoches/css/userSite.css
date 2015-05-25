@@ -686,7 +686,7 @@ md-inline-list-icon {
 }
 @media only screen and (max-width: 630px) {
   .searchBar {
-    top: 2px;
+    top: 0;
     left: auto;
     right: 0;
     -moz-transform: translate(0, 0);
