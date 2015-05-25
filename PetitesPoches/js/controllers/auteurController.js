@@ -133,18 +133,23 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         if (searchToggled)
             return;
         searchToggled = true;
+
+        var searchWidth = $(window).width() < 630 ? 260 : 150;
         $("#searchitem").addClass("toggled");
         $("#searchIcon").addClass("toggled");
-        $(".searchBar").addClass("toggled");
+        TweenMax.fromTo(".searchBar", 0.2, { width: searchWidth+50, opacity: 0, ease: null }, { width: searchWidth, opacity: 1, ease: Linear.ease });
     }
 
 
     $scope.closeSearch = function () {
-        setTimeout(function () {
-            $("#searchitem, #searchIcon, .searchBar").removeClass("toggled");
-            searchToggled = false;
-        }, 100)
-
+        var searchWidth = $(window).width() < 630 ? 260 : 150;
+        $("#searchitem, #searchIcon, .searchBar").removeClass("toggled");
+        TweenMax.to(".searchBar", 0.2, {
+            width: searchWidth + 50, opacity: 0, ease: Linear.ease,
+            onComplete:function(){
+                $(".searchBar").width(45);
+        }});
+        searchToggled = false;
     }
 
 
@@ -266,12 +271,26 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
         else {
             $scope.searchPattern = searchPattern;
         }
-        if ($('#Container').mixItUp('isLoaded')) {
-            $('#Container').mixItUp('filter', $scope.searchPattern);
+        console.log($scope.searchPattern)
+        filter();
+    }
+
+    var filter = function () {
+        if (!$('#Container').mixItUp('isLoaded')) {
+            return;
         }
-
-      
-
+        if ($('#Container').mixItUp('isMixing')) {
+            setTimeout(function () {
+                filter();
+            }, 200);
+        } else {
+            var state = $('#Container').mixItUp('getState');
+            if (state.activeFilter != $scope.searchPattern) {
+                $('#Container').mixItUp('filter', $scope.searchPattern);
+            } else {
+                // skip filter
+            }
+        }
     }
 
     $scope.filtreAuteur = function (auteur) {

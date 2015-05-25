@@ -191,12 +191,6 @@
   width: 150px;
   overflow: visible;
 }
-.searchButton > .md-icon-container {
-  -moz-transition: all 0s linear !important;
-  -o-transition: all 0s linear !important;
-  -webkit-transition: all 0s linear !important;
-  transition: all 0s linear !important;
-}
 .searchBar {
   position: absolute;
   top: 50%;
@@ -206,14 +200,14 @@
   -o-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 38px;
+  width: 160px;
   height: 38px;
   opacity: 0;
   min-width: 0;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  -webkit-transition: none !important;
+  transition: none !important;
 }
 .searchBar.toggled {
   width: 150px;
@@ -224,6 +218,7 @@
     top: 2px;
     left: auto;
     right: 0;
+    width: 308px;
     -moz-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
