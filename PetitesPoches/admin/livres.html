@@ -180,9 +180,6 @@
 
         </div>
 
-    </div>
-
-    </div>
 
     <div class="modal-footer">
         <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
@@ -244,96 +241,19 @@
         <!--<a href="#sortBy=date" ng-click="sort()">by date</a>-->
     </div>
 
-    <div id="booksContainer" class="tilesContainer drop-box" ng-file-drop ng-model="files"
+    <div id="Container" class="tileContainer tileContainerAdmin drop-box" ng-file-drop ng-model="files"
          drag-over-class="dragover" multiple="true"
          allow-dir="false" accept="image/*"
          ng-file-change="addLivreByDragAndDrop($files, $event)">
-        <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin  {{::item.filter}}"
-             ng-repeat="item in items"
-             isotopethis sort="date" ng-click="select(item, lg, $event)">
-            <button class="close close-override" title="supprimer"
-                    ng-click="deleteLivre(item, $event)">
-                <i class="fa fa-close"></i>
-            </button>
-            <!--href="#responsive" data-toggle="modal"-->
-            <div class="inner-tile">
-
-                <img class="tile-image" src="{{::apiRootUrl}}/{{item.Couverture}}" />
-
-                <!--<div class="tile-text-wrapper">
-                <p class="tile-text">{{item.Titre}}</p>
-            </div>
-
-            <div class="moreInfoButtonWrapper topRight">
-                <div class="bottomLeft" ng-show="item.PrixLitteraire">
-                    <md-icon title="{{item.PrixLitteraire}}" md-svg-src="../images/prix.svg"></md-icon>
-                    <img style="width:24px;height:24px" src="../images/prix.svg" />
-                </div>
-                <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{item.FichePedago}}" target="_blank" title="Fiche pédagogique" ng-show="item.FichePedago"
-                   class="transparentButton background-circle">
-                    <i class="fa fa-file-text" />
-                </a>
-                <a href="{{::apiRootUrl}}/static/{{::item.Id}}/{{item.EBookUrl}}" target="_blank"
-                   title="E-book"
-                   ng-show="item.EBookUrl"
-                   class="transparentButton background-circle">
-                    <i class="fa fa-tablet" />
-                </a>
-            </div>-->
-            </div>
+        <div class="mix tile tile-admin  {{::item.filter}}"
+        ng-repeat="item in items track by $index" data-date="{{item.datePublication | dateTicks}}" ng-click="select(item, lg, $event)">
+        <button class="close close-override" title="supprimer"
+        ng-click="deleteLivre(item, $event)">
+        <i class="fa fa-close"></i>
+        </button>
+        <div class="inner-tile">
+        <img class="tile-image" src="{{::apiRootUrl}}/{{item.Couverture}}" />
+        </div>
         </div>
     </div>
-
-
 </div>
-<script>
-
-    var $container = $('.tilesContainer');
-
-    // change layout mode
-    //$container.isotope({ layoutMode: "masonryHorizontal" });
-    $container.isotope({
-        layoutMode: 'masonryHorizontal',
-        itemSelector: '.isotopey',
-        masonry: { rowHeight: 230 },
-        getSortData: {
-            //weight: function (itemElem) { // function
-            //    if (!$(itemElem).scope())
-            //        return 0;
-            //    if ($(itemElem).scope().item) {
-            //        //console.log($(itemElem).scope().item.Index);
-            //        return parseFloat($(itemElem).scope().item.Index);
-            //    } else {
-            //        var weight = $(itemElem).find('.index').text();
-            //        //console.log(weight);
-            //        return parseFloat(weight.replace(/[\(\)]/g, ''));
-            //    }
-
-
-            //}
-            date: function (elem) {
-
-                var scope = $(elem).scope();
-                if (!scope)
-                    return 0;
-                if (scope.item && scope.item.datePublication) {
-                    return Date.parse(scope.item.datePublication);
-                }
-                return 0;
-            }
-        },
-
-
-
-
-        //sortBy: 'date',
-        sortAscending: false,
-       // transitionDuration: 0
-       // transformsEnabled: true,
-        //onLayout: function () {
-        //    $container.css('overflow', 'visible');
-        //}
-    });
-
-</script>

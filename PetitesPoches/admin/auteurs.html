@@ -74,24 +74,22 @@
         </div>
     </div>
 
-    <div id="booksContainer" class="tilesContainer" ng-file-drop ng-model="files" class="drop-box dragover"
+    <div id="Container" class="tileContainer tileContainerAdmin" ng-file-drop ng-model="files" class="drop-box dragover"
          drag-over-class="dragover" multiple="false"
          allow-dir="false" accept="image/*"
          ng-file-change="add($files, $event)">
         <!--| orderBy:'Index':true-->
-        <div class="tile isotopey tile-admin filter-{{item.Nom|lowercase}}"
+        <div class="mix tile tile-admin filter-{{item.Nom|lowercase}}"
+             data-nom="{{item.Nom}}"
              ng-repeat="item in items"
-             isotopethis
-             sort="nom"
              ng-click="select(item, $event)">
-            <isotopthis></isotopthis>
             <button class="close close-override" title="supprimer"
                     ng-click="delete(item, $event)">
                 <i class="fa fa-close"></i>
             </button>
 
             <div class="inner-tile">
-              
+
                 <img class="tile-image" src="{{item.Photo}}" ng-show="item.Photo" />
 
                 <div class="placeholder" ng-hide="item.Photo">
@@ -106,12 +104,12 @@
 
 
 
-                <div class="moreInfoButtonWrapper">
+                <!--<div class="moreInfoButtonWrapper">
                     <a href="{{item.LienBiblio}}" data-dismiss="modal" target="_blank" title="Bibliographie" ng-show="item.LienBiblio" class="transparentButton background-circle">
                         <i class="fa fa-leanpub fa-07" />
                     </a>
 
-                </div>
+                </div>-->
             </div>
 
         </div>
@@ -144,29 +142,29 @@
     //});
 
 
-    var $container = $('.tilesContainer');
+    //var $container = $('.tilesContainer');
 
 
-    // change layout mode
-    //$container.isotope({ layoutMode: "masonryHorizontal" });
-    $container.isotope({
-        layoutMode: 'masonryHorizontal',
-        itemSelector: '.isotopey',
-        masonryHorizontal: { rowHeight: 20 },
-        getSortData: {
-            nom: function (elem) {
-                var scope = $(elem).scope();
-                if (scope && scope.item && scope.item.Nom) {
-                    return scope.item.Nom.toLowerCase();
-                }
-                // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste
-                return "aaaaaa";
-            }
-        },
+    //// change layout mode
+    ////$container.isotope({ layoutMode: "masonryHorizontal" });
+    //$container.isotope({
+    //    layoutMode: 'masonryHorizontal',
+    //    itemSelector: '.isotopey',
+    //    masonryHorizontal: { rowHeight: 20 },
+    //    getSortData: {
+    //        nom: function (elem) {
+    //            var scope = $(elem).scope();
+    //            if (scope && scope.item && scope.item.Nom) {
+    //                return scope.item.Nom.toLowerCase();
+    //            }
+    //            // permet aux auteurs n'ayant pas de nom d'être ajouté au début de la liste
+    //            return "aaaaaa";
+    //        }
+    //    },
 
-        sortAscending: true,
-        transformsEnabled: true,
+    //    sortAscending: true,
+    //    transformsEnabled: true,
 
-    });
+    //});
 
 </script>

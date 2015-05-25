@@ -8,9 +8,7 @@
                 array.push(firstLetter);
             }
         });
-        array.sort(function (a, b) {
-            return a.displayOrder - b.displayOrder;
-        });
+       
         return array;
     }
 });

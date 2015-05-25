@@ -44,14 +44,28 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
     $scope.themeMultiselectSettings = { displayProp: 'Name', idProp: 'Name' };
     $scope.themeMultiselectmodel = [];
     $scope.menuShown = true;
-
+    $scope.searchPattern = "*";
+    $scope.userLeft = false;
+    // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
+    $scope.$on("tabChanged", function (event, args) {
+        $scope.userLeft = true;
+    })
     $scope.init = function () {
         itemAdded = 0;
         livreService.getLivres()
             .then(function (livres) {
                 $scope.itemsPool = livres;
+                var $container = $('#Container');
+                if ($container.mixItUp('isLoaded')) {
+                    $container.mixItUp('destroy')
+                }
 
-                angular.forEach(livres, function (item, index) {
+
+                delayLoop(livres, 0, 0, function (item) {
+                    if ($scope.userLeft) {
+                        // abort the delayed process
+                        livres.length = 0;
+                    }
                     item.Id = item['@metadata']['@id'];
 
                     item.filter = item.Titre.split(" ").map(function (val) {
@@ -59,12 +73,12 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                     }).join(' ');
 
                     if (item.Auteur.Nom) {
-                        item.filter += " fil-" + item.Auteur.Nom.split(" ").map(function (val) {
+                        item.filter += " " + item.Auteur.Nom.split(" ").map(function (val) {
                             return 'fil-' + cleanString(val);
                         }).join(' ');
                     }
                     if (item.Auteur.Prenom) {
-                        item.filter += " fil-" + item.Auteur.Prenom.split(" ").map(function (val) {
+                        item.filter += " " + item.Auteur.Prenom.split(" ").map(function (val) {
                             return 'fil-' + cleanString(val);
                         }).join(' ');
                     }
@@ -85,7 +99,26 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                         item.filter += " " + $filter('filterString')(item.Tags);
 
 
+
                     $scope.items.push(item);
+                    if ($scope.items.length == 23) {
+                        $scope.$apply();
+                        if (!$container.mixItUp('isLoaded')) {
+                            $container.mixItUp({ animation: { enable: enableAnimation } });
+                        }
+                    }
+
+                    if ($scope.items.length % 30 == 0) {
+                        $scope.$apply();
+                        $container.mixItUp('filter', $scope.searchPattern);
+                    }
+
+
+                    if ($scope.items.length == livres.length) {
+                        $scope.$apply();
+                        $scope.dataReady = true;
+                        $container.mixItUp('filter', $scope.searchPattern);
+                    }
                 });
              
             })
@@ -132,6 +165,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }
     }
 
+
     $scope.saveItem = function (item) {
         delete item.new;
         var filter = item.filter;
@@ -144,8 +178,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }).
         success(function (data, status, headers, config) {
             item.filter = filter;
-            $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
-            $scope.container.isotope({ sortBy: 'date' });
+            $scope.sort();
         }).
         error(function (data, status, headers, config) {
             item.filter = filter;
@@ -283,6 +316,9 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
                 livre.Id = data.Key;
                 $scope.itemsPool.push(livre);
                 $scope.items.push(livre);
+
+                $scope.sort();
+
                 defer.resolve();
                 var fileReader = new FileReader();
                 fileReader.onload = function (e) {
@@ -349,7 +385,8 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
             item.new = true;
             $scope.itemsPool.unshift(item);
             $scope.items.unshift(item);
-           
+           // $("#Container").mixItUp('filter', $scope.searchPattern);
+
             TweenMax.to(".tile", 0.2, { opacity: 1 });
 
             var modalInstance = $modal.open({
@@ -413,9 +450,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         }).
           success(function (data, status, headers, config) {
               $scope.items.splice($scope.items.indexOf(item), 1);
-              setTimeout(function () {
-                  $scope.container.isotope('reLayout');
-              }, 100);
+              $scope.sort();
           }).
           error(function (data, status, headers, config) {
               console.log(data);
@@ -455,7 +490,31 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
         + ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
         + ($scope.filterPatternNiveauLecture ? $scope.filterPatternNiveauLecture : '')
         + ($scope.searchPatternTheme ? $scope.searchPatternTheme : '');
-        $scope.container.isotope({ filter: searchPattern });
+        if (searchPattern.length == 0)
+            $scope.searchPattern = "*"
+        else {
+            $scope.searchPattern = searchPattern;
+        }
+        filter();
+
+    }
+
+    var filter = function () {
+        if (!$('#Container').mixItUp('isLoaded')) {
+            return;
+        }
+        if ($('#Container').mixItUp('isMixing')) {
+            setTimeout(function () {
+                filter();
+            }, 200);
+        } else {
+            var state = $('#Container').mixItUp('getState');
+            if (state.activeFilter != $scope.searchPattern) {
+                $('#Container').mixItUp('filter', $scope.searchPattern);
+            } else {
+                // skip filter
+            }
+        }
     }
 
     $scope.filtreNiveauLecture = function () {
@@ -555,7 +614,7 @@ app.controller("livreController", ['$scope', '$rootScope', '$http', '$timeout', 
 
     $scope.sort = function () {
         setTimeout(function () {
-            $scope.container.isotope({sortBy: 'date'});
+            $("#Container").mixItUp('sort', 'date:desc');
         }, 100)
         
     }

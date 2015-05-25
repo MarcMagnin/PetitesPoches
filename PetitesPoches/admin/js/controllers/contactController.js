@@ -3,13 +3,15 @@
     $scope.init = function () {
         contactService.getContacts()
             .then(function (contact) {
-                $scope.items = contact
+                $scope.items = contact;
+
+                $scope.$watch('items.Value', function () {
+                    $scope.saveItem($scope.items)
+                });
             })
     };
 
-    $scope.$watch('items.Value', function () {
-        $scope.saveItem($scope.items)
-    });
+ 
 
     $scope.saveItem = function (item) {
         $http({

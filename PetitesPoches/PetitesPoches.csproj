@@ -223,6 +223,7 @@
     <Content Include="js\jquery.mixitup.js" />
     <Content Include="js\masonryHorizontal.js" />
     <Content Include="js\packages\jquery.mousewheel.min.js" />
+    <Content Include="js\ScrollToPlugin.js" />
     <Content Include="js\services\services.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.js" />
     <Content Include="bower_components\angular-bootstrap\ui-bootstrap-tpls.min.js" />

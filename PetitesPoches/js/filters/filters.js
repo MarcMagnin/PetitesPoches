@@ -20,3 +20,12 @@ app.filter('dateCleaner', function () {
     };
 });
 
+
+
+app.filter('dateTicks', function () {
+    return function (date) {
+        return moment(date).valueOf();
+    };
+});
+
+

@@ -6,6 +6,12 @@
     }
 })(jQuery);
 
+function sortByDate(a, b) {
+    var aVal = Date.parse(a.datePublication);
+    var bVal = Date.parse(b.datePublication);
+    return ((aVal < bVal) ? -1 : ((aVal > bVal) ? 1 : 0));
+}
+
 function delayLoop(collection, index, timer, action) {
     var i = 0;
     if (collection.length == 0)
@@ -33,13 +39,29 @@ function cleanString(string) {
 $(document).ready(function () {
     var orientation = "h";
     $('body, html').mousewheel(function (event) {
+        var container = $('#Container');
         if (event.deltaY != 0) {
             // prevent scroll of content when select control is open
             if ($('.md-select-backdrop') && $('.md-select-backdrop').length != 0) {
                 return;
             }
             if (($('.modal-backdrop') && $('.modal-backdrop').length == 0) && orientation == "h") {
-                $('#Container').stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
+                //var test = container.scrollLeft() - (event.deltaY * 400);
+               // console.log(test)
+                //$('#Container').scrollLeft($('#Container')container.scrollLeft() - (event.deltaY * 60));
+                //TweenMax.to(container, 0.2, {
+                //    scrollTo: {
+                //        y:0,
+                //        x: 400,
+                //        autoKill: true
+                //    }, ease: Power2.easeOut
+                //});
+              //  TweenLite.to(container, 0.4, { scrollTo: { x: container.scrollLeft() - (event.deltaY * 200), autoKill: true }, ease: Power4.easeOut })
+
+                container.stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
+                //TweenMax.to(container, 0.2, { scrollLeft: container.scrollLeft() - (event.deltaY * 300), ease: Linear.ease });
+                event.preventDefault();
+               
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
             //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
             }

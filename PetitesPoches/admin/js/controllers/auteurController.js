@@ -11,7 +11,7 @@ var Update = function () {
 };
 
 
-app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', '$upload', '$state', '$modal', function ($scope, $rootScope, $http,$filter, $upload, $state, $modal) {
+app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', '$upload', '$state', '$modal', 'auteurService', function ($scope, $rootScope, $http, $filter, $upload, $state, $modal, auteurService) {
     $scope.entityName = "Auteur"
     $scope.itemsPool = [];
     $scope.items = [];
@@ -20,15 +20,22 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
     $scope.container = $('.tilesContainer');
     $scope.menuShown = true;
    // $scope.letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
+    $scope.searchPattern = "*";
   
+    $scope.userLeft = false;
 
+    // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
+    $scope.$on("tabChanged", function (event, args) {
+        $scope.userLeft = true;
+    })
 
     $scope.init = function () {
         itemAdded = 0;
-        $http({ method: 'GET', url: $rootScope.apiRootUrl + '/indexes/' + $scope.entityName + '?start=0&pageSize=200&sort=-Nom&_=' + Date.now() }).
-            success(function (data, status, headers, config) {
-                $scope.itemsPool = data.Results;
+       
+
+        auteurService.getAuteurs()
+          .then(function (auteurs) {
+              $scope.itemsPool = auteurs;
                 //for (var i = 0; i < 100; i++) {
                 //    var livre = new Livre();
                 //    livre['@metadata'] ="";
@@ -42,28 +49,91 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
                 //    $scope.$apply();
                 //});
 
-                angular.forEach(data.Results, function (item, index) {
+                var $container = $('#Container');
+                if ($container.mixItUp('isLoaded')) {
+                    $container.mixItUp('destroy')
+                }
+                delayLoop(auteurs, 0, 0, function (item) {
+                    if ($scope.userLeft) {
+                        // abort the delayed process
+                        auteurs.length = 0;
+                    }
+
                     item.Id = item['@metadata']['@id'];
-                    $scope.items.unshift(item);
+                    item.filter = "";
+
+                    if (item.Nom) {
+                        item.filter += item.Nom.split(" ").map(function (val) {
+                            return 'f-' + cleanString(val);
+                        }).join(' ');
+                    }
+                    if (item.Prenom) {
+                        item.filter += " " + item.Prenom.split(" ").map(function (val) {
+                            return 'f-' + cleanString(val);
+                        }).join(' ');
+                    }
+
+                    $scope.items.push(item);
+                    if ($scope.items.length == 23) {
+                        $scope.$apply();
+                        if (!$container.mixItUp('isLoaded')) {
+                            $container.mixItUp({ animation: { enable: enableAnimation } });
+                        }
+                    }
+
+                    if ($scope.items.length % 30 == 0) {
+                        $scope.$apply();
+                        if ($container.mixItUp('isLoaded')) {
+                            $container.mixItUp('filter', $scope.searchPattern);
+                        }
+                    }
+
+
+                    if ($scope.items.length == auteurs.length) {
+
+                        $scope.$apply();
+                        $scope.dataReady = true;
+                        $container.mixItUp('filter', $scope.searchPattern);
+                    }
+
                 });
                // $scope.AZArray = $filter('orderByDisplayOrder')($scope.items);
 
 
-            }).
-            error(function (data, status, headers, config) {
-                console.log(data);
-            });
+            })
 
     };
 
+   
+    var filter = function () {
+        if (!$('#Container').mixItUp('isLoaded')) {
+            return;
+        }
+        if ($('#Container').mixItUp('isMixing')) {
+            setTimeout(function () {
+                filter();
+            }, 200);
+        } else {
+            var state = $('#Container').mixItUp('getState');
+            if (state.activeFilter != $scope.searchPattern) {
+                $('#Container').mixItUp('filter', $scope.searchPattern);
+            } else {
+                // skip filter
+            }
+        }
+    }
+
     
+
     $scope.filterByLetter = function (item) {
-        var $container = $('.tilesContainer');
-        var test = '[class*=\'filter-' + item.toLowerCase() + '\']';
-        $container.isotope({ filter: test });
+        $scope.searchPattern = '[class*=\'filter-' + item.toLowerCase() + '\']';
+        filter();
+
+
     }
     $scope.unFilter = function (item) {
-        $container.isotope({ filter: '*' });
+        $scope.searchPattern = "*"
+        filter();
     }
 
     $scope.select = function (item, $event) {
@@ -256,7 +326,9 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
           success(function (data, status, headers, config) {
               $scope.items.splice($scope.items.indexOf(item), 1);
               setTimeout(function () {
-                  $scope.container.isotope('reLayout');
+                  $scope.sort();
+
+
               }, 100);
           }).
           error(function (data, status, headers, config) {
@@ -273,8 +345,7 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
             data: angular.toJson(item)
         }).
         success(function (data, status, headers, config) {
-            $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
-            $scope.container.isotope({sortBy: 'nom'});
+            $scope.sort();
             
         }).
         error(function (data, status, headers, config) {
@@ -283,10 +354,6 @@ app.controller("auteurController", ['$scope', '$rootScope', '$http', '$filter', 
     }
 
     $scope.sort = function () {
-        console.log("sort");
-        $scope.container.isotope('updateSortData', $scope.container.find(".isotopey"))
-        $scope.container.isotope({
-            sortBy: 'nom',
-        });
+        $("#Container").mixItUp('sort', 'nom:asc');
     }
 }]);
