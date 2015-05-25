@@ -58,23 +58,21 @@ $(document).ready(function () {
             orientation = "h"
         } else if ($(window).width() < maxWidth && orientation != "v") {
             orientation = "v";
-
-            if ($('#Container').mixItUp('isLoaded')) {
-                if ($(window).width() < maxWidth) {
-                    $('#Container').mixItUp('setOptions', {
-                        animation: {
-                            enable: false
-                        },
-                    });
-                } else {
-                    $('#Container').mixItUp('setOptions', {
-                        animation: {
-                            enable: true
-                        },
-                    });
-                }
+        }
+        if ($('#Container').mixItUp('isLoaded')) {
+            if ($(window).width() < maxWidth) {
+                $('#Container').mixItUp('setOptions', {
+                    animation: {
+                        enable: false
+                    },
+                });
+            } else {
+                $('#Container').mixItUp('setOptions', {
+                    animation: {
+                        enable: true
+                    },
+                });
             }
-
         }
     }
     $(window).resize(function () {
