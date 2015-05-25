@@ -587,23 +587,11 @@ md-inline-list-icon {
   border-radius: 50% !important;
 }
 .sendFPinnerCircle {
-  margin: auto;
-  width: 114px;
-  height: 114px;
-  margin-top: 5px;
+  width: 100%;
+  height: 100%;
   border: 2px solid rgba(255, 255, 255, 0.7);
-  padding: 15px;
   text-align: center;
   line-height: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  align-items: center;
 }
 .sendFPinnerCircle a {
   font-size: 0.8em;
@@ -618,11 +606,12 @@ md-inline-list-icon {
   -webkit-transform: scale(1) rotate(-10deg);
   -o-transform: scale(1) rotate(-10deg);
   transform: scale(1) rotate(-10deg);
-  z-index: 100;
   width: 124px;
   height: 124px;
+  z-index: 100;
   left: 45px;
   top: 100px;
+  padding: 5px;
   background: rgba(1, 172, 160, 0.8);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
   cursor: pointer;
@@ -631,7 +620,7 @@ md-inline-list-icon {
   background: #01dfcf;
 }
 @media only screen and (max-width: 950px) {
-  .sendFP {
+  #sendFP {
     display: none;
   }
 }
@@ -1339,5 +1328,22 @@ a:focus {
   .logo-middle {
     display: none;
   }
+}
+.center-content {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -moz-box;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
 }
 /*# sourceMappingURL=userSite.css.map */

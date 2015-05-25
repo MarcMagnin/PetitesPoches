@@ -1,7 +1,7 @@
 ﻿@import "ressources";
 
 .contact {
-    height: ~"calc(100%-80px)";
+    height: ~"calc(100%-60px)";
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -28,4 +28,46 @@
         -webkit-transform-origin: 50% 0;
         transform-origin: 50% 0;
     }
+}
+
+
+
+.pastille-contact {
+    opacity:0;
+   margin-right:auto;
+   margin-left:auto;
+    -ms-transform:  rotate(-10deg);
+    -moz-transform:  rotate(-10deg);
+    -webkit-transform:  rotate(-10deg);
+    -o-transform:  rotate(-10deg);
+    transform:  rotate(-10deg);
+    width: 100px;
+    height: 100px;
+    background: fadeout(@primaryColor,20%);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    cursor: pointer;
+    &:hover {
+        background: lighten(@primaryColor,10%);
+    }
+}
+
+.pastille-inner {
+    width: 100%;
+    height: 100%;
+    border: 2px solid fadeout(#fff, 30%);
+    line-height: 1;
+
+    a {
+        font-size: 0.8em;
+        text-wrap: normal;
+        white-space: normal;
+        color: @textColor;
+    }
+}
+
+@media only screen and (max-width:@sizeHideToolbarText) {
+.contact {
+    height: ~"calc(100%-75px)";
+}
+
 }

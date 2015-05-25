@@ -14,6 +14,9 @@ app.controller("contactController", function ($scope, $rootScope, $http, contact
             .then(function (contact) {
                 $scope.items = contact
                 TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+                TweenMax.to(".pastille-contact", 0.2, { opacity: 1 });
+
+
             })
     };
 });

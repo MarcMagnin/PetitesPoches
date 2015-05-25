@@ -178,6 +178,9 @@
     <Content Include="css\tabs.min.css">
       <DependentUpon>tabs.css</DependentUpon>
     </Content>
+    <Content Include="css\test.min.css">
+      <DependentUpon>test.css</DependentUpon>
+    </Content>
     <Content Include="css\tile.css">
       <DependentUpon>tile.less</DependentUpon>
     </Content>

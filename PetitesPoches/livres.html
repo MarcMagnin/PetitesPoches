@@ -25,8 +25,8 @@
 </script>
 
 
-<div class="md-icon-container sendFP circle animate-show" ng-show="checkboxFichePedagogiques">
-    <div class="sendFPinnerCircle circle">
+<div id="sendFP" class="sendFP center-content circle animate-show" ng-show="checkboxFichePedagogiques">
+    <div class="sendFPinnerCircle center-content circle">
         <a href="mailto:etm@editions-thierry-magnier.com">Soumettre vos outils pédagogiques</a>
     </div>
 </div>
@@ -67,8 +67,6 @@
             </p>
         </md-item>
 
-       
-
         <md-item btn-checkbox=""
                  aria-label="E-books"
                  ng-change="searchEBook()"
@@ -78,7 +76,6 @@
             </div>
             <p class="toobar-button-label">E-books</p>
         </md-item>
-
       
         <md-item btn-checkbox=""
                  aria-label="Prix littéraires"
@@ -102,9 +99,7 @@
             </md-select>
         </md-item>
 
-
         <md-item id="searchitem"  style="z-index:50">
-      
             <div id="searchIcon" class="md-icon-container ">
                 <md-icon md-svg-src="images/search.svg"></md-icon>
             </div>
@@ -120,7 +115,6 @@
                    typeahead-on-select="validateSearchFromLivre($item, $model, $label, $viewValue)"
                    class="form-control form-control-inline transparentInput searchBar" />
         </md-item>
-
     </md-list>
 
 
@@ -148,8 +142,6 @@
     </div>
 </div>
 
-
-
 <script>
 
 
@@ -171,30 +163,30 @@
 
 
     // Ripple click effect
-    var parent, ink, d, x, y;
-    $("ul li a").click(function (e) {
+    //var parent, ink, d, x, y;
+    //$("ul li a").click(function (e) {
 
-        parent = $(this).parent();
-        //create .ink element if it doesn't exist
-        if (parent.find(".ink").length == 0)
-            parent.prepend("<span class='ink'></span>");
+    //    parent = $(this).parent();
+    //    //create .ink element if it doesn't exist
+    //    if (parent.find(".ink").length == 0)
+    //        parent.prepend("<span class='ink'></span>");
 
-        ink = parent.find(".ink");
-        //incase of quick double clicks stop the previous animation
-        ink.removeClass("animate");
+    //    ink = parent.find(".ink");
+    //    //incase of quick double clicks stop the previous animation
+    //    ink.removeClass("animate");
 
-        //set size of .ink
-        if (!ink.height() && !ink.width()) {
-            //use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
-            d = Math.max(parent.outerWidth(), parent.outerHeight());
-            ink.css({ height: d, width: d });
-        }
+    //    //set size of .ink
+    //    if (!ink.height() && !ink.width()) {
+    //        //use parent's width or height whichever is larger for the diameter to make a circle which can cover the entire element.
+    //        d = Math.max(parent.outerWidth(), parent.outerHeight());
+    //        ink.css({ height: d, width: d });
+    //    }
 
-        //get click coordinates
-        //logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
-        x = e.pageX - parent.offset().left - ink.width() / 2;
-        y = e.pageY - parent.offset().top - ink.height() / 2;
-        //set the position and add class .animate
-        ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
-    })
+    //    //get click coordinates
+    //    //logic = click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center;
+    //    x = e.pageX - parent.offset().left - ink.width() / 2;
+    //    y = e.pageY - parent.offset().top - ink.height() / 2;
+    //    //set the position and add class .animate
+    //    ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
+    //})
 </script>

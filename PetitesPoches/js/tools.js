@@ -60,7 +60,6 @@ $(document).ready(function () {
 
                 container.stop().animate({ scrollLeft: '-=' + (400 * event.deltaY) + 'px' }, 200);
                 //TweenMax.to(container, 0.2, { scrollLeft: container.scrollLeft() - (event.deltaY * 300), ease: Linear.ease });
-                event.preventDefault();
                
             } else if ($('.modal-backdrop').length == 0 && orientation == "v") {
             //    $('#booksContainer').stop().animate({ scrollLeft: '-=' + (400 * event.deltaX) + 'px' }, 200);
