@@ -94,6 +94,12 @@
     <Content Include="auteurs.html" />
     <Content Include="contacts.html" />
     <Content Include="css\angular-material-cleaned.css" />
+    <Content Include="css\background.css">
+      <DependentUpon>background.less</DependentUpon>
+    </Content>
+    <Content Include="css\background.min.css">
+      <DependentUpon>background.css</DependentUpon>
+    </Content>
     <Content Include="css\bootstrap-override.css">
       <DependentUpon>bootstrap-override.less</DependentUpon>
     </Content>
@@ -209,6 +215,12 @@
       <DependentUpon>contactController.js</DependentUpon>
     </Content>
     <Content Include="js\controllers\mainController.js" />
+    <Content Include="js\directives\angular-lazy-img-directive.js" />
+    <Content Include="js\directives\angular-lazy-img-helpers.js" />
+    <Content Include="js\directives\angular-lazy-img-logic.js" />
+    <Content Include="js\directives\angular-lazy-img-provider.js" />
+    <Content Include="js\directives\angular-lazy-img.js" />
+    <Content Include="js\directives\angular-lazy-img.min.js" />
     <Content Include="js\directives\commonDirectives.min.js">
       <DependentUpon>commonDirectives.js</DependentUpon>
     </Content>
@@ -499,6 +511,13 @@
     </Content>
     <Content Include="js\tools.min.js.map">
       <DependentUpon>tools.min.js</DependentUpon>
+    </Content>
+    <Content Include="css\background.less" />
+    <Content Include="css\background.css.map">
+      <DependentUpon>background.css</DependentUpon>
+    </Content>
+    <Content Include="js\directives\angular-lazy-img.min.js.map">
+      <DependentUpon>angular-lazy-img.min.js</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

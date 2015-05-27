@@ -260,16 +260,23 @@
 
 /*  Clouds
 ~-----------------------------------------*/
+.clouds{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    opacity:0.9;
+}
 .cloud {
     width: 100%;
-    height: 900px;
+    height: 100%;
     position: relative;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 5;
+    z-index: 1;
     background: transparent url('../images/animated_clouds.png') left bottom no-repeat;
+    /*background:red;*/
     -moz-background-size: cover;
     -o-background-size: cover;
     -webkit-background-size: cover;
@@ -279,7 +286,7 @@
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }
-@media (max-width: 550px) {
+@media (max-width: 650px) {
   .cloud {
     display: none;
   }

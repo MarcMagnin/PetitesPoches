@@ -32,7 +32,7 @@
 </div>
 
 <div class="viewContainer" ng-init="init()">
-   
+
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
@@ -51,7 +51,7 @@
             </md-select>
         </md-item>
 
-        <md-item btn-checkbox="" 
+        <md-item btn-checkbox=""
                  aria-label="Fiche pédagogiques"
                  ng-change="searchFichePedagogiques()"
                  ng-model="checkboxFichePedagogiques">
@@ -76,7 +76,7 @@
             </div>
             <p class="toobar-button-label">E-books</p>
         </md-item>
-      
+
         <md-item btn-checkbox=""
                  aria-label="Prix littéraires"
                  ng-change="searchPrixLitteraires()"
@@ -137,7 +137,7 @@
     <!--when-scrolled="loadMore()"-->
     <div id="Container" class="tileContainer u-fancy-scrollbar">
         <div class="mix tile {{::item.filter}}" ng-repeat="item in items" ng-click="select(item, 'lg', $event)">
-            <img class="tile-image" src="{{::apiRootUrl}}/{{::item.Couverture}}" />
+            <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" class="tile-image"></img>
         </div>
     </div>
 </div>
@@ -145,9 +145,9 @@
 <script>
 
 
-    // prevent a bug on IPAD where scroll is not working 
-  //  $('#Container').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
-  
+    // prevent a bug on IPAD where scroll is not working
+    //  $('#Container').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
+
     //$('#Container').mixItUp({
     //            animation: {
     //                animateResizeTargets: false,
@@ -159,7 +159,7 @@
     //                // as we are interacting via the API, we can disable default controls to increase performance
     //            },
     //        });
-  
+
 
 
     // Ripple click effect

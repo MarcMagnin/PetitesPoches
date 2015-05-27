@@ -32,9 +32,9 @@
 </head>
 <body ng-app="PetitesPoches" ng-controller="mainController" bg>
     <div class="bg-grad noselect">
-        <!--<div class="clouds">
-            <div class="cloud x1"></div>
-        </div>-->
+        <div class="clouds">
+            <div class="cloud"></div>
+        </div>
         <div class="bg-layer color-1"></div>
         <div class="bg-layer color-2"></div>
         <div class="bg-layer color-3"></div>
@@ -126,6 +126,7 @@
 
     <!--<script src="../bower_components/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js"></script>-->
     <script src="js/app.js"></script>
+
     <script src="js/controllers/mainController.js"></script>
     <script src="js/controllers/livreController.js"></script>
     <script src="js/controllers/auteurController.js"></script>
@@ -135,6 +136,15 @@
     <script src="js/directives/commonDirectives.js"></script>
     <script src="js/directives/price.js"></script>
     <script src="js/tools.js"></script>
+
+    <script>
+        var tl = new TimelineMax({ delay: 0, repeat: -1, repeatDelay: 0 });
+        tl.from(".clouds", 50, { x: 1200, ease: Linear.easeNone })
+        .to(".clouds", 50, { x: "-=1000", ease: Linear.easeNone })
+        .add("final",100)
+        .to(".clouds", 20, { x: "-=300" },"final")
+        .to(".cloud", 20, { opacity: 0 }, "final");
+    </script>
 </body>
 </html>
 
