@@ -132,19 +132,14 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     }
                     item.Id = item['@metadata']['@id'];
                     
-                    item.filter = item.Titre.split(" ").map(function (val) {
-                        return 'fil-'+ cleanString(val);
-                    }).join(' ');
+                    if (item.Titre && item.Titre.length > 0)
+                    item.filter = tokenizeString(item.Titre);
 
-                    if (item.Auteur.Nom) {
-                        item.filter += " " + item.Auteur.Nom.split(" ").map(function (val) {
-                            return 'fil-' + cleanString(val);
-                        }).join(' ');
+                    if (item.Auteur.Nom && item.Auteur.Nom.length > 0) {
+                        item.filter += " " + tokenizeString(item.Auteur.Nom);
                     }
-                    if (item.Auteur.Prenom) {
-                        item.filter += " " + item.Auteur.Prenom.split(" ").map(function (val) {
-                            return 'fil-' + cleanString(val);
-                        }).join(' ');
+                    if (item.Auteur.Prenom && item.Auteur.Nom.length > 0) {
+                        item.filter += " " + tokenizeString(item.Auteur.Prenom);
                     }
 
                     if (item.PrixLitteraires)
@@ -687,21 +682,11 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
     $scope.setSearchPattern = function () {
-
-
-        if ($scope.searchedText.Titre) {
-            $scope.searchPatternRecherche = $scope.searchedText.Titre.split(" ").map(function (val) {
-                return '[class*=\'fil-' + cleanString(val) + '\']';
-            }).join('');
+        if ($scope.searchedText.length == 0) {
+            $scope.searchPatternRecherche = '*';
         } else {
-            if ($scope.searchedText.length == 0) {
-                $scope.searchPatternRecherche = '*';
-            } else {
-                //$scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText) + '\']';
-                $scope.searchPatternRecherche = $scope.searchedText.split(" ").map(function (val) {
-                    return '[class*=\'fil-' + cleanString(val) + '\']';
-                }).join('');
-            }
+            //$scope.searchPatternRecherche = '[class*=\'fil-' + cleanString($scope.searchedText) + '\']';
+            $scope.searchPatternRecherche = tokenizeStringPattern($scope.searchedText);
         }
         console.log($scope.searchPatternRecherche);
     }
