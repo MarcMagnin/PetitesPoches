@@ -4,12 +4,8 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     // for any unmatched url
     $urlRouterProvider.otherwise("/collection");
 
-    //$locationProvider.html5Mode({
-    //    enabled: true,
-    //    requireBase: false
-    //});
-    
-
+    // https://github.com/angular-ui/ui-router/issues/372
+    $locationProvider.html5Mode(true).hashPrefix('!')
 
     $stateProvider.state('tabs', {
         abstract: true,
