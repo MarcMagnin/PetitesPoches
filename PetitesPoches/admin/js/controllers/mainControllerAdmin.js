@@ -1,5 +1,5 @@
 ﻿app.controller("mainControllerAdmin", ['$scope', '$rootScope', '$http', '$timeout', '$state', function ($scope, $rootScope, $http, $timeout, $state) {
-$rootScope.apiRootUrl = "http://62.23.104.30:8181/databases/PetitesPoches";
+$rootScope.apiRootUrl = "http://petitepoche.fr/databases/PetitesPoches";
 //   $rootScope.apiRootUrl = "http://localhost:8088/databases/PetitesPoches";
 
     $scope.tabs = [
