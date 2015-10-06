@@ -17,8 +17,13 @@ app.controller("contactController", function ($scope, $rootScope, $http, contact
                 TweenMax.fromTo(".contact pre", 0.6, { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, ease: Quart.easeOut, onComplete:function(){
                     $scope.showPastilleContact = true;
                     $scope.$apply();
+                    // tell phantom crawler that content has loaded
+                    if (typeof window.callPhantom === 'function') {
+                        window.callPhantom();
+                    }
                 }, force3D: true, delay: 0.3  } );
-                TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none"});
+                TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+               
             })
     };
 });

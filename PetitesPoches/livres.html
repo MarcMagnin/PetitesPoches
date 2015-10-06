@@ -1,4 +1,4 @@
-﻿
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <script type="text/ng-template" id="customTemplate.html">
     <a>
@@ -137,7 +137,7 @@
     <!--when-scrolled="loadMore()"-->
     <div id="Container" class="tileContainer u-fancy-scrollbar">
         <div class="mix tile {{::item.filter}}" ng-repeat="item in items" ng-click="select(item, 'lg', $event)">
-            <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" class="tile-image"></img>
+            <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" alt="{{::item.Titre}} {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}" class="tile-image"/>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 ﻿@import url('http://fonts.googleapis.com/css?family=Montserrat|Bitter');
-@import url('bootstrap-override.css');
+
+
 md-bottom-sheet {
   overflow-y: hidden;
   background-color: rgba(255, 255, 255, 0.42);

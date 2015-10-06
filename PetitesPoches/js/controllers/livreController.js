@@ -176,8 +176,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                         $scope.dataReady = true;
                         $container.mixItUp('filter', $scope.searchPattern);
                         TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
-
-                 
+                        // tell phantom crawler that content has loaded
+                        if (typeof window.callPhantom === 'function') {
+                            window.callPhantom();
+                        }
                     }
 
                 });

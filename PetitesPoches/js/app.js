@@ -1,12 +1,12 @@
 ﻿var app = angular.module('PetitesPoches', ["ui.router", "ui.bootstrap", "ngMaterial", 'ngAnimate', 'monospaced.mousewheel']);
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-
+   
     // for any unmatched url
     $urlRouterProvider.otherwise("/collection");
 
     // https://github.com/angular-ui/ui-router/issues/372
     $locationProvider.html5Mode(true).hashPrefix('!')
-
+   
     $stateProvider.state('tabs', {
         abstract: true,
         url: '/',

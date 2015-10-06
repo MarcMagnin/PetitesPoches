@@ -1,4 +1,8 @@
-﻿<script type="text/ng-template" id="auteurSearchTemplate.html">
+﻿<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<script type="text/ng-template" id="auteurSearchTemplate.html">
     <a>
         <img src="{{match.model.Photo}}" width="40" />
         <span bind-html-unsafe="match.model.Prenom | typeaheadHighlight:query"></span>
@@ -7,7 +11,7 @@
 </script>
 
 
-<div class="viewContainer"  ng-init="init()">
+<div class="viewContainer" ng-init="init()">
 
     <md-list class="menuBar" layout="row" layout-align="center center">
 
@@ -44,10 +48,10 @@
         <div class="mix tile tile-author {{::item.filter}}"
              ng-repeat="item in items"
              ng-click="select(item, 'lg', $event)">
-                <!--<img class="author-image" src="{{::item.Photo}}" ng-show="::item.Photo" />-->
+            <!--<img class="author-image" src="{{::item.Photo}}" ng-show="::item.Photo" />-->
             <div class="round">
                 <img ng-src="{{::item.Photo}}" ng-show="::item.Photo" />
-                <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo" />
+                <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo"></i>
             </div>
 
             <div class="tile-text-wrapper">
@@ -59,34 +63,34 @@
 <script>
 
 
-//    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
-//        <div class="tile tile-author isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
-//    ng-repeat="item in items"
-//    isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
-//   <div class="inner-tile">
-//       <!--<img class="author-image" src="{{::item.Photo}}" ng-show="::item.Photo" />-->
+    //    <div id="booksContainer" class="tilesContainer u-fancy-scrollbar">
+    //        <div class="tile tile-author isotopey tile-admin f-{{::item.Nom|lowercase}} f-{{::item.Prenom|lowercase}}"
+    //    ng-repeat="item in items"
+    //    isotopethis sort="nom" ng-click="select(item, 'lg', $event)">
+    //   <div class="inner-tile">
+    //       <!--<img class="author-image" src="{{::item.Photo}}" ng-show="::item.Photo" />-->
 
-//       <div class="round">
-//           <img src="{{::item.Photo}}" ng-show="::item.Photo" />
-//           <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo" />
-//       </div>
+    //       <div class="round">
+    //           <img src="{{::item.Photo}}" ng-show="::item.Photo" />
+    //           <i class="fa fa-user fa-6 inner-placeholder author-placeholder" ng-hide="::item.Photo" />
+    //       </div>
 
-//   </div>
+    //   </div>
 
-//   <div class="tile-text-wrapper">
-//       <p class="tile-text">{{::item.Prenom}} {{::item.Nom|uppercase}}</p>
-//   </div>
-//</div>
-//</div>
-
-
+    //   <div class="tile-text-wrapper">
+    //       <p class="tile-text">{{::item.Prenom}} {{::item.Nom|uppercase}}</p>
+    //   </div>
+    //</div>
+    //</div>
 
 
 
 
 
-    // prevent a bug on IPAD where scroll is not working 
-   // $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
+
+
+    // prevent a bug on IPAD where scroll is not working
+    // $('#booksContainer').height($('body').height() - ($('.navbar-brand').outerHeight() + $('md-tabs').outerHeight() + $('.menuBar').outerHeight() + $('.filter-terms').outerHeight()));
 
 
     //var layoutMode = 'masonryHorizontal'
@@ -144,3 +148,4 @@
     //    ink.css({ top: y + 'px', left: x + 'px' }).addClass("animate");
     //})
 </script>
+</head>

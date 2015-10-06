@@ -31,6 +31,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
 
 
     $scope.init = function () {
+       
         //$("md-item").click(function () {
         //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
         //    TweenMax.fromTo(this, 2, { scale: 0.8, opacity: 0, ease: Elastic.easeOut, force3D: true }, { scale: 1, opacity: 1, ease: Elastic.easeOut, force3D: true });
@@ -61,7 +62,7 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             //}
             $scope.closeSearch();
         });
-
+        
         itemAdded = 0;
         auteurService.getAuteurs()
             .then(function (auteurs) {
@@ -114,6 +115,11 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
                         $scope.dataReady = true;
                         $container.mixItUp('filter', $scope.searchPattern);
                         TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
+
+                        // tell phantom crawler that content has loaded
+                        if (typeof window.callPhantom === 'function') {
+                            window.callPhantom();
+                        }
                     }
 
                 });
