@@ -1,5 +1,5 @@
 ﻿app.controller("mainController", function ($scope, $rootScope, $http, $timeout, $state) {
-   $rootScope.apiRootUrl = "http://petitepoche.fr:8181/databases/PetitesPoches";
+   $rootScope.apiRootUrl = "http://petitepoche.fr/databases/PetitesPoches";
  /// $rootScope.apiRootUrl = "http://localhost:8088/databases/PetitesPoches";
 
     $scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
