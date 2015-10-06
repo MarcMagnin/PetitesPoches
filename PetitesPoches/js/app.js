@@ -5,8 +5,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/collection");
 
     // https://github.com/angular-ui/ui-router/issues/372
-    $locationProvider.html5Mode(true).hashPrefix('!')
-   
+    // http://www.yearofmoo.com/2012/11/angularjs-and-seo.html
+    $locationProvider//.hashPrefix('!')//.html5Mode(true)
+    $locationProvider.html5Mode(true)
+
     $stateProvider.state('tabs', {
         abstract: true,
         url: '/',
@@ -18,8 +20,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
             'selectedTab': 0
         },
         templateUrl: "/livres.html",
-        controller: "livreController",
-
+        controller: "livreController"
     })
     .state('auteurs', {
         url: '/auteurs',
@@ -28,13 +29,14 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         },
         templateUrl: "/auteurs.html",
         controller: "auteurController"
-    }).state('contacts', {
+    })
+    .state('contacts', {
         url: '/contacts',
         data: {
             'selectedTab': 2
         },
-        controller: "contactController",
         templateUrl: "/contacts.html",
+        controller: "contactController"
     })
 
 
