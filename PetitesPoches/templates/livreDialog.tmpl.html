@@ -169,7 +169,7 @@
                                         <span class="iconedLink-text">sa biographie</span>
                                     </div>
                                 </a>
-                                <a class="iconedLink" ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()">
+                                <a class="iconedLink" ui-href="collection/{{::selectedItem.Auteur.Prenom}} {{::selectedItem.Auteur.Nom}}"  ng-click="parentScope.filtreAuteur(selectedItem.Auteur); closeDialog()">
                                     <div class="inline-flex">
                                         <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
                                         <span class="iconedLink-text">voir toutes ses Petite Poche</span>

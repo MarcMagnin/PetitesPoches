@@ -103,10 +103,16 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         $scope.menuShown = false;
 
 
-        if ($stateParams.auteur) {
-            $scope.searchedText = $stateParams.auteur;
+        if ($stateParams.search) {
+            $scope.searchedText = $stateParams.search.trim();
             $scope.setSearchPattern();
      
+        }
+
+        $scope.isPhantomSnapshot = false;
+        // tell phantom crawler that content has loaded
+        if (typeof window.callPhantom === 'function') {
+            $scope.isPhantomSnapshot = true;
         }
 
         itemAdded = 0;
@@ -177,7 +183,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                         $container.mixItUp('filter', $scope.searchPattern);
                         TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
                         // tell phantom crawler that content has loaded
-                        if (typeof window.callPhantom === 'function') {
+                        if ($scope.isPhantomSnapshot) {
                             window.callPhantom();
                         }
                     }
@@ -290,33 +296,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     parentScope: $scope
                 }
             });
-
-
-            //var modalInstance = $modal.open({
-            //    templateUrl: 'myModalContent.html',
-            //    controller: 'ModalInstanceCtrl',
-            //    size: size,
-            //    resolve: {
-            //        selectedItem: function () {
-            //            return $scope.selectedItem;
-            //        },
-            //        parentScope: function () {
-            //            return $scope;
-            //        },
-            //    }
-            //});
-
-
-
         }
-
-
-
-        //    modalInstance.result.then(function () {
-        //    }, function () {
-        //        //   $log.info('Modal dismissed at: ' + new Date());
-        //    });
-        //}
     }
 
     function afterShowLivreDialog(scope, element, options) {
@@ -632,15 +612,15 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
     $scope.filtreAuteur = function (auteur) {
         //$scope.openLeft();
-
         $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
+        $scope.searchedText = $scope.searchedText.trim();
         $scope.validateSearch();
     }
 
 
     $scope.$on('FilterAvecAuteur', function (event, args) {
-        var test = $stateParams.auteur;
-        console.log(test);
+        //var test = $stateParams.search;
+        //console.log(test);
         if (args) {
             $scope.searchedText = args.Prenom + " " + args.Nom;
             $scope.validateSearch();

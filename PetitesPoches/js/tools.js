@@ -78,8 +78,11 @@ function tokenizeString(str) {
 
 function tokenizeStringPattern(str) {
     return str = removeDiacritics(str.toLowerCase())
-    .split(" ").map(function(val){
-        return '[class*="' + val.replace(/[^\w\s-]/gi, '') + '"]'
+    .split(" ").map(function (val) {
+        val = val.replace(/[^\w\s-]/gi, '');
+        if (val)
+            return '[class*="' + val + '"]'
+        return '';
     }).join('')
 }
 function cleanString(string) {

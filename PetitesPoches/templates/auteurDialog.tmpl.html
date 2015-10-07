@@ -36,7 +36,7 @@
                                         <span class="iconedLink-text">sa biographie</span>
                                     </div>
                                 </a>
-                                <a class="iconedLink" ui-sref="collection({auteur:selectedItem.Prenom + ' ' + selectedItem.Nom})" ng-click="parentScope.voirTousSesLivres(selectedItem); closeDialog()">
+                                <a class="iconedLink" href="collection/{{::selectedItem.Prenom}} {{::selectedItem.Nom}}" ng-click="closeDialog()">
                                     <div class="inline-flex">
                                         <md-icon class="md-icon" md-svg-src="images/toutesSesPetitesPoches.svg"></md-icon>
                                         <span class="iconedLink-text">voir toutes ses Petite Poche</span>

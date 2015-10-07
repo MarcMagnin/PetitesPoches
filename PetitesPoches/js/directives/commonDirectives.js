@@ -52,23 +52,23 @@ app.directive("isotopethis", function () {
                 if (!scope.menuShown) {
                     delay = 500;
                 }
-                setTimeout(function () {
-                //    $container.mixItUp();
-                    //$container.isotope({ sortBy: attrs.sort });
-                    //TweenMax.to(".tile", 0, { delay: .3, opacity: 1, display: "block" });
-                    //$(".tile").click(function () {
-                    //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
-                    //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
-                    //});
+                //setTimeout(function () {
+                ////    $container.mixItUp();
+                //    //$container.isotope({ sortBy: attrs.sort });
+                //    //TweenMax.to(".tile", 0, { delay: .3, opacity: 1, display: "block" });
+                //    //$(".tile").click(function () {
+                //    //    //TweenMax.to(this, 0.5, { opacity: 0, y: -100, ease: Back.easeIn }, 0.1);
+                //    //    TweenMax.from(this, 2, { scale: 0.3, ease: Elastic.easeOut, force3D: true });
+                //    //});
 
-                    // correct a bug where the relayout will prevent a correct redesign of the content
-                    //setTimeout(function () {
-                    //    $('#booksContainer').css('display', 'none');//.stop().animate({ scrollLeft: '+=' + (20) + 'px' }, 200);
-                    //    $('#booksContainer').css('display', 'block')
-                    //}, 1500);
+                //    // correct a bug where the relayout will prevent a correct redesign of the content
+                //    //setTimeout(function () {
+                //    //    $('#booksContainer').css('display', 'none');//.stop().animate({ scrollLeft: '+=' + (20) + 'px' }, 200);
+                //    //    $('#booksContainer').css('display', 'block')
+                //    //}, 1500);
                     
                 
-                }, delay)
+                //}, delay)
 
                
                

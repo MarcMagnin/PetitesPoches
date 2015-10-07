@@ -12,7 +12,7 @@ var Update = function () {
 
 
 
-app.controller("auteurController", function ($scope, $rootScope, $http, $state, $q, auteurService, $mdDialog) {
+app.controller("auteurController", function ($scope, $rootScope, $stateParams, $http, $state, $q, auteurService, $mdDialog) {
     $scope.entityName = "Auteur";
     $scope.items = [];
     $scope.itemsPool = [];
@@ -63,6 +63,13 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             $scope.closeSearch();
         });
         
+
+        if ($stateParams.search) {
+            $scope.searchedText = $stateParams.search.trim();
+            $scope.setSearchPattern();
+
+        }
+
         itemAdded = 0;
         auteurService.getAuteurs()
             .then(function (auteurs) {
@@ -102,20 +109,15 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
 
                     if ($scope.items.length % 30 == 0) {
                         $scope.$apply();
-                        if ($container.mixItUp('isLoaded')) {
-                            $container.mixItUp('filter', $scope.searchPattern);
-                        }
-                       
+                        $container.mixItUp('filter', $scope.searchPattern);
                     }
 
 
                     if ($scope.items.length == auteurs.length) {
-
                         $scope.$apply();
                         $scope.dataReady = true;
                         $container.mixItUp('filter', $scope.searchPattern);
                         TweenMax.to(".progressIndicator", 0.2, { opacity: 0, display: "none" });
-
                         // tell phantom crawler that content has loaded
                         if (typeof window.callPhantom === 'function') {
                             window.callPhantom();
@@ -123,16 +125,18 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
                     }
 
                 });
-
-
             })
     };
 
-    $scope.voirTousSesLivres = function (auteur) {
-        console.log(auteur)
-        $rootScope.$broadcast('goToCollection', auteur);
+    $scope.setSearchPattern = function () {
+        if ($scope.searchedText.length == 0) {
+            $scope.searchPattern = '*';
+        } else {
+            $scope.searchPattern = tokenizeStringPattern($scope.searchedText);
+        }
     }
 
+   
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
@@ -266,9 +270,10 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
 
         $scope.validateFilter();
     }
+
     $scope.validateFilter = function () {
-        if(!$scope.dataReady)
-            return;
+        //if(!$scope.dataReady)
+        //    return;
         var searchPattern =
             ($scope.searchPatternRecherche ? $scope.searchPatternRecherche : '')
 
@@ -298,12 +303,6 @@ app.controller("auteurController", function ($scope, $rootScope, $http, $state, 
             }
         }
     }
-
-    $scope.filtreAuteur = function (auteur) {
-        $scope.searchedText = auteur.Prenom + " " + auteur.Nom;
-        $scope.validateSearch();
-    }
-
 
     $scope.validateSearch = function ($item, $model, $label, $viewValue) {
         if ($scope.searchTimeout) {

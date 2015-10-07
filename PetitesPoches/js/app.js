@@ -2,11 +2,11 @@
 app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
    
     // for any unmatched url
-    $urlRouterProvider.otherwise("/collection");
-
+    $urlRouterProvider.otherwise("/collection/");
+   
     // https://github.com/angular-ui/ui-router/issues/372
     // http://www.yearofmoo.com/2012/11/angularjs-and-seo.html
-    $locationProvider//.hashPrefix('!')//.html5Mode(true)
+    //$locationProvider//.hashPrefix('!')//.html5Mode(true)
     $locationProvider.html5Mode(true)
 
     $stateProvider.state('tabs', {
@@ -15,7 +15,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: "mainController"
     })
     .state('collection', {
-        url: '/collection:auteur',
+        url: '/collection/:search',
         data: {
             'selectedTab': 0
         },
@@ -23,7 +23,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: "livreController"
     })
     .state('auteurs', {
-        url: '/auteurs',
+        url: '/auteurs/:search',
         data: {
             'selectedTab': 1
         },

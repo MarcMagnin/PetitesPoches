@@ -128,7 +128,7 @@
 
         <div class="tags repeat-item" ng-repeat="item in themeMultiselectmodel">
             <button ng-click="removeFilterTheme(item)" class="btn filterButton">
-                {{item.Name}}
+                {{::item.Name}}
                 <md-icon class="md-icon filter-terms-icon" md-svg-src="images/close.svg"></md-icon>
             </button>
         </div>
@@ -137,7 +137,10 @@
     <!--when-scrolled="loadMore()"-->
     <div id="Container" class="tileContainer u-fancy-scrollbar">
         <div class="mix tile {{::item.filter}}" ng-repeat="item in items" ng-click="select(item, 'lg', $event)">
-            <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" alt="{{::item.Titre}} {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}" class="tile-image"/>
+            <a ng-if="::isPhantomSnapshot" href="collection/{{::item.Titre}}">
+                {{::item.Titre}} de {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}
+            </a>
+            <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" alt="{{::item.Titre}} de {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}" class="tile-image"/>
         </div>
     </div>
 </div>
