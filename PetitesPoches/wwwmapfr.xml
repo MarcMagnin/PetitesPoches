@@ -7,19 +7,19 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://www.petitepoche.fr/collection</loc>
+    <loc>http://www.petitepoche.fr/collection/</loc>
     <lastmod>2015-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://www.petitepoche.fr/auteurs</loc>
+    <loc>http://www.petitepoche.fr/auteurs/</loc>
     <lastmod>2015-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://www.petitepoche.fr/contacts</loc>
+    <loc>http://www.petitepoche.fr/contacts/</loc>
     <lastmod>2015-10-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>

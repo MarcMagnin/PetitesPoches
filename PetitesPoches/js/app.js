@@ -31,7 +31,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         controller: "auteurController"
     })
     .state('contacts', {
-        url: '/contacts',
+        url: '/contacts/',
         data: {
             'selectedTab': 2
         },
