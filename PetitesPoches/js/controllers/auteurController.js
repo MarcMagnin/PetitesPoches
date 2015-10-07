@@ -12,7 +12,7 @@ var Update = function () {
 
 
 
-app.controller("auteurController", function ($scope, $rootScope, $stateParams, $http, $state, $q, auteurService, $mdDialog) {
+app.controller("auteurController", function ($scope, $rootScope, $window, $stateParams, $http, $state, $q, auteurService, $mdDialog) {
     $scope.entityName = "Auteur";
     $scope.items = [];
     $scope.itemsPool = [];
@@ -164,6 +164,10 @@ app.controller("auteurController", function ($scope, $rootScope, $stateParams, $
 
 
     $scope.select = function (item, size, $event) {
+        if ($window.dragged) {
+            return;
+        }
+
         $scope.selectedItem = item;
 
 

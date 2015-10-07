@@ -1,6 +1,6 @@
 ﻿const THRESHOLD = 25; // Distance from either axis before movement in that direction is allowed
-const ENABLE_HORIZ_LOCK = false; // Allow locking to x axis
-const ENABLE_VERT_LOCK = true; // Allow locking to y axis
+//const ENABLE_HORIZ_LOCK = false; // Allow locking to x axis
+//const ENABLE_VERT_LOCK = true; // Allow locking to y axis
 
 var dragged = false;
 var dragging = false;
@@ -30,8 +30,6 @@ $(document).ready(function () {
         downY = e.pageY;
         initialScrollX = el.scrollLeft;
         initialScrollY = el.scrollTop;
-        lockX = ENABLE_VERT_LOCK; // Vert lock = no x movement
-        lockY = ENABLE_HORIZ_LOCK; // Horiz lock = no y movement
         dragging = true;
         return false;
     });
@@ -47,15 +45,18 @@ $(document).ready(function () {
             lockX = lockX && Math.abs(distX) < THRESHOLD;
             lockY = lockY && Math.abs(distY) < THRESHOLD;
 
-            if (Math.abs(distX) > THRESHOLD)
+            if (Math.abs(distX) > THRESHOLD || Math.abs(distY) > THRESHOLD) {
                 dragged = true;
+                //// Restrict movement in locked directions unless still in center region
+                //if (lockX && !lockY) distX = 0;
+                //if (lockY && !lockX) distY = 0;
+                // Adjust scroll position
+                el.scrollLeft = initialScrollX - distX;
+                el.scrollTop = initialScrollY - distY;
+            }
+               
 
-            // Restrict movement in locked directions unless still in center region
-            if (lockX && !lockY) distX = 0;
-            if (lockY && !lockX) distY = 0;
-            // Adjust scroll position
-            el.scrollLeft = initialScrollX - distX;
-            el.scrollTop = initialScrollY - distY;
+         
             return false;
         }
     });
