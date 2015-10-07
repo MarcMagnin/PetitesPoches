@@ -29,7 +29,7 @@ if ($(window).width() < maxWidth) {
     enableAnimation = true;
 }
 
-app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $timeout, $state, $q, livreService, $mdDialog, $filter) {
+app.controller("livreController", function ($scope, $rootScope, $stateParams, $http, $window, $timeout, $state, $q, livreService, $mdDialog, $filter) {
     $scope.entityName = "Livre";
     $scope.items = [];
     $scope.itemsPool = [];
@@ -280,9 +280,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
     $scope.select = function (item, size, $event) {
+        if ($window.dragged) {
+            return;
+        }
         $scope.selectedItem = item;
-
-
         //// prevent the modal to show if we click on a nested link
         if (!$($event.target).closest('a').length) {
 

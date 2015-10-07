@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -441,6 +442,8 @@
     <Content Include="js\tools.min.js">
       <DependentUpon>tools.js</DependentUpon>
     </Content>
+    <Content Include="mapcom.xml" />
+    <Content Include="mapfr.xml" />
     <Content Include="templates\auteurDialog.tmpl.html" />
     <Content Include="css\common.less" />
     <Content Include="css\contacts.less" />
@@ -519,6 +522,8 @@
     <Content Include="js\directives\angular-lazy-img.min.js.map">
       <DependentUpon>angular-lazy-img.min.js</DependentUpon>
     </Content>
+    <Content Include="wwwmapcom.xml" />
+    <Content Include="wwwmapfr.xml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
