@@ -14,7 +14,8 @@ $(document).ready(function () {
     var previousItem;
 
     $(window).on('mousedown', function (e) {
-        //if ($(e.target).closest('.mix').length) {
+        if ($(e.target).closest('.searchBar').length) {
+            return;
         //    previousItem = $(e.target).closest('.mix')[0];
         //    var item = angular.element(previousItem);
         //    console.log(item)
@@ -23,7 +24,7 @@ $(document).ready(function () {
         //        evt.stopPropagation();
         //        evt.preventDefault();
         //    });
-        //}
+        }
         dragged = false;
         el = document.getElementById('Container');
         downX = e.pageX;
@@ -54,9 +55,6 @@ $(document).ready(function () {
                 el.scrollLeft = initialScrollX - distX;
                 el.scrollTop = initialScrollY - distY;
             }
-               
-
-         
             return false;
         }
     });

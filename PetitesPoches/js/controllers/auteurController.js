@@ -12,7 +12,7 @@ var Update = function () {
 
 
 
-app.controller("auteurController", function ($scope, $rootScope, $window, $stateParams, $http, $state, $q, auteurService, $mdDialog) {
+app.controller("auteurController", function ($scope, $rootScope, $window, $stateParams, $timeout, $http, $state, $q, auteurService, $mdDialog) {
     $scope.entityName = "Auteur";
     $scope.items = [];
     $scope.itemsPool = [];
@@ -27,8 +27,8 @@ app.controller("auteurController", function ($scope, $rootScope, $window, $state
     // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
     $scope.$on("tabChanged", function (event, args) {
         $scope.userLeft = true;
+        $(window).off('mousedown', $scope.closeSearchHandler);
     })
-
 
     $scope.init = function () {
        
@@ -43,7 +43,7 @@ app.controller("auteurController", function ($scope, $rootScope, $window, $state
               $scope.menuShown = true;
           });
         TweenMax.to(".progressIndicator", 0.2, { opacity: 1, display: "block" });
-        $(".searchBar").focusin(function ($event) {
+        $(".searchBar").click(function ($event) {
             if (preventSearchFocusIn) {
                 $(".searchBar").blur();
                 return
@@ -51,18 +51,8 @@ app.controller("auteurController", function ($scope, $rootScope, $window, $state
             $scope.toggleSearch();
         });
 
+        $(window).on('mousedown', $scope.closeSearchHandler);
 
-        $(".searchBar").focusout(function ($event) {
-            //// Can't rely on that, relatedTarget is null on firefox
-            ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
-            ////    return;
-            ////}
-            //if (preventFocusOut) {
-            //    return
-            //}
-            $scope.closeSearch();
-        });
-        
 
         if ($stateParams.search) {
             $scope.searchedText = $stateParams.search.trim();
@@ -128,6 +118,24 @@ app.controller("auteurController", function ($scope, $rootScope, $window, $state
             })
     };
 
+    $scope.keyUp = function ($event) {
+        // close seach on escape
+        if ($event.keyCode == 27) {
+            $timeout(function () {
+                $scope.searchedText = "";
+                $scope.searchPatternRecherche = null;
+                $scope.validateFilter();
+                $scope.closeSearch();
+            })
+        }
+    }
+
+    $scope.closeSearchHandler = function (e) {
+        if (!$(e.target).closest('.searchBar').length) {
+            $scope.closeSearch();
+        }
+    }
+
     $scope.setSearchPattern = function () {
         if ($scope.searchedText.length == 0) {
             $scope.searchPattern = '*';
@@ -158,7 +166,9 @@ app.controller("auteurController", function ($scope, $rootScope, $window, $state
             width: searchWidth + 50, opacity: 0, ease: Linear.ease,
             onComplete:function(){
                 $(".searchBar").width(45);
-        }});
+            }
+        });
+        $(".searchBar").blur();
         searchToggled = false;
     }
 

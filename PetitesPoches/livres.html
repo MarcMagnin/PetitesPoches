@@ -107,6 +107,7 @@
             <input type="text"
                    id="search2"
                    ng-model='searchedText'
+                    ng-keyup="keyUp($event)"
                    ng-change='validateSearch($viewValue)'
                    typeahead="val as val.Titre for val in searchLivreSuggestions($viewValue)"
                    typeahead-loading="loadingSearchSuggestions"

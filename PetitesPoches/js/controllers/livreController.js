@@ -51,7 +51,10 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
     // permet de verifier si l'utilisateur s'en va pour annuler toutes les taches 
     $scope.$on("tabChanged", function (event, args) {
         $scope.userLeft = true;
+        $(window).off('mousedown', $scope.closeSearchHandler);
     })
+
+ 
 
     $scope.loadMore = function () {
        // alert('test');
@@ -79,27 +82,17 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
 
         //});
+        $(window).on('mousedown', $scope.closeSearchHandler);
 
 
-        $(".searchBar").focusin(function ($event) {
+        $(".searchBar").click(function ($event) {
             if (preventSearchFocusIn) {
                 $(".searchBar").blur();
                 return
             }
             $scope.toggleSearch();
         });
-
-
-        $(".searchBar").focusout(function ($event) {
-            //// Can't rely on that, relatedTarget is null on firefox
-            ////if ($event.relatedTarget && ($event.relatedTarget.id == "searchitem" || $event.relatedTarget.id == "searchbutton" || $event.relatedTarget.id == "search2")) {
-            ////    return;
-            ////}
-            //if (preventFocusOut) {
-            //    return
-            //}
-            $scope.closeSearch();
-        });
+     
         $scope.menuShown = false;
 
 
@@ -205,6 +198,14 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
 
     };
 
+
+
+    $scope.closeSearchHandler = function (e) {
+        if (!$(e.target).closest('.searchBar').length) {
+            $scope.closeSearch();
+        }
+    }
+
     var searchToggled = false;
     var preventFocusOut = false;
     $scope.toggleSearch = function () {
@@ -217,6 +218,17 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
         TweenMax.fromTo(".searchBar", 0.2, { width: searchWidth + 50, opacity: 0, ease: null }, { width: searchWidth, opacity: 1, ease: Linear.ease });
     }
 
+    $scope.keyUp = function ($event) {
+        // close seach on escape
+        if ($event.keyCode == 27) {
+            $timeout(function () {
+                $scope.searchedText = "";
+                $scope.searchPatternRecherche = null;
+                $scope.validateFilter();
+                $scope.closeSearch();
+            })
+        }
+    }
 
     $scope.closeSearch = function () {
         var searchWidth = $(window).width() < 630 ? 260 : 150;
@@ -227,6 +239,7 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                 $(".searchBar").width(45);
             }
         });
+        $(".searchBar").blur();
         searchToggled = false;
     }
 
