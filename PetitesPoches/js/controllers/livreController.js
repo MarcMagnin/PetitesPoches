@@ -131,8 +131,15 @@ app.controller("livreController", function ($scope, $rootScope, $stateParams, $h
                     }
                     item.Id = item['@metadata']['@id'];
                     
-                    if (item.Titre && item.Titre.length > 0)
-                    item.filter = tokenizeString(item.Titre);
+                    if (item.Titre && item.Titre.length > 0) {
+                        item.filter = tokenizeString(item.Titre);
+                        item.CleanedTitre = item.Titre; {
+                            while (item.CleanedTitre[item.CleanedTitre.length - 1] === ".") {
+                                item.CleanedTitre = item.CleanedTitre.slice(0, -1);
+                            }
+                        }
+                    }
+                    
 
                     if (item.Auteur.Nom && item.Auteur.Nom.length > 0) {
                         item.filter += " " + tokenizeString(item.Auteur.Nom);

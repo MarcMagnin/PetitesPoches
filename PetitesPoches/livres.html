@@ -138,7 +138,7 @@
     <!--when-scrolled="loadMore()"-->
     <div id="Container" class="tileContainer u-fancy-scrollbar">
         <div class="mix tile {{::item.filter}}" ng-repeat="item in items" ng-click="select(item, 'lg', $event)">
-            <a ng-if="::isPhantomSnapshot" href="collection/{{::item.Titre}}">
+            <a ng-if="::isPhantomSnapshot" href="collection/{{::item.CleanedTitre}}">
                 {{::item.Titre}} de {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}
             </a>
             <img ng-src="{{::apiRootUrl}}/{{::item.Couverture}}" alt="{{::item.Titre}} de {{::item.Auteur.Nom}} {{::item.Auteur.Prenom}}" class="tile-image"/>

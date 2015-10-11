@@ -229,6 +229,7 @@
     <Content Include="js\directives\price.min.js">
       <DependentUpon>price.js</DependentUpon>
     </Content>
+    <Content Include="js\drag-scroll.js" />
     <Content Include="js\filters\filters.min.js">
       <DependentUpon>filters.js</DependentUpon>
     </Content>

@@ -6,7 +6,7 @@ var dragged = false;
 var dragging = false;
 
 $(document).ready(function () {
-   
+
     var el;
     var downX, downY;
     var initialScrollX, initialScrollY;
@@ -16,6 +16,10 @@ $(document).ready(function () {
     $(window).on('mousedown', function (e) {
         if ($(e.target).closest('.searchBar').length) {
             return;
+        }
+        if ($('.md-dialog-container') && $('.md-dialog-container').length != 0) {
+            return;
+        }
         //    previousItem = $(e.target).closest('.mix')[0];
         //    var item = angular.element(previousItem);
         //    console.log(item)
@@ -24,7 +28,6 @@ $(document).ready(function () {
         //        evt.stopPropagation();
         //        evt.preventDefault();
         //    });
-        }
         dragged = false;
         el = document.getElementById('Container');
         downX = e.pageX;
